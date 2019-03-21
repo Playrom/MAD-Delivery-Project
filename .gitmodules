@@ -1,0 +1,9 @@
+[submodule "Customer"]
+	path = Customer
+	url = https://Playrom@github.com/Playrom/MAD-Delivery-Project-Customer-App.git
+[submodule "Delivery"]
+	path = Delivery
+	url = https://Playrom@github.com/Playrom/MAD-Delivery-Project-Delivery-App.git
+[submodule "Restaurant"]
+	path = Restaurant
+	url = https://Playrom@github.com/Playrom/MAD-Delivery-Project-Restaurant-App.git
