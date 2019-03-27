@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">JustOrder</string>
+    <string name="button_name">Edit</string>
+    <string name="button_load_image">Load Image</string>
+    <string name="title">App name</string>
+    <string name="name">Name</string>
+    <string name="email">E-mail</string>
+    <string name="imageOfUser">Image of the User</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="validation_error">Your input is not valid</string>
+    <string name="field_are_not_valid">You must provide valid data for all text field</string>
+</resources>

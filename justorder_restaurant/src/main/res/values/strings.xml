@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">JustOrder Restaurant</string>
+    <string name="tax_code">Fiscal Code</string>
+    <string name="iban">IBAN</string>
+    <string name="vat_code">VAT Code</string>
+    <string name="foodType">Food Type</string>
+    <string name="address">Address</string>
+    <string-array name="foodTypes">
+        <item>Pizza</item>
+        <item>Hamburger</item>
+        <item>Chinese</item>
+        <item>Sushi</item>
+        <item>Indian</item>
+        <item>Ice Creams</item>
+        <item>Kebap</item>
+        <item>Fusion</item>
+    </string-array>
+</resources>
