@@ -1,4 +1,5 @@
 <resources>
+    <string name="fileprovider">it.polito.justorder.fileprovider</string>
     <string name="app_name">JustOrder Delivery</string>
     <string name="tax_code">Fiscal Code</string>
     <string name="iban">IBAN</string>

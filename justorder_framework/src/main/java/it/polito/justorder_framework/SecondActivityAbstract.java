@@ -125,7 +125,7 @@ public class SecondActivityAbstract extends AppCompatActivity {
                         .choose(MimeType.ofImage())
                         .maxSelectable(1)
                         .capture(true)
-                        .captureStrategy(new CaptureStrategy(true, "it.polito.justorder_framework.fileprovider"))
+                        .captureStrategy(new CaptureStrategy(true, getResources().getString(R.string.fileprovider)))
                         .imageEngine(new GlideEngine())
                         .forResult(0);
             }

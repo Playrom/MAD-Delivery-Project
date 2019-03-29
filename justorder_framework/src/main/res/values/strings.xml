@@ -1,4 +1,5 @@
 <resources>
+    <string name="fileprovider">it.polito.justorder_framework.fileprovider</string>
     <string name="app_name">JustOrder</string>
     <string name="button_name">Edit</string>
     <string name="button_load_image">Load Image</string>

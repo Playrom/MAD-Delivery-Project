@@ -18,7 +18,7 @@
         </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="it.polito.justorder_framework.fileprovider"
+            android:authorities="@string/fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
