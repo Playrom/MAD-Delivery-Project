@@ -11,4 +11,6 @@
     <string name="phone">Phone</string>
     <string name="validation_error">Your input is not valid</string>
     <string name="field_are_not_valid">You must provide valid data for all text field</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
 </resources>

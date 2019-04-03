@@ -7,9 +7,4 @@
         android:title="Edit"
         android:visible="true" />
 
-    <item
-        android:id="@+id/saveUserData"
-        android:enabled="true"
-        android:title="Save"
-        android:visible="true" />
 </menu>

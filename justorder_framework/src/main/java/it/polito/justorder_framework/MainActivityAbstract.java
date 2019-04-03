@@ -8,12 +8,19 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.google.android.material.navigation.NavigationView;
 
 abstract public class MainActivityAbstract extends AppCompatActivity {
 
@@ -21,13 +28,21 @@ abstract public class MainActivityAbstract extends AppCompatActivity {
     protected ImageView image;
     protected String imageFileName, name, email, phone;
 
+    protected DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        name = sharedPreferences.getString("name", "");
+        email = sharedPreferences.getString("email", "");
+        phone = sharedPreferences.getString("phone", "");
+        imageFileName = sharedPreferences.getString("imageFileName", null);
 
+    }
+
+    protected void setupActivity() {
         nameTextField = findViewById(R.id.nameTextField);
         emailTextField = findViewById(R.id.emailTextField);
         phoneTextField = findViewById(R.id.phoneTextField);
@@ -35,19 +50,48 @@ abstract public class MainActivityAbstract extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        name = sharedPreferences.getString("name", "");
-        email = sharedPreferences.getString("email", "");
-        phone = sharedPreferences.getString("phone", "");
-        imageFileName = sharedPreferences.getString("imageFileName", null);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        reloadViews();
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setDisplayShowHomeEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this.getNavigationListener());
+
+    }
+
+    protected NavigationView.OnNavigationItemSelectedListener getNavigationListener() {
+
+        return new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                // set item as selected to persist highlight
+                menuItem.setChecked(true);
+                // close drawer when item is tapped
+                drawerLayout.closeDrawers();
+
+                return true;
+            }
+        };
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        MenuItem item = (MenuItem) menu.findItem(R.id.saveUserData);
-        item.setVisible(false);
+        getMenuInflater().inflate(R.menu.activity_first_menu, menu);
         return true;
     }
 

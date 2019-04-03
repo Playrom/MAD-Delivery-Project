@@ -17,23 +17,17 @@ public class MainActivity extends MainActivityAbstract {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        addressTextField = findViewById(R.id.addressTextField);
-        vatCodeTextField = findViewById(R.id.vatCodeTextField);
-        taxCodeTextField = findViewById(R.id.taxCodeTextField);
-        ibanTextField = findViewById(R.id.ibanTextField);
-        foodTypeTextField = findViewById(R.id.foodTypeTextField);
-
         address = sharedPreferences.getString("address", "");
         vatCode = sharedPreferences.getString("vat_code", "");
         taxCode = sharedPreferences.getString("tax_code", "");
         iban = sharedPreferences.getString("iban", "");
         foodType = sharedPreferences.getString("food_type", "");
 
-        super.onCreate(savedInstanceState);
-
+        this.setupActivity();
     }
 
     @Override
@@ -54,6 +48,19 @@ public class MainActivity extends MainActivityAbstract {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void setupActivity() {
+        super.setupActivity();
+
+        addressTextField = findViewById(R.id.addressTextField);
+        vatCodeTextField = findViewById(R.id.vatCodeTextField);
+        taxCodeTextField = findViewById(R.id.taxCodeTextField);
+        ibanTextField = findViewById(R.id.ibanTextField);
+        foodTypeTextField = findViewById(R.id.foodTypeTextField);
+
+        this.reloadViews();
     }
 
     @Override

@@ -1,16 +1,15 @@
 package it.polito.justorder_delivery;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.appcompat.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.EditText;
 
 import it.polito.justorder_framework.SecondActivityAbstract;
 import it.polito.justorder_framework.Utils;
-import it.polito.justorder_delivery.R;
 
 public class SecondActivity extends SecondActivityAbstract {
 
@@ -19,16 +18,14 @@ public class SecondActivity extends SecondActivityAbstract {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         Intent i = getIntent();
-
-        taxCodeTextField = findViewById(R.id.taxCodeTextField);
-        ibanTextField = findViewById(R.id.ibanTextField);
 
         taxCode = i.getStringExtra("tax_code");
         iban = i.getStringExtra("iban");
 
-        super.onCreate(savedInstanceState);
+        this.setupActivity();
     }
 
     @Override
@@ -38,6 +35,13 @@ public class SecondActivity extends SecondActivityAbstract {
         ibanTextField.setText(this.iban);
     }
 
+    @Override
+    protected void setupActivity() {
+        super.setupActivity();
+        taxCodeTextField = findViewById(R.id.taxCodeTextField);
+        ibanTextField = findViewById(R.id.ibanTextField);
+        this.reloadViews();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

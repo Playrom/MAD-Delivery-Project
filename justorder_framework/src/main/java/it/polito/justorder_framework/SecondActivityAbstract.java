@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.os.Environment;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -58,6 +60,9 @@ public class SecondActivityAbstract extends AppCompatActivity {
         email = i.getStringExtra("email");
         phone = i.getStringExtra("phone");
         imageFileName = i.getStringExtra("imageFileName");
+    }
+
+    protected void setupActivity(){
 
         nameTextField = findViewById(R.id.nameTextField);
         emailTextField = findViewById(R.id.emailTextField);
@@ -66,7 +71,12 @@ public class SecondActivityAbstract extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        reloadViews();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setDisplayShowHomeEnabled(true);
 
         butt = findViewById(R.id.button);
 
@@ -149,6 +159,12 @@ public class SecondActivityAbstract extends AppCompatActivity {
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == RESULT_OK) {
@@ -172,9 +188,7 @@ public class SecondActivityAbstract extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        MenuItem item = (MenuItem) menu.findItem(R.id.editUserData);
-        item.setVisible(false);
+        getMenuInflater().inflate(R.menu.activity_second_menu, menu);
         return true;
     }
 

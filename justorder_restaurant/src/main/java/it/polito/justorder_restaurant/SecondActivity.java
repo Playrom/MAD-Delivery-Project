@@ -1,10 +1,10 @@
 package it.polito.justorder_restaurant;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.appcompat.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,22 +20,29 @@ public class SecondActivity extends SecondActivityAbstract {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
         Intent i = getIntent();
-
-        addressTextField = findViewById(R.id.addressTextField);
-        vatCodeTextField = findViewById(R.id.vatCodeTextField);
-        taxCodeTextField = findViewById(R.id.taxCodeTextField);
-        ibanTextField = findViewById(R.id.ibanTextField);
-        foodTypeSpinner = findViewById(R.id.foodTypeSpinner);
-
         address = i.getStringExtra("address");
         vatCode = i.getStringExtra("vat_code");
         taxCode = i.getStringExtra("tax_code");
         iban = i.getStringExtra("iban");
         foodType = i.getStringExtra("food_type");
 
-        super.onCreate(savedInstanceState);
+        this.setupActivity();
+    }
+
+    @Override
+    protected void setupActivity() {
+        super.setupActivity();
+        addressTextField = findViewById(R.id.addressTextField);
+        vatCodeTextField = findViewById(R.id.vatCodeTextField);
+        taxCodeTextField = findViewById(R.id.taxCodeTextField);
+        ibanTextField = findViewById(R.id.ibanTextField);
+        foodTypeSpinner = findViewById(R.id.foodTypeSpinner);
+
+        this.reloadViews();
     }
 
     @Override

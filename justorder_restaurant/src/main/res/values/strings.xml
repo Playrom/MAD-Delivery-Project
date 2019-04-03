@@ -6,6 +6,7 @@
     <string name="vat_code">VAT Code</string>
     <string name="foodType">Food Type</string>
     <string name="address">Address</string>
+    <string name="edit_restaurant_title">Edit Restaurant</string>
     <string-array name="foodTypes">
         <item>Pizza</item>
         <item>Hamburger</item>

@@ -1,10 +1,10 @@
 package it.polito.justorder;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.appcompat.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.EditText;
 
@@ -18,11 +18,17 @@ public class SecondActivity extends SecondActivityAbstract {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         Intent i = getIntent();
-        addressTextField = findViewById(R.id.addressTextField);
         address = i.getStringExtra("address");
-        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void setupActivity() {
+        super.setupActivity();
+        addressTextField = findViewById(R.id.addressTextField);
+        this.reloadViews();
     }
 
     @Override

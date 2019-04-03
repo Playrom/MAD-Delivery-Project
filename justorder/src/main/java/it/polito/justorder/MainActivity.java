@@ -9,6 +9,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import it.polito.justorder_framework.MainActivityAbstract;
 
 public class MainActivity extends MainActivityAbstract {
@@ -17,14 +23,20 @@ public class MainActivity extends MainActivityAbstract {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        addressTextField = findViewById(R.id.addressTextField);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         address = sharedPreferences.getString("address", "");
 
-        super.onCreate(savedInstanceState);
+        this.setupActivity();
+    }
 
+    @Override
+    protected void setupActivity() {
+        super.setupActivity();
+        addressTextField = findViewById(R.id.addressTextField);
+        this.reloadViews();
     }
 
     @Override
@@ -47,6 +59,36 @@ public class MainActivity extends MainActivityAbstract {
     protected void reloadViews() {
         super.reloadViews();
         addressTextField.setText(this.address);
+    }
+
+    @Override
+    protected NavigationView.OnNavigationItemSelectedListener getNavigationListener() {
+        return new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                // set item as selected to persist highlight
+                menuItem.setChecked(true);
+                // close drawer when item is tapped
+                drawerLayout.closeDrawers();
+
+                if(menuItem.getItemId() == R.id.editUserData){
+                    Intent i = new Intent(getApplicationContext(), SecondActivity.class);
+                    i.putExtra("name", MainActivity.this.name);
+                    i.putExtra("email", MainActivity.super.email);
+                    i.putExtra("phone", MainActivity.super.phone);
+                    i.putExtra("imageFileName", MainActivity.super.imageFileName);
+                    i.putExtra("address", MainActivity.this.address);
+
+                    startActivityForResult(i, 1);
+                    return true;
+                }
+
+                // Add code here to update the UI based on the item selected
+                // For example, swap UI fragments here
+
+                return true;
+            }
+        };
     }
 
     @Override
