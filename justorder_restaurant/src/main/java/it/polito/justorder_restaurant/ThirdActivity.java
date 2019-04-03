@@ -15,7 +15,8 @@ import android.widget.TextView;
 public class ThirdActivity extends AppCompatActivity {
 
     private ListView lv;
-    String[] data = {"Kebab", "Pizza", "Pasta", "Sushi"};
+    String[] data = {"Kebab", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi"
+            , "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

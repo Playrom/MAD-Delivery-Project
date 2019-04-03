@@ -7,6 +7,12 @@
         android:visible="true" />
 
     <item
+        android:id="@+id/list_view"
+        android:enabled="true"
+        android:title="List"
+        android:visible="true" />
+
+    <item
         android:id="@+id/userPage"
         android:enabled="true"
         android:title="User Settings"
