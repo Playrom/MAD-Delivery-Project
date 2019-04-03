@@ -1,20 +1,19 @@
 package it.polito.justorder_restaurant;
 
-import androidx.appcompat.app.AppCompatActivity;
+import it.polito.justorder_framework.ActivityAbstractWithSideNav;
 
 import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ThirdActivity extends AppCompatActivity {
+public class ThirdActivity extends ActivityAbstractWithSideNav {
 
-    private ListView lv;
+    protected ListView listView;
+    protected BaseAdapter adapter;
+
     String[] data = {"Kebab", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi"
             , "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi"};
 
@@ -22,8 +21,22 @@ public class ThirdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
-        lv = findViewById(R.id.food_list);
-        lv.setAdapter(new BaseAdapter() {
+
+        this.setupActivity();
+    }
+
+    @Override
+    protected void setupActivity() {
+        super.setupActivity();
+        this.listView = findViewById(R.id.food_list);
+        this.routeHandler = new ResturantActivityWithSideNav();
+        this.reloadViews();
+    }
+
+    @Override
+    protected void reloadViews() {
+        super.reloadViews();
+        this.adapter = new BaseAdapter() {
             @Override
             public int getCount() {
                 return data.length;
@@ -48,6 +61,8 @@ public class ThirdActivity extends AppCompatActivity {
                 ((TextView)convertView.findViewById(R.id.counter)).setText(data[position]);
                 return convertView;
             }
-        });
+        };
+        this.listView.setAdapter(this.adapter);
+        this.actionBar.setTitle(R.string.product_list_title);
     }
 }

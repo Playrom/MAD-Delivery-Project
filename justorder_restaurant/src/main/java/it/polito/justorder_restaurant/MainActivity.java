@@ -62,6 +62,8 @@ public class MainActivity extends MainActivityAbstract {
         ibanTextField = findViewById(R.id.ibanTextField);
         foodTypeTextField = findViewById(R.id.foodTypeTextField);
 
+        this.routeHandler = new ResturantActivityWithSideNav();
+
         this.reloadViews();
     }
 
@@ -99,46 +101,6 @@ public class MainActivity extends MainActivityAbstract {
             }
         }
     }
-
-    @Override
-    protected NavigationView.OnNavigationItemSelectedListener getNavigationListener() {
-        return new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // set item as selected to persist highlight
-                menuItem.setChecked(true);
-                // close drawer when item is tapped
-                drawerLayout.closeDrawers();
-
-                if(menuItem.getItemId() == R.id.list_view) {
-                    Intent i = new Intent(getApplicationContext(), ThirdActivity.class);
-                    startActivity(i);
-                    return true;
-                }
-
-                if(menuItem.getItemId() == R.id.editUserData){
-                    Intent i = new Intent(getApplicationContext(), SecondActivity.class);
-                    i.putExtra("name", MainActivity.this.name);
-                    i.putExtra("email", MainActivity.super.email);
-                    i.putExtra("phone", MainActivity.super.phone);
-                    i.putExtra("imageFileName", MainActivity.super.imageFileName);
-
-
-                    i.putExtra("tax_code", MainActivity.this.taxCode);
-                    i.putExtra("iban", MainActivity.this.iban);
-
-                    startActivityForResult(i, 1);
-                    return true;
-                }
-
-                // Add code here to update the UI based on the item selected
-                // For example, swap UI fragments here
-
-                return true;
-            }
-        };
-    }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

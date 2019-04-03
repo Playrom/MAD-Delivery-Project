@@ -22,13 +22,11 @@ import android.widget.ImageView;
 
 import com.google.android.material.navigation.NavigationView;
 
-abstract public class MainActivityAbstract extends AppCompatActivity {
+abstract public class MainActivityAbstract extends ActivityAbstractWithSideNav {
 
     protected EditText nameTextField, emailTextField, phoneTextField;
     protected ImageView image;
     protected String imageFileName, name, email, phone;
-
-    protected DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,50 +41,11 @@ abstract public class MainActivityAbstract extends AppCompatActivity {
     }
 
     protected void setupActivity() {
+        super.setupActivity();
         nameTextField = findViewById(R.id.nameTextField);
         emailTextField = findViewById(R.id.emailTextField);
         phoneTextField = findViewById(R.id.phoneTextField);
         image = findViewById(R.id.imageView);
-
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setDisplayShowHomeEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-
-        drawerLayout = findViewById(R.id.drawer_layout);
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this.getNavigationListener());
-
-    }
-
-    protected NavigationView.OnNavigationItemSelectedListener getNavigationListener() {
-
-        return new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // set item as selected to persist highlight
-                menuItem.setChecked(true);
-                // close drawer when item is tapped
-                drawerLayout.closeDrawers();
-
-                return true;
-            }
-        };
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            drawerLayout.openDrawer(GravityCompat.START);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -43,7 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class SecondActivityAbstract extends AppCompatActivity {
+public class SecondActivityAbstract extends ActivityAbstractWithToolbar {
 
     protected String name, email, phone, imageFileName;
     protected EditText nameTextField, emailTextField, phoneTextField;

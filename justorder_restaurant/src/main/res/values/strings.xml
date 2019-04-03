@@ -7,6 +7,7 @@
     <string name="foodType">Food Type</string>
     <string name="address">Address</string>
     <string name="edit_restaurant_title">Edit Restaurant</string>
+    <string name="product_list_title">Our Meals</string>
     <string-array name="foodTypes">
         <item>Pizza</item>
         <item>Hamburger</item>

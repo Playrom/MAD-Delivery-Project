@@ -36,6 +36,7 @@ public class MainActivity extends MainActivityAbstract {
     protected void setupActivity() {
         super.setupActivity();
         addressTextField = findViewById(R.id.addressTextField);
+        this.routeHandler = new CustomerActivityWithSideNav();
         this.reloadViews();
     }
 

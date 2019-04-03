@@ -53,6 +53,7 @@ public class MainActivity extends MainActivityAbstract {
         super.setupActivity();
         taxCodeTextField = findViewById(R.id.taxCodeTextField);
         ibanTextField = findViewById(R.id.ibanTextField);
+        this.routeHandler = new DeliveryActivityWithSideNav();
         this.reloadViews();
 
     }

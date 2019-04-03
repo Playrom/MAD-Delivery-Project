@@ -13,13 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/MyActionBar"
-            app:title="@string/edit_restaurant_title" />
+        <include layout="@layout/toolbar_main" />
 
         <ListView
             android:id="@+id/food_list"
@@ -28,4 +22,6 @@
         </ListView>
 
     </LinearLayout>
+    <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
+    <include layout="@layout/navigation_view_main" />
 </androidx.drawerlayout.widget.DrawerLayout>
