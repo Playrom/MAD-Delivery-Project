@@ -37,7 +37,12 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
                 drawerLayout.closeDrawers();
 
                 if(ActivityAbstractWithSideNav.this.routeHandler != null){
-                    return ActivityAbstractWithSideNav.this.routeHandler.routeHandler(menuItem, getApplicationContext());
+                    boolean ret = ActivityAbstractWithSideNav.this.routeHandler.routeHandler(menuItem, ActivityAbstractWithSideNav.this);
+                    overridePendingTransition(0, 0);
+                    if(ret) {
+                        ActivityAbstractWithSideNav.this.finish();
+                    }
+                    return ret;
                 }
                 return false;
             }
