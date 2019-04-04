@@ -20,6 +20,6 @@ public class ResturantActivityWithSideNav extends RouteHandler {
             context.startActivity(i);
             return true;
         }
-        return true;
+        return false;
     }
 }
