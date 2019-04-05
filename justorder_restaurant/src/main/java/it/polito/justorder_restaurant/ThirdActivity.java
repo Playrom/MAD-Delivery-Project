@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,8 +15,10 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
     protected ListView listView;
     protected BaseAdapter adapter;
 
-    String[] data = {"Kebab", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi"
-            , "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi"};
+    String[] data = {"Kebab", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi", "Pizza", "Pasta", "Sushi"};
+    String[] descr = {"Descr1", "Descr2", "Descr3", "Descr4", "Descr5", "Descr6", "Descr7", "Descr8", "Descr9", "Descr10"};
+    int[] img = new int[]{ R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
+            R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,9 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
                 if(convertView == null) {
                     convertView = getLayoutInflater().inflate(R.layout.item_adapter, parent, false);
                 }
-                ((TextView)convertView.findViewById(R.id.counter)).setText("" + (position + 1));
-                ((TextView)convertView.findViewById(R.id.counter)).setText(data[position]);
+                ((TextView)convertView.findViewById(R.id.description)).setText(descr[position]);
+                ((TextView)convertView.findViewById(R.id.content)).setText(data[position]);
+                ((ImageView)convertView.findViewById(R.id.image)).setImageResource(img[position]);
                 return convertView;
             }
         };
