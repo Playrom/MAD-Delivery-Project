@@ -119,6 +119,88 @@
                     android:hint="@string/foodType"
                     android:entries="@array/foodTypes"/>
 
+
+                <TextView
+                    android:id="@+id/openingHour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/foodTypeSpinner"
+                    android:layout_alignStart="@id/common_editor_layout"
+                    android:layout_alignLeft="@id/common_editor_layout"
+                    android:layout_alignEnd="@id/common_editor_layout"
+                    android:layout_alignRight="@id/common_editor_layout"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/openingHour"
+                    android:inputType="time"
+                    android:enabled="false"/>
+
+                <TimePicker
+                    android:layout_width="300dp"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/openingHour"
+                    android:id="@+id/timePickerOpen"
+                    android:timePickerMode="spinner"/>
+
+                <TextView
+                    android:id="@+id/closingHour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/timePickerOpen"
+                    android:layout_alignStart="@id/common_editor_layout"
+                    android:layout_alignLeft="@id/common_editor_layout"
+                    android:layout_alignEnd="@id/common_editor_layout"
+                    android:layout_alignRight="@id/common_editor_layout"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/closingHour"
+                    android:inputType="time"
+                    android:enabled="false"/>
+
+                <TimePicker
+                    android:layout_width="300dp"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/closingHour"
+                    android:id="@+id/timePickerClose"
+                    android:timePickerMode="spinner"/>
+
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@id/timePickerClose">
+                    <CheckBox android:id="@+id/checkbox_sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sunday" />
+                    <CheckBox android:id="@+id/checkbox_monday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Monday" />
+                    <CheckBox android:id="@+id/checkbox_tuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tuesday" />
+                    <CheckBox android:id="@+id/checkbox_wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Wednesday" />
+                    <CheckBox android:id="@+id/checkbox_thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thursday" />
+                    <CheckBox android:id="@+id/checkbox_friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Friday" />
+                    <CheckBox android:id="@+id/checkbox_saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Saturdaye" />
+                </LinearLayout>
+
+
             </RelativeLayout>
         </ScrollView>
     </LinearLayout>
