@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Use DrawerLayout as root container for activity -->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/MyActionBar" />
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                tools:context=".MainActivity"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                >
+
+                <LinearLayout
+                    android:id="@+id/rowImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="20dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:contentDescription="@string/imageOfUser"
+                        app:srcCompat="@mipmap/ic_launcher" />
+
+                    <Space
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/button_load_image" />
+
+                    <Space
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>
+
+                </LinearLayout>
+
+
+                <EditText
+                    android:id="@+id/nameTextField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rowImage"
+                    android:layout_alignStart="@id/rowImage"
+                    android:layout_alignLeft="@id/rowImage"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:hint="@string/name" />
+
+                <EditText
+                    android:id="@+id/costTextField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nameTextField"
+                    android:layout_alignStart="@+id/nameTextField"
+                    android:layout_alignLeft="@+id/nameTextField"
+                    android:layout_alignEnd="@+id/nameTextField"
+                    android:layout_alignRight="@+id/nameTextField"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:inputType="numberSigned"
+                    android:hint="@string/cost" />
+
+                <EditText
+                    android:id="@+id/notesTextField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/costTextField"
+                    android:layout_alignStart="@+id/nameTextField"
+                    android:layout_alignLeft="@+id/nameTextField"
+                    android:layout_alignEnd="@+id/nameTextField"
+                    android:layout_alignRight="@+id/nameTextField"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:inputType="textMultiLine"
+                    android:hint="@string/note" />
+
+                <EditText
+                    android:id="@+id/ingredientsTextField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/notesTextField"
+                    android:layout_alignStart="@+id/nameTextField"
+                    android:layout_alignLeft="@+id/nameTextField"
+                    android:layout_alignEnd="@+id/nameTextField"
+                    android:layout_alignRight="@+id/nameTextField"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:inputType="textMultiLine"
+                    android:hint="@string/ingredients" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ingredientsTextField"
+                    android:layout_alignStart="@+id/nameTextField"
+                    android:layout_alignLeft="@+id/nameTextField"
+                    android:layout_alignEnd="@+id/nameTextField"
+                    android:layout_alignRight="@+id/nameTextField"
+                    android:layout_marginTop="20dp"
+                    android:ems="10" />
+
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

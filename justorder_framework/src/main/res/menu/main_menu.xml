@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/dashboard"
-        android:enabled="true"
-        android:title="Dashboard"
-        android:visible="true" />
 
     <item
         android:id="@+id/list_view"
         android:enabled="true"
-        android:title="List"
-        android:visible="true" />
-
-    <item
-        android:id="@+id/userPage"
-        android:enabled="true"
-        android:title="User Settings"
+        android:title="Products"
         android:visible="true" />
 
     <item
         android:id="@+id/ordersPage"
         android:enabled="true"
         android:title="Orders"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/userPage"
+        android:enabled="true"
+        android:title="User Settings"
         android:visible="true" />
 </menu>

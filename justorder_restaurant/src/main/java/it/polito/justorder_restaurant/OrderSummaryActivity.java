@@ -1,6 +1,5 @@
 package it.polito.justorder_restaurant;
 
-import androidx.appcompat.app.AppCompatActivity;
 import it.polito.justorder_framework.ActivityAbstractWithSideNav;
 
 import android.os.Bundle;
@@ -9,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-//import android.widget.AdapterView;
-//import android.widget.AdapterView.OnItemClickListener;
 
 
 public class OrderSummaryActivity extends ActivityAbstractWithSideNav {

@@ -47,9 +47,8 @@ public class SecondActivityAbstract extends ActivityAbstractWithToolbar {
 
     protected String name, email, phone, imageFileName;
     protected EditText nameTextField, emailTextField, phoneTextField;
-    protected Button butt, saveUserData;
+    protected Button butt;
     protected ImageView image;
-
     private String mCurrentPhotoPath;
 
     @Override

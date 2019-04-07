@@ -33,4 +33,8 @@
     <string name="thursday">Thursday</string>
     <string name="saturday">Saturday</string>
     <string name="placeholder">Placeholder</string>
+    <string name="cost">Cost</string>
+    <string name="note">Note</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="category">Category</string>
 </resources>
