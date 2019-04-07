@@ -15,11 +15,26 @@
 
         <include layout="@layout/toolbar_main" />
 
-        <ListView
-            android:id="@+id/food_list"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
+            android:layout_height="wrap_content">
+
+            <ListView
+                android:id="@+id/food_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </ListView>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|end|bottom"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_add"
+                android:layout_margin="16dp" />
+        </RelativeLayout>
 
     </LinearLayout>
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
