@@ -24,7 +24,6 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
-
         this.setupActivity();
     }
 
@@ -33,6 +32,12 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
         super.setupActivity();
         this.listView = findViewById(R.id.food_list);
         this.routeHandler = new ResturantActivityWithSideNav();
+        this.reloadData();
+    }
+
+    @Override
+    protected void reloadData() {
+        super.reloadData();
         this.reloadViews();
     }
 

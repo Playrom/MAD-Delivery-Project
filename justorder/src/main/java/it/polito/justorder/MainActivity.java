@@ -25,10 +25,6 @@ public class MainActivity extends MainActivityAbstract {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        address = sharedPreferences.getString("address", "");
-
         this.setupActivity();
     }
 
@@ -37,7 +33,21 @@ public class MainActivity extends MainActivityAbstract {
         super.setupActivity();
         addressTextField = findViewById(R.id.addressTextField);
         this.routeHandler = new CustomerActivityWithSideNav();
+        this.reloadData();
+    }
+
+    @Override
+    protected void reloadData() {
+        super.reloadData();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        address = sharedPreferences.getString("address", "");
         this.reloadViews();
+    }
+
+    @Override
+    protected void reloadViews() {
+        super.reloadViews();
+        addressTextField.setText(this.address);
     }
 
     @Override
@@ -54,12 +64,6 @@ public class MainActivity extends MainActivityAbstract {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void reloadViews() {
-        super.reloadViews();
-        addressTextField.setText(this.address);
     }
 
     @Override

@@ -20,14 +20,21 @@ public class SecondActivity extends SecondActivityAbstract {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        Intent i = getIntent();
-        address = i.getStringExtra("address");
+        this.setupActivity();
     }
 
     @Override
     protected void setupActivity() {
         super.setupActivity();
         addressTextField = findViewById(R.id.addressTextField);
+        this.reloadData();
+    }
+
+    @Override
+    protected void reloadData() {
+        super.reloadData();
+        Intent i = getIntent();
+        address = i.getStringExtra("address");
         this.reloadViews();
     }
 
