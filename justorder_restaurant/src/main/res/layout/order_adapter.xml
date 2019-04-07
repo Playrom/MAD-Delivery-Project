@@ -7,29 +7,33 @@
 
     <TextView
         android:id="@+id/order_id"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:text="@string/placeholder"/>
 
     <TextView
         android:id="@+id/amount"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:text="@string/placeholder" />
 
     <TextView
         android:id="@+id/address"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:text="@string/placeholder" />
 
     <TextView
         android:id="@+id/timestamp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:text="@string/placeholder" />
 
 </LinearLayout>
