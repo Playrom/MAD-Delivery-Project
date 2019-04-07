@@ -19,22 +19,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
+
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                tools:context=".MainActivity"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                >
+                tools:context=".MainActivity">
 
                 <include
                     android:id="@+id/common_viewer_layout"
                     layout="@layout/common_viewer_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="20dp" />
@@ -50,9 +50,9 @@
                     android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
                     android:ems="10"
+                    android:enabled="false"
                     android:hint="@string/address"
-                    android:inputType="textPostalAddress"
-                    android:enabled="false"/>
+                    android:inputType="textPostalAddress" />
 
                 <EditText
                     android:id="@+id/taxCodeTextField"
@@ -65,9 +65,9 @@
                     android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
                     android:ems="10"
+                    android:enabled="false"
                     android:hint="@string/tax_code"
-                    android:inputType="text"
-                    android:enabled="false"/>
+                    android:inputType="text" />
 
                 <EditText
                     android:id="@+id/vatCodeTextField"
@@ -80,9 +80,9 @@
                     android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
                     android:ems="10"
+                    android:enabled="false"
                     android:hint="@string/vat_code"
-                    android:inputType="text"
-                    android:enabled="false"/>
+                    android:inputType="text" />
 
                 <EditText
                     android:id="@+id/ibanTextField"
@@ -95,9 +95,9 @@
                     android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
                     android:ems="10"
+                    android:enabled="false"
                     android:hint="@string/iban"
-                    android:inputType="text"
-                    android:enabled="false"/>
+                    android:inputType="text" />
 
                 <EditText
                     android:id="@+id/foodTypeTextField"
@@ -110,53 +110,86 @@
                     android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
                     android:ems="10"
+                    android:enabled="false"
                     android:hint="@string/foodType"
-                    android:inputType="text"
-                    android:enabled="false"/>
+                    android:inputType="text" />
 
-                <EditText
-                    android:id="@+id/openingHourTextField"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_below="@id/foodTypeTextField"
                     android:layout_alignStart="@id/common_viewer_layout"
                     android:layout_alignLeft="@id/common_viewer_layout"
                     android:layout_alignEnd="@id/common_viewer_layout"
                     android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:hint="@string/openingHour"
-                    android:inputType="text"
-                    android:enabled="false"/>
-                <EditText
-                    android:id="@+id/closingHourTextField"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/openingHourTextField"
-                    android:layout_alignStart="@id/common_viewer_layout"
-                    android:layout_alignLeft="@id/common_viewer_layout"
-                    android:layout_alignEnd="@id/common_viewer_layout"
-                    android:layout_alignRight="@id/common_viewer_layout"
-                    android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:hint="@string/closingHour"
-                    android:inputType="text"
-                    android:enabled="false"/>
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
 
-                <EditText
-                    android:id="@+id/openDaysTextField"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/closingHourTextField"
-                    android:layout_alignStart="@id/common_viewer_layout"
-                    android:layout_alignLeft="@id/common_viewer_layout"
-                    android:layout_alignEnd="@id/common_viewer_layout"
-                    android:layout_alignRight="@id/common_viewer_layout"
-                    android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:hint="@string/openDays"
-                    android:inputType="text"
-                    android:enabled="false"/>
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/openingHour"
+                                style="@style/TextAppearance.AppCompat.Title" />
+                            <TextView
+                                android:id="@+id/openingHour"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12:00"
+                                style="@style/TextAppearance.AppCompat.Headline" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/closingHour"
+                                style="@style/TextAppearance.AppCompat.Title" />
+                            <TextView
+                                android:id="@+id/closingHour"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12:00"
+                                style="@style/TextAppearance.AppCompat.Headline" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/openingDays"
+                            style="@style/TextAppearance.AppCompat.Title" />
+                        <TextView
+                            android:id="@+id/openingDays"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="12:00"
+                        style="@style/TextAppearance.AppCompat.Headline" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
 
             </RelativeLayout>

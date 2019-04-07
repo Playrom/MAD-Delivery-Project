@@ -136,10 +136,10 @@
                     android:enabled="false"/>
 
                 <TimePicker
-                    android:layout_width="300dp"
-                    android:layout_height="200dp"
-                    android:layout_below="@id/openingHour"
                     android:id="@+id/timePickerOpen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/openingHour"
                     android:timePickerMode="spinner"/>
 
                 <TextView
@@ -158,9 +158,9 @@
                     android:enabled="false"/>
 
                 <TimePicker
-                    android:layout_width="300dp"
-                    android:layout_height="200dp"
                     android:layout_below="@id/closingHour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/timePickerClose"
                     android:timePickerMode="spinner"/>
 
@@ -173,31 +173,31 @@
                     <CheckBox android:id="@+id/checkbox_sunday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sunday" />
+                        android:text="@string/sunday" />
                     <CheckBox android:id="@+id/checkbox_monday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Monday" />
+                        android:text="@string/monday" />
                     <CheckBox android:id="@+id/checkbox_tuesday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tuesday" />
+                        android:text="@string/tuesday" />
                     <CheckBox android:id="@+id/checkbox_wednesday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Wednesday" />
+                        android:text="@string/wednesday" />
                     <CheckBox android:id="@+id/checkbox_thursday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Thursday" />
+                        android:text="@string/thursday" />
                     <CheckBox android:id="@+id/checkbox_friday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Friday" />
+                        android:text="@string/friday" />
                     <CheckBox android:id="@+id/checkbox_saturday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Saturdaye" />
+                        android:text="@string/saturday" />
                 </LinearLayout>
 
 

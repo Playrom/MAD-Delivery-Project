@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import java.util.HashMap;
+
 import it.polito.justorder_framework.SecondActivityAbstract;
 import it.polito.justorder_framework.Utils;
 
@@ -22,7 +24,15 @@ public class SecondActivity extends SecondActivityAbstract {
     protected String openHour, openMinute, closeHour, closeMinute;
     protected TimePicker timePickerOpen, timePickerClose;
     protected CheckBox Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday;
-    protected String openDays= "";
+    protected HashMap<String, Boolean> openDays = new HashMap() {{
+        put("sunday", false);
+        put("monday", false);
+        put("tuesday", false);
+        put("wednesday", false);
+        put("thursday", false);
+        put("friday", false);
+        put("saturday", false);
+    }};
 
 
     @Override
@@ -36,11 +46,11 @@ public class SecondActivity extends SecondActivityAbstract {
         taxCode = i.getStringExtra("tax_code");
         iban = i.getStringExtra("iban");
         foodType = i.getStringExtra("food_type");
-        openHour = i.getStringExtra("openHour");
-        closeHour = i.getStringExtra("closeHour");
-        openMinute = i.getStringExtra("openMinute");
-        closeMinute = i.getStringExtra("closeMinute");
-        openDays = i.getStringExtra("openDays");
+        openHour = i.getStringExtra("opening_hour").split(":")[0];
+        closeHour = i.getStringExtra("closing_hour").split(":")[0];
+        openMinute = i.getStringExtra("opening_hour").split(":")[1];
+        closeMinute = i.getStringExtra("closing_hour").split(":")[1];
+        openDays = (HashMap) i.getSerializableExtra("open_days");
 
 
         this.setupActivity();
@@ -55,7 +65,9 @@ public class SecondActivity extends SecondActivityAbstract {
         ibanTextField = findViewById(R.id.ibanTextField);
         foodTypeSpinner = findViewById(R.id.foodTypeSpinner);
         timePickerOpen = findViewById(R.id.timePickerOpen);
+        timePickerOpen.setIs24HourView(true);
         timePickerClose = findViewById(R.id.timePickerClose);
+        timePickerClose.setIs24HourView(true);
         Sunday=(CheckBox)findViewById(R.id.checkbox_tuesday);
         Monday=(CheckBox)findViewById(R.id.checkbox_monday);
         Tuesday=(CheckBox)findViewById(R.id.checkbox_tuesday);
@@ -77,34 +89,34 @@ public class SecondActivity extends SecondActivityAbstract {
         ibanTextField.setText(this.iban);
         foodTypeSpinner.setSelection(getIndex(foodTypeSpinner, foodType));
         timePickerOpen.setCurrentHour(Integer.parseInt(openHour));
-        timePickerClose.setCurrentMinute(Integer.parseInt(closeHour));
-        timePickerOpen.setCurrentHour(Integer.parseInt(openMinute));
+        timePickerClose.setCurrentHour(Integer.parseInt(closeHour));
+        timePickerOpen.setCurrentMinute(Integer.parseInt(openMinute));
         timePickerClose.setCurrentMinute(Integer.parseInt(closeMinute));
 
-            if (openDays != null) {
+        if (openDays != null) {
 
-                if (openDays.contains("Sun")) {
-                    Sunday.setChecked(true);
-                }
-                if (openDays.contains("Mon")) {
-                    Monday.setChecked(true);
-                }
-                if (openDays.contains("Tue")) {
-                    Tuesday.setChecked(true);
-                }
-                if (openDays.contains("Wed")) {
-                    Wednesday.setChecked(true);
-                }
-                if (openDays.contains("Thu")) {
-                    Thursday.setChecked(true);
-                }
-                if (openDays.contains("Fri")) {
-                    Friday.setChecked(true);
-                }
-                if (openDays.contains("Sat")) {
-                    Saturday.setChecked(true);
-                }
+            if (openDays.get("sunday") || false) {
+                Sunday.setChecked(true);
             }
+            if (openDays.get("monday") || false) {
+                Monday.setChecked(true);
+            }
+            if (openDays.get("tuesday") || false) {
+                Tuesday.setChecked(true);
+            }
+            if (openDays.get("wednesday") || false) {
+                Wednesday.setChecked(true);
+            }
+            if (openDays.get("thursday") || false) {
+                Thursday.setChecked(true);
+            }
+            if (openDays.get("friday") || false) {
+                Friday.setChecked(true);
+            }
+            if (openDays.get("saturday") || false) {
+                Saturday.setChecked(true);
+            }
+        }
 
     }
 
@@ -137,8 +149,8 @@ public class SecondActivity extends SecondActivityAbstract {
                 dialog.show();
             } else {
 
-                String closeAt = Integer.toString(timePickerOpen.getCurrentHour()) + ":" + Integer.toString(timePickerOpen.getCurrentMinute());
-                String openAt = Integer.toString(timePickerClose.getCurrentHour()) + ":" + Integer.toString(timePickerClose.getCurrentMinute());
+                String openAt = Utils.beautifyTime(timePickerOpen.getCurrentHour(), timePickerOpen.getCurrentMinute());
+                String closeAt = Utils.beautifyTime(timePickerClose.getCurrentHour(), timePickerClose.getCurrentMinute());
 
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("name", nameTextField.getText().toString());
@@ -149,37 +161,57 @@ public class SecondActivity extends SecondActivityAbstract {
                 returnIntent.putExtra("tax_code", taxCodeTextField.getText().toString());
                 returnIntent.putExtra("iban", ibanTextField.getText().toString());
                 returnIntent.putExtra("food_type", foodTypeSpinner.getSelectedItem().toString());
-                returnIntent.putExtra("openingHour", closeAt);
-                returnIntent.putExtra("closingHour", openAt);
+                returnIntent.putExtra("opening_hour", openAt);
+                returnIntent.putExtra("closing_hour", closeAt);
+                returnIntent.putExtra("nome", new HashMap<>());
 
                 if (imageFileName != null) {
                     returnIntent.putExtra("imageFileName", imageFileName);
                 }
 
                 if (Sunday.isChecked()){
-                    openDays +="Sun ";
+                    openDays.put("sunday", true);
+                }else {
+                    openDays.put("sunday", false);
                 }
+
                 if (Monday.isChecked()){
-                    openDays +="Mon ";
+                    openDays.put("monday", true);
+                }else {
+                    openDays.put("monday", false);
                 }
+
                 if (Tuesday.isChecked()){
-                    openDays +="Tue ";
+                    openDays.put("tuesday", true);
+                }else {
+                    openDays.put("tuesday", false);
                 }
+
                 if (Wednesday.isChecked()){
-                    openDays +="Wed ";
+                    openDays.put("wednesday", true);
+                }else {
+                    openDays.put("wednesday", false);
                 }
+
                 if (Thursday.isChecked()){
-                    openDays +="Thu ";
+                    openDays.put("thursday", true);
+                }else {
+                    openDays.put("thursday", false);
                 }
+
                 if (Friday.isChecked()){
-                    openDays +="Fri ";
+                    openDays.put("friday", true);
+                }else {
+                    openDays.put("friday", false);
                 }
+
                 if (Saturday.isChecked()){
-                    openDays +="Sat ";
+                    openDays.put("saturday", true);
+                }else {
+                    openDays.put("saturday", false);
                 }
 
-                returnIntent.putExtra("openDays", openDays);
-
+                returnIntent.putExtra("open_days", openDays);
 
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
@@ -196,6 +228,13 @@ public class SecondActivity extends SecondActivityAbstract {
         outState.putString("tax_code", taxCode);
         outState.putString("iban", iban);
         outState.putString("food_type", foodType);
+
+        String openAt = Utils.beautifyTime(timePickerOpen.getCurrentHour(), timePickerOpen.getCurrentMinute());
+        String closeAt = Utils.beautifyTime(timePickerClose.getCurrentHour(), timePickerClose.getCurrentMinute());
+        outState.putString("opening_hour", closeAt);
+        outState.putString("closing_hour", openAt);
+
+        outState.putSerializable("open_days", openDays);
     }
 
     @Override
@@ -206,6 +245,12 @@ public class SecondActivity extends SecondActivityAbstract {
         taxCode = savedInstanceState.getString("tax_code");
         iban = savedInstanceState.getString("iban");
         foodType = savedInstanceState.getString("food_type");
+
+        openHour = savedInstanceState.getString("opening_hour").split(":")[0];
+        closeHour = savedInstanceState.getString("closing_hour").split(":")[0];
+        openMinute = savedInstanceState.getString("opening_hour").split(":")[1];
+        closeMinute = savedInstanceState.getString("closing_hour").split(":")[1];
+        openDays = (HashMap) savedInstanceState.getSerializable("open_days");
 
         reloadViews();
     }

@@ -6,44 +6,41 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
+
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import it.polito.justorder_framework.MainActivityAbstract;
 
 public class MainActivity extends MainActivityAbstract {
-    protected String address, vatCode, taxCode, iban, foodType, openDays;
-    protected EditText addressTextField, vatCodeTextField, taxCodeTextField, ibanTextField, foodTypeTextField, openingHourTextField, closingHourTextField, openDaysTextField;
+    protected String address, vatCode, taxCode, iban, foodType;
+    protected EditText addressTextField, vatCodeTextField, taxCodeTextField, ibanTextField, foodTypeTextField;
+    protected TextView openingHourTextView, closingHourTextView, openDaysTextView;
     protected String openingHour, closingHour;
-    protected String openHour, closeHour;
-    protected String openMinute, closeMinute;
+
+    protected HashMap<String, Boolean> openDays = new HashMap() {{
+        put("sunday", false);
+        put("monday", false);
+        put("tuesday", false);
+        put("wednesday", false);
+        put("thursday", false);
+        put("friday", false);
+        put("saturday", false);
+    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        address = sharedPreferences.getString("address", "");
-        vatCode = sharedPreferences.getString("vat_code", "");
-        taxCode = sharedPreferences.getString("tax_code", "");
-        iban = sharedPreferences.getString("iban", "");
-        foodType = sharedPreferences.getString("food_type", "");
-        openingHour = sharedPreferences.getString("openingHour", "00:00");
-        closingHour = sharedPreferences.getString("closingHour", "00:00");
-        openDays = sharedPreferences.getString("openDays", "");
-
-
-
-        openHour = openingHour.split(":")[0];
-        openMinute = openingHour.split(":")[0];
-        closeHour = closingHour.split(":")[1];
-        closeMinute = closingHour.split(":")[1];
-
-
-        this.setupActivity();
+        setupActivity();
     }
 
     @Override
@@ -59,11 +56,9 @@ public class MainActivity extends MainActivityAbstract {
             i.putExtra("tax_code", this.taxCode);
             i.putExtra("iban", this.iban);
             i.putExtra("food_type", this.foodType);
-            i.putExtra("openHour", this.openHour);
-            i.putExtra("closeHour", this.closeHour);
-            i.putExtra("openMinute", this.openMinute);
-            i.putExtra("closeMinute", this.closeMinute);
-            i.putExtra("openDays", this.openDays);
+            i.putExtra("opening_hour", this.openingHour);
+            i.putExtra("closing_hour", this.closingHour);
+            i.putExtra("open_days", this.openDays);
 
 
 
@@ -82,14 +77,34 @@ public class MainActivity extends MainActivityAbstract {
         taxCodeTextField = findViewById(R.id.taxCodeTextField);
         ibanTextField = findViewById(R.id.ibanTextField);
         foodTypeTextField = findViewById(R.id.foodTypeTextField);
-        openingHourTextField = findViewById(R.id.openingHourTextField);
-        closingHourTextField = findViewById(R.id.closingHourTextField);
-        openDaysTextField = findViewById(R.id.openDaysTextField);
+        openingHourTextView = findViewById(R.id.openingHour);
+        closingHourTextView = findViewById(R.id.closingHour);
+        openDaysTextView = findViewById(R.id.openingDays);
 
 
         this.routeHandler = new ResturantActivityWithSideNav();
 
-        this.reloadViews();
+        reloadData();
+    }
+
+    @Override
+    protected void reloadData() {
+        super.reloadData();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        address = sharedPreferences.getString("address", "");
+        vatCode = sharedPreferences.getString("vat_code", "");
+        taxCode = sharedPreferences.getString("tax_code", "");
+        iban = sharedPreferences.getString("iban", "");
+        foodType = sharedPreferences.getString("food_type", "");
+        openingHour = sharedPreferences.getString("opening_hour", "00:00");
+        closingHour = sharedPreferences.getString("closing_hour", "00:00");
+
+        Set<String> set = sharedPreferences.getStringSet("open_days", new HashSet<String>());
+        for (String day : set) {
+            openDays.put(day, true);
+        }
+
+        reloadViews();
     }
 
     @Override
@@ -100,9 +115,15 @@ public class MainActivity extends MainActivityAbstract {
         taxCodeTextField.setText(this.taxCode);
         ibanTextField.setText(this.iban);
         foodTypeTextField.setText(this.foodType);
-        openingHourTextField.setText(this.openingHour);
-        closingHourTextField.setText(this.closingHour);
-        openDaysTextField.setText(this.openDays);
+        openingHourTextView.setText(this.openingHour);
+        closingHourTextView.setText(this.closingHour);
+        String days = "";
+        for(HashMap.Entry<String, Boolean> entry : openDays.entrySet()) {
+            if(entry.getValue()){
+                days = days + "&#8226; " + entry.getKey() + "<br/>\n";
+            }
+        }
+        openDaysTextView.setText(Html.fromHtml(days));
     }
 
     @Override
@@ -118,22 +139,29 @@ public class MainActivity extends MainActivityAbstract {
                 taxCode = data.getStringExtra("tax_code");
                 iban = data.getStringExtra("iban");
                 foodType = data.getStringExtra("food_type");
-                openDays= data.getStringExtra("openDays");
+                openingHour = data.getStringExtra("opening_hour");
+                closingHour = data.getStringExtra("closing_hour");
+                openDays= (HashMap) data.getSerializableExtra("open_days");
 
                 editor.putString("address", data.getStringExtra("address"));
                 editor.putString("vat_code", data.getStringExtra("vat_code"));
                 editor.putString("tax_code", data.getStringExtra("tax_code"));
                 editor.putString("iban", data.getStringExtra("iban"));
                 editor.putString("food_type", data.getStringExtra("food_type"));
-                editor.putString("openingHour", data.getStringExtra("openingHour"));
-                editor.putString("closingHour", data.getStringExtra("closingHour"));
-                editor.putString("openDays", data.getStringExtra("openDays"));
-                editor.apply();
+                editor.putString("opening_hour", data.getStringExtra("opening_hour"));
+                editor.putString("closing_hour", data.getStringExtra("closing_hour"));;
 
-                openHour = openingHour.split(":")[0];
-                openMinute = openingHour.split(":")[0];
-                closeHour = closingHour.split(":")[1];
-                closeMinute = closingHour.split(":")[1];
+                HashSet<String> days = new HashSet<>();
+
+                for(HashMap.Entry<String, Boolean> entry : openDays.entrySet()) {
+                    if(entry.getValue()){
+                        days.add(entry.getKey());
+                    }
+                }
+
+                editor.putStringSet("open_days", days);
+
+                editor.apply();
 
                 this.reloadViews();
             }
@@ -148,9 +176,9 @@ public class MainActivity extends MainActivityAbstract {
         outState.putString("tax_code", taxCode);
         outState.putString("iban", iban);
         outState.putString("food_type", foodType);
-        outState.putString("openingHour", openingHour);
-        outState.putString("closingHour", closingHour);
-        outState.putString("openDays", openDays);
+        outState.putString("opening_hour", openingHour);
+        outState.putString("closing_hour", closingHour);
+        outState.putSerializable("open_days", openDays);
 
     }
 
@@ -162,9 +190,9 @@ public class MainActivity extends MainActivityAbstract {
         taxCode = savedInstanceState.getString("tax_code");
         iban = savedInstanceState.getString("iban");
         foodType = savedInstanceState.getString("food_type");
-        openingHour = savedInstanceState.getString("openingHour");
-        closingHour = savedInstanceState.getString("closingHour");
-        openDays = savedInstanceState.getString("openDays");
+        openingHour = savedInstanceState.getString("opening_hour");
+        closingHour = savedInstanceState.getString("closing_hour");
+        openDays = (HashMap) savedInstanceState.getSerializable("open_days");
 
         reloadViews();
     }
