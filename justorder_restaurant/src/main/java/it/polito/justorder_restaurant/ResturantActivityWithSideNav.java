@@ -20,6 +20,12 @@ public class ResturantActivityWithSideNav extends RouteHandler {
             context.startActivity(i);
             return true;
         }
+
+        if(item.getItemId() == R.id.ordersPage) {
+            Intent i = new Intent(context, OrderSummaryActivity.class);
+            context.startActivity(i);
+            return true;
+        }
         return false;
     }
 }

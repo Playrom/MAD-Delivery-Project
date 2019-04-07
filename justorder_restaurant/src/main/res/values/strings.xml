@@ -8,6 +8,12 @@
     <string name="address">Address</string>
     <string name="edit_restaurant_title">Edit Restaurant</string>
     <string name="product_list_title">Our Meals</string>
+    <string name="order_summary_title">Orders Summary</string>
+    <string name="openingDays">Opening Days</string>
+    <string name="openingHour">Opening Hour</string>
+    <string name="closingHour">Closing Hour</string>
+    <string name="openDays">Opening Days</string>
+
     <string-array name="foodTypes">
         <item>Pizza</item>
         <item>Hamburger</item>
@@ -18,4 +24,5 @@
         <item>Kebap</item>
         <item>Fusion</item>
     </string-array>
+    <string name="title_activity_order_summary">OrderSummaryActivity</string>
 </resources>

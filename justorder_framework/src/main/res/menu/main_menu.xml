@@ -17,4 +17,10 @@
         android:enabled="true"
         android:title="User Settings"
         android:visible="true" />
+
+    <item
+        android:id="@+id/ordersPage"
+        android:enabled="true"
+        android:title="Orders"
+        android:visible="true" />
 </menu>
