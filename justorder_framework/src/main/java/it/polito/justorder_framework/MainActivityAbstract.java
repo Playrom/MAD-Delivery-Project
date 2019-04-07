@@ -31,13 +31,6 @@ abstract public class MainActivityAbstract extends ActivityAbstractWithSideNav {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        name = sharedPreferences.getString("name", "");
-        email = sharedPreferences.getString("email", "");
-        phone = sharedPreferences.getString("phone", "");
-        imageFileName = sharedPreferences.getString("imageFileName", null);
-
     }
 
     protected void setupActivity() {
@@ -49,9 +42,13 @@ abstract public class MainActivityAbstract extends ActivityAbstractWithSideNav {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_first_menu, menu);
-        return true;
+    protected void reloadData() {
+        super.reloadData();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        name = sharedPreferences.getString("name", "");
+        email = sharedPreferences.getString("email", "");
+        phone = sharedPreferences.getString("phone", "");
+        imageFileName = sharedPreferences.getString("imageFileName", null);
     }
 
     protected void reloadViews(){
@@ -67,6 +64,12 @@ abstract public class MainActivityAbstract extends ActivityAbstractWithSideNav {
 
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_first_menu, menu);
+        return true;
     }
 
     @Override

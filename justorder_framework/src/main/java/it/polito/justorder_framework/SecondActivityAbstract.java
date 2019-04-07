@@ -173,7 +173,7 @@ public class SecondActivityAbstract extends ActivityAbstractWithToolbar {
                 Uri imageUri = images.get(0);
                 try {
                     final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    final Bitmap selectedImage = Utils.resizeBitmap(BitmapFactory.decodeStream(imageStream), 400);
                     imageFileName = createImageFromBitmap(selectedImage);
                     image.setImageBitmap(selectedImage);
                 } catch (Exception e) {

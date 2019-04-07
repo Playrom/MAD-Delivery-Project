@@ -28,4 +28,25 @@ public class Utils {
 
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
+
+    public static Bitmap resizeBitmap(Bitmap image, int width){
+        float aspectRatio = image.getWidth() /
+                (float) image.getHeight();
+        int height = Math.round(width / aspectRatio);
+
+        return Bitmap.createScaledBitmap(image, width, height, false);
+    }
+
+    public static String beautifyTime(Integer hour, Integer minute){
+        String hourTime = Integer.toString(hour);
+        if(hourTime.length() == 1){
+            hourTime = "0" + hourTime;
+        }
+        String minuteTime = Integer.toString(minute);
+        if(minuteTime.length() == 1){
+            minuteTime = "0" + minuteTime;
+        }
+
+        return hourTime + ":" + minuteTime;
+    }
 }
