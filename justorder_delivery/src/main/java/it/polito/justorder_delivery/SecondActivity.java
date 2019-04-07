@@ -20,19 +20,7 @@ public class SecondActivity extends SecondActivityAbstract {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        Intent i = getIntent();
-
-        taxCode = i.getStringExtra("tax_code");
-        iban = i.getStringExtra("iban");
-
         this.setupActivity();
-    }
-
-    @Override
-    protected void reloadViews() {
-        super.reloadViews();
-        taxCodeTextField.setText(this.taxCode);
-        ibanTextField.setText(this.iban);
     }
 
     @Override
@@ -40,7 +28,23 @@ public class SecondActivity extends SecondActivityAbstract {
         super.setupActivity();
         taxCodeTextField = findViewById(R.id.taxCodeTextField);
         ibanTextField = findViewById(R.id.ibanTextField);
+        this.reloadData();
+    }
+
+    @Override
+    protected void reloadData() {
+        super.reloadData();
+        Intent i = getIntent();
+        taxCode = i.getStringExtra("tax_code");
+        iban = i.getStringExtra("iban");
         this.reloadViews();
+    }
+
+    @Override
+    protected void reloadViews() {
+        super.reloadViews();
+        taxCodeTextField.setText(this.taxCode);
+        ibanTextField.setText(this.iban);
     }
 
     @Override

@@ -30,7 +30,6 @@ public class OrderSummaryActivity extends ActivityAbstractWithSideNav {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
-
         this.setupActivity();
     }
 
@@ -40,6 +39,12 @@ public class OrderSummaryActivity extends ActivityAbstractWithSideNav {
         super.setupActivity();
         this.listView = findViewById(R.id.order_list);
         this.routeHandler = new ResturantActivityWithSideNav();
+        this.reloadData();
+    }
+
+    @Override
+    protected void reloadData() {
+        super.reloadData();
         this.reloadViews();
     }
 

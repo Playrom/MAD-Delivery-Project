@@ -39,20 +39,6 @@ public class SecondActivity extends SecondActivityAbstract {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-
-        Intent i = getIntent();
-        address = i.getStringExtra("address");
-        vatCode = i.getStringExtra("vat_code");
-        taxCode = i.getStringExtra("tax_code");
-        iban = i.getStringExtra("iban");
-        foodType = i.getStringExtra("food_type");
-        openHour = i.getStringExtra("opening_hour").split(":")[0];
-        closeHour = i.getStringExtra("closing_hour").split(":")[0];
-        openMinute = i.getStringExtra("opening_hour").split(":")[1];
-        closeMinute = i.getStringExtra("closing_hour").split(":")[1];
-        openDays = (HashMap) i.getSerializableExtra("open_days");
-
-
         this.setupActivity();
     }
 
@@ -76,6 +62,23 @@ public class SecondActivity extends SecondActivityAbstract {
         Friday=(CheckBox)findViewById(R.id.checkbox_friday);
         Saturday=(CheckBox)findViewById(R.id.checkbox_saturday);
 
+        this.reloadData();
+    }
+
+    @Override
+    protected void reloadData() {
+        super.reloadData();
+        Intent i = getIntent();
+        address = i.getStringExtra("address");
+        vatCode = i.getStringExtra("vat_code");
+        taxCode = i.getStringExtra("tax_code");
+        iban = i.getStringExtra("iban");
+        foodType = i.getStringExtra("food_type");
+        openHour = i.getStringExtra("opening_hour").split(":")[0];
+        closeHour = i.getStringExtra("closing_hour").split(":")[0];
+        openMinute = i.getStringExtra("opening_hour").split(":")[1];
+        closeMinute = i.getStringExtra("closing_hour").split(":")[1];
+        openDays = (HashMap) i.getSerializableExtra("open_days");
 
         this.reloadViews();
     }

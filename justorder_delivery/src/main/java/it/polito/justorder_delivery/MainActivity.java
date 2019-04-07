@@ -21,13 +21,33 @@ public class MainActivity extends MainActivityAbstract {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        this.setupActivity();
+    }
 
+    @Override
+    protected void setupActivity() {
+        super.setupActivity();
+        taxCodeTextField = findViewById(R.id.taxCodeTextField);
+        ibanTextField = findViewById(R.id.ibanTextField);
+        this.routeHandler = new DeliveryActivityWithSideNav();
+        this.reloadData();
+
+    }
+
+    @Override
+    protected void reloadData() {
+        super.reloadData();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         taxCode = sharedPreferences.getString("tax_code", "");
         iban = sharedPreferences.getString("iban", "");
+        this.reloadViews();
+    }
 
-        this.setupActivity();
-
+    @Override
+    protected void reloadViews() {
+        super.reloadViews();
+        taxCodeTextField.setText(this.taxCode);
+        ibanTextField.setText(this.iban);
     }
 
     @Override
@@ -46,23 +66,6 @@ public class MainActivity extends MainActivityAbstract {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void setupActivity() {
-        super.setupActivity();
-        taxCodeTextField = findViewById(R.id.taxCodeTextField);
-        ibanTextField = findViewById(R.id.ibanTextField);
-        this.routeHandler = new DeliveryActivityWithSideNav();
-        this.reloadViews();
-
-    }
-
-    @Override
-    protected void reloadViews() {
-        super.reloadViews();
-        taxCodeTextField.setText(this.taxCode);
-        ibanTextField.setText(this.iban);
     }
 
     @Override
