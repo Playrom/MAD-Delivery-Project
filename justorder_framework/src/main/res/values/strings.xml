@@ -13,4 +13,5 @@
     <string name="field_are_not_valid">You must provide valid data for all text field</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
+    <string name="category">Category</string>
 </resources>
