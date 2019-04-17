@@ -60,8 +60,6 @@ public class MainActivity extends MainActivityAbstract {
             i.putExtra("closing_hour", this.closingHour);
             i.putExtra("open_days", this.openDays);
 
-
-
             startActivityForResult(i, 1);
             return true;
         }

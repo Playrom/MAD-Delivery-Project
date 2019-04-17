@@ -6,12 +6,17 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Base64;
 
+import com.google.firebase.database.DataSnapshot;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Logger;
+
+import it.polito.justorder_framework.model.Product;
 
 public class Utils {
 
@@ -86,5 +91,17 @@ public class Utils {
         );
 
         return image;
+    }
+
+    public static <T> T convertObject(DataSnapshot dataSnapshot, Class<T> tClass) {
+        T product = dataSnapshot.getValue(tClass);
+        try {
+            if (tClass.getMethod("setKey", String.class) != null) {
+                tClass.getMethod("setKey", String.class).invoke(product, dataSnapshot.getKey());
+            }
+        }catch (Exception e){
+
+        }
+        return product;
     }
 }

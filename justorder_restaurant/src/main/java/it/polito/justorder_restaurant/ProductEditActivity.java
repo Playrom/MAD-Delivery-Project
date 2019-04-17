@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat;
 import it.polito.justorder_framework.ActivityAbstractWithToolbar;
 import it.polito.justorder_framework.SecondActivityAbstract;
 import it.polito.justorder_framework.Utils;
+import it.polito.justorder_framework.db.Database;
+import it.polito.justorder_framework.db.Storage;
 
 import android.Manifest;
 import android.app.Activity;
@@ -24,12 +26,17 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.hootsuite.nachos.NachoTextView;
+import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
@@ -40,15 +47,19 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 public class ProductEditActivity extends ActivityAbstractWithToolbar {
 
-    private String name, cost, notes, ingredients, imageFileName;
-    private EditText nameTextField, costTextField, notesTextField, ingredientsTextField;
+    private String name, cost, notes, imageFileName;
+    private List<String> ingredients = new ArrayList<>();
+    private EditText nameTextField, costTextField, notesTextField;
+    private NachoTextView ingredientsChips;
     private Spinner spinner;
     private Integer category = 0;
     protected Button butt;
@@ -67,9 +78,11 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
         nameTextField = findViewById(R.id.nameTextField);
         costTextField = findViewById(R.id.costTextField);
         notesTextField = findViewById(R.id.notesTextField);
-        ingredientsTextField = findViewById(R.id.ingredientsTextField);
+        ingredientsChips = findViewById(R.id.ingredientsChips);
         spinner = findViewById(R.id.spinner);
         image = findViewById(R.id.imageView);
+
+        ingredientsChips.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL);
 
         butt = findViewById(it.polito.justorder_framework.R.id.button);
 
@@ -144,7 +157,11 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
         name = i.getStringExtra("name");
         cost = i.getStringExtra("cost");
         notes = i.getStringExtra("notes");
-        ingredients = i.getStringExtra("ingredients");
+
+        if(i.getSerializableExtra("ingredients") != null){
+            ingredients = (List) i.getSerializableExtra("ingredients");
+        }
+
         category = i.getIntExtra("category", 0);
         imageFileName = i.getStringExtra("imageFileName");
 
@@ -166,7 +183,6 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
         nameTextField.setText(this.name);
         costTextField.setText(this.cost);
         notesTextField.setText(this.notes);
-        ingredientsTextField.setText(this.notes);
         spinner.setSelection(category);
 
         if(imageFileName != null) {
@@ -177,6 +193,8 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
 
             }
         }
+
+        this.ingredientsChips.setText(this.ingredients);
     }
 
     @Override
@@ -212,7 +230,7 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
                 returnIntent.putExtra("name", this.nameTextField.getText().toString());
                 returnIntent.putExtra("cost", this.costTextField.getText().toString());
                 returnIntent.putExtra("notes", this.notesTextField.getText().toString());
-                returnIntent.putExtra("ingredients", this.ingredientsTextField.getText().toString());
+                returnIntent.putExtra("ingredients", (Serializable) this.ingredientsChips.getChipValues());
                 returnIntent.putExtra("category", this.spinner.getSelectedItemPosition());
 
                 if (imageFileName != null) {
@@ -236,6 +254,7 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
                     final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                     final Bitmap selectedImage = Utils.resizeBitmap(BitmapFactory.decodeStream(imageStream), 400);
                     imageFileName = Utils.createImageFromBitmap(selectedImage, ProductEditActivity.this);
+                    Storage.INSTANCE.saveImage(imageUri);
                     image.setImageBitmap(selectedImage);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -256,7 +275,7 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
         outState.putString("name", name);
         outState.putString("cost", cost);
         outState.putString("notes", notes);
-        outState.putString("ingredients", ingredients);
+        outState.putSerializable("ingredients", (Serializable) this.ingredients);
         outState.putInt("category", category);
         outState.putString("imageFileName", imageFileName);
     }
@@ -267,7 +286,7 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
         name = savedInstanceState.getString("name");
         cost = savedInstanceState.getString("cost");
         notes = savedInstanceState.getString("notes");
-        ingredients = savedInstanceState.getString("ingredients");
+        ingredients = (List) savedInstanceState.getSerializable("ingredients");
         category = savedInstanceState.getInt("category");
         imageFileName = savedInstanceState.getString("imageFileName");
 

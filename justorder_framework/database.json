@@ -1,0 +1,26 @@
+{
+  "users": {
+    "id": "id",
+    "first_name": "first_name",
+    "last_name": "last_name",
+    "username": "username"
+  },
+  "restaurants": {
+    "manager": "user_id",
+    "name": "name",
+    "location": {},
+    "type": "type"
+  },
+  "orders": {
+    "id": "id",
+    "foods": [
+      {
+        "id_food": "id_food",
+        "quantity": "quantity"
+      }
+    ]
+  },
+  "foods": [{
+
+  }]
+}

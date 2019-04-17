@@ -15,6 +15,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import it.polito.justorder_framework.FirebaseFunctions;
 import it.polito.justorder_framework.MainActivityAbstract;
 
 public class MainActivity extends MainActivityAbstract {
@@ -31,6 +32,7 @@ public class MainActivity extends MainActivityAbstract {
     @Override
     protected void setupActivity() {
         super.setupActivity();
+        FirebaseFunctions.test(this);
         addressTextField = findViewById(R.id.addressTextField);
         this.routeHandler = new CustomerActivityWithSideNav();
         this.reloadData();

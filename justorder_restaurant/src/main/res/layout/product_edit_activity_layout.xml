@@ -115,8 +115,8 @@
                     android:inputType="textMultiLine"
                     android:hint="@string/note" />
 
-                <EditText
-                    android:id="@+id/ingredientsTextField"
+                <com.hootsuite.nachos.NachoTextView
+                    android:id="@+id/ingredientsChips"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/notesTextField"
@@ -125,15 +125,13 @@
                     android:layout_alignEnd="@+id/nameTextField"
                     android:layout_alignRight="@+id/nameTextField"
                     android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:inputType="textMultiLine"
-                    android:hint="@string/ingredients" />
+                />
 
                 <Spinner
                     android:id="@+id/spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ingredientsTextField"
+                    android:layout_below="@id/ingredientsChips"
                     android:layout_alignStart="@+id/nameTextField"
                     android:layout_alignLeft="@+id/nameTextField"
                     android:layout_alignEnd="@+id/nameTextField"

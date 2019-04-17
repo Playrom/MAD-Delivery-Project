@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_menu" >
 
     <item
         android:id="@+id/list_view"
@@ -14,8 +16,20 @@
         android:visible="true" />
 
     <item
-        android:id="@+id/userPage"
+        android:id="@+id/login"
+        android:enabled="true"
+        android:title="Login/Sign up"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/userSettings"
         android:enabled="true"
         android:title="User Settings"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/logout"
+        android:enabled="true"
+        android:title="Logout"
         android:visible="true" />
 </menu>

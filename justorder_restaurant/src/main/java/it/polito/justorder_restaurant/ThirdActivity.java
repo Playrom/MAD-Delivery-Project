@@ -2,7 +2,11 @@ package it.polito.justorder_restaurant;
 
 import androidx.annotation.Nullable;
 import it.polito.justorder_framework.ActivityAbstractWithSideNav;
+import it.polito.justorder_framework.FirebaseFunctions;
 import it.polito.justorder_framework.ProductEntity;
+import it.polito.justorder_framework.db.Products;
+import it.polito.justorder_framework.model.Product;
+import kotlin.Unit;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +25,9 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,19 +37,14 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
     protected BaseAdapter adapter;
     protected FloatingActionButton fab;
     private int tapped;
-
-    ArrayList<ProductEntity> products = new ArrayList<ProductEntity>() {{
-        add(new ProductEntity("Name1", null, "45", "", "", "Pizza"));
-        add(new ProductEntity("Name2", null, "45", "", "", "Pizza"));
-        add(new ProductEntity("Name3", null, "45", "", "", "Pizza"));
-        add(new ProductEntity("Name4", null, "45", "", "", "Pizza"));
-    }};
+    private List<Product> products = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
         this.setupActivity();
+        System.out.println(MainMenuLoader.class.getName());
     }
 
     @Override
@@ -85,6 +87,13 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
     @Override
     protected void reloadViews() {
         super.reloadViews();
+
+        Products.INSTANCE.getAllProducts(products1 -> {
+            products.clear();
+            products.addAll(products1);
+            return Unit.INSTANCE;
+        });
+
         this.adapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -108,11 +117,11 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
                 }
 
                 if(products.get(position) != null){
-                    ProductEntity product = products.get(position);
+                    Product product = products.get(position);
                     ((TextView)convertView.findViewById(R.id.content)).setText(product.getName());
-                    ((TextView)convertView.findViewById(R.id.description)).setText(product.getCost());
+                    ((TextView)convertView.findViewById(R.id.description)).setText(product.getCost().toString());
 
-                    if(product.getImageFileName() != null) {
+                    /*if(product.getImageFileName() != null) {
                         try {
                             Bitmap selectedImage = BitmapFactory.decodeStream(getApplicationContext().openFileInput(product.getImageFileName()));
                             ((ImageView)convertView.findViewById(R.id.image)).setImageBitmap(selectedImage);
@@ -121,7 +130,7 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
                         }
                     }else{
                         ((ImageView)convertView.findViewById(R.id.image)).setImageResource(R.drawable.ic_launcher_background);
-                    }
+                    }*/
                 }
 
                 return convertView;
@@ -139,26 +148,27 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
 
         if(requestCode == 1){
             if(resultCode== Activity.RESULT_OK){
-                ProductEntity productEntity = products.get(tapped);
-                productEntity.setName(data.getStringExtra("name"));
-                productEntity.setCost(data.getStringExtra("cost"));
-                productEntity.setNotes(data.getStringExtra("notes"));
-                productEntity.setIngredients(data.getStringExtra("ingredients"));
-                productEntity.setCategory(data.getStringExtra("category"));
-                productEntity.setImageFileName(data.getStringExtra("imageFileName"));
+                Product product = products.get(tapped);
+                product.setName(data.getStringExtra("name"));
+                product.setCost(Double.valueOf(data.getStringExtra("cost")));
+                product.setNotes(data.getStringExtra("notes"));
+                product.setIngredients((List) data.getSerializableExtra("ingredients"));
+                product.setCategory(data.getStringExtra("category"));
+//                product.setImageFileName(data.getStringExtra("imageFileName"));
 
                 this.reloadViews();
             }
         }else if(requestCode == 2){
             if(resultCode== Activity.RESULT_OK){
-                ProductEntity productEntity = new ProductEntity();
-                productEntity.setName(data.getStringExtra("name"));
-                productEntity.setCost(data.getStringExtra("cost"));
-                productEntity.setNotes(data.getStringExtra("notes"));
-                productEntity.setIngredients(data.getStringExtra("ingredients"));
-                productEntity.setCategory(data.getStringExtra("category"));
-                productEntity.setImageFileName(data.getStringExtra("imageFileName"));
-                products.add(productEntity);
+                Product product = new Product();
+                product.setName(data.getStringExtra("name"));
+                product.setCost(Double.valueOf(data.getStringExtra("cost")));
+                product.setNotes(data.getStringExtra("notes"));
+                product.setIngredients((List) data.getSerializableExtra("ingredients"));
+                product.setCategory(data.getStringExtra("category"));
+//                product.setImageFileName(data.getStringExtra("imageFileName"));
+                products.add(product);
+                Products.INSTANCE.saveProduct(product);
                 this.reloadViews();
             }
         }
