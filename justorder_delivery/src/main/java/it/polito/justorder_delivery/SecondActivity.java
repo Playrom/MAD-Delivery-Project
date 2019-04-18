@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import it.polito.justorder_framework.SecondActivityAbstract;
+import it.polito.justorder_framework.abstract_activities.SecondActivityAbstract;
 import it.polito.justorder_framework.Utils;
 
 public class SecondActivity extends SecondActivityAbstract {
@@ -19,7 +19,7 @@ public class SecondActivity extends SecondActivityAbstract {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.usersettings_editor_activity);
         this.setupActivity();
     }
 

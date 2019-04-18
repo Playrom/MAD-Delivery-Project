@@ -12,13 +12,11 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.material.navigation.NavigationView;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.polito.justorder_framework.MainActivityAbstract;
+import it.polito.justorder_framework.abstract_activities.MainActivityAbstract;
 
 public class MainActivity extends MainActivityAbstract {
     protected String address, vatCode, taxCode, iban, foodType;
@@ -39,7 +37,7 @@ public class MainActivity extends MainActivityAbstract {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.placeholder_activity_main);
         setupActivity();
     }
 

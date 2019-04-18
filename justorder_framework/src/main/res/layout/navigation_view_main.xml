@@ -9,4 +9,4 @@
     android:fitsSystemWindows="true"
     app:menu="@menu/main_menu"
     app:headerLayout="@layout/nav_header"
-    tools:showIn="@layout/activity_main" />
+    tools:showIn="@layout/placeholder_activity_main" />

@@ -9,7 +9,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Logger;
 import com.google.firebase.database.ValueEventListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import androidx.annotation.NonNull;
 import it.polito.justorder_framework.db.Database;
@@ -27,6 +27,7 @@ import kotlin.Unit;
 
 public class FirebaseFunctions {
     public static final int AUTH_ACTIVITY_RESULT = 4;
+    public static Logger LOGGER = Logger.getLogger("FirebaseFunctions");
     public static void login(Activity context) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
@@ -53,5 +54,6 @@ public class FirebaseFunctions {
     public static void logout() {
         FirebaseAuth.getInstance().signOut();
         EventBus.getDefault().post(new UserChangeStatusEvent());
+        LOGGER.info("FIREBASE LOGOUT");
     }
 }

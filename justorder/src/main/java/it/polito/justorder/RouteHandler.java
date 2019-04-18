@@ -1,4 +1,4 @@
-package it.polito.justorder_restaurant;
+package it.polito.justorder;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,15 +8,16 @@ import android.view.MenuItem;
 import it.polito.justorder_framework.AbstractRouteHandler;
 import it.polito.justorder_framework.FirebaseFunctions;
 import it.polito.justorder_framework.common_activities.ProductsListActivity;
+import it.polito.justorder_framework.common_activities.UserSettingsViewerActivity;
 
-public class ResturantActivityWithSideNav extends AbstractRouteHandler {
+public class RouteHandler extends AbstractRouteHandler {
 
     public boolean routeHandler(MenuItem item, Context context) {
+
         if(item.getItemId() == R.id.list_view) {
             Intent i = new Intent(context, ProductsListActivity.class);
             context.startActivity(i);
             return true;
-
         }
 
         if(item.getItemId() == R.id.login) {
@@ -27,7 +28,7 @@ public class ResturantActivityWithSideNav extends AbstractRouteHandler {
         }
 
         if(item.getItemId() == R.id.userSettings) {
-            Intent i = new Intent(context, MainActivity.class);
+            Intent i = new Intent(context, UserSettingsViewerActivity.class);
             context.startActivity(i);
             return true;
         }
@@ -37,12 +38,6 @@ public class ResturantActivityWithSideNav extends AbstractRouteHandler {
                 FirebaseFunctions.logout();
             }
             return false;
-        }
-
-        if(item.getItemId() == R.id.ordersPage) {
-            Intent i = new Intent(context, OrderSummaryActivity.class);
-            context.startActivity(i);
-            return true;
         }
 
         return false;

@@ -1,23 +1,12 @@
 package it.polito.justorder_restaurant;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import it.polito.justorder_framework.ActivityAbstractWithToolbar;
+import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.Random;
 
 public class OrderDetails extends ActivityAbstractWithToolbar {
 

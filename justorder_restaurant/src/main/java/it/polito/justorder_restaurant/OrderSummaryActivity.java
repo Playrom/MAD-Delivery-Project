@@ -1,8 +1,7 @@
 package it.polito.justorder_restaurant;
 
-import it.polito.justorder_framework.ActivityAbstractWithSideNav;
+import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithSideNav;
 import it.polito.justorder_framework.OrderEntity;
-import it.polito.justorder_framework.ProductEntity;
 
 import android.content.Intent;
 import android.os.Bundle;

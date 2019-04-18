@@ -1,9 +1,11 @@
-package it.polito.justorder_framework;
+package it.polito.justorder_framework.abstract_activities;
 
 import android.view.WindowManager;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+
+import it.polito.justorder_framework.R;
 
 public class ActivityAbstractWithToolbar extends ActivityAbstract {
     protected ActionBar actionBar;

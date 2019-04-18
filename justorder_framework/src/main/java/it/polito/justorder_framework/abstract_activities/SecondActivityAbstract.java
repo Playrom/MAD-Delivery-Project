@@ -1,4 +1,4 @@
-package it.polito.justorder_framework;
+package it.polito.justorder_framework.abstract_activities;
 
 import android.Manifest;
 import android.content.Context;
@@ -6,27 +6,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
@@ -35,7 +30,6 @@ import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,26 +37,30 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import it.polito.justorder_framework.R;
+import it.polito.justorder_framework.Utils;
+import it.polito.justorder_framework.db.Storage;
+import it.polito.justorder_framework.db.Users;
+import it.polito.justorder_framework.model.User;
+import kotlin.Unit;
+
 public class SecondActivityAbstract extends ActivityAbstractWithToolbar {
 
     protected String name, email, phone, imageFileName;
     protected EditText nameTextField, emailTextField, phoneTextField;
     protected Button butt;
     protected ImageView image;
-    private String mCurrentPhotoPath;
+    protected User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
-        name = i.getStringExtra("name");
-        email = i.getStringExtra("email");
-        phone = i.getStringExtra("phone");
-        imageFileName = i.getStringExtra("imageFileName");
+        user = (User) i.getSerializableExtra("user");
     }
 
     protected void setupActivity(){
-
+        super.setupActivity();
         nameTextField = findViewById(R.id.nameTextField);
         emailTextField = findViewById(R.id.emailTextField);
         phoneTextField = findViewById(R.id.phoneTextField);
@@ -140,20 +138,25 @@ public class SecondActivityAbstract extends ActivityAbstractWithToolbar {
             }
         });
 
+        this.reloadData();
+
     }
 
     protected void reloadViews(){
-        nameTextField.setText(name);
-        emailTextField.setText(email);
-        phoneTextField.setText(phone);
+        super.reloadViews();
+        nameTextField.setText(user.getName());
+        emailTextField.setText(user.getEmail());
+        phoneTextField.setText(user.getTelephone());
 
-        if(imageFileName != null) {
-            try {
-                Bitmap selectedImage = BitmapFactory.decodeStream(getApplicationContext().openFileInput(imageFileName));
-                image.setImageBitmap(selectedImage);
-            } catch (Exception e) {
-
-            }
+        if(user.getImageUri() != null) {
+            Utils.getBitmapFromURL(user.getImageUri(), (selectedImage -> {
+                this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageBitmap(selectedImage);
+                    }
+                });
+            }));
         }
     }
 
@@ -172,9 +175,17 @@ public class SecondActivityAbstract extends ActivityAbstractWithToolbar {
                 Uri imageUri = images.get(0);
                 try {
                     final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                    final Bitmap selectedImage = Utils.resizeBitmap(BitmapFactory.decodeStream(imageStream), 400);
-                    imageFileName = createImageFromBitmap(selectedImage);
-                    image.setImageBitmap(selectedImage);
+                    try{
+                        final byte[] byteArray = Utils.getByteArray(imageStream);
+                        final Bitmap selectedImage = BitmapFactory.decodeByteArray(byteArray, 0 , byteArray.length);
+                        image.setImageBitmap(selectedImage);
+                        Storage.INSTANCE.saveImage(byteArray, uri -> {
+                            user.setImageUri(uri.toString());
+                            return Unit.INSTANCE;
+                        });
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -195,54 +206,14 @@ public class SecondActivityAbstract extends ActivityAbstractWithToolbar {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("name", nameTextField.getText().toString());
-        outState.putString("email", emailTextField.getText().toString());
-        outState.putString("phone", phoneTextField.getText().toString());
-        outState.putString("imageFileName", imageFileName);
+        outState.putSerializable("user", user);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        name = savedInstanceState.getString("name");
-        email = savedInstanceState.getString("email");
-        phone = savedInstanceState.getString("phone");
-        imageFileName = savedInstanceState.getString("imageFileName");
+        user =(User) savedInstanceState.getSerializable("user");
 
         reloadViews();
     }
-
-    protected String createImageFromBitmap(Bitmap bitmap) {
-        String fileName = "myImage";//no .png or .jpg needed
-        try {
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-            FileOutputStream fo = openFileOutput(fileName, Context.MODE_PRIVATE);
-            fo.write(bytes.toByteArray());
-            // remember close file output
-            fo.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            fileName = null;
-        }
-        return fileName;
-    }
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM), "Camera");
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                getApplicationContext().getFilesDir()/* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
-        return image;
-    }
-
 }

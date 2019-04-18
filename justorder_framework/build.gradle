@@ -29,6 +29,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
 }
 
 dependencies {
@@ -61,3 +65,6 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+
+apply plugin: 'kotlin-android-extensions'

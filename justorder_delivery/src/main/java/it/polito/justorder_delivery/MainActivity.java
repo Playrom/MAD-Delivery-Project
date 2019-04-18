@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.google.android.material.navigation.NavigationView;
 
-import it.polito.justorder_framework.MainActivityAbstract;
+import it.polito.justorder_framework.abstract_activities.MainActivityAbstract;
 
 public class MainActivity extends MainActivityAbstract {
     protected String taxCode, iban;
@@ -20,7 +20,7 @@ public class MainActivity extends MainActivityAbstract {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.placeholder_activity_main);
         this.setupActivity();
     }
 

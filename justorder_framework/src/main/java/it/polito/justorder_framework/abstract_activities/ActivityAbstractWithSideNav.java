@@ -1,28 +1,25 @@
-package it.polito.justorder_framework;
+package it.polito.justorder_framework.abstract_activities;
 
 import android.content.Intent;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
 
-import com.google.android.material.internal.NavigationMenu;
 import com.google.android.material.navigation.NavigationView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import it.polito.justorder_framework.AbstractRouteHandler;
+import it.polito.justorder_framework.FirebaseFunctions;
+import it.polito.justorder_framework.R;
+import it.polito.justorder_framework.UserChangeStatusEvent;
+
 public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
     protected DrawerLayout drawerLayout;
-    protected RouteHandler routeHandler;
+    protected AbstractRouteHandler routeHandler;
 
     @Override
     protected void onStart() {
@@ -45,12 +42,18 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this.getNavigationListener());
+        this.setRouteHandler();
+    }
+
+    @Override
+    protected void reloadViews() {
+        super.reloadViews();
         this.reloadMenu();
     }
 
     @Subscribe
     public void onMessageEvent(UserChangeStatusEvent event) {
-        this.reloadMenu();
+        this.reloadViews();
     };
 
     protected NavigationView.OnNavigationItemSelectedListener getNavigationListener() {
@@ -90,7 +93,23 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
         }catch (NoSuchMethodException e){
             System.out.println("Missing createMainMenu in MainMenuLoader");
         }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
+    protected void setRouteHandler() {
+        try {
+            Class moduleRouteHandlerClass = Class.forName(getApplicationContext().getPackageName() + ".RouteHandler");
+            Class handlerClass = ActivityAbstractWithSideNav.class.getField("routeHandler").getType();
+            if(handlerClass.isAssignableFrom(moduleRouteHandlerClass)){
+                this.routeHandler = (AbstractRouteHandler) moduleRouteHandlerClass.getConstructor().newInstance();
+            }
+        }catch (ClassNotFoundException e){
+            System.out.println("Missing MainMenuLoader in package");
+        }catch (NoSuchMethodException e){
+            System.out.println("Missing createMainMenu in MainMenuLoader");
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -100,6 +119,13 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
         if(requestCode == FirebaseFunctions.AUTH_ACTIVITY_RESULT){
             EventBus.getDefault().post(new UserChangeStatusEvent());
         }
+        this.reloadViews();
+    }
+
+    @Override
+    public void onActivityReenter(int resultCode, Intent data) {
+        super.onActivityReenter(resultCode, data);
+        this.reloadViews();
     }
 
     @Override

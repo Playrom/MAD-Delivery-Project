@@ -3,7 +3,6 @@ package it.polito.justorder_framework.db
 import com.google.firebase.database.*
 import it.polito.justorder_framework.Utils
 import it.polito.justorder_framework.model.Product
-import java.util.function.Consumer
 
 object Products{
     fun getAllProducts(ch : (List<Product>) -> Unit){
@@ -23,7 +22,13 @@ object Products{
     }
 
     fun saveProduct(product: Product){
-        var ref: DatabaseReference = Database.db.child("products").push()
+        var ref: DatabaseReference
+        val key = product.key
+        if(key != null){
+            ref = Database.db.child("products").child(key);
+        }else{
+            ref = Database.db.child("products").push()
+        }
         ref.setValue(product)
     }
 }

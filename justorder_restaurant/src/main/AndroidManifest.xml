@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".OrderDetails"></activity>
-        <activity android:name=".ProductActivity" />
+        <activity android:name="it.polito.justorder_framework.common_activities.ProductActivity" />
         <activity android:name=".ProductEditActivity" />
         <activity android:name=".OrderSummaryActivity" />
-        <activity android:name=".ThirdActivity">
+        <activity android:name="it.polito.justorder_framework.common_activities.ProductsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

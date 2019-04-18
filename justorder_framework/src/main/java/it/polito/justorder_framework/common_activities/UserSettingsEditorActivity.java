@@ -1,17 +1,19 @@
-package it.polito.justorder;
+package it.polito.justorder_framework.common_activities;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import it.polito.justorder_framework.SecondActivityAbstract;
+import androidx.appcompat.app.AlertDialog;
+
+import it.polito.justorder_framework.R;
+import it.polito.justorder_framework.abstract_activities.SecondActivityAbstract;
 import it.polito.justorder_framework.Utils;
 
-public class SecondActivity extends SecondActivityAbstract {
+public class UserSettingsEditorActivity extends SecondActivityAbstract {
 
     protected String address;
     protected EditText addressTextField;
@@ -19,7 +21,7 @@ public class SecondActivity extends SecondActivityAbstract {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.usersettings_editor_activity);
         this.setupActivity();
     }
 
@@ -31,31 +33,15 @@ public class SecondActivity extends SecondActivityAbstract {
     }
 
     @Override
-    protected void reloadData() {
-        super.reloadData();
-        Intent i = getIntent();
-        address = i.getStringExtra("address");
-        this.reloadViews();
-    }
-
-    @Override
-    protected void reloadViews() {
-        super.reloadViews();
-        addressTextField.setText(address);
-    }
-
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.saveUserData) {
             if (
                     nameTextField.getText().toString() == "" ||
                             emailTextField.getText().toString() == "" ||
                             phoneTextField.getText().toString() == "" ||
-                            addressTextField.getText().toString() == "" ||
                             !Utils.isValidEmail(emailTextField.getText().toString())
             ) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SecondActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(UserSettingsEditorActivity.this);
                 AlertDialog dialog = builder
                         .setTitle(R.string.validation_error)
                         .setMessage(R.string.field_are_not_valid)
@@ -70,13 +56,11 @@ public class SecondActivity extends SecondActivityAbstract {
             } else {
 
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("name", nameTextField.getText().toString());
-                returnIntent.putExtra("email", emailTextField.getText().toString());
-                returnIntent.putExtra("phone", phoneTextField.getText().toString());
-                returnIntent.putExtra("address", addressTextField.getText().toString());
-                if (imageFileName != null) {
-                    returnIntent.putExtra("imageFileName", imageFileName);
-                }
+                user.setName(nameTextField.getText().toString());
+                user.setEmail(emailTextField.getText().toString());
+                user.setTelephone(phoneTextField.getText().toString());
+
+                returnIntent.putExtra("user", user);
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }

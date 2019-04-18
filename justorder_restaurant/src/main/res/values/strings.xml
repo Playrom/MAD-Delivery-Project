@@ -7,40 +7,5 @@
     <string name="foodType">Food Type</string>
     <string name="address">Address</string>
     <string name="edit_restaurant_title">Edit Restaurant</string>
-    <string name="product_list_title">Our Meals</string>
-    <string name="order_summary_title">Orders Summary</string>
-    <string name="openingDays">Opening Days</string>
-    <string name="openingHour">Opening Hour</string>
-    <string name="closingHour">Closing Hour</string>
-    <string name="openDays">Opening Days</string>
-
-    <string-array name="foodTypes">
-        <item>Pizza</item>
-        <item>Hamburger</item>
-        <item>Chinese</item>
-        <item>Sushi</item>
-        <item>Indian</item>
-        <item>Ice Creams</item>
-        <item>Kebap</item>
-        <item>Fusion</item>
-    </string-array>
-    <string name="title_activity_order_summary">OrderSummaryActivity</string>
-    <string name="sunday">Sunday</string>
-    <string name="monday">Monday</string>
-    <string name="tuesday">Tuesday</string>
-    <string name="wednesday">Wednesday</string>
-    <string name="friday">Friday</string>
-    <string name="thursday">Thursday</string>
-    <string name="saturday">Saturday</string>
-    <string name="placeholder">Placeholder</string>
-    <string name="cost">Cost</string>
-    <string name="note">Note</string>
-    <string name="ingredients">Ingredients</string>
-    <string name="orderId">Order ID</string>
-    <string name="category">Category</string>
-    <string name="user">Customer Username</string>
-    <string name="price">Total Price</string>
-    <string name="timestamp">Order time</string>
-    <string name="rider">Rider Name</string>
 
 </resources>

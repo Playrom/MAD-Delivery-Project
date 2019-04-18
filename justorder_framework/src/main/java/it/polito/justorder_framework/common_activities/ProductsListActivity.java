@@ -1,8 +1,9 @@
-package it.polito.justorder_restaurant;
+package it.polito.justorder_framework.common_activities;
 
 import androidx.annotation.Nullable;
-import it.polito.justorder_framework.ActivityAbstractWithSideNav;
-import it.polito.justorder_framework.FirebaseFunctions;
+
+import it.polito.justorder_framework.R;
+import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithSideNav;
 import it.polito.justorder_framework.ProductEntity;
 import it.polito.justorder_framework.db.Products;
 import it.polito.justorder_framework.model.Product;
@@ -11,27 +12,21 @@ import kotlin.Unit;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThirdActivity extends ActivityAbstractWithSideNav {
+public class ProductsListActivity extends ActivityAbstractWithSideNav {
 
     protected ListView listView;
     protected BaseAdapter adapter;
@@ -42,9 +37,8 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_third);
+        setContentView(R.layout.product_list_activity);
         this.setupActivity();
-        System.out.println(MainMenuLoader.class.getName());
     }
 
     @Override
@@ -52,12 +46,11 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
         super.setupActivity();
         this.listView = findViewById(R.id.food_list);
         this.fab = findViewById(R.id.fab);
-        this.routeHandler = new ResturantActivityWithSideNav();
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ProductEntity entry= (ProductEntity) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(ThirdActivity.this, ProductActivity.class);
+                Intent intent = new Intent(ProductsListActivity.this, ProductActivity.class);
                 intent.putExtra("name", entry.getName());
                 intent.putExtra("cost", entry.getCost());
                 intent.putExtra("notes", entry.getNotes());
@@ -68,13 +61,13 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
                 startActivityForResult(intent, 1);
             }
         });
-        this.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ThirdActivity.this, ProductEditActivity.class);
-                startActivityForResult(intent, 2);
-            }
-        });
+//        this.fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ProductsListActivity.this, ProductEditActivity.class);
+//                startActivityForResult(intent, 2);
+//            }
+//        });
         this.reloadData();
     }
 
@@ -113,13 +106,13 @@ public class ThirdActivity extends ActivityAbstractWithSideNav {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 if(convertView == null) {
-                    convertView = getLayoutInflater().inflate(R.layout.item_adapter, parent, false);
+                    convertView = getLayoutInflater().inflate(R.layout.product_item_adapter, parent, false);
                 }
 
                 if(products.get(position) != null){
                     Product product = products.get(position);
                     ((TextView)convertView.findViewById(R.id.content)).setText(product.getName());
-                    ((TextView)convertView.findViewById(R.id.description)).setText(product.getCost().toString());
+                    ((TextView)convertView.findViewById(R.id.description)).setText(new Double(product.getCost()).toString());
 
                     /*if(product.getImageFileName() != null) {
                         try {

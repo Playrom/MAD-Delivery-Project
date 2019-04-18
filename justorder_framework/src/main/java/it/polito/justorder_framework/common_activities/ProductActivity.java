@@ -1,7 +1,9 @@
-package it.polito.justorder_restaurant;
+package it.polito.justorder_framework.common_activities;
 
 import androidx.annotation.Nullable;
-import it.polito.justorder_framework.ActivityAbstractWithToolbar;
+
+import it.polito.justorder_framework.R;
+import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,13 +14,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.util.Arrays;
 
 public class ProductActivity extends ActivityAbstractWithToolbar {
 
@@ -96,28 +94,28 @@ public class ProductActivity extends ActivityAbstractWithToolbar {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_product_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.editProduct){
-            Intent i = new Intent(getApplicationContext(), ProductEditActivity.class);
-            i.putExtra("name", this.name);
-            i.putExtra("cost", this.cost);
-            i.putExtra("notes", this.notes);
-            i.putExtra("ingredients", this.ingredients);
-            i.putExtra("category", this.category);
-            i.putExtra("imageFileName", this.imageFileName);
-
-            startActivityForResult(i, 1);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.activity_product_menu, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if(item.getItemId() == R.id.editProduct){
+//            Intent i = new Intent(getApplicationContext(), ProductEditActivity.class);
+//            i.putExtra("name", this.name);
+//            i.putExtra("cost", this.cost);
+//            i.putExtra("notes", this.notes);
+//            i.putExtra("ingredients", this.ingredients);
+//            i.putExtra("category", this.category);
+//            i.putExtra("imageFileName", this.imageFileName);
+//
+//            startActivityForResult(i, 1);
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -3,6 +3,8 @@ package it.polito.justorder_framework;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Base64;
 
@@ -12,8 +14,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import it.polito.justorder_framework.model.Product;
@@ -103,5 +109,52 @@ public class Utils {
 
         }
         return product;
+    }
+
+    public static void getBitmapFromURL(String src, Consumer<Bitmap> cb) {
+        new AsyncTask<String, Void, Void>() {
+            protected Void doInBackground(String... urls){
+                try {
+                    URL url = new URL(src);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setDoInput(true);
+                    connection.connect();
+                    InputStream input = connection.getInputStream();
+                    Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                    cb.accept(myBitmap);
+                    return null;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        }.execute(src);
+    }
+
+    public static Bitmap getBitmapFromURL(Uri uri) {
+        try {
+            URL url = new URL(uri.toString());
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
+    }
+
+    public static byte[] getByteArray(InputStream stream) throws IOException{
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        int read = 0;
+        byte[] buff = new byte[1024];
+        while ((read = stream.read(buff)) != -1) {
+            bos.write(buff, 0, read);
+        }
+        byte[] streamData = bos.toByteArray();
+        return streamData;
     }
 }
