@@ -8,10 +8,10 @@ import androidx.appcompat.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import it.polito.justorder_framework.abstract_activities.SecondActivityAbstract;
+import it.polito.justorder_framework.abstract_activities.AbstractEditorWithImagePickerActivity;
 import it.polito.justorder_framework.Utils;
 
-public class SecondActivity extends SecondActivityAbstract {
+public class SecondActivity extends AbstractEditorWithImagePickerActivity {
 
     protected String taxCode, iban;
     protected EditText taxCodeTextField, ibanTextField;

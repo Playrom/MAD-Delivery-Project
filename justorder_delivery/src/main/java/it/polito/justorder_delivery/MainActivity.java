@@ -11,9 +11,9 @@ import android.widget.EditText;
 
 import com.google.android.material.navigation.NavigationView;
 
-import it.polito.justorder_framework.abstract_activities.MainActivityAbstract;
+import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivity;
 
-public class MainActivity extends MainActivityAbstract {
+public class MainActivity extends AbstractViewerWithImagePickerActivity {
     protected String taxCode, iban;
     protected EditText taxCodeTextField, ibanTextField;
 

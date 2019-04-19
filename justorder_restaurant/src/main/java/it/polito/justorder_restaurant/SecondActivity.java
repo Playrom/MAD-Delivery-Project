@@ -13,10 +13,10 @@ import android.widget.TimePicker;
 
 import java.util.HashMap;
 
-import it.polito.justorder_framework.abstract_activities.SecondActivityAbstract;
+import it.polito.justorder_framework.abstract_activities.AbstractEditorWithImagePickerActivity;
 import it.polito.justorder_framework.Utils;
 
-public class SecondActivity extends SecondActivityAbstract {
+public class SecondActivity extends AbstractEditorWithImagePickerActivity {
 
     protected String address, vatCode, taxCode, iban, foodType;
     protected EditText addressTextField, vatCodeTextField, taxCodeTextField, ibanTextField;

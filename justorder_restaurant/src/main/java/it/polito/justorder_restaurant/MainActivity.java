@@ -16,9 +16,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.polito.justorder_framework.abstract_activities.MainActivityAbstract;
+import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivity;
 
-public class MainActivity extends MainActivityAbstract {
+public class MainActivity extends AbstractViewerWithImagePickerActivity {
     protected String address, vatCode, taxCode, iban, foodType;
     protected EditText addressTextField, vatCodeTextField, taxCodeTextField, ibanTextField, foodTypeTextField;
     protected TextView openingHourTextView, closingHourTextView, openDaysTextView;
