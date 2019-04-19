@@ -7,6 +7,7 @@ class User : Serializable{
     var key: String? = null
     var name: String = ""
     var email: String = ""
+    var address: String = ""
     var imageUri: String? = null
     var telephone: String = ""
     var ownedRestaurants: Map<String, Boolean> = mutableMapOf<String, Boolean>()

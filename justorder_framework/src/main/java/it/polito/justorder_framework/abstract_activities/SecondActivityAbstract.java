@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
@@ -149,14 +150,7 @@ public class SecondActivityAbstract extends ActivityAbstractWithToolbar {
         phoneTextField.setText(user.getTelephone());
 
         if(user.getImageUri() != null) {
-            Utils.getBitmapFromURL(user.getImageUri(), (selectedImage -> {
-                this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        image.setImageBitmap(selectedImage);
-                    }
-                });
-            }));
+            Glide.with(this).load(user.getImageUri()).into(image);
         }
     }
 

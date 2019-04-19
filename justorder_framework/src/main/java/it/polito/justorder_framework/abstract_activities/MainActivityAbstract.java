@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.Serializable;
@@ -63,14 +64,7 @@ abstract public class MainActivityAbstract extends ActivityAbstractWithSideNav {
             phoneTextField.setText(user.getTelephone());
 
             if(user.getImageUri() != null) {
-                Utils.getBitmapFromURL(user.getImageUri(), (selectedImage -> {
-                    this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            image.setImageBitmap(selectedImage);
-                        }
-                    });
-                }));
+                Glide.with(this).load(user.getImageUri()).into(image);
             }
         }
 
