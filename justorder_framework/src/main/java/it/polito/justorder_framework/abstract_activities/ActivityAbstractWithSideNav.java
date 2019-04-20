@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import java.lang.reflect.Field;
+
 import it.polito.justorder_framework.AbstractRouteHandler;
 import it.polito.justorder_framework.FirebaseFunctions;
 import it.polito.justorder_framework.R;
@@ -100,7 +102,8 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
     protected void setRouteHandler() {
         try {
             Class moduleRouteHandlerClass = Class.forName(getApplicationContext().getPackageName() + ".RouteHandler");
-            Class handlerClass = ActivityAbstractWithSideNav.class.getField("routeHandler").getType();
+            Field field = ActivityAbstractWithSideNav.class.getDeclaredField("routeHandler");
+            Class handlerClass = field.getType();
             if(handlerClass.isAssignableFrom(moduleRouteHandlerClass)){
                 this.routeHandler = (AbstractRouteHandler) moduleRouteHandlerClass.getConstructor().newInstance();
             }

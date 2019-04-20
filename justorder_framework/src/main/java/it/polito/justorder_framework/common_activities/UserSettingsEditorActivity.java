@@ -107,6 +107,10 @@ public class UserSettingsEditorActivity extends AbstractEditorWithImagePickerAct
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        user.setName(nameTextField.getText().toString());
+        user.setEmail(emailTextField.getText().toString());
+        user.setTelephone(phoneTextField.getText().toString());
+        user.setAddress(addressTextField.getText().toString());
         outState.putSerializable("user", user);
     }
 
@@ -114,7 +118,6 @@ public class UserSettingsEditorActivity extends AbstractEditorWithImagePickerAct
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         user =(User) savedInstanceState.getSerializable("user");
-
         reloadViews();
     }
 }

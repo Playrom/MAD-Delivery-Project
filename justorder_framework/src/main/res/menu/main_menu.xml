@@ -22,6 +22,24 @@
         android:visible="true" />
 
     <item
+        android:id="@+id/createRestaurant"
+        android:enabled="true"
+        android:title="Add Restaurant"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/delivererSettings"
+        android:enabled="true"
+        android:title="Deliverer Settings"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/restaurantSettings"
+        android:enabled="true"
+        android:title="Restaurant Settings"
+        android:visible="true" />
+
+    <item
         android:id="@+id/userSettings"
         android:enabled="true"
         android:title="User Settings"

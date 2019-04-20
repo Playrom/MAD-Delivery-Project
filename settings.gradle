@@ -1,1 +1,1 @@
-include ':justorder', ':justorder_framework', ':justorder_delivery', ':justorder_restaurant'
+include ':justorder', ':justorder_framework', ':justorder_deliverer', ':justorder_restaurant'

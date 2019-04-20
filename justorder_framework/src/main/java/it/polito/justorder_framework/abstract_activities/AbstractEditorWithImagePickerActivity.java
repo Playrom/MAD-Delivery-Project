@@ -37,11 +37,10 @@ import it.polito.justorder_framework.db.Storage;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
-public class AbstractEditorWithImagePickerActivity extends ActivityAbstractWithToolbar {
+public class AbstractEditorWithImagePickerActivity extends AbstractEditor {
 
     protected Button butt;
     protected ImageView image;
-    protected Intent i;
     protected String imageUri = null;
 
     @Override
@@ -154,7 +153,7 @@ public class AbstractEditorWithImagePickerActivity extends ActivityAbstractWithT
                         final byte[] byteArray = Utils.getByteArray(imageStream);
                         final Bitmap selectedImage = BitmapFactory.decodeByteArray(byteArray, 0 , byteArray.length);
                         image.setImageBitmap(selectedImage);
-                        Storage.INSTANCE.saveImage(byteArray, uri -> saveImageUri(uri));
+                        Storage.INSTANCE.saveImage(byteArray, uri -> this.saveImageUri(uri));
                     }catch (IOException e){
                         e.printStackTrace();
                     }

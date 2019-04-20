@@ -10,6 +10,8 @@ class User : Serializable{
     var address: String = ""
     var imageUri: String? = null
     var telephone: String = ""
+
+    var delivererKey: String? = null
     var ownedRestaurants: Map<String, Boolean> = mutableMapOf<String, Boolean>()
-    var managedRestaurants: Map<String, Boolean>? = mutableMapOf<String, Boolean>()
+    var managedRestaurants: Map<String, Boolean> = mutableMapOf<String, Boolean>()
 }

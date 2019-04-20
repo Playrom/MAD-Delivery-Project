@@ -50,4 +50,6 @@
     <string name="price">Total Price</string>
     <string name="timestamp">Order time</string>
     <string name="rider">Rider Name</string>
+
+    <string name="edit_user_title">Edit User</string>
 </resources>

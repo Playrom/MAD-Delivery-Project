@@ -5,19 +5,21 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import it.polito.justorder_framework.Utils
+import it.polito.justorder_framework.model.Deliverer
 import it.polito.justorder_framework.model.Product
+import it.polito.justorder_framework.model.Restaurant
 import it.polito.justorder_framework.model.User
 
-object Users{
-    fun getUser(key: String, cb : (User) -> Unit){
-        Database.db.child("users").child(key).addListenerForSingleValueEvent(object : ValueEventListener {
+object Deliverers{
+    fun getDeliverer(key: String, cb : (Deliverer) -> Unit){
+        Database.db.child("deliverers").child(key).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 if(p0.exists()) {
-                    cb(Utils.convertObject(p0, User::class.java))
+                    cb(Utils.convertObject(p0, Deliverer::class.java))
                 }else{
-                    val user = User()
-                    user.key = key
-                    cb(user)
+                    val deliverer = Deliverer()
+                    deliverer.key = key
+                    cb(deliverer)
                 }
             }
 
@@ -27,15 +29,15 @@ object Users{
         })
     }
 
-    fun saveUser(user: User){
+    fun saveDeliverer(deliverer: Deliverer){
         var ref: DatabaseReference
-        val key = user.key
+        val key = deliverer.key
         if(key != null){
-            ref = Database.db.child("users").child(key);
+            ref = Database.db.child("deliverers").child(key);
         }else{
-            ref = Database.db.child("users").push()
-            user.key = ref.key
+            ref = Database.db.child("deliverers").push()
+            deliverer.key = ref.key
         }
-        ref.setValue(user)
+        ref.setValue(deliverer)
     }
 }

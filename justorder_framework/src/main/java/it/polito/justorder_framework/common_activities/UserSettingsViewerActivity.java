@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import it.polito.justorder_framework.FirebaseFunctions;
 import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivity;
 import it.polito.justorder_framework.R;
+import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.db.Users;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
@@ -43,12 +44,13 @@ public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerAct
     @Override
     protected void reloadData() {
         super.reloadData();
-        Users.INSTANCE.getUser(FirebaseAuth.getInstance().getCurrentUser().getUid(), (user) -> {
-            this.user = user;
+        this.user = Database.INSTANCE.getCurrent_User();
+        if(this.user != null){
             this.imageUri = this.user.getImageUri();
-            this.reloadViews();
-            return Unit.INSTANCE;
-        });
+        }else{
+            this.user = new User();
+        }
+        this.reloadViews();
     }
 
     @Override

@@ -234,11 +234,11 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
             if (images.size() > 0) {
                 Uri imageUri = images.get(0);
                 try {
-                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                    final Bitmap selectedImage = Utils.resizeBitmap(BitmapFactory.decodeStream(imageStream), 400);
-                    imageFileName = Utils.createImageFromBitmap(selectedImage, ProductEditActivity.this);
-                    Storage.INSTANCE.saveImage(imageUri);
-                    image.setImageBitmap(selectedImage);
+//                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+//                    final Bitmap selectedImage = Utils.resizeBitmap(BitmapFactory.decodeStream(imageStream), 400);
+//                    imageFileName = Utils.createImageFromBitmap(selectedImage, ProductEditActivity.this);
+//                    Storage.INSTANCE.saveImage(imageUri);
+//                    image.setImageBitmap(selectedImage);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -43,7 +43,7 @@ public class OrderSummaryActivity extends ActivityAbstractWithSideNav {
     protected void setupActivity() {
         super.setupActivity();
         this.listView = findViewById(R.id.order_list);
-        this.routeHandler = new ResturantActivityWithSideNav();
+        this.routeHandler = new RouteHandler();
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

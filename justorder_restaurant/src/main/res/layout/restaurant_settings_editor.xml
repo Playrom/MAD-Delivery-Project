@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Use DrawerLayout as root container for activity -->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/MyActionBar"
+            app:title="@string/edit_restaurant_title" />
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                >
+                <include
+                    android:id="@+id/common_editor_layout"
+                    layout="@layout/common_editor_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="20dp" />
+
+                <EditText
+                    android:id="@+id/addressTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/common_editor_layout"
+                    android:layout_alignStart="@id/common_editor_layout"
+                    android:layout_alignLeft="@id/common_editor_layout"
+                    android:layout_alignEnd="@id/common_editor_layout"
+                    android:layout_alignRight="@id/common_editor_layout"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/address"
+                    android:inputType="textPostalAddress"
+                    android:enabled="true"/>
+
+                <EditText
+                    android:id="@+id/taxCodeTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/addressTextField"
+                    android:layout_alignStart="@id/common_editor_layout"
+                    android:layout_alignLeft="@id/common_editor_layout"
+                    android:layout_alignEnd="@id/common_editor_layout"
+                    android:layout_alignRight="@id/common_editor_layout"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/tax_code"
+                    android:inputType="text"
+                    android:enabled="true"/>
+
+                <EditText
+                    android:id="@+id/vatCodeTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/taxCodeTextField"
+                    android:layout_alignStart="@id/common_editor_layout"
+                    android:layout_alignLeft="@id/common_editor_layout"
+                    android:layout_alignEnd="@id/common_editor_layout"
+                    android:layout_alignRight="@id/common_editor_layout"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/vat_code"
+                    android:inputType="text"
+                    android:enabled="true"/>
+
+                <EditText
+                    android:id="@+id/ibanTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vatCodeTextField"
+                    android:layout_alignStart="@id/common_editor_layout"
+                    android:layout_alignLeft="@id/common_editor_layout"
+                    android:layout_alignEnd="@id/common_editor_layout"
+                    android:layout_alignRight="@id/common_editor_layout"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/iban"
+                    android:inputType="text"
+                    android:enabled="true"/>
+
+                <Spinner
+                    android:id="@+id/foodTypeSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ibanTextField"
+                    android:layout_alignStart="@id/common_editor_layout"
+                    android:layout_alignLeft="@id/common_editor_layout"
+                    android:layout_alignEnd="@id/common_editor_layout"
+                    android:layout_alignRight="@id/common_editor_layout"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/foodType"
+                    android:entries="@array/foodTypes"/>
+
+
+                <TextView
+                    android:id="@+id/openingHour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/foodTypeSpinner"
+                    android:layout_alignStart="@id/common_editor_layout"
+                    android:layout_alignLeft="@id/common_editor_layout"
+                    android:layout_alignEnd="@id/common_editor_layout"
+                    android:layout_alignRight="@id/common_editor_layout"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/openingHour"
+                    android:inputType="time"
+                    android:enabled="false"/>
+
+                <TimePicker
+                    android:id="@+id/timePickerOpen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/openingHour"
+                    android:timePickerMode="spinner"/>
+
+                <TextView
+                    android:id="@+id/closingHour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/timePickerOpen"
+                    android:layout_alignStart="@id/common_editor_layout"
+                    android:layout_alignLeft="@id/common_editor_layout"
+                    android:layout_alignEnd="@id/common_editor_layout"
+                    android:layout_alignRight="@id/common_editor_layout"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/closingHour"
+                    android:inputType="time"
+                    android:enabled="false"/>
+
+                <TimePicker
+                    android:layout_below="@id/closingHour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/timePickerClose"
+                    android:timePickerMode="spinner"/>
+
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@id/timePickerClose">
+                    <CheckBox android:id="@+id/checkbox_sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sunday" />
+                    <CheckBox android:id="@+id/checkbox_monday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/monday" />
+                    <CheckBox android:id="@+id/checkbox_tuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tuesday" />
+                    <CheckBox android:id="@+id/checkbox_wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wednesday" />
+                    <CheckBox android:id="@+id/checkbox_thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/thursday" />
+                    <CheckBox android:id="@+id/checkbox_friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/friday" />
+                    <CheckBox android:id="@+id/checkbox_saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/saturday" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

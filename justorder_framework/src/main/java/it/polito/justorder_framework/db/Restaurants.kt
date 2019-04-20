@@ -6,18 +6,19 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import it.polito.justorder_framework.Utils
 import it.polito.justorder_framework.model.Product
+import it.polito.justorder_framework.model.Restaurant
 import it.polito.justorder_framework.model.User
 
-object Users{
-    fun getUser(key: String, cb : (User) -> Unit){
-        Database.db.child("users").child(key).addListenerForSingleValueEvent(object : ValueEventListener {
+object Restaurants{
+    fun getRestaurant(key: String, cb : (Restaurant) -> Unit){
+        Database.db.child("restaurants").child(key).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 if(p0.exists()) {
-                    cb(Utils.convertObject(p0, User::class.java))
+                    cb(Utils.convertObject(p0, Restaurant::class.java))
                 }else{
-                    val user = User()
-                    user.key = key
-                    cb(user)
+                    val restaurant = Restaurant()
+                    restaurant.key = key
+                    cb(restaurant)
                 }
             }
 
@@ -27,15 +28,15 @@ object Users{
         })
     }
 
-    fun saveUser(user: User){
+    fun saveRestaurant(restaurant: Restaurant){
         var ref: DatabaseReference
-        val key = user.key
+        val key = restaurant.key
         if(key != null){
-            ref = Database.db.child("users").child(key);
+            ref = Database.db.child("restaurants").child(key);
         }else{
-            ref = Database.db.child("users").push()
-            user.key = ref.key
+            ref = Database.db.child("restaurants").push()
+            restaurant.key = ref.key
         }
-        ref.setValue(user)
+        ref.setValue(restaurant)
     }
 }

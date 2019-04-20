@@ -1,8 +1,0 @@
-<resources>
-    <string name="fileprovider">it.polito.justorder_delivery.fileprovider</string>
-    <string name="app_name">JustOrder Delivery</string>
-    <string name="tax_code">Fiscal Code</string>
-    <string name="iban">IBAN</string>
-    <string name="vat_code">VAT Code</string>
-    <string name="edit_user_title">Edit User</string>
-</resources>

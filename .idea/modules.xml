@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MAD-Delivery-Project.iml" filepath="$PROJECT_DIR$/MAD-Delivery-Project.iml" />
       <module fileurl="file://$PROJECT_DIR$/justorder/justorder.iml" filepath="$PROJECT_DIR$/justorder/justorder.iml" />
-      <module fileurl="file://$PROJECT_DIR$/justorder_delivery/justorder_delivery.iml" filepath="$PROJECT_DIR$/justorder_delivery/justorder_delivery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/justorder_deliverer/justorder_deliverer.iml" filepath="$PROJECT_DIR$/justorder_deliverer/justorder_deliverer.iml" />
       <module fileurl="file://$PROJECT_DIR$/justorder_framework/justorder_framework.iml" filepath="$PROJECT_DIR$/justorder_framework/justorder_framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/justorder_restaurant/justorder_restaurant.iml" filepath="$PROJECT_DIR$/justorder_restaurant/justorder_restaurant.iml" />
     </modules>
