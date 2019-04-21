@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.abstract_activities.AbstractEditorWithImagePickerActivity;
 import it.polito.justorder_framework.Utils;
-import it.polito.justorder_framework.db.Users;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 

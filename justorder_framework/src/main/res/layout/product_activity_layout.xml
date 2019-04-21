@@ -34,26 +34,37 @@
                 android:layout_marginEnd="16dp"
                 >
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="20dp"
-                    android:contentDescription="@string/imageOfUser"
-                    app:srcCompat="@mipmap/ic_launcher_round"/>
+                <LinearLayout
+                    android:id="@+id/common_viewer_layout"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp">
 
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:contentDescription="@string/imageOfUser"
+                        app:srcCompat="@mipmap/ic_launcher_round"/>
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/nameTextField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/imageView"
-                    android:layout_alignStart="@id/imageView"
-                    android:layout_alignLeft="@id/imageView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/common_viewer_layout"
+                    android:layout_alignStart="@id/common_viewer_layout"
+                    android:layout_alignLeft="@id/common_viewer_layout"
+                    android:layout_alignEnd="@id/common_viewer_layout"
+                    android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
                     android:ems="10"
                     android:enabled="false"
@@ -65,10 +76,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/nameTextField"
-                    android:layout_alignStart="@+id/nameTextField"
-                    android:layout_alignLeft="@+id/nameTextField"
-                    android:layout_alignEnd="@+id/nameTextField"
-                    android:layout_alignRight="@+id/nameTextField"
+                    android:layout_alignStart="@id/common_viewer_layout"
+                    android:layout_alignLeft="@id/common_viewer_layout"
+                    android:layout_alignEnd="@id/common_viewer_layout"
+                    android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
                     android:ems="10"
                     android:enabled="false"
@@ -80,51 +91,49 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/costTextField"
-                    android:layout_alignStart="@+id/nameTextField"
-                    android:layout_alignLeft="@+id/nameTextField"
-                    android:layout_alignEnd="@+id/nameTextField"
-                    android:layout_alignRight="@+id/nameTextField"
+                    android:layout_alignStart="@id/common_viewer_layout"
+                    android:layout_alignLeft="@id/common_viewer_layout"
+                    android:layout_alignEnd="@id/common_viewer_layout"
+                    android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
                     android:ems="10"
                     android:enabled="false"
                     android:inputType="textMultiLine"
                     android:hint="@string/note" />
 
-                <EditText
-                    android:id="@+id/ingredientsTextField"
+                <TextView
+                    android:id="@+id/categoryTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/notesTextField"
-                    android:layout_alignStart="@+id/nameTextField"
-                    android:layout_alignLeft="@+id/nameTextField"
-                    android:layout_alignEnd="@+id/nameTextField"
-                    android:layout_alignRight="@+id/nameTextField"
+                    android:layout_alignStart="@id/common_viewer_layout"
+                    android:layout_alignLeft="@id/common_viewer_layout"
+                    android:layout_alignEnd="@id/common_viewer_layout"
+                    android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:inputType="textMultiLine"
-                    android:hint="@string/ingredients" />
+                    android:text="@string/category"
+                    style="@style/TextAppearance.AppCompat.Title" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ingredientsTextField"
-                    android:layout_alignStart="@+id/nameTextField"
-                    android:layout_alignLeft="@+id/nameTextField"
-                    android:layout_alignEnd="@+id/nameTextField"
-                    android:layout_alignRight="@+id/nameTextField"
+                    android:layout_below="@id/categoryTextView"
+                    android:layout_alignStart="@id/common_viewer_layout"
+                    android:layout_alignLeft="@id/common_viewer_layout"
+                    android:layout_alignEnd="@id/common_viewer_layout"
+                    android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/category"
+                        android:text="@string/ingredients"
                         style="@style/TextAppearance.AppCompat.Title" />
                     <TextView
-                        android:id="@+id/categoryTextView"
+                        android:id="@+id/ingredientsTextView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="12:00"
+                        android:text="Ingrediente"
                         style="@style/TextAppearance.AppCompat.Headline" />
                 </LinearLayout>
 

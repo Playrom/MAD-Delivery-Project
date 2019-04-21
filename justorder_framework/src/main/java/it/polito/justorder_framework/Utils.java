@@ -102,8 +102,8 @@ public class Utils {
     public static <T> T convertObject(DataSnapshot dataSnapshot, Class<T> tClass) {
         T product = dataSnapshot.getValue(tClass);
         try {
-            if (tClass.getMethod("setKey", String.class) != null) {
-                tClass.getMethod("setKey", String.class).invoke(product, dataSnapshot.getKey());
+            if (tClass.getMethod("setKeyId", String.class) != null) {
+                tClass.getMethod("setKeyId", String.class).invoke(product, new String(dataSnapshot.getKey()));
             }
         }catch (Exception e){
 

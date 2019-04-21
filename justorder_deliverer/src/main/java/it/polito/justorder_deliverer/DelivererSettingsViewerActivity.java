@@ -8,15 +8,13 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
-import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivity;
+import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndSidenav;
 import it.polito.justorder_framework.db.Database;
-import it.polito.justorder_framework.db.Deliverers;
-import it.polito.justorder_framework.db.Users;
 import it.polito.justorder_framework.model.Deliverer;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
-public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePickerActivity {
+public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePickerActivityAndSidenav {
 
     protected Deliverer deliverer;
     protected EditText nameTextField, emailTextField, phoneTextField, addressTextField, taxCodeTextField, ibanTextField;
@@ -45,7 +43,7 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
 
         if(i != null && i.getStringExtra("deliverer_intent_key") != null){
             deliverer_intent_key = i.getStringExtra("deliverer_intent_key");
-            Deliverers.INSTANCE.getDeliverer(deliverer_intent_key, (deliverer1 -> {
+            Database.INSTANCE.getDeliverers().get(deliverer_intent_key, (deliverer1 -> {
                 this.deliverer = deliverer1;
                 this.reloadViews();
                 return Unit.INSTANCE;
@@ -86,13 +84,13 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
         if(requestCode == 1 || requestCode == 2){
             if(resultCode== Activity.RESULT_OK){
                 deliverer = (Deliverer) data.getSerializableExtra("deliverer");
-                Deliverers.INSTANCE.saveDeliverer(deliverer);
+                Database.INSTANCE.getDeliverers().save(deliverer);
                 if(requestCode == 2 && Database.INSTANCE.getCurrent_User() != null){
                     User user = Database.INSTANCE.getCurrent_User();
-                    deliverer.setUserKey(user.getKey());
-                    user.setDelivererKey(deliverer.getKey());
-                    Users.INSTANCE.saveUser(user);
-                    Deliverers.INSTANCE.saveDeliverer(deliverer);
+                    deliverer.setUserKey(user.getKeyId());
+                    user.setDelivererKey(deliverer.getKeyId());
+                    Database.INSTANCE.getUsers().save(user);
+                    Database.INSTANCE.getDeliverers().save(deliverer);
                 }
                 reloadViews();
             }

@@ -8,18 +8,13 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
-
 import it.polito.justorder_framework.FirebaseFunctions;
-import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivity;
+import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndSidenav;
 import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.db.Database;
-import it.polito.justorder_framework.db.Users;
 import it.polito.justorder_framework.model.User;
-import kotlin.Unit;
 
-public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerActivity {
+public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerActivityAndSidenav {
 
     protected EditText nameTextField, emailTextField, phoneTextField, addressTextField;
     protected User user;
@@ -45,10 +40,10 @@ public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerAct
     protected void reloadData() {
         super.reloadData();
         this.user = Database.INSTANCE.getCurrent_User();
-        if(this.user != null){
-            this.imageUri = this.user.getImageUri();
-        }else{
+        if(this.user == null){
             this.user = new User();
+        }else {
+            this.imageUri = this.user.getImageUri();
         }
         this.reloadViews();
     }
@@ -88,7 +83,7 @@ public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerAct
         if(requestCode == 1){
             if(resultCode== Activity.RESULT_OK){
                 user = (User) data.getSerializableExtra("user");
-                Users.INSTANCE.saveUser(user);
+                Database.INSTANCE.getUsers().save(user);
                 reloadViews();
             }
         }

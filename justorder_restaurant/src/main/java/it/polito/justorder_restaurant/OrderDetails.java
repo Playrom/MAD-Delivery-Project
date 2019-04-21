@@ -1,6 +1,13 @@
 package it.polito.justorder_restaurant;
 
+import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndToolbar;
 import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
+import it.polito.justorder_framework.db.Database;
+import it.polito.justorder_framework.model.Deliverer;
+import it.polito.justorder_framework.model.Order;
+import it.polito.justorder_framework.model.Product;
+import it.polito.justorder_framework.model.User;
+import kotlin.Unit;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,11 +15,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 
-public class OrderDetails extends ActivityAbstractWithToolbar {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-    private String orderId, user, address, price, timestamp, rider, productString;
+public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolbar {
+
+    private Order order;
+    private User deliverer;
+    private User user;
     private TextView orderIdTextField, userTextField, addressTextField, priceTextField, timestampTextField, riderTextField, productsTextField;
-    private String[] products;
+    private String productString;
+    private Map<Product, Integer> products = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,42 +56,70 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
     protected void reloadData() {
         super.reloadData();
         Intent i = getIntent();
-        this.orderId = i.getStringExtra("orderId");
-        this.user = i.getStringExtra("user");
-        this.address = i.getStringExtra("address");
-        this.price = i.getStringExtra("price");
-        this.timestamp = i.getStringExtra("timestamp");
-        this.rider = i.getStringExtra("rider");
-        this.products = i.getStringArrayExtra("products");
+        this.order = (Order) i.getSerializableExtra("order");
+        if(this.order == null){
+            this.order = new Order();
+        }else{
+            if(this.order.getUser() != null){
+                Database.INSTANCE.getUsers().get(this.order.getUser(), (user1 -> {
+                    this.user = user1;
+                    this.reloadViews();
+                    return Unit.INSTANCE;
+                }));
+            }
 
+            if(this.order.getDeliverer() != null){
+                Database.INSTANCE.getDeliverers().get(this.order.getDeliverer(), (deliverer1 -> {
+                    Database.INSTANCE.getUsers().get(deliverer1.getUserKey(), user1 -> {
+                        this.deliverer = user1;
+                        this.reloadViews();
+                        return Unit.INSTANCE;
+                    });
+                    return Unit.INSTANCE;
+                }));
+            }
+
+            for(Map.Entry<String, Integer> entry : this.order.getProducts().entrySet()){
+                Database.INSTANCE.getProducts().get(entry.getKey(), (product -> {
+                    this.products.put(product, entry.getValue());
+                    this.reloadViews();
+                    return Unit.INSTANCE;
+                }));
+            }
+        }
         this.reloadViews();
     }
 
     @Override
     protected void reloadViews() {
         super.reloadViews();
-        //orderIdTextField.setText(this.orderId);
-        userTextField.setText(this.user);
-        addressTextField.setText(this.address);
-        priceTextField.setText(this.price);
-        timestampTextField.setText(this.timestamp);
-        riderTextField.setText(this.rider);
-        productString = createProductString();
-        productsTextField.setText(this.productString);
 
+        if(this.user != null) {
+            userTextField.setText(this.user.getName());
+        }
+        addressTextField.setText(order.getAddress());
+        priceTextField.setText(new Double(order.getPrice()).toString());
+        timestampTextField.setText(order.getTimestamp().toString());
 
-        if(this.orderId != null){
-            this.actionBar.setTitle(this.orderId);
+        if(this.deliverer != null) {
+            riderTextField.setText(this.deliverer.getName());
+        }
+
+        if(products.size() > 0){
+            productString = createProductString();
+            productsTextField.setText(this.productString);
+        }
+
+        if(this.order != null){
+            this.actionBar.setTitle(this.order.getKeyId());
         }
     }
 
     private String createProductString() {
 
-        int maxIndex = products.length;
-        int i = 0;
         String productString = "";
-        for(i=0; i<maxIndex; i++){
-            productString += products[i] + "\n";
+        for(Map.Entry<Product, Integer> entry : products.entrySet()){
+            productString += entry.getKey().getName() + "\n";
         }
 
         return productString;
@@ -88,46 +131,20 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
         return true;
     }
 
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("orderId", this.orderId);
-        returnIntent.putExtra("user", this.user);
-        returnIntent.putExtra("address", this.address);
-        returnIntent.putExtra("price", this.price);
-        returnIntent.putExtra("timestamp", this.timestamp);
-        returnIntent.putExtra("rider", this.rider);
-        returnIntent.putExtra("products", this.products);
-
-
-        setResult(Activity.RESULT_OK, returnIntent);
-        onBackPressed();
-        return true;
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("orderId", orderId);
-        outState.putString("user", user);
-        outState.putString("address", address);
-        outState.putString("price", price);
-        outState.putString("timestamp", timestamp);
-        outState.putString("rider", rider);
-        outState.putString("products", productString);
+        outState.putSerializable("order", order);
+        outState.putSerializable("user", user);
+        outState.putSerializable("deliverer", deliverer);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        orderId = savedInstanceState.getString("orderId");
-        user = savedInstanceState.getString("user");
-        address = savedInstanceState.getString("address");
-        price = savedInstanceState.getString("price");
-        timestamp = savedInstanceState.getString("timestamp");
-        rider = savedInstanceState.getString("rider");
-        productString = savedInstanceState.getString("products");
+        order = (Order) savedInstanceState.getSerializable("order");
+        user = (User) savedInstanceState.getSerializable("user");
+        deliverer = (User) savedInstanceState.getSerializable("deliverer");
 
         reloadViews();
     }

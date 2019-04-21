@@ -66,11 +66,16 @@ public class RouteHandler extends AbstractRouteHandler {
         }
 
         if(item.getItemId() == R.id.ordersPage) {
-            Intent i = new Intent(context, OrderSummaryActivity.class);
+            Intent i = new Intent(context, OrdersListActivity.class);
             context.startActivity(i);
             return true;
         }
 
         return false;
+    }
+
+    @Override
+    public Class getProductActivityClass() {
+        return ProductActivityWithEditing.class;
     }
 }

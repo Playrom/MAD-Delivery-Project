@@ -13,17 +13,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Logger;
-
-import androidx.annotation.NonNull;
-import it.polito.justorder_framework.db.Database;
-import it.polito.justorder_framework.db.Products;
-import it.polito.justorder_framework.model.Product;
-import kotlin.Unit;
 
 public class FirebaseFunctions {
     public static final int AUTH_ACTIVITY_RESULT = 4;

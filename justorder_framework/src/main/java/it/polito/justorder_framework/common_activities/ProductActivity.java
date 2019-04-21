@@ -3,28 +3,27 @@ package it.polito.justorder_framework.common_activities;
 import androidx.annotation.Nullable;
 
 import it.polito.justorder_framework.R;
-import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
+import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndSidenav;
+import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndToolbar;
+import it.polito.justorder_framework.db.Database;
+import it.polito.justorder_framework.model.Product;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.Menu;
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ProductActivity extends ActivityAbstractWithToolbar {
+import java.util.Arrays;
+import java.util.List;
 
-    private String imageFileName, name, cost, notes, ingredients, categoryName;
-    private EditText nameTextField, costTextField, notesTextField, ingredientsTextField;
-    private TextView categoryTextView;
-    private Integer category = 0;
-    private ImageView image;
+public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToolbar {
+
+    protected Product product;
+    protected EditText nameTextField, costTextField, notesTextField;
+    protected TextView categoryTextView, ingredientsTextView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,7 @@ public class ProductActivity extends ActivityAbstractWithToolbar {
         nameTextField = findViewById(R.id.nameTextField);
         costTextField = findViewById(R.id.costTextField);
         notesTextField = findViewById(R.id.notesTextField);
-        ingredientsTextField = findViewById(R.id.ingredientsTextField);
+        ingredientsTextView = findViewById(R.id.ingredientsTextView);
         image = findViewById(R.id.imageView);
         categoryTextView = findViewById(R.id.categoryTextView);
         this.reloadData();
@@ -48,93 +47,38 @@ public class ProductActivity extends ActivityAbstractWithToolbar {
     protected void reloadData() {
         super.reloadData();
         Intent i = getIntent();
-        this.name = i.getStringExtra("name");
-        this.cost = i.getStringExtra("cost");
-        this.notes = i.getStringExtra("notes");
-        this.ingredients = i.getStringExtra("ingredients");
-
-        if(i.getStringExtra("category") != null){
-            String[] strs = getResources().getStringArray(R.array.foodTypes);
-            for(int k = 0; k < strs.length ; k++){
-                if(strs[k].equals(i.getStringExtra("category"))){
-                    this.category = k;
-                    break;
-                }
-            }
+        this.product = (Product) i.getSerializableExtra("product");
+        if(this.product == null){
+            this.product = new Product();
+        }else{
+            this.imageUri = this.product.getImageUri();
         }
-        this.imageFileName = i.getStringExtra("imageFileName");
         this.reloadViews();
     }
 
     @Override
     protected void reloadViews() {
         super.reloadViews();
-        nameTextField.setText(this.name);
-        costTextField.setText(this.cost);
-        notesTextField.setText(this.notes);
-        ingredientsTextField.setText(this.notes);
-
-        String[] types = getResources().getStringArray(R.array.foodTypes);
-        if(types.length > this.category){
-            this.categoryName = types[this.category];
-            categoryTextView.setText(categoryName);
-        }
-
-        if(imageFileName != null) {
-            try {
-                Bitmap selectedImage = BitmapFactory.decodeStream(getApplicationContext().openFileInput(imageFileName));
-                image.setImageBitmap(selectedImage);
-            } catch (Exception e) {
-
+        List<String> types = Arrays.asList(getResources().getStringArray(R.array.foodTypes));
+        if(product != null) {
+            nameTextField.setText(product.getName());
+            costTextField.setText(new Double(product.getCost()).toString());
+            notesTextField.setText(product.getNotes());
+            String ingredients = "";
+            for (String entry : product.getIngredients()) {
+                ingredients = ingredients + "&#8226; " + entry + "<br/>\n";
             }
-        }
+            ingredientsTextView.setText(Html.fromHtml(ingredients));
 
-        if(this.name != null){
-            this.actionBar.setTitle(this.name);
-        }
-    }
+            String category = types.stream().filter(x -> {
+                return x.equals(product.getCategory());
+            }).findFirst().orElse(null);
+            if (category != null) {
+                categoryTextView.setText(category);
+            }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.activity_product_menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if(item.getItemId() == R.id.editProduct){
-//            Intent i = new Intent(getApplicationContext(), ProductEditActivity.class);
-//            i.putExtra("name", this.name);
-//            i.putExtra("cost", this.cost);
-//            i.putExtra("notes", this.notes);
-//            i.putExtra("ingredients", this.ingredients);
-//            i.putExtra("category", this.category);
-//            i.putExtra("imageFileName", this.imageFileName);
-//
-//            startActivityForResult(i, 1);
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        if(requestCode == 1){
-            if(resultCode== Activity.RESULT_OK){
-                name = data.getStringExtra("name");
-                cost = data.getStringExtra("cost");
-                notes = data.getStringExtra("notes");
-                ingredients = data.getStringExtra("ingredients");
-                category = data.getIntExtra("category", 0);
-                imageFileName = data.getStringExtra("imageFileName");
-
-                editor.apply();
-
-                this.reloadViews();
+            if (product.getName() != null) {
+                this.actionBar.setTitle(product.getName());
             }
         }
     }
@@ -142,16 +86,7 @@ public class ProductActivity extends ActivityAbstractWithToolbar {
     @Override
     public boolean onSupportNavigateUp() {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("name", this.name);
-        returnIntent.putExtra("cost", this.cost);
-        returnIntent.putExtra("notes", this.notes);
-        returnIntent.putExtra("ingredients", this.ingredients);
-        returnIntent.putExtra("category", this.categoryName);
-
-        if (imageFileName != null) {
-            returnIntent.putExtra("imageFileName", imageFileName);
-        }
-
+        returnIntent.putExtra("product", product);
         setResult(Activity.RESULT_OK, returnIntent);
         onBackPressed();
         return true;
@@ -160,23 +95,13 @@ public class ProductActivity extends ActivityAbstractWithToolbar {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("name", name);
-        outState.putString("cost", cost);
-        outState.putString("notes", notes);
-        outState.putString("ingredients", ingredients);
-        outState.putInt("category", category);
-        outState.putString("imageFileName", imageFileName);
+        outState.putSerializable("product", product);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        name = savedInstanceState.getString("name");
-        cost = savedInstanceState.getString("cost");
-        notes = savedInstanceState.getString("notes");
-        ingredients = savedInstanceState.getString("ingredients");
-        category = savedInstanceState.getInt("category");
-        imageFileName = savedInstanceState.getString("imageFileName");
+        product = (Product) savedInstanceState.getSerializable("product");
 
         reloadViews();
     }

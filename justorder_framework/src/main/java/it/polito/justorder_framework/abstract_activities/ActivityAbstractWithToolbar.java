@@ -1,5 +1,7 @@
 package it.polito.justorder_framework.abstract_activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.ActionBar;
@@ -19,6 +21,13 @@ public class ActivityAbstractWithToolbar extends ActivityAbstract {
         this.actionBar = getSupportActionBar();
         this.actionBar.setDisplayHomeAsUpEnabled(true);
         this.actionBar.setDisplayShowHomeEnabled(true);
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 }

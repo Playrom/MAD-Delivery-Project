@@ -23,7 +23,7 @@ object Products{
 
     fun saveProduct(product: Product){
         var ref: DatabaseReference
-        val key = product.key
+        val key = product.keyId
         if(key != null){
             ref = Database.db.child("products").child(key);
         }else{

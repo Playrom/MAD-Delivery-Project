@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithSideNav;
 import it.polito.justorder_framework.ProductEntity;
-import it.polito.justorder_framework.db.Products;
+import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Product;
 import kotlin.Unit;
 
@@ -18,9 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -49,44 +51,27 @@ public class ProductsListActivity extends ActivityAbstractWithSideNav {
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ProductEntity entry= (ProductEntity) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(ProductsListActivity.this, ProductActivity.class);
-                intent.putExtra("name", entry.getName());
-                intent.putExtra("cost", entry.getCost());
-                intent.putExtra("notes", entry.getNotes());
-                intent.putExtra("ingredients", entry.getIngredients());
-                intent.putExtra("imageFileName", entry.getImageFileName());
-                intent.putExtra("category", entry.getCategory());
+                Product entry = (Product) parent.getAdapter().getItem(position);
+                Intent intent = new Intent(ProductsListActivity.this, routeHandler.getProductActivityClass());
+                intent.putExtra("product", entry);
                 tapped = position;
                 startActivityForResult(intent, 1);
             }
         });
-//        this.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ProductsListActivity.this, ProductEditActivity.class);
-//                startActivityForResult(intent, 2);
-//            }
-//        });
+
+        Database.INSTANCE.getProducts().getAll(products1 -> {
+            products.clear();
+            products.addAll(products1);
+            this.reloadViews();
+            return Unit.INSTANCE;
+        });
+
         this.reloadData();
     }
 
     @Override
     protected void reloadData() {
         super.reloadData();
-        this.reloadViews();
-    }
-
-    @Override
-    protected void reloadViews() {
-        super.reloadViews();
-
-        Products.INSTANCE.getAllProducts(products1 -> {
-            products.clear();
-            products.addAll(products1);
-            return Unit.INSTANCE;
-        });
-
         this.adapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -113,17 +98,7 @@ public class ProductsListActivity extends ActivityAbstractWithSideNav {
                     Product product = products.get(position);
                     ((TextView)convertView.findViewById(R.id.content)).setText(product.getName());
                     ((TextView)convertView.findViewById(R.id.description)).setText(new Double(product.getCost()).toString());
-
-                    /*if(product.getImageFileName() != null) {
-                        try {
-                            Bitmap selectedImage = BitmapFactory.decodeStream(getApplicationContext().openFileInput(product.getImageFileName()));
-                            ((ImageView)convertView.findViewById(R.id.image)).setImageBitmap(selectedImage);
-                        } catch (Exception e) {
-                            ((ImageView)convertView.findViewById(R.id.image)).setImageResource(R.drawable.ic_launcher_background);
-                        }
-                    }else{
-                        ((ImageView)convertView.findViewById(R.id.image)).setImageResource(R.drawable.ic_launcher_background);
-                    }*/
+                    Glide.with(ProductsListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
                 }
 
                 return convertView;
@@ -131,37 +106,30 @@ public class ProductsListActivity extends ActivityAbstractWithSideNav {
         };
         this.listView.setAdapter(this.adapter);
         this.actionBar.setTitle(R.string.product_list_title);
+        this.reloadViews();
+    }
+
+    @Override
+    protected void reloadViews() {
+        super.reloadViews();
+        this.adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
         if(requestCode == 1){
             if(resultCode== Activity.RESULT_OK){
-                Product product = products.get(tapped);
-                product.setName(data.getStringExtra("name"));
-                product.setCost(Double.valueOf(data.getStringExtra("cost")));
-                product.setNotes(data.getStringExtra("notes"));
-                product.setIngredients((List) data.getSerializableExtra("ingredients"));
-                product.setCategory(data.getStringExtra("category"));
-//                product.setImageFileName(data.getStringExtra("imageFileName"));
+                Product product = (Product) data.getSerializableExtra("product");
+                products.set(tapped, product);
 
                 this.reloadViews();
             }
         }else if(requestCode == 2){
             if(resultCode== Activity.RESULT_OK){
-                Product product = new Product();
-                product.setName(data.getStringExtra("name"));
-                product.setCost(Double.valueOf(data.getStringExtra("cost")));
-                product.setNotes(data.getStringExtra("notes"));
-                product.setIngredients((List) data.getSerializableExtra("ingredients"));
-                product.setCategory(data.getStringExtra("category"));
-//                product.setImageFileName(data.getStringExtra("imageFileName"));
+                Product product = (Product) data.getSerializableExtra("product");
                 products.add(product);
-                Products.INSTANCE.saveProduct(product);
+                Database.INSTANCE.getProducts().save(product);
                 this.reloadViews();
             }
         }

@@ -2,8 +2,7 @@ package it.polito.justorder_framework.model
 
 import java.io.Serializable
 
-class Restaurant : Serializable {
-    var key: String? = null
+class Restaurant : Model(),Serializable {
     var name: String = ""
     var email: String = ""
     var imageUri: String? = null

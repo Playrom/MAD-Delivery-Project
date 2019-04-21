@@ -3,9 +3,13 @@ package it.polito.justorder_restaurant;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import it.polito.justorder_framework.abstract_activities.AbstractEditorWithImagePickerActivity;
 import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
 import it.polito.justorder_framework.Utils;
 import it.polito.justorder_framework.db.Storage;
+import it.polito.justorder_framework.model.Product;
+import kotlin.Unit;
 
 import android.Manifest;
 import android.app.Activity;
@@ -35,19 +39,17 @@ import com.zhihu.matisse.internal.entity.CaptureStrategy;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class ProductEditActivity extends ActivityAbstractWithToolbar {
+public class ProductEditActivity extends AbstractEditorWithImagePickerActivity {
 
-    private String name, cost, notes, imageFileName;
+    protected Product product;
     private List<String> ingredients = new ArrayList<>();
     private EditText nameTextField, costTextField, notesTextField;
     private NachoTextView ingredientsChips;
     private Spinner spinner;
-    private Integer category = 0;
-    protected Button butt;
-    protected ImageView image;
-    private String mCurrentPhotoPath;
+    protected List<String> types = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,16 +139,14 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
     protected void reloadData() {
         super.reloadData();
         Intent i = getIntent();
-        name = i.getStringExtra("name");
-        cost = i.getStringExtra("cost");
-        notes = i.getStringExtra("notes");
-
-        if(i.getSerializableExtra("ingredients") != null){
-            ingredients = (List) i.getSerializableExtra("ingredients");
+        this.product = (Product) i.getSerializableExtra("product");
+        if(this.product == null){
+            this.product = new Product();
+        }else{
+            this.imageUri = this.product.getImageUri();
         }
 
-        category = i.getIntExtra("category", 0);
-        imageFileName = i.getStringExtra("imageFileName");
+        this.types = Arrays.asList(getResources().getStringArray(it.polito.justorder_framework.R.array.foodTypes));
 
         // Create an ArrayAdapter using the string array and a default spinner
         ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(this, R.array.foodTypes, android.R.layout.simple_spinner_item);
@@ -156,29 +156,31 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
 
         // Apply the adapter to the spinner
         spinner.setAdapter(staticAdapter);
-
         this.reloadViews();
     }
 
     @Override
     protected void reloadViews() {
         super.reloadViews();
-        nameTextField.setText(this.name);
-        costTextField.setText(this.cost);
-        notesTextField.setText(this.notes);
-        spinner.setSelection(category);
+        if(product != null) {
+            nameTextField.setText(product.getName());
+            costTextField.setText(new Double(product.getCost()).toString());
+            notesTextField.setText(product.getNotes());
 
-        if(imageFileName != null) {
-            try {
-                Bitmap selectedImage = BitmapFactory.decodeStream(getApplicationContext().openFileInput(imageFileName));
-                image.setImageBitmap(selectedImage);
-            } catch (Exception e) {
-
+            if(product.getName() != null){
+                this.actionBar.setTitle(product.getName());
             }
-        }
 
-        this.ingredientsChips.setText(this.ingredients);
+            spinner.setSelection(this.types.indexOf(product.getCategory()));
+            this.ingredientsChips.setText(this.ingredients);
+        }
     }
+
+    protected Unit saveImageUri(Uri uri){
+        this.product.setImageUri(uri.toString());
+        return Unit.INSTANCE;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -210,40 +212,18 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
             } else {
 
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("name", this.nameTextField.getText().toString());
-                returnIntent.putExtra("cost", this.costTextField.getText().toString());
-                returnIntent.putExtra("notes", this.notesTextField.getText().toString());
-                returnIntent.putExtra("ingredients", (Serializable) this.ingredientsChips.getChipValues());
-                returnIntent.putExtra("category", this.spinner.getSelectedItemPosition());
+                this.product.setName(this.nameTextField.getText().toString());
+                this.product.setCost(new Double(this.costTextField.getText().toString()));
+                this.product.setNotes(this.notesTextField.getText().toString());
+                this.product.setIngredients(this.ingredientsChips.getChipValues());
+                this.product.setCategory(this.types.get(spinner.getSelectedItemPosition()));
 
-                if (imageFileName != null) {
-                    returnIntent.putExtra("imageFileName", imageFileName);
-                }
-
+                returnIntent.putExtra("product", product);
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == RESULT_OK) {
-            List<Uri> images = Matisse.obtainResult(data);
-            if (images.size() > 0) {
-                Uri imageUri = images.get(0);
-                try {
-//                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-//                    final Bitmap selectedImage = Utils.resizeBitmap(BitmapFactory.decodeStream(imageStream), 400);
-//                    imageFileName = Utils.createImageFromBitmap(selectedImage, ProductEditActivity.this);
-//                    Storage.INSTANCE.saveImage(imageUri);
-//                    image.setImageBitmap(selectedImage);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     @Override
@@ -255,23 +235,13 @@ public class ProductEditActivity extends ActivityAbstractWithToolbar {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("name", name);
-        outState.putString("cost", cost);
-        outState.putString("notes", notes);
-        outState.putSerializable("ingredients", (Serializable) this.ingredients);
-        outState.putInt("category", category);
-        outState.putString("imageFileName", imageFileName);
+        outState.putSerializable("product", product);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        name = savedInstanceState.getString("name");
-        cost = savedInstanceState.getString("cost");
-        notes = savedInstanceState.getString("notes");
-        ingredients = (List) savedInstanceState.getSerializable("ingredients");
-        category = savedInstanceState.getInt("category");
-        imageFileName = savedInstanceState.getString("imageFileName");
+        product = (Product) savedInstanceState.getSerializable("product");
 
         reloadViews();
     }

@@ -13,18 +13,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
-import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivity;
+import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndSidenav;
 import it.polito.justorder_framework.db.Database;
-import it.polito.justorder_framework.db.Restaurants;
-import it.polito.justorder_framework.db.Users;
 import it.polito.justorder_framework.model.Restaurant;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
-public class RestaurantSettingsViewerActivity extends AbstractViewerWithImagePickerActivity {
+public class RestaurantSettingsViewerActivity extends AbstractViewerWithImagePickerActivityAndSidenav {
 
     protected Restaurant restaurant;
     protected EditText nameTextField, emailTextField, phoneTextField, addressTextField, vatCodeTextField, taxCodeTextField, ibanTextField, foodTypeTextField;
@@ -76,7 +72,7 @@ public class RestaurantSettingsViewerActivity extends AbstractViewerWithImagePic
 
         if(i != null && i.getStringExtra("restaurant_key") != null){
             restaurant_intent_key = i.getStringExtra("restaurant_key");
-            Restaurants.INSTANCE.getRestaurant(restaurant_intent_key, (restaurant1 -> {
+            Database.INSTANCE.getRestaurants().get(restaurant_intent_key, (restaurant1 -> {
                 this.restaurant = restaurant1;
                 if(this.restaurant != null){
                     this.imageUri = this.restaurant.getImageUri();
@@ -138,14 +134,14 @@ public class RestaurantSettingsViewerActivity extends AbstractViewerWithImagePic
         if(requestCode == 1 || requestCode == 2){
             if(resultCode== Activity.RESULT_OK){
                 restaurant = (Restaurant) data.getSerializableExtra("restaurant");
-                Restaurants.INSTANCE.saveRestaurant(restaurant);
+                Database.INSTANCE.getRestaurants().save(restaurant);
                 if(requestCode == 2 && Database.INSTANCE.getCurrent_User() != null){
                     User user = Database.INSTANCE.getCurrent_User();
-                    restaurant.setOwner(user.getKey());
-                    user.getOwnedRestaurants().put(restaurant.getKey(), true);
-                    user.getManagedRestaurants().put(restaurant.getKey(), true);
-                    Users.INSTANCE.saveUser(user);
-                    Restaurants.INSTANCE.saveRestaurant(restaurant);
+                    restaurant.setOwner(user.getKeyId());
+                    user.getOwnedRestaurants().put(restaurant.getKeyId(), true);
+                    user.getManagedRestaurants().put(restaurant.getKeyId(), true);
+                    Database.INSTANCE.getUsers().save(user);
+                    Database.INSTANCE.getRestaurants().save(restaurant);
                 }
                 reloadViews();
             }

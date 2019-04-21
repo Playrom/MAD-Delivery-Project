@@ -5,7 +5,7 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import it.polito.justorder_framework.UserChangeStatusEvent
 import it.polito.justorder_framework.Utils
-import it.polito.justorder_framework.model.User
+import it.polito.justorder_framework.model.*
 import org.greenrobot.eventbus.EventBus
 
 
@@ -32,6 +32,13 @@ object Database {
      }
      var db : DatabaseReference = FirebaseDatabase.getInstance().getReference()
      var storage = Storage
+
+     val users = ModelOperations<User>("users", User::class.java)
+     val products = ModelOperations<Product>("products", Product::class.java)
+     val restaurants = ModelOperations<Restaurant>("restaurants", Restaurant::class.java)
+     val deliverers = ModelOperations<Deliverer>("deliverers", Deliverer::class.java)
+     val orders = ModelOperations<Order>("orders", Order::class.java)
+
 
      var Current_User : User? = null
           private set

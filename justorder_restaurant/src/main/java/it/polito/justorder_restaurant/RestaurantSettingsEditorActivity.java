@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 import it.polito.justorder_framework.abstract_activities.AbstractEditorWithImagePickerActivity;
 import it.polito.justorder_framework.Utils;
-import it.polito.justorder_framework.db.Restaurants;
+import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Restaurant;
 import kotlin.Unit;
 
@@ -142,7 +142,7 @@ public class RestaurantSettingsEditorActivity extends AbstractEditorWithImagePic
     protected Unit saveImageUri(Uri uri) {
         super.saveImageUri(uri);
         restaurant.setImageUri(uri.toString());
-        Restaurants.INSTANCE.saveRestaurant(restaurant);
+        Database.INSTANCE.getRestaurants().save(restaurant);
         return Unit.INSTANCE;
     }
 
