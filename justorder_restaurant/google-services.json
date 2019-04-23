@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "1069245474589",
+    "firebase_url": "https://justorder-mad.firebaseio.com",
+    "project_id": "justorder-mad",
+    "storage_bucket": "justorder-mad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069245474589:android:f3687d4922575dae",
+        "android_client_info": {
+          "package_name": "it.polito.justorder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069245474589-sotha79vcvb9rds5qfe1slleq42ha032.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.polito.justorder",
+            "certificate_hash": "06f729ec2e3637b5e1e26b4c3b6df3c67d561a67"
+          }
+        },
+        {
+          "client_id": "1069245474589-rgbv7g7kbplqpsk47931k896kl8m4t57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD438y-KAS8jkn-1anJxKsa6F1SBU4j5XA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069245474589-rgbv7g7kbplqpsk47931k896kl8m4t57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069245474589:android:3210455c05a01002",
+        "android_client_info": {
+          "package_name": "it.polito.justorder_framework"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069245474589-pnens2rqh9gc862liph71ubv44bgu260.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.polito.justorder_framework",
+            "certificate_hash": "06f729ec2e3637b5e1e26b4c3b6df3c67d561a67"
+          }
+        },
+        {
+          "client_id": "1069245474589-rgbv7g7kbplqpsk47931k896kl8m4t57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD438y-KAS8jkn-1anJxKsa6F1SBU4j5XA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069245474589-rgbv7g7kbplqpsk47931k896kl8m4t57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069245474589:android:a885df6da9867151",
+        "android_client_info": {
+          "package_name": "it.polito.justorder_restaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069245474589-j9k2inhiov4m42k041qosj50bp98b4f8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.polito.justorder_restaurant",
+            "certificate_hash": "06f729ec2e3637b5e1e26b4c3b6df3c67d561a67"
+          }
+        },
+        {
+          "client_id": "1069245474589-rgbv7g7kbplqpsk47931k896kl8m4t57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD438y-KAS8jkn-1anJxKsa6F1SBU4j5XA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069245474589-rgbv7g7kbplqpsk47931k896kl8m4t57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

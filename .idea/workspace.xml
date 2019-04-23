@@ -1,0 +1,1278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <device id="Nexus 7 2013" />
+        <device id="pixel_xl" />
+      </config>
+    </shared>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="83fe9572-f87a-4d4f-994b-ca4f310abf58" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/.gradle/" />
+    <ignored path="$PROJECT_DIR$/build/classes/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/apk_list/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/blame/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/build-info/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/builds/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/bundle_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/compatible_screen_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/incremental-runtime-classes/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/incremental-verifier/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/instant-run-apk/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/instant_app_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/instant_run_app_info_output_file/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/instant_run_main_apk_resources/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/instant_run_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/instant_run_split_apk_resources/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/jniLibs/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/manifest-checker/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/merged_assets/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/metadata_feature_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/prebuild/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/processed_res/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/reload-dex/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/resources/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/signing_config/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/split-apk/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/intermediates/validate_signing_config/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/outputs/" />
+    <ignored path="$PROJECT_DIR$/justorder/build/tmp/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/apk_list/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/blame/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/build-info/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/bundle_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/compatible_screen_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/incremental-runtime-classes/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/incremental-verifier/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/instant-run-apk/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/instant_app_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/instant_run_app_info_output_file/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/instant_run_main_apk_resources/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/instant_run_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/instant_run_split_apk_resources/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/jniLibs/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/manifest-checker/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/merged_assets/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/metadata_feature_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/prebuild/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/processed_res/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/reload-dex/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/resources/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/signing_config/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/split-apk/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/intermediates/validate_signing_config/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/outputs/" />
+    <ignored path="$PROJECT_DIR$/justorder_delivery/build/tmp/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/aapt_friendly_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/compile_only_not_namespaced_r_class_jar/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/intermediate-jars/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/jniLibs/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/library_assets/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/library_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/packaged_res/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/public_res/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/outputs/" />
+    <ignored path="$PROJECT_DIR$/justorder_framework/build/tmp/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/generated/not_namespaced_r_class_sources/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/generated/source/r/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/annotation_processor_list/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/apk_list/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/blame/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/build-info/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/builds/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/bundle_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/check_manifest_result/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/compatible_screen_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/incremental/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/incremental-runtime-classes/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/incremental-verifier/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/instant-run-apk/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/instant_app_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/instant_run_app_info_output_file/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/instant_run_main_apk_resources/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/instant_run_merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/instant_run_split_apk_resources/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/javac/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/jniLibs/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/manifest-checker/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/merged_assets/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/merged_manifests/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/metadata_feature_manifest/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/prebuild/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/processed_res/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/reload-dex/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/res/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/resources/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/rs/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/shader_assets/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/shaders/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/signing_config/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/split-apk/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/symbols/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/transforms/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/intermediates/validate_signing_config/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/outputs/" />
+    <ignored path="$PROJECT_DIR$/justorder_restaurant/build/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MAD-Delivery-Project" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/OrdersListActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="159">
+              <caret line="89" selection-start-line="89" selection-end-line="89" />
+              <folding>
+                <element signature="e#3448#3476#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/common_activities/ProductsListActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="371">
+              <caret line="30" column="61" selection-start-line="30" selection-start-column="61" selection-end-line="30" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/db/ModelOperations.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/common_activities/ProductActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/AbstractViewerWithImagePickerActivityAndToolbar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="10" column="90" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
+              <folding>
+                <element signature="e#689#690#0" expanded="true" />
+                <element signature="e#723#724#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/ActivityAbstractWithToolbar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/OrderDetails.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="103" column="25" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Order.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+              <folding>
+                <element signature="e#45#97#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/db/Database.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="319">
+              <caret line="39" column="56" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="resourceFile" />
+        <option value="layoutResourceFile_vertical" />
+        <option value="layoutResourceFile" />
+        <option value="valueResourceFile" />
+        <option value="Interface" />
+        <option value="Kotlin File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>setDisplayHomeAsUpEnabled</find>
+      <find>AppTheme</find>
+      <find>syncs</find>
+      <find>listi</find>
+      <find>actionbar</find>
+      <find>save</find>
+      <find>openFIleOu</find>
+      <find>createImageFile</find>
+      <find>crrea</find>
+      <find>justorder-mad.firebaseio.com1</find>
+      <find>new Array</find>
+      <find>initializeApp</find>
+      <find>Firebas</find>
+      <find>.logout</find>
+      <find>onNavigationItemSelected</find>
+      <find>catego</find>
+      <find>reloadData</find>
+      <find>open(</find>
+      <find>openHour</find>
+      <find>openDays</find>
+      <find>saveIma</find>
+      <find>split</find>
+      <find>saveImageUri</find>
+      <find>saveImageUr</find>
+      <find>saveImage</find>
+      <find>justorder_delivery</find>
+      <find>image</find>
+      <find>layout_aligntEnd</find>
+      <find>oncreate</find>
+      <find>title</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/justorder_delivery/src/main/java/it/polito/justorder_delivery/RestaurantSettingsEditorActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/db/Deliverers.kt" />
+        <option value="$PROJECT_DIR$/justorder_delivery/build.gradle" />
+        <option value="$PROJECT_DIR$/justorder_delivery/src/main/res/layout/deliverer_settings_editor.xml" />
+        <option value="$PROJECT_DIR$/justorder_delivery/src/main/res/layout/deliverer_settings_viewer.xml" />
+        <option value="$PROJECT_DIR$/justorder_delivery/src/main/java/it/polito/justorder_delivery/DelivererSettingsViewerActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/AbstractEditor.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/AbstractEditorWithImagePickerActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_delivery/src/main/java/it/polito/justorder_delivery/DelivererSettingsEditorActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/res/menu/main_menu.xml" />
+        <option value="$PROJECT_DIR$/justorder_delivery/src/main/java/it/polito/justorder_delivery/RouteHandler.java" />
+        <option value="$PROJECT_DIR$/justorder_delivery/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/justorder_deliverer/build.gradle" />
+        <option value="$PROJECT_DIR$/justorder_deliverer/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/justorder_deliverer/build/generated/source/buildConfig/debug/it/polito/justorder_deliverer/BuildConfig.java" />
+        <option value="$PROJECT_DIR$/justorder_deliverer/src/main/java/it/polito/justorder_deliverer/MainMenuLoader.java" />
+        <option value="$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/MainMenuLoader.java" />
+        <option value="$PROJECT_DIR$/justorder/src/main/java/it/polito/justorder/MainMenuLoader.java" />
+        <option value="$PROJECT_DIR$/justorder_deliverer/src/main/java/it/polito/justorder_deliverer/RouteHandler.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/User.kt" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Deliverer.kt" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Restaurant.kt" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/common_activities/UserSettingsEditorActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/RestaurantSettingsEditorActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/RestaurantSettingsViewerActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_deliverer/src/main/java/it/polito/justorder_deliverer/DelivererSettingsViewerActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/FirebaseFunctions.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/AbstractViewerWithImagePickerActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/AbstractViewerWithImagePickerActivityAndToolbar.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/res/layout/product_activity_layout.xml" />
+        <option value="$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/ProductActivityWithEditing.java" />
+        <option value="$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/RouteHandler.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/AbstractRouteHandler.java" />
+        <option value="$PROJECT_DIR$/justorder_restaurant/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/Utils.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Model.kt" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Product.kt" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/common_activities/UserSettingsViewerActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/common_activities/ProductActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/ProductEditActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/OrderEntity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/OrderEntity.kt" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/OrderEntity.kt" />
+        <option value="$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/OrderSummaryActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/common_activities/ProductsListActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/db/Database.kt" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Order.kt" />
+        <option value="$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/OrdersListActivity.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/db/ModelOperations.kt" />
+        <option value="$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/OrderDetails.java" />
+        <option value="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/ActivityAbstractWithToolbar.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="877" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="MAD-Delivery-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MAD-Delivery-Project" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MAD-Delivery-Project" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="justorder" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MAD-Delivery-Project" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="justorder_restaurant" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="it" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="it" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="it" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+              <item name="justorder_framework" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="it" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+              <item name="justorder_framework" type="462c0819:PsiDirectoryNode" />
+              <item name="abstract_activities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="it" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+              <item name="justorder_framework" type="462c0819:PsiDirectoryNode" />
+              <item name="common_activities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="it" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+              <item name="justorder_framework" type="462c0819:PsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="it" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+              <item name="justorder_framework" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_framework" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_restaurant" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_restaurant" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_restaurant" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_restaurant" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="it" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_restaurant" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="it" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_restaurant" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="it" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+              <item name="justorder_restaurant" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_restaurant" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justorder_restaurant" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="MAD-Delivery-Project" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.project.structure.last.selected" value="justorder_framework" />
+    <property name="android.project.structure.proportion" value="0.15" />
+    <property name="device.picker.selection" value="42f7fb0d8703af31" />
+    <property name="not.eligible.for.single.variant.sync" value="true" />
+    <property name="settings.editor.selected.configurable" value="instant.run" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/justorder_delivery" />
+      <recent name="$PROJECT_DIR$/justorder_framework/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/justorder_framework/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/justorder_restaurant" />
+      <recent name="$PROJECT_DIR$/justorder" />
+    </key>
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="it.polito.justorder_framework.db" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="it.polito.justorder_framework.model" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.polito.justorder_framework.abstract_activities" />
+      <recent name="it.polito.justorder_framework" />
+      <recent name="it.polito.justorder" />
+      <recent name="it.polito.justorder_delivery" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/justorder_delivery/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/justorder_delivery/src/main/java/it/polito/justorder_delivery" />
+      <recent name="$PROJECT_DIR$/justorder_framework/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework" />
+      <recent name="$PROJECT_DIR$/justorder_framework/src/main/res/menu" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Android App.justorder_restaurant">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="justorder" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="justorder" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="justorder_delivery" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="justorder_deliverer" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="justorder_restaurant" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="justorder_restaurant" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Android App.justorder" />
+      <item itemvalue="Android App.justorder_delivery" />
+      <item itemvalue="Android App.justorder_restaurant" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="83fe9572-f87a-4d4f-994b-ca4f310abf58" name="Default Changelist" comment="" />
+      <created>1554107158897</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1554107158897</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
+    <layout>
+      <window_info id="Captures" order="0" sideWeight="0.50428814" side_tool="true" weight="0.20457797" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49525616" visible="true" weight="0.20457797" />
+      <window_info id="Structure" order="2" sideWeight="0.5047438" side_tool="true" weight="0.20457797" />
+      <window_info id="Build Variants" order="3" side_tool="true" />
+      <window_info id="Image Layers" order="4" />
+      <window_info id="Designer" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info id="Resources Explorer" order="8" />
+      <window_info anchor="bottom" id="Logcat" order="0" />
+      <window_info anchor="bottom" id="TODO" order="1" />
+      <window_info anchor="bottom" id="Android Profiler" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32866243" />
+      <window_info anchor="bottom" id="Terminal" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.41988555" side_tool="true" weight="0.25732484" />
+      <window_info anchor="bottom" id="Version Control" order="6" weight="0.3299363" />
+      <window_info anchor="bottom" x="-20" y="165" width="1398" height="595" id="Build" order="7" sideWeight="0.5801144" weight="0.25732484" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.3299363" />
+      <window_info anchor="bottom" id="Run" order="9" sideWeight="0.64110756" weight="0.32866243" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" weight="0.32960597" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.32904148" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Assistant" order="6" weight="0.32904148" />
+      <window_info anchor="right" id="Android WiFi ADB" order="7" weight="0.32960597" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Captures" order="0" sideWeight="0.5028463" side_tool="true" weight="0.20457797" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4971537" visible="true" weight="0.20457797" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Build Variants" order="3" side_tool="true" />
+      <window_info id="Image Layers" order="4" />
+      <window_info id="Designer" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Logcat" order="0" />
+      <window_info anchor="bottom" id="TODO" order="1" />
+      <window_info anchor="bottom" id="Android Profiler" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32866243" />
+      <window_info anchor="bottom" id="Terminal" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.41917023" side_tool="true" weight="0.25732484" />
+      <window_info anchor="bottom" id="Version Control" order="6" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.58082974" weight="0.25732484" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.3299363" />
+      <window_info active="true" anchor="bottom" id="Run" order="9" sideWeight="0.64110756" visible="true" weight="0.32866243" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" weight="0.32960597" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.32904148" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Assistant" order="6" weight="0.32960597" />
+      <window_info anchor="right" id="Android WiFi ADB" order="7" weight="0.32960597" />
+    </layout-to-restore>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/justorder_deliverer/src/main/java/it/polito/justorder_deliverer/RouteHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="38" column="45" selection-start-line="38" selection-start-column="45" selection-end-line="38" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/db/Restaurants.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/RestaurantSettingsEditorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/db/Deliverers.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="13" selection-start-column="4" selection-end-line="41" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/db/Products.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="14" column="28" lean-forward="true" selection-start-line="10" selection-start-column="16" selection-end-line="14" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_deliverer/src/main/java/it/polito/justorder_deliverer/DelivererSettingsViewerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-430">
+          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/ProductEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-349">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/User.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="9" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/res/layout/common_viewer_layout.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="51" lean-forward="true" selection-start-line="1" selection-end-line="16" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/res/layout/usersettings_viewer_activity.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="63" column="53" selection-start-line="63" selection-start-column="53" selection-end-line="63" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/res/layout/product_activity_layout.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1373">
+          <caret line="119" column="37" lean-forward="true" selection-start-line="119" selection-start-column="37" selection-end-line="119" selection-end-column="37" />
+          <folding>
+            <element signature="e#2320#2341#0" expanded="true" />
+            <element signature="e#5977#5995#0" expanded="true" />
+            <element signature="e#6854#6875#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/res/layout/common_editor_layout.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="43" column="19" selection-start-line="8" selection-start-column="4" selection-end-line="43" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/res/layout/product_edit_activity_layout.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="135" column="41" selection-start-line="135" selection-start-column="41" selection-end-line="135" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/RestaurantSettingsViewerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="114" lean-forward="true" selection-start-line="114" selection-end-line="126" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/AbstractRouteHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/RouteHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="79" column="15" selection-start-line="79" selection-start-column="15" selection-end-line="79" selection-end-column="15" />
+          <folding>
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2805#2806#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="40" lean-forward="true" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/AbstractEditorWithImagePickerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="169" column="25" selection-start-line="169" selection-end-line="172" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/common_activities/UserSettingsEditorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-497">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8fe61c9d8ce7e543cc849343f6b8c63d/jars/classes.jar!/com/google/firebase/database/core/ValueEventRegistration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8fe61c9d8ce7e543cc849343f6b8c63d/jars/classes.jar!/com/google/firebase/database/core/view/DataEvent.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+          <folding>
+            <element signature="e#1289#1290#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8fe61c9d8ce7e543cc849343f6b8c63d/jars/classes.jar!/com/google/firebase/database/core/view/EventRaiser.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#0#1406#0" expanded="true" />
+            <element signature="e#949#1395#0" expanded="true" />
+            <element signature="e#1394#1395#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../../Android/sdk/sources/android-28/android/widget/AdapterView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="318" selection-start-line="318" selection-end-line="318" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../../Android/sdk/sources/android-28/android/widget/AbsListView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="4221" selection-start-line="4221" selection-end-line="4221" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../../Android/sdk/sources/android-28/android/os/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../../Android/sdk/sources/android-28/android/os/Looper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="175" selection-start-line="175" selection-end-line="175" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/ActivityAbstract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/FirebaseFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../../Android/sdk/sources/android-28/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/res/layout/product_item_adapter.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="30" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/ProductEditActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="144" column="14" selection-start-line="144" selection-start-column="14" selection-end-line="144" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/common_activities/UserSettingsViewerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="46" column="9" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Model.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/ProductActivityWithEditing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="60" lean-forward="true" selection-start-line="12" selection-start-column="60" selection-end-line="12" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/AbstractViewerWithImagePickerActivityAndSidenav.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Restaurant.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Product.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Deliverer.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/justorder-mad-order-export.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="18" lean-forward="true" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/model/Order.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding>
+            <element signature="e#45#97#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8fe61c9d8ce7e543cc849343f6b8c63d/jars/classes.jar!/com/google/firebase/database/Query.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="124" selection-start-line="124" selection-end-line="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/db/Database.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="39" column="56" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/OrdersListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
+          <folding>
+            <element signature="e#3448#3476#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/db/ModelOperations.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_restaurant/src/main/java/it/polito/justorder_restaurant/OrderDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="103" column="25" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/ActivityAbstractWithSideNav.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/common_activities/ProductsListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="30" column="61" selection-start-line="30" selection-start-column="61" selection-end-line="30" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/common_activities/ProductActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/AbstractViewerWithImagePickerActivityAndToolbar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="10" column="90" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
+          <folding>
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/justorder_framework/src/main/java/it/polito/justorder_framework/abstract_activities/ActivityAbstractWithToolbar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
