@@ -22,9 +22,16 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
         if(createRestaurant != null){
             createRestaurant.setVisible(false);
         }
+
         MenuItem delivererSettings = navView.getMenu().findItem(R.id.delivererSettings);
         if(delivererSettings != null){
             delivererSettings.setVisible(true);
         }
+
+        MenuItem restaurants = navView.getMenu().findItem(R.id.restaurants);
+        if(restaurants != null){
+            restaurants.setVisible(false);
+        }
+
     }
 }
