@@ -5,6 +5,7 @@ import it.polito.justorder_framework.common_activities.ProductsListActivity;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Order;
 import it.polito.justorder_framework.model.Product;
+import it.polito.justorder_framework.model.Restaurant;
 import kotlin.Unit;
 
 import android.content.Intent;
@@ -28,7 +29,8 @@ public class OrdersListActivity extends ActivityAbstractWithSideNav {
     protected BaseAdapter adapter;
     protected FloatingActionButton fab;
     private int tapped;
-    private List<Order> orders = new ArrayList<>();
+    private ArrayList<String> ordersId = new ArrayList<>();
+    private ArrayList<Order> orders = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,12 @@ public class OrdersListActivity extends ActivityAbstractWithSideNav {
             }
         });
 
-        Database.INSTANCE.getOrders().getAll(orders1 -> {
+
+        Intent i = getIntent();
+        this.ordersId = (ArrayList<String>) i.getSerializableExtra("orders");
+
+
+        Database.INSTANCE.getOrders().getWithIds(this.ordersId, orders1 -> {
             orders.clear();
             orders.addAll(orders1);
             this.reloadViews();

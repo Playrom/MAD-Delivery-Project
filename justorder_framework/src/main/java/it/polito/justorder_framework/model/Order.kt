@@ -8,6 +8,7 @@ class Order: Model(){
     var address: String = ""
     var price: Double = 0.0
     var timestamp: Date = Date()
+    var restaurant: String = ""
     var deliverer: String? = null
     var products : Map<String, Int> = mutableMapOf<String, Int>()
 }

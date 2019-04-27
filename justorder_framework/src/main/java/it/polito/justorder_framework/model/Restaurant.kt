@@ -16,6 +16,9 @@ class Restaurant : Model(),Serializable {
     var openDays: Map<String, Boolean> = mutableMapOf()
     var type: String = ""
 
+    var products: Map<String, Product> = mutableMapOf()
+    var orders: Map<String, Boolean> = mutableMapOf<String, Boolean>()
+
     var owner: String = ""
     var managers: Map<String, Boolean> = mutableMapOf<String, Boolean>()
 }

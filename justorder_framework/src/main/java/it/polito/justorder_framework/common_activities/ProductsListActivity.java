@@ -7,6 +7,7 @@ import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithSid
 import it.polito.justorder_framework.ProductEntity;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Product;
+import it.polito.justorder_framework.model.Restaurant;
 import kotlin.Unit;
 
 import android.app.Activity;
@@ -27,6 +28,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductsListActivity extends ActivityAbstractWithSideNav {
 
@@ -34,6 +36,7 @@ public class ProductsListActivity extends ActivityAbstractWithSideNav {
     protected BaseAdapter adapter;
     protected FloatingActionButton fab;
     private int tapped;
+    private Restaurant restaurant;
     private List<Product> products = new ArrayList<>();
 
     @Override
@@ -58,13 +61,8 @@ public class ProductsListActivity extends ActivityAbstractWithSideNav {
                 startActivityForResult(intent, 1);
             }
         });
-
-        Database.INSTANCE.getProducts().getAll(products1 -> {
-            products.clear();
-            products.addAll(products1);
-            this.reloadViews();
-            return Unit.INSTANCE;
-        });
+        Intent i = getIntent();
+        this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
 
         this.reloadData();
     }
@@ -112,6 +110,9 @@ public class ProductsListActivity extends ActivityAbstractWithSideNav {
     @Override
     protected void reloadViews() {
         super.reloadViews();
+        if(this.restaurant != null){
+            this.products = new ArrayList<>(this.restaurant.getProducts().values());
+        }
         this.adapter.notifyDataSetChanged();
     }
 
@@ -122,14 +123,18 @@ public class ProductsListActivity extends ActivityAbstractWithSideNav {
             if(resultCode== Activity.RESULT_OK){
                 Product product = (Product) data.getSerializableExtra("product");
                 products.set(tapped, product);
-
+                this.restaurant.getProducts().put(product.getKeyId(), product);
+                Database.INSTANCE.getRestaurants().save(restaurant);
                 this.reloadViews();
             }
         }else if(requestCode == 2){
             if(resultCode== Activity.RESULT_OK){
                 Product product = (Product) data.getSerializableExtra("product");
                 products.add(product);
-                Database.INSTANCE.getProducts().save(product);
+                String key = Database.INSTANCE.getRestaurants().generateKeyForChild(this.restaurant.getKeyId());
+                product.setKeyId(key);
+                this.restaurant.getProducts().put(key, product);
+                Database.INSTANCE.getRestaurants().save(restaurant);
                 this.reloadViews();
             }
         }

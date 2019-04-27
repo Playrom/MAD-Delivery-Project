@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import it.polito.justorder_framework.AbstractRouteHandler;
@@ -12,14 +14,24 @@ import it.polito.justorder_framework.FirebaseFunctions;
 import it.polito.justorder_framework.common_activities.ProductsListActivity;
 import it.polito.justorder_framework.common_activities.UserSettingsViewerActivity;
 import it.polito.justorder_framework.db.Database;
+import it.polito.justorder_framework.model.Order;
+import kotlin.Unit;
 
 public class RouteHandler extends AbstractRouteHandler {
 
     public boolean routeHandler(MenuItem item, Context context) {
         if(item.getItemId() == R.id.list_view) {
-            Intent i = new Intent(context, ProductsListActivity.class);
-            context.startActivity(i);
-            return true;
+
+            String restaurant_key = "";
+            restaurant_key = Database.INSTANCE.getCurrent_User().getManagedRestaurants().entrySet()
+                    .stream().filter(x -> {return x.getValue();}).collect(Collectors.toList()).get(0).getKey();
+
+            Database.INSTANCE.getRestaurants().get(restaurant_key, (restaurant -> {
+                Intent i = new Intent(context, ProductListActivityWithAdd.class);
+                i.putExtra("restaurant", restaurant);
+                context.startActivity(i);
+                return Unit.INSTANCE;
+            }));
 
         }
 
@@ -66,8 +78,18 @@ public class RouteHandler extends AbstractRouteHandler {
         }
 
         if(item.getItemId() == R.id.ordersPage) {
-            Intent i = new Intent(context, OrdersListActivity.class);
-            context.startActivity(i);
+            String restaurant_key = "";
+            restaurant_key = Database.INSTANCE.getCurrent_User().getManagedRestaurants().entrySet()
+                    .stream().filter(x -> {return x.getValue();}).collect(Collectors.toList()).get(0).getKey();
+
+            Database.INSTANCE.getRestaurants().get(restaurant_key, (restaurant -> {
+                Intent i = new Intent(context, OrdersListActivity.class);
+                ArrayList<String> orders =  new ArrayList<>(restaurant.getOrders().keySet());
+                i.putExtra("orders", orders);
+                context.startActivity(i);
+                return Unit.INSTANCE;
+            }));
+
             return true;
         }
 

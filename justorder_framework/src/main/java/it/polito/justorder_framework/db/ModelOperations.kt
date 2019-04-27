@@ -6,8 +6,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import it.polito.justorder_framework.Utils
 import it.polito.justorder_framework.model.Model
+import it.polito.justorder_framework.model.Order
 
-class ModelOperations<T: Model>(val path: String, private val tClass: Class<T>){
+class ModelOperations<T: Model>(private val tClass: Class<T>, val path: String){
     fun get(key: String, cb : (T) -> Unit) {
 
         Database.db.child(path).child(key).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -54,5 +55,35 @@ class ModelOperations<T: Model>(val path: String, private val tClass: Class<T>){
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         })
+    }
+
+    fun getWithIds(keys: List<String>, cb : (List<T>) -> Unit) {
+        var ref = Database.db.child(path)
+        var collection = mutableListOf<T>()
+        for(key in keys){
+            ref.child(key).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    if(p0.exists()) {
+                        collection.add(Utils.convertObject(p0, tClass))
+                    }
+                    if(collection.size.equals(keys.size)){
+                        cb(collection)
+                    }
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+            })
+        }
+
+    }
+
+    fun generateKeyForChild(vararg childPath: String) : String?{
+        var ref = Database.db.child(path)
+        for(child in childPath){
+            ref = ref.child(child)
+        }
+        return ref.push().key
     }
 }
