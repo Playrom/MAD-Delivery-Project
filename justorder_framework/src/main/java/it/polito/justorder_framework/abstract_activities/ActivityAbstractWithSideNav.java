@@ -56,7 +56,7 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
     @Subscribe
     public void onMessageEvent(UserChangeStatusEvent event) {
         this.reloadViews();
-    };
+    }
 
     protected NavigationView.OnNavigationItemSelectedListener getNavigationListener() {
 

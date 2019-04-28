@@ -71,13 +71,13 @@ public class RestaurantSettingsEditorActivity extends AbstractEditorWithImagePic
         timePickerOpen.setIs24HourView(true);
         timePickerClose = findViewById(R.id.timePickerClose);
         timePickerClose.setIs24HourView(true);
-        Sunday=(CheckBox)findViewById(R.id.checkbox_tuesday);
-        Monday=(CheckBox)findViewById(R.id.checkbox_monday);
-        Tuesday=(CheckBox)findViewById(R.id.checkbox_tuesday);
-        Wednesday=(CheckBox)findViewById(R.id.checkbox_wednesday);
-        Thursday=(CheckBox)findViewById(R.id.checkbox_thursday);
-        Friday=(CheckBox)findViewById(R.id.checkbox_friday);
-        Saturday=(CheckBox)findViewById(R.id.checkbox_saturday);
+        Sunday= findViewById(R.id.checkbox_tuesday);
+        Monday= findViewById(R.id.checkbox_monday);
+        Tuesday= findViewById(R.id.checkbox_tuesday);
+        Wednesday= findViewById(R.id.checkbox_wednesday);
+        Thursday= findViewById(R.id.checkbox_thursday);
+        Friday= findViewById(R.id.checkbox_friday);
+        Saturday= findViewById(R.id.checkbox_saturday);
 
         this.reloadData();
     }

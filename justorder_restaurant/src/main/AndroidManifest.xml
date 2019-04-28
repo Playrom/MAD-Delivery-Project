@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderDetails"></activity>
+        <activity android:name=".OrderToConfirm"></activity>
+        <activity android:name=".OrderDetails" />
         <activity android:name="it.polito.justorder_framework.common_activities.ProductActivity" />
         <activity android:name=".ProductActivityWithEditing" />
         <activity android:name=".ProductEditActivity" />
@@ -19,7 +20,6 @@
         <activity android:name=".RestaurantSettingsViewerActivity" />
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity" />
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsViewerActivity" />
-
         <activity android:name=".ResturantAppLoaderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

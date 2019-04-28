@@ -103,7 +103,7 @@ public class Utils {
         T product = dataSnapshot.getValue(tClass);
         try {
             if (tClass.getMethod("setKeyId", String.class) != null) {
-                tClass.getMethod("setKeyId", String.class).invoke(product, new String(dataSnapshot.getKey()));
+                tClass.getMethod("setKeyId", String.class).invoke(product, dataSnapshot.getKey());
             }
         }catch (Exception e){
 

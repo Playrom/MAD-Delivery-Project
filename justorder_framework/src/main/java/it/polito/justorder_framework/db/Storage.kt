@@ -23,20 +23,20 @@ object Storage {
     fun saveImage(stream: InputStream, cb: (Uri) -> Unit){
         var ref: StorageReference = Database.storage.products.child(UUID.randomUUID().toString())
         val uploadTask = ref.putStream(stream)
-        this.getPublicUrl(ref, uploadTask, cb);
+        this.getPublicUrl(ref, uploadTask, cb)
 
     }
 
     fun saveImage(uri: Uri, cb: (Uri) -> Unit){
         var ref: StorageReference = Database.storage.products.child(UUID.randomUUID().toString())
-        var uploadTask = ref.putFile(uri);
-        this.getPublicUrl(ref, uploadTask, cb);
+        var uploadTask = ref.putFile(uri)
+        this.getPublicUrl(ref, uploadTask, cb)
     }
 
     fun saveImage(byteArray: ByteArray, cb: (Uri) -> Unit){
         var ref: StorageReference = Database.storage.products.child(UUID.randomUUID().toString())
-        var uploadTask = ref.putBytes(byteArray);
-        this.getPublicUrl(ref, uploadTask, cb);
+        var uploadTask = ref.putBytes(byteArray)
+        this.getPublicUrl(ref, uploadTask, cb)
     }
     private fun getPublicUrl(ref: StorageReference, task: UploadTask, cb: (Uri) -> Unit){
         val urlTask = task.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
@@ -50,7 +50,7 @@ object Storage {
             if (task.isSuccessful) {
                 val downloadUri = task.result
                 if(downloadUri != null){
-                    cb(downloadUri);
+                    cb(downloadUri)
                 }
             }
         }

@@ -13,7 +13,7 @@ object Database {
      init {
           val key = FirebaseAuth.getInstance().currentUser?.uid
           if(key != null) {
-               FirebaseDatabase.getInstance().getReference().child("users").child(key).addListenerForSingleValueEvent(object : ValueEventListener {
+               FirebaseDatabase.getInstance().reference.child("users").child(key).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(p0: DataSnapshot) {
                          if(p0.exists()) {
                               Database.Current_User = Utils.convertObject(p0, User::class.java)
@@ -30,7 +30,7 @@ object Database {
      object Storage {
           var products = FirebaseStorage.getInstance().getReference("products")
      }
-     var db : DatabaseReference = FirebaseDatabase.getInstance().getReference()
+     var db : DatabaseReference = FirebaseDatabase.getInstance().reference
      var storage = Storage
 
      val users = ModelOperations<User>(User::class.java, "users")
@@ -43,7 +43,7 @@ object Database {
      fun loadCurrentUser(cb : () -> Unit){
           val key = FirebaseAuth.getInstance().currentUser?.uid
           if(key != null) {
-               FirebaseDatabase.getInstance().getReference().child("users").child(key).addListenerForSingleValueEvent(object : ValueEventListener {
+               FirebaseDatabase.getInstance().reference.child("users").child(key).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(p0: DataSnapshot) {
                          if(p0.exists()) {
                               Database.Current_User = Utils.convertObject(p0, User::class.java)

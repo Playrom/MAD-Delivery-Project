@@ -32,7 +32,7 @@ class ModelOperations<T: Model>(private val tClass: Class<T>, val path: String){
         var ref: DatabaseReference
         val key = entity.keyId
         if(key != null){
-            ref = Database.db.child(path).child(key);
+            ref = Database.db.child(path).child(key)
         }else{
             ref = Database.db.child(path).push()
             entity.keyId = ref.key

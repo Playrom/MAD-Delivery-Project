@@ -25,7 +25,7 @@ object Products{
         var ref: DatabaseReference
         val key = product.keyId
         if(key != null){
-            ref = Database.db.child("products").child(key);
+            ref = Database.db.child("products").child(key)
         }else{
             ref = Database.db.child("products").push()
         }

@@ -39,7 +39,7 @@ public class FirebaseFunctions {
 
     public static boolean isLoggedIn(){
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        return auth.getCurrentUser() != null ? true : false;
+        return auth.getCurrentUser() != null;
     }
 
     public static void logout() {

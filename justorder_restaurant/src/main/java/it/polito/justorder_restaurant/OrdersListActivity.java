@@ -42,7 +42,7 @@ public class OrdersListActivity extends ActivityAbstractWithSideNav {
     @Override
     protected void setupActivity() {
         super.setupActivity();
-        this.listView = findViewById(R.id.order_list);;
+        this.listView = findViewById(R.id.order_list);
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -98,6 +98,7 @@ public class OrdersListActivity extends ActivityAbstractWithSideNav {
                 ((TextView)convertView.findViewById(R.id.amount)).setText(new Double(order.getPrice()).toString());
                 ((TextView)convertView.findViewById(R.id.address)).setText(order.getUserAddress());
                 ((TextView)convertView.findViewById(R.id.timestamp)).setText(order.getTimestamp().toString());
+                ((TextView)convertView.findViewById(R.id.state)).setText(order.getState());
                 return convertView;
             }
         };
@@ -110,6 +111,12 @@ public class OrdersListActivity extends ActivityAbstractWithSideNav {
     protected void reloadViews() {
         super.reloadViews();
         this.adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        super.reloadData();
     }
 
 }
