@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import it.polito.justorder_framework.AbstractRouteHandler;
 import it.polito.justorder_framework.FirebaseFunctions;
 import it.polito.justorder_framework.common_activities.ProductsListActivity;
+import it.polito.justorder_framework.common_activities.RestaurantsListActivity;
 import it.polito.justorder_framework.common_activities.UserSettingsViewerActivity;
 
 public class RouteHandler extends AbstractRouteHandler {
@@ -17,6 +18,12 @@ public class RouteHandler extends AbstractRouteHandler {
         if(item.getItemId() == R.id.list_view) {
             Intent i = new Intent(context, ProductsListActivity.class);
             context.startActivity(i);
+            return true;
+        }
+
+        if(item.getItemId() == R.id.restaurants) {
+            Intent i = new Intent(context, RestaurantsListActivity.class);
+            context.startActivity(i); //crashes here
             return true;
         }
 

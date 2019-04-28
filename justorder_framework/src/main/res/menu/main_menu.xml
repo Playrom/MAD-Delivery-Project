@@ -22,6 +22,12 @@
         android:visible="true" />
 
     <item
+        android:id="@+id/restaurants"
+        android:enabled="true"
+        android:title="Restaurants"
+        android:visible="true" />
+
+    <item
         android:id="@+id/createRestaurant"
         android:enabled="true"
         android:title="Add Restaurant"

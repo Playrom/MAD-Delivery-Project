@@ -36,5 +36,10 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
         if(delivererSettings != null){
             delivererSettings.setVisible(false);
         }
+
+        MenuItem restaurants = navView.getMenu().findItem(R.id.restaurants);
+        if(restaurants != null){
+            restaurants.setVisible(false);
+        }
     }
 }
