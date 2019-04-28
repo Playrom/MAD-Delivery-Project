@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import it.polito.justorder_framework.AbstractRouteHandler;
@@ -22,16 +25,23 @@ public class RouteHandler extends AbstractRouteHandler {
     public boolean routeHandler(MenuItem item, Context context) {
         if(item.getItemId() == R.id.list_view) {
 
-            String restaurant_key = "";
-            restaurant_key = Database.INSTANCE.getCurrent_User().getManagedRestaurants().entrySet()
-                    .stream().filter(x -> {return x.getValue();}).collect(Collectors.toList()).get(0).getKey();
+            List<Map.Entry<String, Boolean>> resturants = Database.INSTANCE.getCurrent_User().getManagedRestaurants().entrySet()
+                    .stream().filter(x -> {
+                        return x.getValue();
+                    }).collect(Collectors.toList());
+            if(resturants.size() > 0){
+                String restaurant_key = "";
+                restaurant_key = resturants.get(0).getKey();
 
-            Database.INSTANCE.getRestaurants().get(restaurant_key, (restaurant -> {
-                Intent i = new Intent(context, ProductListActivityWithAdd.class);
-                i.putExtra("restaurant", restaurant);
-                context.startActivity(i);
-                return Unit.INSTANCE;
-            }));
+                Map<String, Serializable> map = new HashMap<>();
+
+                Database.INSTANCE.getRestaurants().get(restaurant_key, (restaurant -> {
+                    Intent i = new Intent(context, ProductListActivityWithAdd.class);
+                    i.putExtra("restaurant", restaurant);
+                    context.startActivity(i);
+                    return Unit.INSTANCE;
+                }));
+            }
 
         }
 

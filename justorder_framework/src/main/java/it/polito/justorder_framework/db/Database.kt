@@ -48,6 +48,12 @@ object Database {
                          if(p0.exists()) {
                               Database.Current_User = Utils.convertObject(p0, User::class.java)
                               cb()
+                         }else{
+                              var user = User()
+                              user.keyId = key
+                              Database.Current_User = user
+                              users.save(user)
+                              cb()
                          }
                     }
 

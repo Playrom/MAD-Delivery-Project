@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.HashMap;
 
 import it.polito.justorder_framework.abstract_activities.AbstractEditorWithImagePickerActivity;
@@ -47,6 +49,8 @@ public class RestaurantSettingsEditorActivity extends AbstractEditorWithImagePic
             this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
         }else{
             this.restaurant = new Restaurant();
+            this.restaurant.setOwner(FirebaseAuth.getInstance().getUid());
+            this.restaurant.getManagers().put(FirebaseAuth.getInstance().getUid(), true);
         }
         setContentView(R.layout.restaurant_settings_editor);
         this.setupActivity();

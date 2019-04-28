@@ -97,7 +97,7 @@ public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolba
         if(this.user != null) {
             userTextField.setText(this.user.getName());
         }
-        addressTextField.setText(order.getAddress());
+        addressTextField.setText(order.getUserAddress());
         priceTextField.setText(new Double(order.getPrice()).toString());
         timestampTextField.setText(order.getTimestamp().toString());
 

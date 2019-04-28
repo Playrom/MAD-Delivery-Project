@@ -96,7 +96,7 @@ public class OrdersListActivity extends ActivityAbstractWithSideNav {
                 Order order = orders.get(position);
                 ((TextView)convertView.findViewById(R.id.order_id)).setText(order.getKeyId());
                 ((TextView)convertView.findViewById(R.id.amount)).setText(new Double(order.getPrice()).toString());
-                ((TextView)convertView.findViewById(R.id.address)).setText(order.getAddress());
+                ((TextView)convertView.findViewById(R.id.address)).setText(order.getUserAddress());
                 ((TextView)convertView.findViewById(R.id.timestamp)).setText(order.getTimestamp().toString());
                 return convertView;
             }
