@@ -11,6 +11,11 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
     public static void createMainMenu(NavigationView navView){
         AbstractMainMenuLoader.createMainMenu(navView);
 
+        MenuItem productsList = navView.getMenu().findItem(R.id.list_view);
+        if(productsList != null){
+            productsList.setVisible(false);
+        }
+
         MenuItem restaurantSettings = navView.getMenu().findItem(R.id.restaurantSettings);
         if(restaurantSettings != null){
             restaurantSettings.setVisible(false);

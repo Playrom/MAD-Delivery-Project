@@ -53,9 +53,9 @@ public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Product entry = (Product) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(RestaurantsListActivity.this, routeHandler.getProductActivityClass());
-                intent.putExtra("product", entry);
+                Restaurant entry = (Restaurant) parent.getAdapter().getItem(position);
+                Intent intent = new Intent(RestaurantsListActivity.this, ProductsListActivity.class);
+                intent.putExtra("restaurant", entry);
                 tapped = position;
                 startActivityForResult(intent, 1);
             }
