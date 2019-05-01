@@ -21,4 +21,6 @@ class Restaurant : Model(),Serializable {
 
     var owner: String = ""
     var managers: Map<String, Boolean> = mutableMapOf<String, Boolean>()
+
+    var messagingToken : String? = null
 }
