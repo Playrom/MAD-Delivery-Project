@@ -47,7 +47,13 @@ public class OrdersListActivity extends ActivityAbstractWithSideNav {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Order entry = (Order) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(OrdersListActivity.this, OrderDetails.class);
+                Intent intent;
+                String state = entry.getState();
+                if (state!=null && state.equals("pending")) {
+                    intent = new Intent(OrdersListActivity.this, OrderToConfirm.class);
+                }else {
+                    intent = new Intent(OrdersListActivity.this, OrderDetails.class);
+                }
                 intent.putExtra("order", entry);
                 tapped = position;
                 startActivityForResult(intent, 1);
@@ -68,6 +74,7 @@ public class OrdersListActivity extends ActivityAbstractWithSideNav {
 
         this.reloadData();
     }
+
 
     @Override
     protected void reloadData() {
