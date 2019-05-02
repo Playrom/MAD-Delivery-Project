@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,8 +37,11 @@ public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
     protected BaseAdapter adapter;
     protected FloatingActionButton fab;
     private int tapped;
+    protected Button button_search;
+    protected EditText search_bar;
     private List<Restaurant> restaurants = new ArrayList<>();
-    private List<Product> products = new ArrayList<>(); // to be removed
+    private List<Restaurant> filtered_restaurants = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,31 @@ public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
         super.setupActivity();
         this.listView = findViewById(R.id.restaurants_list);
         this.fab = findViewById(R.id.fab);
+        this.button_search = (Button) findViewById(R.id.button_search);
+        this.search_bar = (EditText) findViewById(R.id.search_bar);
+        button_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //get filtering criteria
+                String filter = search_bar.getText().toString();
+                //retrieve list of all restaurants
+                Database.INSTANCE.getRestaurants().getAll(restaurants1 -> {
+                    restaurants.clear();
+                    restaurants.addAll(restaurants1);
+                    return Unit.INSTANCE;
+                });
+                //create a list containing only the filtered restaurants
+                filtered_restaurants.clear(); //empty initialization
+                for (Restaurant r : restaurants) {
+                    if (r.getName().toLowerCase().contains(filter.toLowerCase())) {
+                        filtered_restaurants.add(r);
+                    }
+                }
+                //refresh view
+                restaurants = filtered_restaurants;
+                reloadData();
+            }
+        });
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -73,6 +103,7 @@ public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
 
     @Override
     protected void reloadData() {
+        System.out.println("HERE: realoadData");
         super.reloadData();
         this.adapter = new BaseAdapter() {
             @Override
@@ -113,6 +144,7 @@ public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
 
     @Override
     protected void reloadViews() {
+        System.out.println("HERE: realoadViews");
         super.reloadViews();
         this.adapter.notifyDataSetChanged();
     }
