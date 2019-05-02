@@ -73,7 +73,7 @@ public class OrderProductActivity extends Activity {
                 restaurant.setOrders(m);
                 Database.INSTANCE.getRestaurants().save(restaurant);
                 //show confirm
-                Toast toast = Toast.makeText(getApplicationContext(), "Ordine Accettato", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(), "Ordine Inserito", Toast.LENGTH_SHORT);
                 toast.show();
                 finish();
             }
