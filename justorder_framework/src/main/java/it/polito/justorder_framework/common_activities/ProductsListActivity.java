@@ -51,18 +51,19 @@ public class ProductsListActivity extends ActivityAbstractWithSideNav {
         super.setupActivity();
         this.listView = findViewById(R.id.food_list);
         this.fab = findViewById(R.id.fab);
+        Intent i = getIntent();
+        this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Product entry = (Product) parent.getAdapter().getItem(position);
                 Intent intent = new Intent(ProductsListActivity.this, routeHandler.getProductActivityClass());
                 intent.putExtra("product", entry);
+                intent.putExtra("restaurant", restaurant);
                 tapped = position;
                 startActivityForResult(intent, 1);
             }
         });
-        Intent i = getIntent();
-        this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
 
         this.reloadData();
     }
