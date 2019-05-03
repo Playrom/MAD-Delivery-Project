@@ -44,6 +44,12 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
         }
 
 
+        MenuItem userset = navView.getMenu().findItem(R.id.ordersPage);
+        if(userset != null){
+            userset.setVisible(true);
+        }
+
+
 
     }
 }
