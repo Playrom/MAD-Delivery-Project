@@ -28,6 +28,9 @@ import kotlin.Unit;
 
 public class DelivererAppLoaderActivity extends AppLoaderActivity {
 
+    protected String deliverer_key = "";
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -69,9 +72,27 @@ public class DelivererAppLoaderActivity extends AppLoaderActivity {
                 MessagingService.sendRegistrationToServer(token);
             }
         });
+
         Database.INSTANCE.loadCurrentUser(() -> {
-            // YOU MUST DISPLAY ORDER PAGE
+
+            Database.INSTANCE.loadCurrentUser(() -> {
+                deliverer_key = Database.INSTANCE.getCurrent_User().getDelivererKey();
+                return Unit.INSTANCE;
+            });
+
+
+            Database.INSTANCE.getDeliverers().get(deliverer_key, (deliverer -> {
+                Map<String, Serializable> map = new HashMap<>();
+                map.put("deliverer", deliverer);
+                this.startApp(OrderListActivity.class, map);
+
+
+                return Unit.INSTANCE;
+            }));
+
+
             return Unit.INSTANCE;
         });
+
     }
 }

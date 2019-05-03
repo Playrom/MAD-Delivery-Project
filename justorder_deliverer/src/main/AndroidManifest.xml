@@ -18,6 +18,8 @@
         <activity android:name="it.polito.justorder_framework.common_activities.ProductsListActivity" />
         <activity android:name=".DelivererSettingsEditorActivity" />
         <activity android:name=".DelivererSettingsViewerActivity" />
+        <activity android:name=".OrderListActivity" />
+        <activity android:name=".OrderDetails" />
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity" />
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsViewerActivity" />
         <provider

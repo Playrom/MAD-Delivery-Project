@@ -28,6 +28,8 @@ public class RouteHandler extends AbstractRouteHandler {
             return false;
         }
 
+
+
         if(item.getItemId() == R.id.delivererSettings && Database.INSTANCE.getCurrent_User() != null){
 
             if(Database.INSTANCE.getCurrent_User().getDelivererKey() != null) {
