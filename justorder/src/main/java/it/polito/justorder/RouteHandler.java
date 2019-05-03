@@ -23,7 +23,7 @@ public class RouteHandler extends AbstractRouteHandler {
 
         if(item.getItemId() == R.id.restaurants) {
             Intent i = new Intent(context, RestaurantsListActivity.class);
-            context.startActivity(i); //crashes here
+            context.startActivity(i);
             return true;
         }
 
