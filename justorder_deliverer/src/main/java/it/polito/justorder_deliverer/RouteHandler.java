@@ -29,20 +29,17 @@ public class RouteHandler extends AbstractRouteHandler {
         if(item.getItemId() == R.id.ordersPage && Database.INSTANCE.getCurrent_User() != null) {
 
             if(Database.INSTANCE.getCurrent_User().getDelivererKey() != null){
-                String deliverer_key = "";
-                deliverer_key = Database.INSTANCE.getCurrent_User().getDelivererKey();
+                String deliverer_key = Database.INSTANCE.getCurrent_User().getDelivererKey();
 
-                Database.INSTANCE.getRestaurants().get(deliverer_key, (deliverer -> {
-                    Intent i = new Intent(context, OrderListActivity.class);
+                Database.INSTANCE.getDeliverers().get(deliverer_key, (deliverer -> {
+
+                    Intent i = new Intent(context, OrdersDelivererListActivity.class);
                     i.putExtra("deliverer", deliverer);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(i);
-                    return Unit.INSTANCE;
+                    return  Unit.INSTANCE;
                 }));
 
-                return true;
-            } else {
-                Intent i = new Intent(context, DelivererSettingsViewerActivity.class);
-                context.startActivity(i);
                 return true;
             }
 
@@ -53,15 +50,16 @@ public class RouteHandler extends AbstractRouteHandler {
 
             if(Database.INSTANCE.getCurrent_User().getDelivererKey() != null) {
 
-                String deliverer_key = "";
-                deliverer_key = Database.INSTANCE.getCurrent_User().getDelivererKey();
+                String deliverer_key = Database.INSTANCE.getCurrent_User().getDelivererKey();
 
                 Intent i = new Intent(context, DelivererSettingsViewerActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 i.putExtra("deliverer_intent_key", deliverer_key);
                 context.startActivity(i);
                 return true;
             }else{
                 Intent i = new Intent(context, DelivererSettingsViewerActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(i);
                 return true;
             }
@@ -69,6 +67,7 @@ public class RouteHandler extends AbstractRouteHandler {
 
         if(item.getItemId() == R.id.userSettings) {
             Intent i = new Intent(context, UserSettingsViewerActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(i);
             return true;
         }

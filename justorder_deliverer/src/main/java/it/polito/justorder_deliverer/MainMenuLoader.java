@@ -12,12 +12,5 @@ import it.polito.justorder_framework.model.User;
 public class MainMenuLoader extends AbstractMainMenuLoader {
     public static void createMainMenu(NavigationView navView){
         AbstractMainMenuLoader.createMainMenu(navView);
-
-
-        MenuItem delivererSettings = navView.getMenu().findItem(R.id.delivererSettings);
-        if(delivererSettings != null){
-            delivererSettings.setVisible(true);
-        }
-
     }
 }
