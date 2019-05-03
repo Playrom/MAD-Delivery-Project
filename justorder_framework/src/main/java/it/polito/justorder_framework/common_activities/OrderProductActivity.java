@@ -67,11 +67,16 @@ public class OrderProductActivity extends Activity {
                     order.setUser(user.getKeyId());
                 }
                 //save order into database
+                //save order into restaurant
                 Database.INSTANCE.getOrders().save(order);
                 Map<String, Boolean> m = restaurant.getOrders();
                 m.put(order.getKeyId(), true);
                 restaurant.setOrders(m);
                 Database.INSTANCE.getRestaurants().save(restaurant);
+                //save order into user
+                Map<String, Boolean> m1 = user.getOrders();
+                m1.put(order.getKeyId(), true);
+                user.setOrders(m1);
                 //show confirm
                 Toast toast = Toast.makeText(getApplicationContext(), "Ordine Inserito", Toast.LENGTH_SHORT);
                 toast.show();
