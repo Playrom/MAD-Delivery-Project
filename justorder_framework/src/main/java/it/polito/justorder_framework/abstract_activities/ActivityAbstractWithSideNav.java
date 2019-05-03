@@ -1,7 +1,10 @@
 package it.polito.justorder_framework.abstract_activities;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -10,6 +13,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import java.lang.reflect.Field;
