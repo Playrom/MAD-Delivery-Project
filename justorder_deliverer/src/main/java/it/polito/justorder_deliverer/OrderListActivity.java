@@ -6,10 +6,8 @@ import androidx.annotation.Nullable;
 
 import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithSideNav;
 import it.polito.justorder_framework.ProductEntity;
-import it.polito.justorder_framework.common_activities.ProductsListActivity;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Order;
-import it.polito.justorder_framework.model.Product;
 import it.polito.justorder_framework.model.Deliverer;
 import kotlin.Unit;
 
@@ -22,7 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+
 import android.widget.ListView;
 import android.widget.TextView;
 

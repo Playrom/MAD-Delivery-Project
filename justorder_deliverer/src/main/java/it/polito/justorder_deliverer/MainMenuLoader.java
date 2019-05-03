@@ -13,43 +13,20 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
     public static void createMainMenu(NavigationView navView){
         AbstractMainMenuLoader.createMainMenu(navView);
 
-        MenuItem restaurantSettings = navView.getMenu().findItem(R.id.restaurantSettings);
-        if(restaurantSettings != null){
-            restaurantSettings.setVisible(false);
-        }
-
-        MenuItem createRestaurant = navView.getMenu().findItem(R.id.createRestaurant);
-        if(createRestaurant != null){
-            createRestaurant.setVisible(false);
-        }
-
         MenuItem delivererSettings = navView.getMenu().findItem(R.id.delivererSettings);
         if(delivererSettings != null){
             delivererSettings.setVisible(true);
         }
 
-        MenuItem restaurants = navView.getMenu().findItem(R.id.restaurants);
-        if(restaurants != null){
-            restaurants.setVisible(false);
+        MenuItem userSett = navView.getMenu().findItem(R.id.userSettings);
+        if(userSett != null){
+            userSett.setVisible(false);
         }
 
-        MenuItem products = navView.getMenu().findItem(R.id.list_view);
-        if(products != null){
-            products.setVisible(false);
+        MenuItem ordersPage = navView.getMenu().findItem(R.id.ordersPage);
+        if(ordersPage != null){
+            ordersPage.setVisible(true);
         }
-
-        MenuItem usersett = navView.getMenu().findItem(R.id.userSettings);
-        if(usersett != null){
-            usersett.setVisible(false);
-        }
-
-
-        MenuItem userset = navView.getMenu().findItem(R.id.ordersPage);
-        if(userset != null){
-            userset.setVisible(true);
-        }
-
-
 
     }
 }
