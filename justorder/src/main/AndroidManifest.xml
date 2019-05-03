@@ -12,15 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="it.polito.justorder_framework.common_activities.ProductsListActivity" />
-        <activity android:name="it.polito.justorder_framework.common_activities.RestaurantsListActivity">
+        <activity android:name=".ProductsListActivity" />
+        <activity android:name=".RestaurantsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="it.polito.justorder_framework.common_activities.ProductActivity"></activity>
+        <activity android:name=".ProductClientActivity"></activity>
+        <activity android:name=".OrderProductActivity"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsViewerActivity"></activity>
         <provider

@@ -70,10 +70,9 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
 
                 if(ActivityAbstractWithSideNav.this.routeHandler != null){
                     boolean ret = ActivityAbstractWithSideNav.this.routeHandler.routeHandler(menuItem, ActivityAbstractWithSideNav.this);
-                    overridePendingTransition(0, 0);
-                    if(ret) {
-                        ActivityAbstractWithSideNav.this.finish();
-                    }
+//                    if(ret) {
+//                        ActivityAbstractWithSideNav.this.finish();
+//                    }
                     return ret;
                 }
                 return false;

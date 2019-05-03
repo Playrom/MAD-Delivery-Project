@@ -6,15 +6,19 @@ import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndSidenav;
 import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndToolbar;
 import it.polito.justorder_framework.db.Database;
+import it.polito.justorder_framework.db.Products;
 import it.polito.justorder_framework.model.Product;
+import it.polito.justorder_framework.model.Restaurant;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Button;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,8 +26,10 @@ import java.util.List;
 public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToolbar {
 
     protected Product product;
+    protected Restaurant restaurant;
     protected EditText nameTextField, costTextField, notesTextField;
     protected TextView categoryTextView, ingredientsTextView;
+    protected Button orderButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +40,16 @@ public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToo
     @Override
     protected void setupActivity() {
         super.setupActivity();
+        Intent i = getIntent();
+        this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
         nameTextField = findViewById(R.id.nameTextField);
         costTextField = findViewById(R.id.costTextField);
         notesTextField = findViewById(R.id.notesTextField);
         ingredientsTextView = findViewById(R.id.ingredientsTextView);
         image = findViewById(R.id.imageView);
         categoryTextView = findViewById(R.id.categoryTextView);
+        orderButton = findViewById(R.id.order_button);
+        orderButton.setVisibility(View.GONE);
         this.reloadData();
     }
 

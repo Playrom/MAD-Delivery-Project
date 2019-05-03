@@ -149,13 +149,9 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
             order.setDeliverer(chosen.getKeyId());
             Database.INSTANCE.getOrders().save(order);
 
+            finish();
             return Unit.INSTANCE;
-
         });
-
-        //Intent returnIntent = new Intent();
-        //setResult(Activity.RESULT_OK, returnIntent);
-        finish();
     }
 
     public void deleteOrder(View view){

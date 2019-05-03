@@ -19,7 +19,7 @@ public class RouteHandler extends AbstractRouteHandler {
 
     public boolean routeHandler(MenuItem item, Context context) {
 
-        if(item.getItemId() == R.id.list_view) {
+        if(item.getItemId() == R.id.productsPage) {
             Intent i = new Intent(context, ProductsListActivity.class);
             context.startActivity(i);
             return true;

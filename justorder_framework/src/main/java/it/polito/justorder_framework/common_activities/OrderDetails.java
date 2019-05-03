@@ -1,5 +1,6 @@
-package it.polito.justorder_restaurant;
+package it.polito.justorder_framework.common_activities;
 
+import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndToolbar;
 import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
 import it.polito.justorder_framework.db.Database;

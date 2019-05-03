@@ -4,9 +4,21 @@
     android:id="@+id/main_menu" >
 
     <item
+        android:id="@+id/ordersPage"
+        android:enabled="true"
+        android:title="Orders"
+        android:visible="true" />
+
+    <item
         android:id="@+id/login"
         android:enabled="true"
         android:title="Login/Sign up"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/delivererSettings"
+        android:enabled="true"
+        android:title="Deliverer Settings"
         android:visible="true" />
 
     <item
