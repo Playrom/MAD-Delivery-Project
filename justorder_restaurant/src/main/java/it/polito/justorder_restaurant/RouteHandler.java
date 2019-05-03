@@ -14,35 +14,25 @@ import java.util.stream.Collectors;
 
 import it.polito.justorder_framework.AbstractRouteHandler;
 import it.polito.justorder_framework.FirebaseFunctions;
-import it.polito.justorder_framework.common_activities.ProductsListActivity;
 import it.polito.justorder_framework.common_activities.UserSettingsViewerActivity;
 import it.polito.justorder_framework.db.Database;
-import it.polito.justorder_framework.model.Order;
 import kotlin.Unit;
 
 public class RouteHandler extends AbstractRouteHandler {
 
     public boolean routeHandler(MenuItem item, Context context) {
-        if(item.getItemId() == R.id.list_view) {
+        if(item.getItemId() == R.id.productsPage) {
+            String restaurant_key = Database.INSTANCE.getCurrent_User().getRestaurantKey();
 
-            List<Map.Entry<String, Boolean>> resturants = Database.INSTANCE.getCurrent_User().getManagedRestaurants().entrySet()
-                    .stream().filter(x -> {
-                        return x.getValue();
-                    }).collect(Collectors.toList());
-            if(resturants.size() > 0){
-                String restaurant_key = "";
-                restaurant_key = resturants.get(0).getKey();
+            Map<String, Serializable> map = new HashMap<>();
 
-                Map<String, Serializable> map = new HashMap<>();
-
-                Database.INSTANCE.getRestaurants().get(restaurant_key, (restaurant -> {
-                    Intent i = new Intent(context, ProductListActivityWithAdd.class);
-                    i.putExtra("restaurant", restaurant);
-                    context.startActivity(i);
-                    return Unit.INSTANCE;
-                }));
-            }
-
+            Database.INSTANCE.getRestaurants().get(restaurant_key, (restaurant -> {
+                Intent i = new Intent(context, ProductsListActivity.class);
+                i.putExtra("restaurant", restaurant);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(i);
+                return Unit.INSTANCE;
+            }));
         }
 
         if(item.getItemId() == R.id.login) {
@@ -54,28 +44,20 @@ public class RouteHandler extends AbstractRouteHandler {
 
         if(item.getItemId() == R.id.restaurantSettings &&
             Database.INSTANCE.getCurrent_User() != null &&
-            Database.INSTANCE.getCurrent_User().getManagedRestaurants().size() > 0) {
+            Database.INSTANCE.getCurrent_User().getRestaurantKey() != null) {
 
-            String restaurant_key = "";
-            restaurant_key = Database.INSTANCE.getCurrent_User().getManagedRestaurants().entrySet()
-                    .stream().filter(x -> {return x.getValue();}).collect(Collectors.toList()).get(0).getKey();
+            String restaurant_key = Database.INSTANCE.getCurrent_User().getRestaurantKey();
 
             Intent i = new Intent(context, RestaurantSettingsViewerActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             i.putExtra("restaurant_key", restaurant_key);
-            context.startActivity(i);
-            return true;
-        }
-
-        if(item.getItemId() == R.id.createRestaurant &&
-                Database.INSTANCE.getCurrent_User() != null) {
-
-            Intent i = new Intent(context, RestaurantSettingsViewerActivity.class);
             context.startActivity(i);
             return true;
         }
 
         if(item.getItemId() == R.id.userSettings) {
             Intent i = new Intent(context, UserSettingsViewerActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(i);
             return true;
         }
@@ -88,14 +70,12 @@ public class RouteHandler extends AbstractRouteHandler {
         }
 
         if(item.getItemId() == R.id.ordersPage) {
-            String restaurant_key = "";
-            restaurant_key = Database.INSTANCE.getCurrent_User().getManagedRestaurants().entrySet()
-                    .stream().filter(x -> {return x.getValue();}).collect(Collectors.toList()).get(0).getKey();
+            String restaurant_key = Database.INSTANCE.getCurrent_User().getRestaurantKey();
 
             Database.INSTANCE.getRestaurants().get(restaurant_key, (restaurant -> {
-                Intent i = new Intent(context, OrdersListActivity.class);
-                ArrayList<String> orders =  new ArrayList<>(restaurant.getOrders().keySet());
-                i.putExtra("orders", orders);
+                Intent i = new Intent(context, OrdersRestaurantListActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                i.putExtra("restaurant", restaurant);
                 context.startActivity(i);
                 return Unit.INSTANCE;
             }));

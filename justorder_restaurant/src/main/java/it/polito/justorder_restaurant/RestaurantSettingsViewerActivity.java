@@ -138,8 +138,7 @@ public class RestaurantSettingsViewerActivity extends AbstractViewerWithImagePic
                 if(requestCode == 2 && Database.INSTANCE.getCurrent_User() != null){
                     User user = Database.INSTANCE.getCurrent_User();
                     restaurant.setOwner(user.getKeyId());
-                    user.getOwnedRestaurants().put(restaurant.getKeyId(), true);
-                    user.getManagedRestaurants().put(restaurant.getKeyId(), true);
+                    user.setRestaurantKey(restaurant.getKeyId());
                     Database.INSTANCE.getUsers().save(user);
                     Database.INSTANCE.getRestaurants().save(restaurant);
                 }

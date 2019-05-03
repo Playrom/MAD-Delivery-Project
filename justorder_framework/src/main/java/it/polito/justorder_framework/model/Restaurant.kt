@@ -20,7 +20,6 @@ class Restaurant : Model(),Serializable {
     var orders: Map<String, Boolean> = mutableMapOf<String, Boolean>()
 
     var owner: String = ""
-    var managers: Map<String, Boolean> = mutableMapOf<String, Boolean>()
 
     var messagingToken : String? = null
 }

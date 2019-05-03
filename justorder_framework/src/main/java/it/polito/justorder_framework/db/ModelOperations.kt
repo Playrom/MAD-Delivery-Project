@@ -28,6 +28,28 @@ class ModelOperations<T: Model>(private val tClass: Class<T>, val path: String){
         })
     }
 
+    fun get(key: String, listen: Boolean, cb : (T) -> Unit) {
+        if(listen){
+            Database.db.child(path).child(key).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    if(p0.exists()) {
+                        cb(Utils.convertObject(p0, tClass))
+                    }else{
+                        val entity = tClass.newInstance()
+                        entity.keyId = key
+                        cb(entity)
+                    }
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+            })
+        }else{
+            get(key, cb);
+        }
+    }
+
     fun save(entity: T){
         var ref: DatabaseReference
         val key = entity.keyId
@@ -57,6 +79,26 @@ class ModelOperations<T: Model>(private val tClass: Class<T>, val path: String){
         })
     }
 
+    fun getAll(listen: Boolean, cb : (List<T>) -> Unit) {
+        if(listen) {
+            Database.db.child(path).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    var items: MutableList<T> = mutableListOf()
+                    for (item in p0.children) {
+                        items.add(Utils.convertObject(item, tClass))
+                    }
+                    cb(items)
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+            })
+        }else{
+            getAll(cb)
+        }
+    }
+
     fun getWithIds(keys: List<String>, cb : (List<T>) -> Unit) {
         var ref = Database.db.child(path)
         var collection = mutableListOf<T>()
@@ -76,8 +118,24 @@ class ModelOperations<T: Model>(private val tClass: Class<T>, val path: String){
                 }
             })
         }
-
     }
+
+//    fun <K: Model> onChange(child: String, expectedClass: Class<K>, cb : (List<K>) -> Unit) {
+//        var ref = Database.db.child(path)
+//        ref.child(child).addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(p0: DataSnapshot) {
+//                var items: MutableList<K> = mutableListOf()
+//                for(item in p0.children){
+//                    items.add(Utils.convertObject(item, expectedClass))
+//                }
+//                cb(items)
+//            }
+//
+//            override fun onCancelled(p0: DatabaseError) {
+//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//            }
+//        })
+//    }
 
     fun generateKeyForChild(vararg childPath: String) : String?{
         var ref = Database.db.child(path)

@@ -31,8 +31,10 @@ public class AppLoaderActivity extends AppCompatActivity {
 
     protected void startApp(Class activityToLoad, Map<String, Serializable> extras){
         Intent i = new Intent(this, activityToLoad);
-        for(Map.Entry<String, Serializable> entry : extras.entrySet()){
-            i.putExtra(entry.getKey(), entry.getValue());
+        if(extras != null) {
+            for (Map.Entry<String, Serializable> entry : extras.entrySet()) {
+                i.putExtra(entry.getKey(), entry.getValue());
+            }
         }
         this.startActivity(i);
         overridePendingTransition(0, 0);

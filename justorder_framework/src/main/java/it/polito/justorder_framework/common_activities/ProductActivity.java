@@ -48,22 +48,14 @@ public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToo
         ingredientsTextView = findViewById(R.id.ingredientsTextView);
         image = findViewById(R.id.imageView);
         categoryTextView = findViewById(R.id.categoryTextView);
-        orderButton = (Button) findViewById(R.id.order_button);
-        orderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(ProductActivity.this, OrderProductActivity.class);
-                myIntent.putExtra("restaurant", restaurant);
-                myIntent.putExtra("product", product);
-                ProductActivity.this.startActivity(myIntent);
-            }
-        });
+        orderButton = findViewById(R.id.order_button);
         this.reloadData();
     }
 
     @Override
     protected void reloadData() {
         super.reloadData();
+        orderButton.setVisibility(View.GONE);
         Intent i = getIntent();
         this.product = (Product) i.getSerializableExtra("product");
         if(this.product == null){

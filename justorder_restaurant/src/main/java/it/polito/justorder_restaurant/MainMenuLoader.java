@@ -19,27 +19,15 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
             boolean loggedIn = FirebaseFunctions.isLoggedIn();
             User current_user = Database.INSTANCE.getCurrent_User();
             restaurantSettings.setVisible(FirebaseFunctions.isLoggedIn() &&
-                    Database.INSTANCE.getCurrent_User() != null &&
-                    Database.INSTANCE.getCurrent_User().getManagedRestaurants().size() > 0
+                    Database.INSTANCE.getCurrent_User() != null
             );
         }
 
-        MenuItem createRestaurant = navView.getMenu().findItem(R.id.createRestaurant);
+        MenuItem createRestaurant = navView.getMenu().findItem(R.id.restaurantSettings);
         if(createRestaurant != null){
             createRestaurant.setVisible(FirebaseFunctions.isLoggedIn() &&
-                    Database.INSTANCE.getCurrent_User() != null &&
-                    Database.INSTANCE.getCurrent_User().getManagedRestaurants().size() == 0
+                    Database.INSTANCE.getCurrent_User() != null
             );
-        }
-
-        MenuItem delivererSettings = navView.getMenu().findItem(R.id.delivererSettings);
-        if(delivererSettings != null){
-            delivererSettings.setVisible(false);
-        }
-
-        MenuItem restaurants = navView.getMenu().findItem(R.id.restaurants);
-        if(restaurants != null){
-            restaurants.setVisible(false);
         }
     }
 }

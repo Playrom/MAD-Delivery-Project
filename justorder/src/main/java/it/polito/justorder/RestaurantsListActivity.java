@@ -1,20 +1,13 @@
-package it.polito.justorder_framework.common_activities;
-
-import androidx.annotation.Nullable;
+package it.polito.justorder;
 
 import it.polito.justorder_framework.R;
-import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithSideNav;
-import it.polito.justorder_framework.ProductEntity;
+import it.polito.justorder_framework.abstract_activities.AbstractListViewWithSidenav;
 import it.polito.justorder_framework.db.Database;
-import it.polito.justorder_framework.model.Product;
 import it.polito.justorder_framework.model.Restaurant;
 import kotlin.Unit;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
+public class RestaurantsListActivity extends AbstractListViewWithSidenav {
 
     protected ListView listView;
     protected BaseAdapter adapter;
@@ -39,9 +32,8 @@ public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
     private int tapped;
     protected Button button_search;
     protected EditText search_bar;
-    private List<Restaurant> restaurants = new ArrayList<>();
-    private List<Restaurant> filtered_restaurants = new ArrayList<>();
-    private List<Product> products = new ArrayList<>();
+    protected List<Restaurant> restaurants = new ArrayList<>();
+    protected List<Restaurant> filtered_restaurants = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +46,9 @@ public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
     protected void setupActivity() {
         super.setupActivity();
         this.listView = findViewById(R.id.restaurants_list);
-        this.fab = findViewById(R.id.fab);
         this.button_search = (Button) findViewById(R.id.button_search);
         this.search_bar = (EditText) findViewById(R.id.search_bar);
+
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +72,7 @@ public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
                 reloadData();
             }
         });
+
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -91,20 +84,6 @@ public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
             }
         });
 
-        Database.INSTANCE.getRestaurants().getAll(restaurants1 -> {
-            restaurants.clear();
-            restaurants.addAll(restaurants1);
-            this.reloadViews();
-            return Unit.INSTANCE;
-        });
-
-        this.reloadData();
-    }
-
-    @Override
-    protected void reloadData() {
-        System.out.println("HERE: realoadData");
-        super.reloadData();
         this.adapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -138,34 +117,29 @@ public class RestaurantsListActivity extends ActivityAbstractWithSideNav {
             }
         };
         this.listView.setAdapter(this.adapter);
-        this.actionBar.setTitle("Our Restaurants");
+        this.actionBar.setTitle("All Restaurants");
+
+        this.reloadData();
+    }
+
+    protected void initDataSource(){
+        Database.INSTANCE.getRestaurants().getAll(restaurants1 -> {
+            this.restaurants.clear();
+            this.restaurants.addAll(restaurants1);
+            this.reloadViews();
+            return Unit.INSTANCE;
+        });
+    }
+
+    @Override
+    protected void reloadData() {
+        super.reloadData();
         this.reloadViews();
     }
 
     @Override
     protected void reloadViews() {
-        System.out.println("HERE: realoadViews");
         super.reloadViews();
         this.adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
-            if(resultCode== Activity.RESULT_OK){
-                Product product = (Product) data.getSerializableExtra("product");
-                products.set(tapped, product);
-
-                this.reloadViews();
-            }
-        }else if(requestCode == 2){
-            if(resultCode== Activity.RESULT_OK){
-                Product product = (Product) data.getSerializableExtra("product");
-                products.add(product);
-                Database.INSTANCE.getProducts().save(product);
-                this.reloadViews();
-            }
-        }
     }
 }

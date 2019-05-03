@@ -50,7 +50,6 @@ public class RestaurantSettingsEditorActivity extends AbstractEditorWithImagePic
         }else{
             this.restaurant = new Restaurant();
             this.restaurant.setOwner(FirebaseAuth.getInstance().getUid());
-            this.restaurant.getManagers().put(FirebaseAuth.getInstance().getUid(), true);
         }
         setContentView(R.layout.restaurant_settings_editor);
         this.setupActivity();
