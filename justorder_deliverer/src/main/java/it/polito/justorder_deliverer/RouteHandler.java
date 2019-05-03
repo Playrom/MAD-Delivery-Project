@@ -7,19 +7,12 @@ import android.view.MenuItem;
 
 import it.polito.justorder_framework.AbstractRouteHandler;
 import it.polito.justorder_framework.FirebaseFunctions;
-import it.polito.justorder_framework.common_activities.ProductsListActivity;
 import it.polito.justorder_framework.common_activities.UserSettingsViewerActivity;
 import it.polito.justorder_framework.db.Database;
 
 public class RouteHandler extends AbstractRouteHandler {
 
     public boolean routeHandler(MenuItem item, Context context) {
-
-        if(item.getItemId() == R.id.productsPage) {
-            Intent i = new Intent(context, ProductsListActivity.class);
-            context.startActivity(i);
-            return true;
-        }
 
         if(item.getItemId() == R.id.login) {
             if(context instanceof Activity){

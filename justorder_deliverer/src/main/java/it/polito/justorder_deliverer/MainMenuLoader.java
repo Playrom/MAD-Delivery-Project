@@ -13,24 +13,10 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
     public static void createMainMenu(NavigationView navView){
         AbstractMainMenuLoader.createMainMenu(navView);
 
-        MenuItem restaurantSettings = navView.getMenu().findItem(R.id.restaurantSettings);
-        if(restaurantSettings != null){
-            restaurantSettings.setVisible(false);
-        }
-
-        MenuItem createRestaurant = navView.getMenu().findItem(R.id.createRestaurant);
-        if(createRestaurant != null){
-            createRestaurant.setVisible(false);
-        }
 
         MenuItem delivererSettings = navView.getMenu().findItem(R.id.delivererSettings);
         if(delivererSettings != null){
             delivererSettings.setVisible(true);
-        }
-
-        MenuItem restaurants = navView.getMenu().findItem(R.id.restaurants);
-        if(restaurants != null){
-            restaurants.setVisible(false);
         }
 
     }
