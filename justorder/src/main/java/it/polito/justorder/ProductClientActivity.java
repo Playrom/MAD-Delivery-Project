@@ -1,6 +1,7 @@
 package it.polito.justorder;
 
 import android.content.Intent;
+import android.view.Menu;
 import android.view.View;
 
 import it.polito.justorder_framework.common_activities.ProductActivity;
@@ -22,5 +23,10 @@ public class ProductClientActivity extends ProductActivity {
             }
         });
         this.reloadData();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return false;
     }
 }

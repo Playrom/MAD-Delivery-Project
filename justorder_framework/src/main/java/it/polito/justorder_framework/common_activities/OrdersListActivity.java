@@ -41,16 +41,6 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
     protected void setupActivity() {
         super.setupActivity();
         this.listView = findViewById(R.id.order_list);
-        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Order entry = (Order) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(OrdersListActivity.this, OrderDetails.class);
-                intent.putExtra("order", entry);
-                tapped = position;
-                startActivityForResult(intent, 1);
-            }
-        });
 
         this.adapter = new BaseAdapter() {
             @Override

@@ -49,13 +49,13 @@ public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToo
         image = findViewById(R.id.imageView);
         categoryTextView = findViewById(R.id.categoryTextView);
         orderButton = findViewById(R.id.order_button);
+        orderButton.setVisibility(View.GONE);
         this.reloadData();
     }
 
     @Override
     protected void reloadData() {
         super.reloadData();
-        orderButton.setVisibility(View.GONE);
         Intent i = getIntent();
         this.product = (Product) i.getSerializableExtra("product");
         if(this.product == null){
