@@ -48,12 +48,17 @@ public class ResturantAppLoaderActivity extends AppLoaderActivity {
         Database.INSTANCE.loadCurrentUser(() -> {
             String restaurant_key = Database.INSTANCE.getCurrent_User().getRestaurantKey();
 
-            Map<String, Serializable> map = new HashMap<>();
-            Database.INSTANCE.getRestaurants().get(restaurant_key, (restaurant -> {
-                map.put("restaurant", restaurant);
-                this.startApp(ProductsListActivity.class, map);
-                return Unit.INSTANCE;
-            }));
+            if(restaurant_key != null){
+                Map<String, Serializable> map = new HashMap<>();
+                Database.INSTANCE.getRestaurants().get(restaurant_key, (restaurant -> {
+                    map.put("restaurant", restaurant);
+                    this.startApp(ProductsListActivity.class, map);
+                    return Unit.INSTANCE;
+                }));
+            }else{
+                this.startApp(RestaurantSettingsViewerActivity.class, null);
+            }
+
 
             return Unit.INSTANCE;
         });

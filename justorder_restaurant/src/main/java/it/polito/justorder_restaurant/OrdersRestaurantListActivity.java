@@ -28,7 +28,15 @@ public class OrdersRestaurantListActivity extends OrdersListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Order entry = (Order) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(OrdersRestaurantListActivity.this, OrderToConfirm.class);
+
+                Intent intent;
+                String state = entry.getState();
+                if (state!=null && state.equals("pending")) {
+                    intent = new Intent(OrdersRestaurantListActivity.this, OrderToConfirm.class);
+                }else {
+                    intent = new Intent(OrdersRestaurantListActivity.this, OrderDetails.class);
+                }
+
                 intent.putExtra("order", entry);
                 tapped = position;
                 startActivityForResult(intent, 1);
