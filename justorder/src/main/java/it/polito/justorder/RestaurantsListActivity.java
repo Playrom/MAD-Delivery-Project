@@ -34,6 +34,7 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
     protected EditText search_bar;
     protected List<Restaurant> restaurants = new ArrayList<>();
     protected List<Restaurant> filtered_restaurants = new ArrayList<>();
+    protected String filter = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,24 +53,11 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //get filtering criteria
-                String filter = search_bar.getText().toString();
-                //retrieve list of all restaurants
-                Database.INSTANCE.getRestaurants().getAll(restaurants1 -> {
-                    restaurants.clear();
-                    restaurants.addAll(restaurants1);
-                    return Unit.INSTANCE;
-                });
-                //create a list containing only the filtered restaurants
-                filtered_restaurants.clear(); //empty initialization
-                for (Restaurant r : restaurants) {
-                    if (r.getName().toLowerCase().contains(filter.toLowerCase())) {
-                        filtered_restaurants.add(r);
-                    }
-                }
+                //modify filtering criteria
+                filter = search_bar.getText().toString();
                 //refresh view
-                restaurants = filtered_restaurants;
                 reloadData();
+                initDataSource();
             }
         });
 
@@ -123,9 +111,14 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
     }
 
     protected void initDataSource(){
+        //get filtering criteria
         Database.INSTANCE.getRestaurants().getAll(restaurants1 -> {
             this.restaurants.clear();
-            this.restaurants.addAll(restaurants1);
+            for (Restaurant rest : restaurants1) {
+                if (rest.getName().contains(filter)) {
+                    restaurants.add(rest);
+                }
+            }
             this.reloadViews();
             return Unit.INSTANCE;
         });
