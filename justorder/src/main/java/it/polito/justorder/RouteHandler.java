@@ -7,9 +7,15 @@ import android.view.MenuItem;
 
 import it.polito.justorder_framework.AbstractRouteHandler;
 import it.polito.justorder_framework.FirebaseFunctions;
+import it.polito.justorder_framework.common_activities.OrdersListActivity;
 import it.polito.justorder_framework.common_activities.UserSettingsViewerActivity;
+import it.polito.justorder_framework.db.Database;
+import it.polito.justorder_framework.model.User;
+import kotlin.Unit;
 
 public class RouteHandler extends AbstractRouteHandler {
+
+    User user;
 
     public boolean routeHandler(MenuItem item, Context context) {
 
@@ -38,6 +44,15 @@ public class RouteHandler extends AbstractRouteHandler {
             Intent i = new Intent(context, RestaurantsListActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(i);
+            return true;
+        }
+
+        if(item.getItemId() == R.id.ordersPage) {
+            user = Database.INSTANCE.getCurrent_User();
+            Intent intent = new Intent(context, OrdersUserListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("user", user);
+            context.startActivity(intent);
             return true;
         }
 

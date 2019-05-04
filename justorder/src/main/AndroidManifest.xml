@@ -23,6 +23,8 @@
         <activity android:name=".RestaurantsListActivity" />
         <activity android:name=".ProductClientActivity"></activity>
         <activity android:name=".OrderProductActivity"></activity>
+        <activity android:name=".OrdersUserListActivity"></activity>
+        <activity android:name="it.polito.justorder_framework.common_activities.OrderDetails"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsViewerActivity"></activity>
         <provider
