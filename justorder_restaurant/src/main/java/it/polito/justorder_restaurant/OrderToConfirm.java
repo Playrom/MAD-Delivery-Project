@@ -149,6 +149,11 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
             order.setDeliverer(chosen.getKeyId());
             Database.INSTANCE.getOrders().save(order);
 
+            Map <String, Boolean> orderMap = chosen.getOrders();
+            orderMap.put(order.getKeyId(), true);
+            chosen.setOrders(orderMap);
+            Database.INSTANCE.getDeliverers().save(chosen);
+
             finish();
             return Unit.INSTANCE;
         });

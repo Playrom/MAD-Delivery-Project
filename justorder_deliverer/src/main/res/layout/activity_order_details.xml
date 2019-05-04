@@ -82,12 +82,23 @@
                     android:textStyle="italic"
                     android:hint="@string/timestamp" />
 
+                <TextView
+                    android:id="@+id/riderTextField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/timestampTextField"
+                    android:layout_marginTop="20dp"
+                    android:textSize="20sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"/>
+
+
 
                 <TextView
                     android:id="@+id/productsTitleTextField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/timestampTextField"
+                    android:layout_below="@id/riderTextField"
                     android:layout_marginTop="40dp"
                     android:text="Ordered Food"
                     android:textSize="30sp"
@@ -106,6 +117,7 @@
                     android:textSize="20sp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"/>
+
 
 
 

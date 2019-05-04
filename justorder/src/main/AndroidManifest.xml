@@ -25,6 +25,7 @@
         <activity android:name=".OrderProductActivity"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsViewerActivity"></activity>
+        <activity android:name="it.polito.justorder_framework.common_activities.OrderDetails"></activity>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="@string/fileprovider"
