@@ -13,6 +13,7 @@ import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImage
 import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.User;
+import kotlin.Unit;
 
 public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerActivityAndSidenav {
 
@@ -39,13 +40,17 @@ public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerAct
     @Override
     protected void reloadData() {
         super.reloadData();
-        this.user = Database.INSTANCE.getCurrent_User();
-        if(this.user == null){
-            this.user = new User();
-        }else {
-            this.imageUri = this.user.getImageUri();
-        }
-        this.reloadViews();
+        Database.INSTANCE.loadCurrentUser(() -> {
+            this.user = Database.INSTANCE.getCurrent_User();
+            if(this.user == null){
+                this.user = new User();
+            }else {
+                this.imageUri = this.user.getImageUri();
+            }
+            this.reloadViews();
+            return Unit.INSTANCE;
+        });
+
     }
 
     @Override
@@ -84,7 +89,6 @@ public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerAct
             if(resultCode== Activity.RESULT_OK){
                 user = (User) data.getSerializableExtra("user");
                 Database.INSTANCE.getUsers().save(user);
-                reloadViews();
             }
         }
     }
