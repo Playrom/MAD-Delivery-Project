@@ -18,6 +18,7 @@
         <activity android:name=".ProductsListActivity" />
         <activity android:name=".RestaurantSettingsEditorActivity" />
         <activity android:name=".RestaurantSettingsViewerActivity" />
+        <activity android:name=".RestaurantDelivererAssignActivity" />
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity" />
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsViewerActivity" />
         <activity android:name=".ResturantAppLoaderActivity">
@@ -38,5 +39,9 @@
                 android:resource="@xml/provider_paths" />
         </provider>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps" />
 
 </manifest>

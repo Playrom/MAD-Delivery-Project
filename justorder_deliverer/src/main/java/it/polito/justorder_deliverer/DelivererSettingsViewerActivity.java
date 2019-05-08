@@ -91,6 +91,13 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
                     user.setDelivererKey(deliverer.getKeyId());
                     Database.INSTANCE.getUsers().save(user);
                     Database.INSTANCE.getDeliverers().save(deliverer);
+
+                    Intent fromInitParams = getIntent();
+                    if(fromInitParams.getBooleanExtra("init_geo", false)){
+                        Database.INSTANCE.getGeodata().trackClientPosition(deliverer.getKeyId(), this, () -> {
+                            return Unit.INSTANCE;
+                        });
+                    }
                 }
                 reloadViews();
             }

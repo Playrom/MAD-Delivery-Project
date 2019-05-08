@@ -137,26 +137,29 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
     }
 
     public void acceptOrder(View view){
-        order.setState("accepted");
+//        order.setState("accepted");
+//
+//        Database.INSTANCE.getDeliverers().getAll(deliverers1 -> {
+//            deliverers.clear();
+//            deliverers.addAll(deliverers1);
+//
+//            Random rand = new Random();
+//            Deliverer chosen = deliverers.get(rand.nextInt(deliverers.size()));
+//
+//            order.setDeliverer(chosen.getKeyId());
+//            Database.INSTANCE.getOrders().save(order);
+//
+//            Map <String, Boolean> orderMap = chosen.getOrders();
+//            orderMap.put(order.getKeyId(), true);
+//            chosen.setOrders(orderMap);
+//            Database.INSTANCE.getDeliverers().save(chosen);
+//
+//            finish();
+//            return Unit.INSTANCE;
+//        });
+        Intent i = new Intent(this, RestaurantDelivererAssignActivity.class);
+        startActivity(i);
 
-        Database.INSTANCE.getDeliverers().getAll(deliverers1 -> {
-            deliverers.clear();
-            deliverers.addAll(deliverers1);
-
-            Random rand = new Random();
-            Deliverer chosen = deliverers.get(rand.nextInt(deliverers.size()));
-
-            order.setDeliverer(chosen.getKeyId());
-            Database.INSTANCE.getOrders().save(order);
-
-            Map <String, Boolean> orderMap = chosen.getOrders();
-            orderMap.put(order.getKeyId(), true);
-            chosen.setOrders(orderMap);
-            Database.INSTANCE.getDeliverers().save(chosen);
-
-            finish();
-            return Unit.INSTANCE;
-        });
     }
 
     public void deleteOrder(View view){

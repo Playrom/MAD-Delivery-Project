@@ -19,11 +19,12 @@ import java.util.function.Consumer;
 
 import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.UserChangeStatusEvent;
+import it.polito.justorder_framework.abstract_activities.ActivityAbstract;
 import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithSideNav;
 import it.polito.justorder_framework.db.Database;
 import kotlin.Unit;
 
-public class AppLoaderActivity extends AppCompatActivity {
+public class AppLoaderActivity extends ActivityAbstract {
 
     protected void loadData(){
 

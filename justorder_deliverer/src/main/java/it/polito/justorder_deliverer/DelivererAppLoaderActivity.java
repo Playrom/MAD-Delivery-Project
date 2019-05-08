@@ -12,6 +12,7 @@ import java.util.Map;
 
 import it.polito.justorder_framework.FirebaseFunctions;
 import it.polito.justorder_framework.UserChangeStatusEvent;
+import it.polito.justorder_framework.abstract_activities.ActivityAbstract;
 import it.polito.justorder_framework.common_activities.AppLoaderActivity;
 import it.polito.justorder_framework.db.Database;
 import kotlin.Unit;
@@ -53,11 +54,12 @@ public class DelivererAppLoaderActivity extends AppLoaderActivity {
                 Database.INSTANCE.getDeliverers().get(deliverer_key, (deliverer -> {
                     Map<String, Serializable> map = new HashMap<>();
                     map.put("deliverer", deliverer);
+                    Database.INSTANCE.getGeodata().trackClientPosition(Database.INSTANCE.getCurrent_User().getKeyId(), this);
                     this.startApp(OrdersDelivererListActivity.class, map);
                     return  Unit.INSTANCE;
                 }));
             }else{
-                this.startApp(DelivererSettingsViewerActivity.class, null);
+                this.startApp(DelivererSettingsViewerActivity.class, new HashMap<String,Serializable>() {{ put("init_geo", true); }});
             }
             return Unit.INSTANCE;
         });

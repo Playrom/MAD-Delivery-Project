@@ -27,7 +27,6 @@
         <activity android:name="it.polito.justorder_framework.common_activities.OrderDetails"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsViewerActivity"></activity>
-        <activity android:name="it.polito.justorder_framework.common_activities.OrderDetails"></activity>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="@string/fileprovider"
@@ -40,5 +39,7 @@
     </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps" />
 
 </manifest>

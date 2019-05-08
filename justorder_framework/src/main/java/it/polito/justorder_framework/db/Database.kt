@@ -64,6 +64,8 @@ object Database {
           }
      }
 
+     val geodata = GPSOperations("gps_data_from_clients");
+
      var Current_User : User? = null
           private set
 
