@@ -56,6 +56,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.zhihu.android:matisse:0.5.1'
     implementation "com.hootsuite.android:nachos:1.1.1"
+
+    implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation "com.google.android.gms:play-services-maps:16.1.0"
 }
 
 apply plugin: 'com.google.gms.google-services'

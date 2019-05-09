@@ -16,27 +16,21 @@ import com.firebase.geofire.GeoLocation;
 
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.DelivererDistance;
+import it.polito.justorder_restaurant.ConfirmOrderInterface;
 import it.polito.justorder_restaurant.R;
-import it.polito.justorder_restaurant.fragments.dummy.DummyContent;
-import it.polito.justorder_restaurant.fragments.dummy.DummyContent.DummyItem;
+import it.polito.justorder_restaurant.RestaurantDelivererAssignActivity;
 import kotlin.Unit;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
 public class DeliverListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private ConfirmOrderInterface mListener;
     protected List<DelivererDistance> delivererDistances = new ArrayList<>();
     protected String restaurant_key;
     protected GeoLocation restaurantLocation;
@@ -50,11 +44,13 @@ public class DeliverListFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static DeliverListFragment newInstance(int columnCount, String restaurant_key) {
+    public static DeliverListFragment newInstance(int columnCount, String restaurantKey, List<DelivererDistance> distanceList, GeoLocation restaurantLocation) {
         DeliverListFragment fragment = new DeliverListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
-        args.putString("restaurant_key", restaurant_key);
+        fragment.restaurant_key = restaurantKey;
+        fragment.delivererDistances = distanceList;
+        fragment.restaurantLocation = restaurantLocation;
         fragment.setArguments(args);
 
         return fragment;
@@ -85,15 +81,6 @@ public class DeliverListFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new DeliverListItemRecyclerViewAdapter(this.delivererDistances, restaurantLocation, mListener));
-
-            Database.INSTANCE.getGeodata().getDeliverersNear(restaurant_key, (deliverers, restaurantLocation) -> {
-                this.delivererDistances.clear();
-                this.delivererDistances.addAll(deliverers);
-                this.restaurantLocation = restaurantLocation;
-                ((DeliverListItemRecyclerViewAdapter) recyclerView.getAdapter()).setRestaurantLocation(this.restaurantLocation);
-                recyclerView.getAdapter().notifyDataSetChanged();
-                return Unit.INSTANCE;
-            });
         }
         return view;
     }
@@ -102,8 +89,8 @@ public class DeliverListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof ConfirmOrderInterface) {
+            mListener = (ConfirmOrderInterface) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -114,20 +101,5 @@ public class DeliverListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DelivererDistance item);
     }
 }

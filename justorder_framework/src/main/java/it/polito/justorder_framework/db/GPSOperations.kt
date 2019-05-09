@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import it.polito.justorder_framework.abstract_activities.ActivityAbstract
 import it.polito.justorder_framework.model.DelivererDistance
 import java.util.logging.Logger
+import java.util.stream.Collectors
 import java.util.stream.IntStream
 
 class GPSOperations(val path: String) {
@@ -136,7 +137,7 @@ class GPSOperations(val path: String) {
                                     override fun onLocationResult(keyDeliverer: String?, locationDeliverer: GeoLocation?) {
                                         var delivererDistance = DelivererDistance()
                                         if(locationDeliverer != null && keyDeliverer != null){
-                                            delivererDistance.delivererKey = keyDeliverer
+                                            delivererDistance.deliverer = deliverer
                                             delivererDistance.location = locationDeliverer
                                         }
 
@@ -145,7 +146,10 @@ class GPSOperations(val path: String) {
 
                                             deliverPositions.add(delivererDistance)
                                             if(deliverPositions.size === it.size){
-                                                cb(deliverPositions, location)
+                                                val listOfDeliverWithPosition =  deliverPositions.stream().filter {
+                                                    it.location != null && it.deliverer != null && it.deliverer!!.currentOrder == null
+                                                }.collect(Collectors.toList());
+                                                cb(listOfDeliverWithPosition, location)
                                             }
                                         }
 
@@ -160,7 +164,10 @@ class GPSOperations(val path: String) {
                                 var delivererDistance = DelivererDistance()
                                 deliverPositions.add(delivererDistance)
                                 if(deliverPositions.size === it.size){
-                                    cb(deliverPositions, location)
+                                    val listOfDeliverWithPosition =  deliverPositions.stream().filter {
+                                        it.location != null && it.deliverer != null && it.deliverer!!.currentOrder == null
+                                    }.collect(Collectors.toList());
+                                    cb(listOfDeliverWithPosition, location)
                                 }
                             }
                         }

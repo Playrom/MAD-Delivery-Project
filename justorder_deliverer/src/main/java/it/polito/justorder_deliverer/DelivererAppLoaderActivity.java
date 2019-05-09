@@ -54,7 +54,9 @@ public class DelivererAppLoaderActivity extends AppLoaderActivity {
                 Database.INSTANCE.getDeliverers().get(deliverer_key, (deliverer -> {
                     Map<String, Serializable> map = new HashMap<>();
                     map.put("deliverer", deliverer);
-                    Database.INSTANCE.getGeodata().trackClientPosition(Database.INSTANCE.getCurrent_User().getKeyId(), this);
+                    Database.INSTANCE.getGeodata().trackClientPosition(Database.INSTANCE.getCurrent_User().getDelivererKey(), this, () -> {
+                        return Unit.INSTANCE;
+                    });
                     this.startApp(OrdersDelivererListActivity.class, map);
                     return  Unit.INSTANCE;
                 }));

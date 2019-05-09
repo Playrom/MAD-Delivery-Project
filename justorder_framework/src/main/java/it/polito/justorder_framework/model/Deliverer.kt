@@ -7,4 +7,5 @@ class Deliverer : Model(), Serializable {
     var fiscalCode: String = ""
     var userKey : String? = null
     var orders: Map<String, Boolean> = mutableMapOf<String, Boolean>()
+    var currentOrder: String? = null
 }

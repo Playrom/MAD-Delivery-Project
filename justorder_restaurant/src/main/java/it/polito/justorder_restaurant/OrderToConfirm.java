@@ -1,5 +1,6 @@
 package it.polito.justorder_restaurant;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -137,29 +138,32 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
     }
 
     public void acceptOrder(View view){
-//        order.setState("accepted");
-//
-//        Database.INSTANCE.getDeliverers().getAll(deliverers1 -> {
-//            deliverers.clear();
-//            deliverers.addAll(deliverers1);
-//
-//            Random rand = new Random();
-//            Deliverer chosen = deliverers.get(rand.nextInt(deliverers.size()));
-//
-//            order.setDeliverer(chosen.getKeyId());
-//            Database.INSTANCE.getOrders().save(order);
-//
-//            Map <String, Boolean> orderMap = chosen.getOrders();
-//            orderMap.put(order.getKeyId(), true);
-//            chosen.setOrders(orderMap);
-//            Database.INSTANCE.getDeliverers().save(chosen);
-//
-//            finish();
-//            return Unit.INSTANCE;
-//        });
         Intent i = new Intent(this, RestaurantDelivererAssignActivity.class);
-        startActivity(i);
+        startActivityForResult(i, 0);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0 && resultCode == RESULT_OK){
+            order.setState("accepted");
+            String deliverer_key = data.getStringExtra("deliverer_key");
+            Database.INSTANCE.getDeliverers().get(deliverer_key, deliverer -> {
+                order.setDeliverer(deliverer.getKeyId());
+                Database.INSTANCE.getOrders().save(order);
+
+                Map <String, Boolean> orderMap = deliverer.getOrders();
+                orderMap.put(order.getKeyId(), true);
+                deliverer.setOrders(orderMap);
+                deliverer.setCurrentOrder(order.getKeyId());
+                Database.INSTANCE.getDeliverers().save(deliverer);
+                Database.INSTANCE.getOrders().save(order);
+
+                finish();
+                return Unit.INSTANCE;
+            });
+        }
     }
 
     public void deleteOrder(View view){
