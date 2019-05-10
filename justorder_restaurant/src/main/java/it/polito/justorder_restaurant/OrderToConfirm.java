@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -89,11 +90,12 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
         super.reloadViews();
 
         if(this.user != null) {
-            userTextField.setText(this.user.getName());
+            userTextField.setText("User: " + this.user.getName());
         }
-        addressTextField.setText(order.getUserAddress());
-        priceTextField.setText(new Double(order.getPrice()).toString());
-        timestampTextField.setText(order.getTimestamp().toString());
+        addressTextField.setText("Address: " + order.getUserAddress());
+        priceTextField.setText("Cost: " + new Double(order.getPrice()).toString());
+        String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
+        timestampTextField.setText(date);
 
         if(products.size() > 0){
             productString = createProductString();

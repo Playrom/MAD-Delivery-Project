@@ -99,18 +99,29 @@
                     android:id="@+id/button_accept"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Accetta Ordine"
                     android:layout_below="@id/productsTextField"
-                    android:onClick="acceptOrder" />
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:background="#8803AC03"
+                    android:minWidth="150dp"
+                    android:onClick="acceptOrder"
+                    android:padding="20dp"
+                    android:text="Accetta"
+                    android:textColor="#F0FFFFFF" />
 
 
                 <Button xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/button_refuse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/button_accept"
-                    android:text="Rifiuta Ordine"
-                    android:onClick="deleteOrder" />
+                    android:layout_below="@id/productsTextField"
+                    android:layout_marginLeft="30dp"
+                    android:background="#85FF003B"
+                    android:minWidth="150dp"
+                    android:onClick="deleteOrder"
+                    android:padding="20dp"
+                    android:text="Rifiuta"
+                    android:textColor="#F0FFFFFF" />
 
 
 
