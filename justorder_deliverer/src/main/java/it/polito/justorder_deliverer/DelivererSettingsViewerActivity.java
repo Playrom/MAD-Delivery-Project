@@ -1,6 +1,7 @@
 package it.polito.justorder_deliverer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,6 +28,15 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
         i = this.getIntent();
         setContentView(R.layout.deliverer_settings_viewer);
         setupActivity();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Context context = getApplicationContext();
+        Intent startIntent = new Intent(context, OrdersDelivererListActivity.class);
+        startIntent.putExtra("deliverer", deliverer);
+        startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(startIntent);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package it.polito.justorder_deliverer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class DelivererSettingsEditorActivity extends AbstractEditor {
         setContentView(R.layout.deliverer_settings_editor);
         this.setupActivity();
     }
+
 
     @Override
     protected void setupActivity() {

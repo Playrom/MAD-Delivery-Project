@@ -57,6 +57,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.deliverer = (Deliverer) i.getSerializableExtra("deliverer");
     }
 
+    @Override
+    public void onBackPressed() {
+        Context context = getApplicationContext();
+        Intent startIntent = new Intent(context, OrdersDelivererListActivity.class);
+        startIntent.putExtra("deliverer", deliverer);
+        startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(startIntent);
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
