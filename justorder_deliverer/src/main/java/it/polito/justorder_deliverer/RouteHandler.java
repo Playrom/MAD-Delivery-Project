@@ -79,6 +79,25 @@ public class RouteHandler extends AbstractRouteHandler {
             return false;
         }
 
+        if(item.getItemId() == R.id.map && Database.INSTANCE.getCurrent_User() != null) {
+
+            if(Database.INSTANCE.getCurrent_User().getDelivererKey() != null){
+                String deliverer_key = Database.INSTANCE.getCurrent_User().getDelivererKey();
+
+                Database.INSTANCE.getDeliverers().get(deliverer_key, (deliverer -> {
+
+                    Intent i = new Intent(context, MapsActivity.class);
+                    i.putExtra("deliverer", deliverer);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(i);
+                    return  Unit.INSTANCE;
+                }));
+
+                return true;
+            }
+
+        }
+
         return false;
     }
 }
