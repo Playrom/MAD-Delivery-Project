@@ -1,5 +1,9 @@
 package it.polito.justorder_deliverer;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Context;
@@ -9,6 +13,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,6 +23,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.navigation.NavigationView;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
@@ -31,12 +37,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithSideNav;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Deliverer;
 import it.polito.justorder_framework.model.Order;
 import kotlin.Unit;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends ActivityAbstractWithSideNav implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     protected Deliverer deliverer;
@@ -55,15 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent i = getIntent();
         this.deliverer = (Deliverer) i.getSerializableExtra("deliverer");
-    }
-
-    @Override
-    public void onBackPressed() {
-        Context context = getApplicationContext();
-        Intent startIntent = new Intent(context, OrdersDelivererListActivity.class);
-        startIntent.putExtra("deliverer", deliverer);
-        startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(startIntent);
+        this.setupActivity();
     }
 
     @Override
