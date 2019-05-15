@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
@@ -95,11 +96,16 @@ public class MapsActivity extends ActivityAbstractWithSideNav implements OnMapRe
                 String customerPlace = getStringFromAddress(this, this.customerAddress);
 
 
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?saddr=" + restaurantPlace + "&daddr=" + customerPlace));
+                startActivity(intent);
+
+
                 //Define list to get all latlng for the route
                 List<LatLng> path = new ArrayList();
 
 
-                //Execute Directions API request
+               //Execute Directions API request
                 GeoApiContext context = new GeoApiContext.Builder()
                         .apiKey("AIzaSyDWDWfu77UacZO2ZWBf8F8HsBer_uhvflY")
                         .build();
@@ -161,8 +167,6 @@ public class MapsActivity extends ActivityAbstractWithSideNav implements OnMapRe
                 return Unit.INSTANCE;
             }));
         }
-
-
 
 
     }
