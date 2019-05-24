@@ -2,7 +2,7 @@ package it.polito.justorder_framework.model
 
 import java.io.Serializable
 
-class Restaurant : Model(),Serializable {
+class Restaurant : ModelWithVote(),Serializable {
     var name: String = ""
     var email: String = ""
     var imageUri: String? = null
@@ -18,6 +18,7 @@ class Restaurant : Model(),Serializable {
 
     var products: Map<String, Product> = mutableMapOf()
     var orders: Map<String, Boolean> = mutableMapOf<String, Boolean>()
+    var reviews: Map<String, Boolean> = mutableMapOf<String, Boolean>()
 
     var owner: String = ""
 

@@ -15,4 +15,6 @@ class Order: Model(){
     var deliverer: String? = null
     var products : Map<String, Int> = mutableMapOf<String, Int>()
     var state: String? = null
+    var delivererDistanceToTravelToRestaurant: Double = 0.0
+    var delivererDistanceToTravelFromRestaurantToClient: Double = 0.0
 }

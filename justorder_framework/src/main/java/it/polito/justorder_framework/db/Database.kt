@@ -34,10 +34,11 @@ object Database {
      var storage = Storage
 
      val users = ModelOperations<User>(User::class.java, "users")
-     val products = ModelOperations<Product>(Product::class.java, "products")
-     val restaurants = ModelOperations<Restaurant>(Restaurant::class.java, "restaurants")
-     val deliverers = ModelOperations<Deliverer>(Deliverer::class.java, "deliverers")
+     val products = ModelWithVoteOperations<Product>(Product::class.java, "products")
+     val restaurants = ModelWithVoteOperations<Restaurant>(Restaurant::class.java, "restaurants")
+     val deliverers = ModelWithVoteOperations<Deliverer>(Deliverer::class.java, "deliverers")
      val orders = ModelOperations<Order>(Order::class.java, "orders")
+     val reviews = ReviewOperations<Review>(Review::class.java, "reviews")
 
 
      fun loadCurrentUser(cb : () -> Unit){

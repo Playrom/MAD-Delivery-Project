@@ -10,25 +10,24 @@ import android.widget.TextView;
 import com.firebase.geofire.GeoLocation;
 
 import it.polito.justorder_framework.Utils;
-import it.polito.justorder_framework.model.DelivererDistance;
+import it.polito.justorder_framework.model.DelivererPosition;
 import it.polito.justorder_restaurant.ConfirmOrderInterface;
 import it.polito.justorder_restaurant.R;
-import it.polito.justorder_restaurant.RestaurantDelivererAssignActivity;
 
 import java.util.Comparator;
 import java.util.List;
 
 public class DeliverListItemRecyclerViewAdapter extends RecyclerView.Adapter<DeliverListItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DelivererDistance> mValues;
+    private final List<DelivererPosition> mValues;
     private GeoLocation restaurantLocation;
     private final ConfirmOrderInterface mListener;
 
-    public DeliverListItemRecyclerViewAdapter(List<DelivererDistance> items, GeoLocation restaurantLocation, ConfirmOrderInterface listener) {
+    public DeliverListItemRecyclerViewAdapter(List<DelivererPosition> items, GeoLocation restaurantLocation, ConfirmOrderInterface listener) {
         mValues = items;
-        mValues.sort(new Comparator<DelivererDistance>() {
+        mValues.sort(new Comparator<DelivererPosition>() {
             @Override
-            public int compare(DelivererDistance o1, DelivererDistance o2) {
+            public int compare(DelivererPosition o1, DelivererPosition o2) {
                 return o1.distanceFromRestaurant(restaurantLocation).compareTo(o2.distanceFromRestaurant(restaurantLocation));
             }
         });
@@ -74,7 +73,7 @@ public class DeliverListItemRecyclerViewAdapter extends RecyclerView.Adapter<Del
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DelivererDistance mItem;
+        public DelivererPosition mItem;
 
         public ViewHolder(View view) {
             super(view);

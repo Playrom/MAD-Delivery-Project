@@ -14,16 +14,11 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
@@ -37,13 +32,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polito.justorder_framework.model.DelivererDistance;
+import it.polito.justorder_framework.model.DelivererPosition;
 import it.polito.justorder_restaurant.ConfirmOrderInterface;
 import it.polito.justorder_restaurant.R;
 
 public class DeliversMapFragment extends SupportMapFragment implements OnMapReadyCallback {
 
-    private List<DelivererDistance> deliverers = new ArrayList<>();
+    private List<DelivererPosition> deliverers = new ArrayList<>();
     protected String restaurantKey;
     protected GeoLocation restaurantLocation;
     private ConfirmOrderInterface mListener;
@@ -52,7 +47,7 @@ public class DeliversMapFragment extends SupportMapFragment implements OnMapRead
         super();
     }
 
-    public static DeliversMapFragment newInstance(String restaurantKey, List<DelivererDistance> distanceList, GeoLocation restaurantLocation){
+    public static DeliversMapFragment newInstance(String restaurantKey, List<DelivererPosition> distanceList, GeoLocation restaurantLocation){
         DeliversMapFragment frag = new DeliversMapFragment();
         frag.restaurantKey = restaurantKey;
         frag.deliverers = distanceList;
@@ -95,7 +90,7 @@ public class DeliversMapFragment extends SupportMapFragment implements OnMapRead
         googleMap.addMarker(restaurantMarker);
         builder.include(restaurantMarker.getPosition());
 
-        for (DelivererDistance d : deliverers){
+        for (DelivererPosition d : deliverers){
             MarkerOptions marker = new MarkerOptions()
                                     .position(new LatLng(d.getLocation().latitude, d.getLocation().longitude))
                                     .icon(this.getBitmapFromVector(getContext(), R.drawable.marker, getResources().getColor(R.color.colorPrimary)));

@@ -4,7 +4,7 @@ import com.firebase.geofire.GeoLocation
 import it.polito.justorder_framework.Utils
 import java.io.Serializable
 
-class DelivererDistance : Model(), Serializable {
+class DelivererPosition : Model(), Serializable {
     var deliverer : Deliverer? = null
     var user : User? = null
     var location : GeoLocation? = null

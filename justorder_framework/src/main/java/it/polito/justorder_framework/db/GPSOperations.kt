@@ -1,16 +1,12 @@
 package it.polito.justorder_framework.db
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.os.Looper
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.firebase.geofire.GeoFire
@@ -18,7 +14,7 @@ import com.firebase.geofire.GeoLocation
 import com.firebase.geofire.LocationCallback
 import com.google.firebase.database.DatabaseError
 import it.polito.justorder_framework.abstract_activities.ActivityAbstract
-import it.polito.justorder_framework.model.DelivererDistance
+import it.polito.justorder_framework.model.DelivererPosition
 import java.util.logging.Logger
 import java.util.stream.Collectors
 import java.util.stream.IntStream
@@ -120,10 +116,10 @@ class GPSOperations(val path: String) {
 
     }
 
-    fun getDeliverersNear(restaurantId : String, cb: (List<DelivererDistance>, GeoLocation) -> Unit){
+    fun getDeliverersNear(restaurantId : String, cb: (List<DelivererPosition>, GeoLocation) -> Unit){
         val ref = Database.db.child(path);
         val geo = GeoFire(ref)
-        val deliverPositions = mutableListOf<DelivererDistance>()
+        val deliverPositions = mutableListOf<DelivererPosition>()
 
         geo.getLocation(restaurantId,  object : LocationCallback {
             override fun onLocationResult(key: String?, location: GeoLocation?) {
@@ -135,7 +131,7 @@ class GPSOperations(val path: String) {
                             if(delivererKey != null && delivererUserKey != null){
                                 geo.getLocation(deliverer.keyId, object: LocationCallback {
                                     override fun onLocationResult(keyDeliverer: String?, locationDeliverer: GeoLocation?) {
-                                        var delivererDistance = DelivererDistance()
+                                        var delivererDistance = DelivererPosition()
                                         if(locationDeliverer != null && keyDeliverer != null){
                                             delivererDistance.deliverer = deliverer
                                             delivererDistance.location = locationDeliverer
@@ -161,7 +157,7 @@ class GPSOperations(val path: String) {
                                     }
                                 })
                             }else{
-                                var delivererDistance = DelivererDistance()
+                                var delivererDistance = DelivererPosition()
                                 deliverPositions.add(delivererDistance)
                                 if(deliverPositions.size === it.size){
                                     val listOfDeliverWithPosition =  deliverPositions.stream().filter {

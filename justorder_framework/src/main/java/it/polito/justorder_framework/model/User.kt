@@ -14,4 +14,6 @@ class User : Model(), Serializable{
     var restaurantKey: String? = null
 
     var orders: Map<String, Boolean> = mutableMapOf<String, Boolean>()
+    var favouriteRestaurants: Map<String, Boolean> = mutableMapOf<String, Boolean>()
+    var favouriteProducts: Map<String, Boolean> = mutableMapOf<String, Boolean>()
 }

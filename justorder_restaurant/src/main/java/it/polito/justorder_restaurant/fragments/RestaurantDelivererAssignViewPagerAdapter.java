@@ -5,25 +5,22 @@ import android.content.Context;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.firebase.geofire.GeoLocation;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.SupportMapFragment;
 
 import java.util.List;
 
-import it.polito.justorder_framework.model.DelivererDistance;
+import it.polito.justorder_framework.model.DelivererPosition;
 import it.polito.justorder_restaurant.R;
 
 public class RestaurantDelivererAssignViewPagerAdapter extends FragmentPagerAdapter {
 
     private Context mContext;
     private String restaurantKey;
-    private List<DelivererDistance> distanceList;
+    private List<DelivererPosition> distanceList;
     private GeoLocation restaurantLocation;
 
-    public RestaurantDelivererAssignViewPagerAdapter(Context context, FragmentManager fm, String restaurantKey, List<DelivererDistance> distanceList, GeoLocation restaurantLocation) {
+    public RestaurantDelivererAssignViewPagerAdapter(Context context, FragmentManager fm, String restaurantKey, List<DelivererPosition> distanceList, GeoLocation restaurantLocation) {
         super(fm);
         mContext = context;
         this.restaurantKey = restaurantKey;

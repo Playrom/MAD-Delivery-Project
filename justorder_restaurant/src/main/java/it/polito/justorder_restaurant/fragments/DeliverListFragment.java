@@ -14,12 +14,9 @@ import android.view.ViewGroup;
 
 import com.firebase.geofire.GeoLocation;
 
-import it.polito.justorder_framework.db.Database;
-import it.polito.justorder_framework.model.DelivererDistance;
+import it.polito.justorder_framework.model.DelivererPosition;
 import it.polito.justorder_restaurant.ConfirmOrderInterface;
 import it.polito.justorder_restaurant.R;
-import it.polito.justorder_restaurant.RestaurantDelivererAssignActivity;
-import kotlin.Unit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +28,7 @@ public class DeliverListFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private ConfirmOrderInterface mListener;
-    protected List<DelivererDistance> delivererDistances = new ArrayList<>();
+    protected List<DelivererPosition> delivererPositions = new ArrayList<>();
     protected String restaurant_key;
     protected GeoLocation restaurantLocation;
 
@@ -44,12 +41,12 @@ public class DeliverListFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static DeliverListFragment newInstance(int columnCount, String restaurantKey, List<DelivererDistance> distanceList, GeoLocation restaurantLocation) {
+    public static DeliverListFragment newInstance(int columnCount, String restaurantKey, List<DelivererPosition> distanceList, GeoLocation restaurantLocation) {
         DeliverListFragment fragment = new DeliverListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.restaurant_key = restaurantKey;
-        fragment.delivererDistances = distanceList;
+        fragment.delivererPositions = distanceList;
         fragment.restaurantLocation = restaurantLocation;
         fragment.setArguments(args);
 
@@ -80,7 +77,7 @@ public class DeliverListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new DeliverListItemRecyclerViewAdapter(this.delivererDistances, restaurantLocation, mListener));
+            recyclerView.setAdapter(new DeliverListItemRecyclerViewAdapter(this.delivererPositions, restaurantLocation, mListener));
         }
         return view;
     }

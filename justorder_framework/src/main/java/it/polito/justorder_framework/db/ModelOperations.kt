@@ -5,7 +5,7 @@ import it.polito.justorder_framework.Utils
 import it.polito.justorder_framework.model.Model
 import it.polito.justorder_framework.model.Order
 
-class ModelOperations<T: Model>(private val tClass: Class<T>, val path: String){
+open class ModelOperations<T: Model>(protected val tClass: Class<T>, val path: String){
     fun get(key: String, cb : (T) -> Unit) {
 
         Database.db.child(path).child(key).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -47,7 +47,7 @@ class ModelOperations<T: Model>(private val tClass: Class<T>, val path: String){
         }
     }
 
-    fun save(entity: T){
+    open fun save(entity: T){
         var ref: DatabaseReference
         val key = entity.keyId
         if(key != null){
