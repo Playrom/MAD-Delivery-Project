@@ -5,13 +5,13 @@ import java.io.Serializable
 open class ModelWithVote : Model() {
     var totalVotes: Int = 0
         set(value) {
-            totalVotes = value
+            field = value
             averageVote = value.toDouble()/numberOfVotes.toDouble()
         }
         get
     var numberOfVotes: Int = 0
         set(value) {
-            numberOfVotes = value
+            field = value
             averageVote = totalVotes.toDouble()/value.toDouble()
         }
         get
