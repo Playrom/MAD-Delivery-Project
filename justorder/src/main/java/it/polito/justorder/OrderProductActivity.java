@@ -17,6 +17,7 @@ import it.polito.justorder_framework.model.Restaurant;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -110,6 +111,7 @@ public class OrderProductActivity extends AbstractEditor {
                 finish();
             }
         }
+
         return super.onOptionsItemSelected(item);
     }
 

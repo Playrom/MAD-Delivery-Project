@@ -47,6 +47,13 @@ public class RouteHandler extends AbstractRouteHandler {
             return true;
         }
 
+        if(item.getItemId() == R.id.favourite_restaurants) {
+            Intent i = new Intent(context, FavouriteRestaurantsListActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(i);
+            return true;
+        }
+
         if(item.getItemId() == R.id.ordersPage) {
             user = Database.INSTANCE.getCurrent_User();
             Intent intent = new Intent(context, OrdersUserListActivity.class);

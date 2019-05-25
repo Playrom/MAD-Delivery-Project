@@ -4,6 +4,7 @@ import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.abstract_activities.AbstractListViewWithSidenav;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Restaurant;
+import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
 import android.content.Intent;
@@ -23,8 +24,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class RestaurantsListActivity extends AbstractListViewWithSidenav {
+public class FavouriteRestaurantsListActivity extends AbstractListViewWithSidenav {
 
     protected ListView listView;
     protected BaseAdapter adapter;
@@ -35,6 +37,8 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
     protected List<Restaurant> restaurants = new ArrayList<>();
     protected List<Restaurant> filtered_restaurants = new ArrayList<>();
     protected String filter = "";
+    protected User user;
+    protected Map<String, Boolean> favourites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,7 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Restaurant entry = (Restaurant) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(RestaurantsListActivity.this, ProductsListActivity.class);
+                Intent intent = new Intent(FavouriteRestaurantsListActivity.this, FavouriteProductsListActivity.class);
                 intent.putExtra("restaurant", entry);
                 tapped = position;
                 startActivityForResult(intent, 1);
@@ -98,24 +102,27 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
                     Restaurant restaurant = restaurants.get(position);
                     ((TextView)convertView.findViewById(R.id.content)).setText(restaurant.getName());
                     ((TextView)convertView.findViewById(R.id.description)).setText(restaurant.getAddress());
-                    Glide.with(RestaurantsListActivity.this).load(restaurant.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
+                    Glide.with(FavouriteRestaurantsListActivity.this).load(restaurant.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
                 }
 
                 return convertView;
             }
         };
         this.listView.setAdapter(this.adapter);
-        this.actionBar.setTitle("All Restaurants");
+        this.actionBar.setTitle("Favourites");
 
         this.reloadData();
     }
 
     protected void initDataSource(){
         //get filtering criteria
+
         Database.INSTANCE.getRestaurants().orderByVote(restaurants1 -> {
             this.restaurants.clear();
+            user = Database.INSTANCE.getCurrent_User();
+            favourites = user.getFavouriteRestaurants();
             for (Restaurant rest : restaurants1) {
-                if (rest.getName().contains(filter)) {
+                if (rest.getName().contains(filter) && favourites.keySet().contains(rest.getKeyId())) {
                     restaurants.add(rest);
                 }
             }

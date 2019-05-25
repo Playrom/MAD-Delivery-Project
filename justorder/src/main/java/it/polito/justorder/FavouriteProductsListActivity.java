@@ -3,8 +3,6 @@ package it.polito.justorder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,7 +29,7 @@ import it.polito.justorder_framework.model.Restaurant;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
-public class ProductsListActivity extends ActivityAbstractWithToolbar {
+public class FavouriteProductsListActivity extends ActivityAbstractWithToolbar {
 
     protected ListView listView;
     protected BaseAdapter adapter;
@@ -39,18 +37,14 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
     protected int tapped;
     protected Restaurant restaurant;
     protected List<Product> products = new ArrayList<>();
+    protected User user;
+    protected Map<String, Boolean> favourites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_list_activity);
         this.setupActivity();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.product_list_menu, menu);
-        return true;
     }
 
     @Override
@@ -65,7 +59,7 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Product entry = (Product) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(ProductsListActivity.this, ProductClientActivity.class);
+                Intent intent = new Intent(FavouriteProductsListActivity.this, ProductClientActivity.class);
                 intent.putExtra("product", entry);
                 intent.putExtra("restaurant", restaurant);
                 tapped = position;
@@ -99,7 +93,7 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
                     Product product = products.get(position);
                     ((TextView)convertView.findViewById(R.id.content)).setText(product.getName());
                     ((TextView)convertView.findViewById(R.id.description)).setText(new Double(product.getCost()).toString());
-                    Glide.with(ProductsListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
+                    Glide.with(FavouriteProductsListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
                 }
 
                 return convertView;
@@ -107,7 +101,6 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
         };
         this.listView.setAdapter(this.adapter);
         this.actionBar.setTitle(R.string.product_list_title);
-        //this.actionBar.
 
         this.reloadData();
     }
@@ -115,8 +108,16 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
     protected void initDataSource() {
         Intent i = getIntent();
         this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
-        if(this.restaurant != null){
-            this.products = new ArrayList<>(this.restaurant.getProducts().values());
+        user = Database.INSTANCE.getCurrent_User();
+        favourites = user.getFavouriteProducts();
+        if(this.restaurant != null && favourites != null){
+            List<Product> allProducts = new ArrayList<>(this.restaurant.getProducts().values());
+            this.products = new ArrayList<>();
+            for (Product prod : allProducts) {
+                if(favourites.keySet().contains(prod.getKeyId())) {
+                    products.add(prod);
+                }
+            }
         }
 
         Database.INSTANCE.getRestaurants().get(this.restaurant.getKeyId(), true, (restaurant1 -> {
@@ -163,18 +164,5 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
                 this.reloadData();
             }
         }
-    }
-    @Override
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.editUserData){
-            Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
-            i.putExtra("restaurant", restaurant);
-
-            startActivityForResult(i, 1);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
