@@ -4,9 +4,16 @@ import java.io.Serializable
 
 open class ModelWithVote : Model() {
     var totalVotes: Int = 0
-    var numberOfVotes: Int = 0
-    val averageVote: Double
-        get() {
-            return totalVotes.toDouble()/numberOfVotes.toDouble()
+        set(value) {
+            totalVotes = value
+            averageVote = value.toDouble()/numberOfVotes.toDouble()
         }
+        get
+    var numberOfVotes: Int = 0
+        set(value) {
+            numberOfVotes = value
+            averageVote = totalVotes.toDouble()/value.toDouble()
+        }
+        get
+    var averageVote: Double = 0.0
 }
