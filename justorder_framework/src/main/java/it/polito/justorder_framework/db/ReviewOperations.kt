@@ -39,6 +39,7 @@ class ReviewOperations<T: Review>(tClass: Class<T>, path: String): ModelOperatio
             type.get(itemKey){
                 it.numberOfVotes = it.numberOfVotes + 1
                 it.totalVotes = it.totalVotes + entity.stars
+                it.averageVote = it.totalVotes.toDouble() / it.numberOfVotes.toDouble()
                 type.save(it)
             }
         }
