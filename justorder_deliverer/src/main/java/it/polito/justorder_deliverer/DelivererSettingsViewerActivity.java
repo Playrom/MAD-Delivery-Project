@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+
+import org.w3c.dom.Text;
 
 import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndSidenav;
 import it.polito.justorder_framework.db.Database;
@@ -21,6 +24,7 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
     protected EditText nameTextField, emailTextField, phoneTextField, addressTextField, taxCodeTextField, ibanTextField;
     protected Intent i;
     protected String deliverer_intent_key;
+    protected TextView averageVote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,9 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
         super.setupActivity();
         taxCodeTextField = findViewById(R.id.taxCodeTextField);
         ibanTextField = findViewById(R.id.ibanTextField);
+        averageVote = findViewById(R.id.averageVote);
         reloadData();
+        averageVote.setText(String.valueOf(deliverer.getAverageVote()));
     }
 
     @Override
