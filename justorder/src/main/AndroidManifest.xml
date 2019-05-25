@@ -2,14 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="it.polito.justorder">
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -18,8 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReviewActivity"></activity>
-        <activity android:name=".ClientAppLoaderActivity">
+        <activity android:name="it.polito.justorder.ClientAppLoaderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,14 +20,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProductsListActivity" />
+        <activity android:name=".FavouriteProductsListActivity" />
         <activity android:name=".RestaurantsListActivity" />
-        <activity android:name=".ProductClientActivity" />
-        <activity android:name=".OrderProductActivity" />
-        <activity android:name=".OrdersUserListActivity" />
-        <activity android:name="it.polito.justorder_framework.common_activities.OrderDetails" />
-        <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity" />
-        <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsViewerActivity" />
-
+        <activity android:name=".FavouriteRestaurantsListActivity" />
+        <activity android:name=".ReviewActivity" />
+        <activity android:name=".ProductClientActivity"></activity>
+        <activity android:name=".OrderProductActivity"></activity>
+        <activity android:name=".OrdersUserListActivity"></activity>
+        <activity android:name="it.polito.justorder_framework.common_activities.OrderDetails"></activity>
+        <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity"></activity>
+        <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsViewerActivity"></activity>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="@string/fileprovider"
@@ -42,15 +37,19 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
+                android:resource="@xml/provider_paths"></meta-data>
         </provider>
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDWDWfu77UacZO2ZWBf8F8HsBer_uhvflY" />
+            android:value="AIzaSyDWDWfu77UacZO2ZWBf8F8HsBer_uhvflY"/>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps" />
+
 
 </manifest>

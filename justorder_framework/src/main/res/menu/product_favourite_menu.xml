@@ -4,9 +4,9 @@
     android:id="@+id/main_menu" >
 
     <item
-        android:id="@+id/review"
+        android:id="@+id/add_to_favourite"
         android:enabled="true"
-        android:title="Rate the restaurant"
+        android:title="Add to favourites"
         android:visible="true" />
 
 </menu>

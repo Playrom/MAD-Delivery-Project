@@ -22,6 +22,12 @@
         android:visible="true" />
 
     <item
+        android:id="@+id/favourite_restaurants"
+        android:enabled="true"
+        android:title="Favourites"
+        android:visible="true" />
+
+    <item
         android:id="@+id/userSettings"
         android:enabled="true"
         android:title="User Settings"
