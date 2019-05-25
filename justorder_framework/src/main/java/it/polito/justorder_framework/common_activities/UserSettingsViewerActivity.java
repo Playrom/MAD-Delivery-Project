@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -18,6 +19,7 @@ import kotlin.Unit;
 public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerActivityAndSidenav {
 
     protected EditText nameTextField, emailTextField, phoneTextField, addressTextField;
+    protected TextView averageVote;
     protected User user;
 
     @Override

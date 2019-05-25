@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -117,6 +118,18 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
         this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
         if(this.restaurant != null){
             this.products = new ArrayList<>(this.restaurant.getProducts().values());
+            this.products.sort(new Comparator<Product>() {
+                @Override
+                public int compare(Product p1, Product p2) {
+                    if (p1.getAverageVote() > p2.getAverageVote()) {
+                        return 1;
+                    }
+                    if (p1.getAverageVote() < p2.getAverageVote()) {
+                        return -1;
+                    }
+                    return 0;
+                }
+            });
         }
 
         Database.INSTANCE.getRestaurants().get(this.restaurant.getKeyId(), true, (restaurant1 -> {
