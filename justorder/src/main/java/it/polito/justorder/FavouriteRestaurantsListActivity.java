@@ -109,7 +109,7 @@ public class FavouriteRestaurantsListActivity extends AbstractListViewWithSidena
             }
         };
         this.listView.setAdapter(this.adapter);
-        this.actionBar.setTitle("Favourite Restaurants");
+        this.actionBar.setTitle("Favourites");
 
         this.reloadData();
     }
