@@ -3,6 +3,8 @@ package it.polito.justorder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -41,6 +43,12 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_list_activity);
         this.setupActivity();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.product_list_menu, menu);
+        return true;
     }
 
     @Override
@@ -97,6 +105,7 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
         };
         this.listView.setAdapter(this.adapter);
         this.actionBar.setTitle(R.string.product_list_title);
+        //this.actionBar.
 
         this.reloadData();
     }
@@ -152,5 +161,17 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
                 this.reloadData();
             }
         }
+    }
+    @Override
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.editUserData){
+            Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
+            i.putExtra("restaurant", restaurant);
+
+            startActivityForResult(i, 1);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
