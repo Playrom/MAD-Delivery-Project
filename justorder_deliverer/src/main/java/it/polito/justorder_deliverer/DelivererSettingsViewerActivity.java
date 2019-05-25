@@ -48,9 +48,7 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
         super.setupActivity();
         taxCodeTextField = findViewById(R.id.taxCodeTextField);
         ibanTextField = findViewById(R.id.ibanTextField);
-        averageVote = findViewById(R.id.averageVote);
         reloadData();
-        averageVote.setText(String.valueOf(deliverer.getAverageVote()));
     }
 
     @Override
