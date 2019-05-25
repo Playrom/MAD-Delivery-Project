@@ -71,6 +71,19 @@
                     android:inputType="text"
                     android:enabled="false"/>
 
+                <TextView
+                    android:id="@+id/averageVote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/KmTextField"
+                    android:layout_alignStart="@id/KmTextField"
+                    android:layout_alignLeft="@id/KmTextField"
+                    android:layout_alignEnd="@id/KmTextField"
+                    android:layout_alignRight="@id/KmTextField"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:enabled="false"/>
+
             </RelativeLayout>
         </ScrollView>
     </LinearLayout>
