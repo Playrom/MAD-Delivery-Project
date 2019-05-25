@@ -56,6 +56,21 @@
                     android:inputType="text"
                     android:enabled="false"/>
 
+                <EditText
+                    android:id="@+id/KmTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ibanTextField"
+                    android:layout_alignStart="@id/taxCodeTextField"
+                    android:layout_alignLeft="@id/taxCodeTextField"
+                    android:layout_alignEnd="@id/taxCodeTextField"
+                    android:layout_alignRight="@id/taxCodeTextField"
+                    android:layout_marginTop="100dp"
+                    android:ems="10"
+                    android:hint="Km done"
+                    android:inputType="text"
+                    android:enabled="false"/>
+
             </RelativeLayout>
         </ScrollView>
     </LinearLayout>

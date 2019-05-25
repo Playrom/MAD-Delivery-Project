@@ -9,4 +9,5 @@ class Deliverer : ModelWithVote(), Serializable {
     var orders: Map<String, Boolean> = mutableMapOf<String, Boolean>()
     var reviews: Map<String, Boolean> = mutableMapOf<String, Boolean>()
     var currentOrder: String? = null
+    var km: Double? = 0.0
 }

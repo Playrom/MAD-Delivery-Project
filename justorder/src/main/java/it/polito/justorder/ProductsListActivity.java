@@ -180,11 +180,10 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
     @Override
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.editUserData){
+        if(item.getItemId() == R.id.review){
             Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
-            i.putExtra("restaurant", restaurant);
-
-            startActivityForResult(i, 1);
+            i.putExtra("restaurant", this.restaurant);
+            startActivity(i);
             return true;
         }
 
