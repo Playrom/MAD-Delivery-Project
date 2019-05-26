@@ -22,6 +22,13 @@
         android:visible="true" />
 
     <item
+        android:id="@+id/cart"
+        android:enabled="true"
+        android:title="Cart"
+        android:visible="true"
+        />
+
+    <item
         android:id="@+id/favourite_restaurants"
         android:enabled="true"
         android:title="Favourites"
