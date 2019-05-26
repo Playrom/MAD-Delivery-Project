@@ -48,6 +48,7 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
         super.setupActivity();
         taxCodeTextField = findViewById(R.id.taxCodeTextField);
         ibanTextField = findViewById(R.id.ibanTextField);
+        averageVote = findViewById(R.id.averageVote);
         reloadData();
     }
 
@@ -59,6 +60,7 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
             deliverer_intent_key = i.getStringExtra("deliverer_intent_key");
             Database.INSTANCE.getDeliverers().get(deliverer_intent_key, (deliverer1 -> {
                 this.deliverer = deliverer1;
+                averageVote.setText("Average Vote: " + String.valueOf(deliverer.getAverageVote()));
                 this.reloadViews();
                 return Unit.INSTANCE;
             }));

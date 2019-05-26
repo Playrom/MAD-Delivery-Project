@@ -65,7 +65,7 @@ public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolba
             if(this.order.getUser() != null){
                 Database.INSTANCE.getUsers().get(this.order.getUser(), (user1 -> {
                     this.user = user1;
-                    this.reloadViews();
+                    //this.reloadViews();
                     return Unit.INSTANCE;
                 }));
             }
@@ -74,7 +74,7 @@ public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolba
                 Database.INSTANCE.getDeliverers().get(this.order.getDeliverer(), (deliverer1 -> {
                     Database.INSTANCE.getUsers().get(deliverer1.getUserKey(), user1 -> {
                         this.deliverer = user1;
-                        this.reloadViews();
+                        //this.reloadViews();
                         return Unit.INSTANCE;
                     });
                     return Unit.INSTANCE;
@@ -89,7 +89,7 @@ public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolba
                 }));
             }
         }
-        this.reloadViews();
+        //this.reloadViews();
     }
 
     @Override
@@ -122,7 +122,7 @@ public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolba
 
         String productString = "";
         for(Map.Entry<Product, Integer> entry : products.entrySet()){
-            productString += entry.getKey().getName() + "\n";
+            productString += entry.getKey().getName() + ";\n";
         }
 
         return productString;
