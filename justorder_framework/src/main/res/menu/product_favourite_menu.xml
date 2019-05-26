@@ -8,5 +8,10 @@
         android:enabled="true"
         android:title="Add to favourites"
         android:visible="true" />
+    <item
+        android:id="@+id/review"
+        android:enabled="true"
+        android:title="Rate the product"
+        android:visible="true" />
 
 </menu>

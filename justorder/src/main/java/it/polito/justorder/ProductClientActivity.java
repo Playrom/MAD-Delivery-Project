@@ -57,6 +57,12 @@ public class ProductClientActivity extends ProductActivity {
             toast.show();
             return true;
         }
+        if(item.getItemId() == it.polito.justorder_framework.R.id.review){
+            Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
+            i.putExtra("product", this.product);
+            startActivity(i);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
