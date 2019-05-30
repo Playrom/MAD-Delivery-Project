@@ -11,6 +11,9 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.internal.gmsg.HttpClient;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -149,7 +152,7 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 0 && resultCode == RESULT_OK){
-            order.setState("accepted");
+            order.setState("deliver_pending");
             String deliverer_key = data.getStringExtra("deliverer_key");
             Database.INSTANCE.getDeliverers().get(deliverer_key, deliverer -> {
                 order.setDeliverer(deliverer.getKeyId());

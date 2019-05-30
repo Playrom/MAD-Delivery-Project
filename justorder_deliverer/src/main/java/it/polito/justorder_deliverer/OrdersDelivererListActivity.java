@@ -29,7 +29,14 @@ public class OrdersDelivererListActivity extends OrdersListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Order entry = (Order) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(OrdersDelivererListActivity.this, OrderDetails.class);
+                String state = entry.getState();
+                Intent intent;
+                if (state!=null && state.equals("deliver_pending")) {
+                    intent = new Intent(OrdersDelivererListActivity.this, OrderToAccept.class);
+                }else {
+                    intent = new Intent(OrdersDelivererListActivity.this, OrderDetails.class);
+                }
+
                 intent.putExtra("order", entry);
                 tapped = position;
                 startActivityForResult(intent, 1);

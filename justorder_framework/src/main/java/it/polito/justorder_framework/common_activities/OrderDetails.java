@@ -25,7 +25,7 @@ import java.util.Set;
 public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolbar {
 
     private Order order;
-    private User deliverer;
+    public User deliverer;
     private User user;
     private TextView orderIdTextField, userTextField, addressTextField, priceTextField, timestampTextField, riderTextField, productsTextField;
     private String productString;
@@ -128,11 +128,7 @@ public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolba
         return productString;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_product_menu, menu);
-        return true;
-    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

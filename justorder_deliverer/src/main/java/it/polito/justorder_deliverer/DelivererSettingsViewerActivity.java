@@ -22,6 +22,7 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
 
     protected Deliverer deliverer;
     protected EditText nameTextField, emailTextField, phoneTextField, addressTextField, taxCodeTextField, ibanTextField;
+    protected TextView kmTextField;
     protected Intent i;
     protected String deliverer_intent_key;
     protected TextView averageVote;
@@ -48,6 +49,7 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
         super.setupActivity();
         taxCodeTextField = findViewById(R.id.taxCodeTextField);
         ibanTextField = findViewById(R.id.ibanTextField);
+        kmTextField = findViewById(R.id.KmTextField);
         averageVote = findViewById(R.id.averageVote);
         reloadData();
     }
@@ -61,6 +63,7 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
             Database.INSTANCE.getDeliverers().get(deliverer_intent_key, (deliverer1 -> {
                 this.deliverer = deliverer1;
                 averageVote.setText("Average Vote: " + String.valueOf(deliverer.getAverageVote()));
+                kmTextField.setText("Km done: " + String.valueOf(deliverer.getKm()));
                 this.reloadViews();
                 return Unit.INSTANCE;
             }));

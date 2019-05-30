@@ -28,7 +28,7 @@ public class OrdersUserListActivity extends OrdersListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Order entry = (Order) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(OrdersUserListActivity.this, OrderDetails.class);
+                Intent intent = new Intent(OrdersUserListActivity.this, OrderClientDetails.class);
                 intent.putExtra("order", entry);
                 tapped = position;
                 startActivityForResult(intent, 1);

@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/editProduct"
+        android:id="@+id/review"
         android:enabled="true"
-        android:title="Edit"
+        android:title="Rate the deliverer"
         android:visible="true" />
 
 </menu>
