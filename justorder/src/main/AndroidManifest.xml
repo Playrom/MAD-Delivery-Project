@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProductsListActivity" />
+        <activity android:name=".ProductsUserListActivity" />
         <activity android:name=".FavouriteProductsListActivity" />
         <activity android:name=".RestaurantsListActivity" />
         <activity android:name=".FavouriteRestaurantsListActivity" />

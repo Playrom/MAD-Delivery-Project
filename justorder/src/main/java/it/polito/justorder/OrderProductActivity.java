@@ -78,14 +78,28 @@ public class OrderProductActivity extends AbstractEditor {
 
             if(restaurant != null && product != null && user != null) {
 
-
+                Toast toast;
+                Integer i= 0;
                 Map<String, Integer> m = user.getProducts();
-                user.setRestaurantKey(restaurant.getName()); //da controllare che non si inseriscano prodotti di ristoranti diversi
-                m.put(product.getKeyId(), qty);
-                user.setProducts(m);
-                Database.INSTANCE.getUsers().save(user);
 
-                Toast toast = Toast.makeText(getApplicationContext(), "Prodotto Inserito al carrello", Toast.LENGTH_SHORT);
+                if(user.getCurrentRestaurant().equals(restaurant.getKeyId())){
+                    i = m.get(product.getKeyId());
+                    qty = qty + i;
+                    m.put(product.getKeyId(), qty);
+                    user.setProducts(m);
+                    Database.INSTANCE.getUsers().save(user);
+                    toast = Toast.makeText(getApplicationContext(), "Product added to cart", Toast.LENGTH_SHORT);
+                } else {
+                    if(user.getCurrentRestaurant().equals("")) {
+                        user.setCurrentRestaurant(restaurant.getKeyId());
+                        m.put(product.getKeyId(), qty);
+                        user.setProducts(m);
+                        Database.INSTANCE.getUsers().save(user);
+                        toast = Toast.makeText(getApplicationContext(), "Product added to cart", Toast.LENGTH_SHORT);
+                    } else {
+                        toast = Toast.makeText(getApplicationContext(), "Please choose product of the same restaurant", Toast.LENGTH_SHORT);
+                    }
+                }
                 toast.show();
                 finish();
             }
@@ -93,52 +107,7 @@ public class OrderProductActivity extends AbstractEditor {
 
         return super.onOptionsItemSelected(item);
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == it.polito.justorder_framework.R.id.saveUserData) {
 
-            String qty = quantityTextView.getText().toString();
-
-            Order order = new Order();
-            order.setState("pending");
-
-            if(restaurant != null && product != null && user != null) {
-                order.setRestaurantName(restaurant.getName());
-                order.setRestaurantAddress(restaurant.getAddress());
-                order.setRestaurant(restaurant.getKeyId());
-
-                Double price = Integer.parseInt(qty) * product.getCost();
-                order.setPrice(price);
-                Map<String, Integer> prod = new HashMap<String, Integer>();
-                prod.put(product.getKeyId(), Integer.parseInt(qty));
-                order.setProducts(prod);
-
-                order.setUserName(user.getName());
-                order.setUserAddress(user.getAddress());
-                order.setUser(user.getKeyId());
-
-                Database.INSTANCE.getOrders().save(order);
-
-                Map<String, Boolean> m = restaurant.getOrders();
-                m.put(order.getKeyId(), true);
-                restaurant.setOrders(m);
-                Database.INSTANCE.getRestaurants().save(restaurant);
-
-                Map<String, Boolean> m1 = user.getOrders();
-                m1.put(order.getKeyId(), true);
-                user.setOrders(m1);
-                Database.INSTANCE.getUsers().save(user);
-
-                Toast toast = Toast.makeText(getApplicationContext(), "Ordine Inserito", Toast.LENGTH_SHORT);
-                toast.show();
-                finish();
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-*/
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

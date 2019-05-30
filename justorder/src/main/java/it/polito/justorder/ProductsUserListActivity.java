@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.polito.justorder_framework.R;
+import it.polito.justorder_framework.abstract_activities.AbstractEditor;
 import it.polito.justorder_framework.abstract_activities.AbstractListViewWithSidenav;
 import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
 import it.polito.justorder_framework.db.Database;
@@ -37,7 +38,7 @@ import it.polito.justorder_framework.model.Restaurant;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
-public class ProductsUserListActivity extends ActivityAbstractWithToolbar {
+public class ProductsUserListActivity extends AbstractEditor {
 
     protected ListView listView;
     protected BaseAdapter adapter;
@@ -46,19 +47,15 @@ public class ProductsUserListActivity extends ActivityAbstractWithToolbar {
     protected User user;
     protected Restaurant restaurant;
     protected List<String> productKeys = new ArrayList<>();
-    protected List<Product> products = new ArrayList<>();
-    protected Product axx;
+    protected List<Product> productList = new ArrayList<>();
+    protected Map<String, Product> products = new HashMap<>();
+    protected Product product12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_list_activity);
         this.setupActivity();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.product_list_menu, menu);
-        return true;
     }
 
     @Override
@@ -72,12 +69,12 @@ public class ProductsUserListActivity extends ActivityAbstractWithToolbar {
         this.adapter = new BaseAdapter() {
             @Override
             public int getCount() {
-                return products.size();
+                return productList.size();
             }
 
             @Override
             public Object getItem(int position) {
-                return products.get(position);
+                return productList.get(position);
             }
 
             @Override
@@ -91,11 +88,15 @@ public class ProductsUserListActivity extends ActivityAbstractWithToolbar {
                     convertView = getLayoutInflater().inflate(R.layout.product_item_adapter, parent, false);
                 }
 
-                if(products.get(position) != null){
-                    Product product = products.get(position);
+                if(productList.get(position) != null){
+
+                    Product product = productList.get(position);
+                    Integer qty = user.getProducts().get(product.getKeyId());
+
                     ((TextView)convertView.findViewById(R.id.content)).setText(product.getName());
-                    ((TextView)convertView.findViewById(R.id.description)).setText(new Double(product.getCost()).toString());
+                    ((TextView)convertView.findViewById(R.id.description)).setText("cost: " + new Double(product.getCost()).toString() + " ,qty: " + qty );
                     Glide.with(ProductsUserListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
+
                 }
 
                 return convertView;
@@ -112,12 +113,19 @@ public class ProductsUserListActivity extends ActivityAbstractWithToolbar {
         this.user = (User) i.getSerializableExtra("user");
         if(this.user != null){
             this.productKeys = new ArrayList<>(this.user.getProducts().keySet());
-
-            Database.INSTANCE.getProducts().getWithIds(this.user.getProducts().keySet(), true, (product -> {
-                this.products.add(product);  //non riesco a risolvere errore
+            products.clear();
+            Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), (restaurant1 -> {
+                this.restaurant = restaurant1;
+                for (String prod : productKeys) {
+                    this.products.put(prod, this.restaurant.getProducts().get(prod));
+                }
+                this.productList = new ArrayList<>(products.values());
                 this.reloadData();
                 return Unit.INSTANCE;
             }));
+
+
+
         }
 
     }
@@ -132,7 +140,7 @@ public class ProductsUserListActivity extends ActivityAbstractWithToolbar {
     protected void reloadViews() {
         super.reloadViews();
         if(this.user != null){
-            this.actionBar.setTitle(this.user.getName() + " Cart's");
+            this.actionBar.setTitle(this.user.getName() + "'s Cart");
         }
         this.adapter.notifyDataSetChanged();
     }
@@ -146,10 +154,10 @@ public class ProductsUserListActivity extends ActivityAbstractWithToolbar {
             Order order = new Order();
             order.setState("pending");
 
-            if(user.getRestaurantKey() != null && products != null && user != null) {
+            if(user.getCurrentRestaurant() != null && products != null && user != null) {
 
 
-                Database.INSTANCE.getRestaurants().get(user.getRestaurantKey(), true, (restaurant -> {
+                Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), true, (restaurant -> {
                     this.restaurant = restaurant;
                     this.reloadData();
                     return Unit.INSTANCE;
@@ -160,29 +168,22 @@ public class ProductsUserListActivity extends ActivityAbstractWithToolbar {
                 order.setRestaurantAddress(restaurant.getAddress());
                 order.setRestaurant(restaurant.getKeyId());
 
+                Map <String,Double> mm = order.getProducts();
+                Double orderPrice = 0.0;
+
                 Iterator<Map.Entry<String, Integer>> iterator = user.getProducts().entrySet().iterator();
                 while (iterator.hasNext()) {
 
-
                     Map.Entry<String, Integer> entry = iterator.next();
-                    Database.INSTANCE.getProducts().get(entry.getKey(), true, (product -> {
-                        axx = product;
-                        this.reloadData();
-                        return Unit.INSTANCE;
-                    }));
-
-
-                    System.out.println("Key : " + entry.getKey() + " Value :" + entry.getValue());
-
-                    Double price = entry.getValue() * axx.getCost();
-                    order.setPrice(price);
-                    Map<String, Integer> prod = new HashMap<String, Integer>();
-                    prod.put(axx.getKeyId(), entry.getValue());
-                    order.setProducts(prod);
+                    product12 = products.get(entry.getKey());
+                    Double price = entry.getValue() * product12.getCost();
+                    orderPrice = orderPrice + price;
+                    order.setPrice(orderPrice);
+                    mm.put(product12.getKeyId(), price);
 
                 }
 
-
+                order.setProducts(mm);
                 order.setUserName(user.getName());
                 order.setUserAddress(user.getAddress());
                 order.setUser(user.getKeyId());
@@ -197,9 +198,11 @@ public class ProductsUserListActivity extends ActivityAbstractWithToolbar {
                 Map<String, Boolean> m1 = user.getOrders();
                 m1.put(order.getKeyId(), true);
                 user.setOrders(m1);
+                user.setCurrentRestaurant("");
+                user.setProducts(null);
                 Database.INSTANCE.getUsers().save(user);
 
-                Toast toast = Toast.makeText(getApplicationContext(), "Ordine Inserito", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(), "Order successfully inserted", Toast.LENGTH_SHORT);
                 toast.show();
                 finish();
             }
