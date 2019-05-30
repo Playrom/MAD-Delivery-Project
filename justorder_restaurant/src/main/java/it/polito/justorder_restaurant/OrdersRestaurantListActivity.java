@@ -7,6 +7,8 @@ import android.widget.AdapterView;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import it.polito.justorder_framework.common_activities.OrderDetails;

@@ -19,7 +19,9 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class OrdersListActivity extends AbstractListViewWithSidenav {
@@ -80,6 +82,31 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
         this.reloadData();
     }
 
+    protected int getMostPopularHour(List<Order> orders) {
+        int hour;
+        Map<Integer, Integer> m = new HashMap<>();
+        for (Order o : orders) {
+            hour = o.getTimestamp().getHours();
+            if (m.get(hour) != null) {
+                m.put(hour, m.get(hour) + 1);
+            }
+            else {
+                m.put(hour, 1);
+            }
+        }
+
+        Integer max = null;
+        for (Map.Entry<Integer, Integer> entry : m.entrySet())
+        {
+            if (max == null || entry.getValue().compareTo(max) > 0)
+            {
+                max = entry.getValue();
+            }
+        }
+
+        return max;
+    }
+
     protected void initDataSource() {
         Intent i = getIntent();
         this.ordersId = (ArrayList<String>) i.getSerializableExtra("orders");
@@ -87,6 +114,7 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
         Database.INSTANCE.getOrders().getWithIds(this.ordersId, orders1 -> {
             orders.clear();
             orders.addAll(orders1);
+            int maxHour = getMostPopularHour(orders);
             this.reloadViews();
             return Unit.INSTANCE;
         });

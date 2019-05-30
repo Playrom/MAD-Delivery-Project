@@ -95,7 +95,8 @@ public class ProductsListActivity extends AbstractListViewWithSidenav {
                 if(products.get(position) != null){
                     Product product = products.get(position);
                     ((TextView)convertView.findViewById(R.id.content)).setText(product.getName());
-                    ((TextView)convertView.findViewById(R.id.description)).setText(new Double(product.getCost()).toString());
+                    ((TextView)convertView.findViewById(R.id.description)).setText("Cost: " + new Double(product.getCost()).toString());
+                    ((TextView)convertView.findViewById(R.id.avgVote)).setText("Avg vote: " + String.valueOf(product.getAverageVote()));
                     Glide.with(ProductsListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
                 }
 
