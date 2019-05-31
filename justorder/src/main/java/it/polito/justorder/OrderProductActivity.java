@@ -74,6 +74,30 @@ public class OrderProductActivity extends AbstractEditor {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == it.polito.justorder_framework.R.id.saveUserData) {
 
+            Integer qty = new Integer(quantityTextView.getText().toString());
+
+            if(restaurant != null && product != null && user != null) {
+
+
+                Map<String, Integer> m = user.getProducts();
+                user.setRestaurantKey(restaurant.getName()); //da controllare che non si inseriscano prodotti di ristoranti diversi
+                m.put(product.getKeyId(), qty);
+                user.setProducts(m);
+                Database.INSTANCE.getUsers().save(user);
+
+                Toast toast = Toast.makeText(getApplicationContext(), "Prodotto Inserito al carrello", Toast.LENGTH_SHORT);
+                toast.show();
+                finish();
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+/*
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == it.polito.justorder_framework.R.id.saveUserData) {
+
             String qty = quantityTextView.getText().toString();
 
             Order order = new Order();
@@ -114,7 +138,7 @@ public class OrderProductActivity extends AbstractEditor {
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
