@@ -31,7 +31,7 @@ import java.util.Map;
 
 import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.abstract_activities.AbstractEditor;
-import it.polito.justorder_framework.abstract_activities.AbstractListViewWithSidenav;
+import it.polito.justorder_framework.abstract_activities.AbstractListViewWithSidenavSave;
 import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
 import it.polito.justorder_framework.common_activities.OrderDetails;
 import it.polito.justorder_framework.db.Database;
@@ -42,7 +42,7 @@ import it.polito.justorder_framework.model.Restaurant;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
-public class ProductsUserListActivity extends AbstractEditor {
+public class ProductsUserListActivity extends AbstractListViewWithSidenavSave {
 
     protected ListView listView;
     protected BaseAdapter adapter;
@@ -126,9 +126,9 @@ public class ProductsUserListActivity extends AbstractEditor {
     }
 
     protected void initDataSource() {
-        Intent i = getIntent();
-        this.user = (User) i.getSerializableExtra("user");
-        if (this.user != null) {
+
+        this.user = Database.INSTANCE.getCurrent_User();
+        if (this.user != null && this.user.getProducts() != null) {
             this.productKeys = new ArrayList<>(this.user.getProducts().keySet());
             products.clear();
             Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), (restaurant1 -> {
@@ -170,7 +170,7 @@ public class ProductsUserListActivity extends AbstractEditor {
             Order order = new Order();
             order.setState("pending");
 
-            if (user.getCurrentRestaurant() != null && products != null && user != null) {
+            if (user.getCurrentRestaurant() != null && products != null && user != null && user.getProducts()!= null) {
 
 
                 Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), true, (restaurant -> {
@@ -216,11 +216,13 @@ public class ProductsUserListActivity extends AbstractEditor {
                 user.setOrders(m1);
                 user.setCurrentRestaurant("");
                 user.setProducts(null);
+                productList.clear();
+                productKeys.clear();
                 Database.INSTANCE.getUsers().save(user);
 
                 Toast toast = Toast.makeText(getApplicationContext(), "Order successfully inserted", Toast.LENGTH_SHORT);
                 toast.show();
-                finish();
+              //  finish();
             }
         }
 

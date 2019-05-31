@@ -81,6 +81,8 @@ public class OrderProductActivity extends AbstractEditor {
                 Toast toast;
                 Integer i= 0;
                 Map<String, Integer> m = user.getProducts();
+                if(user.getProducts() == null) m = new HashMap<String, Integer>();
+
 
                 if(user.getCurrentRestaurant().equals(restaurant.getKeyId())){
                     i = m.get(product.getKeyId());

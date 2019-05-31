@@ -64,10 +64,8 @@ public class RouteHandler extends AbstractRouteHandler {
         }
 
         if(item.getItemId() == R.id.cart) {
-            user = Database.INSTANCE.getCurrent_User();
             Intent intent = new Intent(context, ProductsUserListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra("user", user);
             context.startActivity(intent);
             return true;
         }
