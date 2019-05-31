@@ -2,6 +2,8 @@ package it.polito.justorder;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,7 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -30,6 +33,7 @@ import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.abstract_activities.AbstractEditor;
 import it.polito.justorder_framework.abstract_activities.AbstractListViewWithSidenav;
 import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
+import it.polito.justorder_framework.common_activities.OrderDetails;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.db.Products;
 import it.polito.justorder_framework.model.Order;
@@ -84,17 +88,17 @@ public class ProductsUserListActivity extends AbstractEditor {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                if(convertView == null) {
+                if (convertView == null) {
                     convertView = getLayoutInflater().inflate(R.layout.product_item_adapter, parent, false);
                 }
 
-                if(productList.get(position) != null){
+                if (productList.get(position) != null) {
 
                     Product product = productList.get(position);
                     Integer qty = user.getProducts().get(product.getKeyId());
 
-                    ((TextView)convertView.findViewById(R.id.content)).setText(product.getName());
-                    ((TextView)convertView.findViewById(R.id.description)).setText("cost: " + new Double(product.getCost()).toString() + " ,qty: " + qty );
+                    ((TextView) convertView.findViewById(R.id.content)).setText(product.getName());
+                    ((TextView) convertView.findViewById(R.id.description)).setText("cost: " + new Double(product.getCost()).toString() + " ,qty: " + qty);
                     Glide.with(ProductsUserListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
 
                 }
@@ -105,13 +109,26 @@ public class ProductsUserListActivity extends AbstractEditor {
         this.listView.setAdapter(this.adapter);
         this.actionBar.setTitle(R.string.product_list_title);
 
+        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Product entry = (Product) parent.getAdapter().getItem(position);
+                Intent intent = new Intent(ProductsUserListActivity.this, CartProductActivity.class);
+
+                intent.putExtra("product", entry);
+                intent.putExtra("qty", user.getProducts().get(entry.getKeyId()));
+                tapped = position;
+                ProductsUserListActivity.this.startActivityForResult(intent, 1);
+            }
+        });
+
         this.reloadData();
     }
 
     protected void initDataSource() {
         Intent i = getIntent();
         this.user = (User) i.getSerializableExtra("user");
-        if(this.user != null){
+        if (this.user != null) {
             this.productKeys = new ArrayList<>(this.user.getProducts().keySet());
             products.clear();
             Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), (restaurant1 -> {
@@ -123,7 +140,6 @@ public class ProductsUserListActivity extends AbstractEditor {
                 this.reloadData();
                 return Unit.INSTANCE;
             }));
-
 
 
         }
@@ -139,7 +155,7 @@ public class ProductsUserListActivity extends AbstractEditor {
     @Override
     protected void reloadViews() {
         super.reloadViews();
-        if(this.user != null){
+        if (this.user != null) {
             this.actionBar.setTitle(this.user.getName() + "'s Cart");
         }
         this.adapter.notifyDataSetChanged();
@@ -148,13 +164,13 @@ public class ProductsUserListActivity extends AbstractEditor {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == it.polito.justorder_framework.R.id.saveUserData) {
+        if (item.getItemId() == it.polito.justorder_framework.R.id.saveUserData) {
 
 
             Order order = new Order();
             order.setState("pending");
 
-            if(user.getCurrentRestaurant() != null && products != null && user != null) {
+            if (user.getCurrentRestaurant() != null && products != null && user != null) {
 
 
                 Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), true, (restaurant -> {
@@ -168,7 +184,7 @@ public class ProductsUserListActivity extends AbstractEditor {
                 order.setRestaurantAddress(restaurant.getAddress());
                 order.setRestaurant(restaurant.getKeyId());
 
-                Map <String,Double> mm = order.getProducts();
+                Map<String, Double> mm = order.getProducts();
                 Double orderPrice = 0.0;
 
                 Iterator<Map.Entry<String, Integer>> iterator = user.getProducts().entrySet().iterator();
@@ -209,5 +225,46 @@ public class ProductsUserListActivity extends AbstractEditor {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("user", user);
+        outState.putSerializable("rest", restaurant);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        user = (User) savedInstanceState.getSerializable("user");
+        restaurant = (Restaurant) savedInstanceState.getSerializable("rest");
+        reloadViews();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) { // Activity.RESULT_OK
+
+                // get String data from Intent
+               Integer qty = (Integer) data.getSerializableExtra("qty");
+
+               Product prod= (Product) data.getSerializableExtra("product");
+
+               if (qty == 0){
+                   user.getProducts().remove(prod.getKeyId());
+               } else {
+                   user.getProducts().put(prod.getKeyId(), qty);
+               }
+                Database.INSTANCE.getUsers().save(user);
+                this.setupActivity();
+
+            }
+        }
     }
 }

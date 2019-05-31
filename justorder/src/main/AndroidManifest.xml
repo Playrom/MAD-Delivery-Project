@@ -27,6 +27,7 @@
         <activity android:name=".ReviewActivity" />
         <activity android:name=".ProductClientActivity"></activity>
         <activity android:name=".OrderProductActivity"></activity>
+        <activity android:name=".CartProductActivity"></activity>
         <activity android:name=".OrdersUserListActivity"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.OrderDetails"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity"></activity>
