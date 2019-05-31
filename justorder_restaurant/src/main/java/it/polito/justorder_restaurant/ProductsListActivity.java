@@ -12,6 +12,8 @@ import kotlin.Unit;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -35,6 +37,8 @@ public class ProductsListActivity extends AbstractListViewWithSidenav {
     protected int tapped;
     protected Restaurant restaurant;
     protected List<Product> products = new ArrayList<>();
+    protected List<Product> visibleProducts = new ArrayList<>();
+    protected boolean isSorting = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,23 +113,20 @@ public class ProductsListActivity extends AbstractListViewWithSidenav {
         this.reloadData();
     }
 
-    protected void initDataSource() {
+    protected void initDataSource(){
+        //get filtering criteria
+
         Intent i = getIntent();
         this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
         if(this.restaurant != null){
             this.products = new ArrayList<>(this.restaurant.getProducts().values());
-            this.products.sort(new Comparator<Product>() {
-                @Override
-                public int compare(Product p1, Product p2) {
-                    if (p1.getAverageVote() > p2.getAverageVote()) {
-                        return 1;
-                    }
-                    if (p1.getAverageVote() < p2.getAverageVote()) {
-                        return -1;
-                    }
-                    return 0;
-                }
-            });
+            if(this.isSorting) {
+                this.applyFilters();
+            }else{
+                this.visibleProducts.clear();
+                this.visibleProducts.addAll(this.products);
+                this.reloadViews();
+            }
         }
 
         Database.INSTANCE.getRestaurants().get(this.restaurant.getKeyId(), true, (restaurant1 -> {
@@ -133,6 +134,24 @@ public class ProductsListActivity extends AbstractListViewWithSidenav {
             this.reloadData();
             return Unit.INSTANCE;
         }));
+    }
+
+    protected void applyFilters(){
+        this.visibleProducts.clear();
+        this.visibleProducts.addAll(this.products);
+        this.visibleProducts.sort(new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                if (p1.getAverageVote() > p2.getAverageVote()) {
+                    return 1;
+                }
+                if (p1.getAverageVote() < p2.getAverageVote()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+        this.reloadViews();
     }
 
     @Override
@@ -172,5 +191,26 @@ public class ProductsListActivity extends AbstractListViewWithSidenav {
                 this.reloadData();
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_sort_by_value_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.sortByVote) {
+            this.isSorting = !this.isSorting;
+            if(this.isSorting) {
+                this.applyFilters();
+            }else{
+                this.visibleProducts.clear();
+                this.visibleProducts.addAll(this.products);
+                this.reloadViews();
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

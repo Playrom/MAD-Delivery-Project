@@ -55,4 +55,6 @@
     <string name="rider">Rider Name</string>
 
     <string name="edit_user_title">Edit User</string>
+    <string name="sort_by_vote">Sort by Vote</string>
+    <string name="sort_by_time_of_order">Sort By Time of Order</string>
 </resources>

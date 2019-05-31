@@ -1,11 +1,7 @@
 package it.polito.justorder;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,33 +12,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import it.polito.justorder_framework.R;
-import it.polito.justorder_framework.abstract_activities.AbstractEditor;
 import it.polito.justorder_framework.abstract_activities.AbstractListViewWithSidenavSave;
-import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
-import it.polito.justorder_framework.common_activities.OrderDetails;
 import it.polito.justorder_framework.db.Database;
-import it.polito.justorder_framework.db.Products;
 import it.polito.justorder_framework.model.Order;
 import it.polito.justorder_framework.model.Product;
 import it.polito.justorder_framework.model.Restaurant;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
-public class ProductsUserListActivity extends AbstractListViewWithSidenavSave {
+public class CartProductsUserListActivity extends AbstractListViewWithSidenavSave {
 
     protected ListView listView;
     protected BaseAdapter adapter;
@@ -99,7 +87,7 @@ public class ProductsUserListActivity extends AbstractListViewWithSidenavSave {
 
                     ((TextView) convertView.findViewById(R.id.content)).setText(product.getName());
                     ((TextView) convertView.findViewById(R.id.description)).setText("cost: " + new Double(product.getCost()).toString() + " ,qty: " + qty);
-                    Glide.with(ProductsUserListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
+                    Glide.with(CartProductsUserListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
 
                 }
 
@@ -113,12 +101,12 @@ public class ProductsUserListActivity extends AbstractListViewWithSidenavSave {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Product entry = (Product) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(ProductsUserListActivity.this, CartProductActivity.class);
+                Intent intent = new Intent(CartProductsUserListActivity.this, CartProductActivity.class);
 
                 intent.putExtra("product", entry);
                 intent.putExtra("qty", user.getProducts().get(entry.getKeyId()));
                 tapped = position;
-                ProductsUserListActivity.this.startActivityForResult(intent, 1);
+                CartProductsUserListActivity.this.startActivityForResult(intent, 1);
             }
         });
 
