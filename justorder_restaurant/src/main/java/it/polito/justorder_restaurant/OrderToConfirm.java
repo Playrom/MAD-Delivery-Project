@@ -37,7 +37,7 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
     private User user;
     private TextView orderIdTextField, userTextField, addressTextField, priceTextField, timestampTextField, productsTextField;
     private String productString;
-    private Map<Product, Integer> products = new HashMap<>();
+    private Map<Product, Double> products = new HashMap<>();
     private List<Deliverer> deliverers = new ArrayList<>();
 
     @Override
@@ -114,7 +114,7 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
     private String createProductString() {
 
         String productString = "";
-        for(Map.Entry<Product, Integer> entry : products.entrySet()){
+        for(Map.Entry<Product, Double> entry : products.entrySet()){
             productString += entry.getKey().getName() + "\n";
         }
 
