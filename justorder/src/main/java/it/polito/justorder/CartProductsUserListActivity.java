@@ -161,61 +161,61 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
 
             if (user.getCurrentRestaurant() != null && products != null && user != null && user.getProducts()!= null) {
 
+                if(user.getProducts().size()!=0) {
+                    Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), true, (restaurant -> {
+                        this.restaurant = restaurant;
+                        this.reloadData();
+                        return Unit.INSTANCE;
+                    }));
 
-                Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), true, (restaurant -> {
-                    this.restaurant = restaurant;
-                    this.reloadData();
-                    return Unit.INSTANCE;
-                }));
 
+                    order.setRestaurantName(restaurant.getName());
+                    order.setRestaurantAddress(restaurant.getAddress());
+                    order.setRestaurant(restaurant.getKeyId());
 
-                order.setRestaurantName(restaurant.getName());
-                order.setRestaurantAddress(restaurant.getAddress());
-                order.setRestaurant(restaurant.getKeyId());
+                    Map<String, OrderProduct> mm = order.getProducts();
+                    Double orderPrice = 0.0;
 
-                Map<String, OrderProduct> mm = order.getProducts();
-                Double orderPrice = 0.0;
+                    Iterator<Map.Entry<String, Integer>> iterator = user.getProducts().entrySet().iterator();
+                    while (iterator.hasNext()) {
 
-                Iterator<Map.Entry<String, Integer>> iterator = user.getProducts().entrySet().iterator();
-                while (iterator.hasNext()) {
+                        Map.Entry<String, Integer> entry = iterator.next();
+                        product12 = products.get(entry.getKey());
+                        Double price = entry.getValue() * product12.getCost();
+                        orderPrice = orderPrice + price;
+                        order.setPrice(orderPrice);
+                        OrderProduct op = new OrderProduct();
+                        op.setProductKey(product12.getKeyId());
+                        op.setRestaurantKey(user.getCurrentRestaurant());
+                        op.setQuantity(entry.getValue());
+                        mm.put(product12.getKeyId(), op);
 
-                    Map.Entry<String, Integer> entry = iterator.next();
-                    product12 = products.get(entry.getKey());
-                    Double price = entry.getValue() * product12.getCost();
-                    orderPrice = orderPrice + price;
-                    order.setPrice(orderPrice);
-                    OrderProduct op = new OrderProduct();
-                    op.setProductKey(product12.getKeyId());
-                    op.setRestaurantKey(user.getCurrentRestaurant());
-                    op.setQuantity(entry.getValue());
-                    mm.put(product12.getKeyId(), op);
+                    }
 
+                    order.setProducts(mm);
+                    order.setUserName(user.getName());
+                    order.setUserAddress(user.getAddress());
+                    order.setUser(user.getKeyId());
+
+                    Database.INSTANCE.getOrders().save(order);
+
+                    Map<String, Boolean> m = restaurant.getOrders();
+                    m.put(order.getKeyId(), true);
+                    restaurant.setOrders(m);
+                    Database.INSTANCE.getRestaurants().save(restaurant);
+
+                    Map<String, Boolean> m1 = user.getOrders();
+                    m1.put(order.getKeyId(), true);
+                    user.setOrders(m1);
+                    user.setCurrentRestaurant("");
+                    user.setProducts(null);
+                    productList.clear();
+                    productKeys.clear();
+                    Database.INSTANCE.getUsers().save(user);
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "Order successfully inserted", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
-
-                order.setProducts(mm);
-                order.setUserName(user.getName());
-                order.setUserAddress(user.getAddress());
-                order.setUser(user.getKeyId());
-
-                Database.INSTANCE.getOrders().save(order);
-
-                Map<String, Boolean> m = restaurant.getOrders();
-                m.put(order.getKeyId(), true);
-                restaurant.setOrders(m);
-                Database.INSTANCE.getRestaurants().save(restaurant);
-
-                Map<String, Boolean> m1 = user.getOrders();
-                m1.put(order.getKeyId(), true);
-                user.setOrders(m1);
-                user.setCurrentRestaurant("");
-                user.setProducts(null);
-                productList.clear();
-                productKeys.clear();
-                Database.INSTANCE.getUsers().save(user);
-
-                Toast toast = Toast.makeText(getApplicationContext(), "Order successfully inserted", Toast.LENGTH_SHORT);
-                toast.show();
-              //  finish();
             }
         }
 
