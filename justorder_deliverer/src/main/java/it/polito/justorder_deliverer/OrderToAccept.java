@@ -45,7 +45,7 @@ public class OrderToAccept extends AbstractViewerWithImagePickerActivityAndToolb
 
 
     private String productString;
-    private Map<Product, Integer> products = new HashMap<>();
+    private Map<Product, Double> products = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +137,7 @@ public class OrderToAccept extends AbstractViewerWithImagePickerActivityAndToolb
     private String createProductString() {
 
         String productString = "";
-        for(Map.Entry<Product, Integer> entry : products.entrySet()){
+        for(Map.Entry<Product, Double> entry : products.entrySet()){
             productString += entry.getKey().getName() + "\n";
         }
 
