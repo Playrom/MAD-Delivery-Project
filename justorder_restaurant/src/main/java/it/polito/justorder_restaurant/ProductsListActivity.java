@@ -44,36 +44,6 @@ public class ProductsListActivity extends AbstractListViewWithSidenav {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_list_activity);
-        this.setupActivity();
-    }
-
-    @Override
-    protected void setupActivity() {
-        super.setupActivity();
-        this.listView = findViewById(R.id.food_list);
-        this.fab = findViewById(R.id.fab);
-        this.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Product entry = new Product();
-                Intent intent = new Intent(ProductsListActivity.this, ProductEditActivity.class);
-                intent.putExtra("product", entry);
-                startActivityForResult(intent, 2);
-            }
-        });
-
-        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Product entry = (Product) parent.getAdapter().getItem(position);
-                Intent intent = new Intent(ProductsListActivity.this, routeHandler.getProductActivityClass());
-                intent.putExtra("product", entry);
-                intent.putExtra("restaurant", restaurant);
-                tapped = position;
-                startActivityForResult(intent, 1);
-            }
-        });
-
         this.adapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -107,6 +77,36 @@ public class ProductsListActivity extends AbstractListViewWithSidenav {
                 return convertView;
             }
         };
+        this.setupActivity();
+    }
+
+    @Override
+    protected void setupActivity() {
+        super.setupActivity();
+        this.listView = findViewById(R.id.food_list);
+        this.fab = findViewById(R.id.fab);
+        this.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Product entry = new Product();
+                Intent intent = new Intent(ProductsListActivity.this, ProductEditActivity.class);
+                intent.putExtra("product", entry);
+                startActivityForResult(intent, 2);
+            }
+        });
+
+        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Product entry = (Product) parent.getAdapter().getItem(position);
+                Intent intent = new Intent(ProductsListActivity.this, routeHandler.getProductActivityClass());
+                intent.putExtra("product", entry);
+                intent.putExtra("restaurant", restaurant);
+                tapped = position;
+                startActivityForResult(intent, 1);
+            }
+        });
+
         this.listView.setAdapter(this.adapter);
         this.actionBar.setTitle(R.string.product_list_title);
 
