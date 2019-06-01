@@ -12,12 +12,12 @@ class User : Model(), Serializable{
 
     var delivererKey: String? = null
     var restaurantKey: String? = null
-
+    var currentRestaurant: String = ""
     var orders: Map<String, Boolean> = mutableMapOf<String, Boolean>()
     var favouriteRestaurants: Map<String, Boolean> = mutableMapOf<String, Boolean>()
     var favouriteProducts: Map<String, Boolean> = mutableMapOf<String, Boolean>()
 
-    var products: Map<String, Int> = mutableMapOf()
+    var products: Map<String, Int>? = mutableMapOf()
 
 
 }

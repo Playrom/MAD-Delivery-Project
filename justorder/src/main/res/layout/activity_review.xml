@@ -78,16 +78,6 @@ android:fitsSystemWindows="true">
                 android:hint="Tell us what you loved"
                 android:gravity="top"/>
 
-            <Button
-                android:id="@+id/btnSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_below="@id/reviewField"
-                android:background="#e57373"
-                android:text="Send feedback"
-                android:textColor="@android:color/white" />
-
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

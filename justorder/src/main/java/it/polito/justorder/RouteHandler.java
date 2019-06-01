@@ -7,11 +7,9 @@ import android.view.MenuItem;
 
 import it.polito.justorder_framework.AbstractRouteHandler;
 import it.polito.justorder_framework.FirebaseFunctions;
-import it.polito.justorder_framework.common_activities.OrdersListActivity;
 import it.polito.justorder_framework.common_activities.UserSettingsViewerActivity;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.User;
-import kotlin.Unit;
 
 public class RouteHandler extends AbstractRouteHandler {
 
@@ -64,10 +62,8 @@ public class RouteHandler extends AbstractRouteHandler {
         }
 
         if(item.getItemId() == R.id.cart) {
-            user = Database.INSTANCE.getCurrent_User();
-            Intent intent = new Intent(context, ProductsUserListActivity.class);
+            Intent intent = new Intent(context, CartProductsUserListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra("user", user);
             context.startActivity(intent);
             return true;
         }

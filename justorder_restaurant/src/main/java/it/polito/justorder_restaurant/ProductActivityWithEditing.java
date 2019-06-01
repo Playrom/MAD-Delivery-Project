@@ -30,7 +30,10 @@ public class ProductActivityWithEditing extends ProductActivity {
         if(requestCode == 1){
             if(resultCode== Activity.RESULT_OK){
                 product = (Product) data.getSerializableExtra("product");
-                Database.INSTANCE.getProducts().save(product);
+                if(product.getKeyId() == null){
+                    product.setKeyId(Database.INSTANCE.getRestaurants().generateKeyForChild("products"));
+                }
+                this.restaurant.getProducts().put(product.getKeyId(), product);
                 this.reloadViews();
             }
         }

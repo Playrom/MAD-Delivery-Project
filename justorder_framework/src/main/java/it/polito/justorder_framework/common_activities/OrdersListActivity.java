@@ -1,20 +1,26 @@
 package it.polito.justorder_framework.common_activities;
 
 import it.polito.justorder_framework.R;
+import it.polito.justorder_framework.Utils;
 import it.polito.justorder_framework.abstract_activities.AbstractListViewWithSidenav;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Order;
 import kotlin.Unit;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,6 +38,7 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
     protected int tapped;
     protected List<String> ordersId = new ArrayList<>();
     protected List<Order> orders = new ArrayList<>();
+    protected Integer maxHour = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +89,7 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
         this.reloadData();
     }
 
-    protected int getMostPopularHour(List<Order> orders) {
+    protected Integer getMostPopularHour(List<Order> orders) {
         int hour;
         Map<Integer, Integer> m = new HashMap<>();
         for (Order o : orders) {
@@ -104,7 +111,7 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
             }
         }
 
-        return max;
+        return new Integer(max);
     }
 
     protected void initDataSource() {
@@ -114,7 +121,7 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
         Database.INSTANCE.getOrders().getWithIds(this.ordersId, orders1 -> {
             orders.clear();
             orders.addAll(orders1);
-            int maxHour = getMostPopularHour(orders);
+            this.maxHour = getMostPopularHour(orders);
             this.reloadViews();
             return Unit.INSTANCE;
         });

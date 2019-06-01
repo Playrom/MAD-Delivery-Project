@@ -6,6 +6,5 @@ class Product: ModelWithVote() {
     var cost: Double = 0.0
     var notes: String = ""
     var ingredients: List<String> = mutableListOf()
-    var reviews: Map<String, Boolean> = mutableMapOf<String, Boolean>()
     var category: String = ""
 }

@@ -8,6 +8,8 @@ import kotlin.Unit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,24 +19,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RestaurantsListActivity extends AbstractListViewWithSidenav {
 
     protected ListView listView;
     protected BaseAdapter adapter;
-    protected FloatingActionButton fab;
     private int tapped;
     protected Button button_search;
     protected EditText search_bar;
     protected List<Restaurant> restaurants = new ArrayList<>();
-    protected List<Restaurant> filtered_restaurants = new ArrayList<>();
+    protected List<Restaurant> visibleRestaurants = new ArrayList<>();
     protected String filter = "";
+    protected boolean isSorting = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +79,12 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
         this.adapter = new BaseAdapter() {
             @Override
             public int getCount() {
-                return restaurants.size();
+                return visibleRestaurants.size();
             }
 
             @Override
             public Object getItem(int position) {
-                return restaurants.get(position);
+                return visibleRestaurants.get(position);
             }
 
             @Override
@@ -94,10 +98,11 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
                     convertView = getLayoutInflater().inflate(R.layout.restaurant_item_adapter, parent, false);
                 }
 
-                if(restaurants.get(position) != null){
-                    Restaurant restaurant = restaurants.get(position);
+                if(visibleRestaurants.get(position) != null){
+                    Restaurant restaurant = visibleRestaurants.get(position);
                     ((TextView)convertView.findViewById(R.id.content)).setText(restaurant.getName());
                     ((TextView)convertView.findViewById(R.id.description)).setText(restaurant.getAddress());
+                    ((TextView)convertView.findViewById(R.id.avgVote)).setText("Avg vote: " + String.valueOf(restaurant.getAverageVote()));
                     Glide.with(RestaurantsListActivity.this).load(restaurant.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
                 }
 
@@ -110,20 +115,6 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
         this.reloadData();
     }
 
-    protected void initDataSource(){
-        //get filtering criteria
-        Database.INSTANCE.getRestaurants().orderByVote(restaurants1 -> {
-            this.restaurants.clear();
-            for (Restaurant rest : restaurants1) {
-                if (rest.getName().contains(filter)) {
-                    restaurants.add(rest);
-                }
-            }
-            this.reloadViews();
-            return Unit.INSTANCE;
-        });
-    }
-
     @Override
     protected void reloadData() {
         super.reloadData();
@@ -134,5 +125,47 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
     protected void reloadViews() {
         super.reloadViews();
         this.adapter.notifyDataSetChanged();
+    }
+
+    protected void initDataSource(){
+        //get filtering criteria
+        Database.INSTANCE.getRestaurants().getAll(restaurants1 -> {
+            this.restaurants = (List<Restaurant>) restaurants1;
+            this.applyFilters();
+            return Unit.INSTANCE;
+        });
+    }
+
+    protected void applyFilters(){
+        this.visibleRestaurants.clear();
+        for (Restaurant rest : this.restaurants) {
+            if (rest.getName().toLowerCase().contains(filter.toLowerCase()) || filter.replaceAll(" ", "").equals("")) {
+                visibleRestaurants.add(rest);
+            }
+        }
+        this.reloadViews();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.sortByVote) {
+            this.isSorting = !this.isSorting;
+            if(this.isSorting) {
+                Database.INSTANCE.getRestaurants().orderByVote(restaurants1 -> {
+                    this.restaurants = (List<Restaurant>) restaurants1;
+                    this.applyFilters();
+                    return Unit.INSTANCE;
+                });
+            }else{
+                this.initDataSource();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_sort_by_value_menu, menu);
+        return true;
     }
 }

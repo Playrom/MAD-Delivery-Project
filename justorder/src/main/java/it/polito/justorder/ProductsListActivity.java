@@ -40,6 +40,8 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
     protected int tapped;
     protected Restaurant restaurant;
     protected List<Product> products = new ArrayList<>();
+    protected List<Product> visibleProducts = new ArrayList<>();
+    protected boolean isSorting = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,6 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
     @Override
     protected void setupActivity() {
         super.setupActivity();
-        this.initDataSource();
         this.listView = findViewById(R.id.food_list);
         this.fab = findViewById(R.id.fab);
         this.fab.hide();
@@ -77,12 +78,12 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
         this.adapter = new BaseAdapter() {
             @Override
             public int getCount() {
-                return products.size();
+                return visibleProducts.size();
             }
 
             @Override
             public Object getItem(int position) {
-                return products.get(position);
+                return visibleProducts.get(position);
             }
 
             @Override
@@ -96,10 +97,11 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
                     convertView = getLayoutInflater().inflate(R.layout.product_item_adapter, parent, false);
                 }
 
-                if(products.get(position) != null){
-                    Product product = products.get(position);
+                if(visibleProducts.get(position) != null){
+                    Product product = visibleProducts.get(position);
                     ((TextView)convertView.findViewById(R.id.content)).setText(product.getName());
                     ((TextView)convertView.findViewById(R.id.description)).setText(new Double(product.getCost()).toString());
+                    ((TextView)convertView.findViewById(R.id.avgVote)).setText("Avg vote: " + String.valueOf(product.getAverageVote()));
                     Glide.with(ProductsListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
                 }
 
@@ -110,26 +112,25 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
         this.actionBar.setTitle(R.string.product_list_title);
         //this.actionBar.
 
+        this.initDataSource();
         this.reloadData();
     }
 
-    protected void initDataSource() {
+
+    protected void initDataSource(){
+        //get filtering criteria
+
         Intent i = getIntent();
         this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
         if(this.restaurant != null){
             this.products = new ArrayList<>(this.restaurant.getProducts().values());
-            this.products.sort(new Comparator<Product>() {
-                @Override
-                public int compare(Product p1, Product p2) {
-                    if (p1.getAverageVote() > p2.getAverageVote()) {
-                        return 1;
-                    }
-                    if (p1.getAverageVote() < p2.getAverageVote()) {
-                        return -1;
-                    }
-                    return 0;
-                }
-            });
+            if(this.isSorting) {
+                this.applyFilters();
+            }else{
+                this.visibleProducts.clear();
+                this.visibleProducts.addAll(this.products);
+                this.reloadViews();
+            }
         }
 
         Database.INSTANCE.getRestaurants().get(this.restaurant.getKeyId(), true, (restaurant1 -> {
@@ -137,6 +138,24 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
             this.reloadData();
             return Unit.INSTANCE;
         }));
+    }
+
+    protected void applyFilters(){
+        this.visibleProducts.clear();
+        this.visibleProducts.addAll(this.products);
+        this.visibleProducts.sort(new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                if (p1.getAverageVote() > p2.getAverageVote()) {
+                    return 1;
+                }
+                if (p1.getAverageVote() < p2.getAverageVote()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+        this.reloadViews();
     }
 
     @Override
@@ -160,7 +179,7 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
         if(requestCode == 1){
             if(resultCode== Activity.RESULT_OK){
                 Product product = (Product) data.getSerializableExtra("product");
-                products.set(tapped, product);
+                visibleProducts.set(tapped, product);
                 this.restaurant.getProducts().put(product.getKeyId(), product);
                 Database.INSTANCE.getRestaurants().save(restaurant);
                 this.reloadData();
@@ -168,7 +187,7 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
         }else if(requestCode == 2){
             if(resultCode== Activity.RESULT_OK){
                 Product product = (Product) data.getSerializableExtra("product");
-                products.add(product);
+                visibleProducts.add(product);
                 String key = Database.INSTANCE.getRestaurants().generateKeyForChild(this.restaurant.getKeyId());
                 product.setKeyId(key);
                 this.restaurant.getProducts().put(key, product);
@@ -177,16 +196,26 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
             }
         }
     }
+
     @Override
-
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.review){
-            Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
-            i.putExtra("restaurant", this.restaurant);
-            startActivity(i);
-            return true;
+        if(item.getItemId() == R.id.sortByVote) {
+            this.isSorting = !this.isSorting;
+            if(this.isSorting) {
+                this.applyFilters();
+            }else{
+                this.visibleProducts.clear();
+                this.visibleProducts.addAll(this.products);
+                this.reloadViews();
+            }
+        }else{
+            if(item.getItemId() == R.id.review){
+                Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
+                i.putExtra("restaurant", this.restaurant);
+                startActivity(i);
+                return true;
+            }
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

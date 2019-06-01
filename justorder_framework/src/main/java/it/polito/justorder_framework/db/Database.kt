@@ -34,7 +34,6 @@ object Database {
      var storage = Storage
 
      val users = ModelOperations<User>(User::class.java, "users")
-     val products = ModelWithVoteOperations<Product>(Product::class.java, "products")
      val restaurants = ModelWithVoteOperations<Restaurant>(Restaurant::class.java, "restaurants")
      val deliverers = ModelWithVoteOperations<Deliverer>(Deliverer::class.java, "deliverers")
      val orders = ModelOperations<Order>(Order::class.java, "orders")
@@ -69,5 +68,10 @@ object Database {
 
      var Current_User : User? = null
           private set
+
+     fun generateKeyForChild(path: String) : String?{
+          var ref = Database.db.child(path)
+          return ref.push().key
+     }
 
 }

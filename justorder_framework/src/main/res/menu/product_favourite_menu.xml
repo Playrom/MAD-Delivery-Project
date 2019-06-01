@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_menu" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_menu">
 
+    <item
+        android:id="@+id/add_to_cart"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_shopping_cart_black_24dp"
+        app:showAsAction="always"
+        android:title="Add to card"
+        android:visible="true" />
     <item
         android:id="@+id/add_to_favourite"
         android:enabled="true"

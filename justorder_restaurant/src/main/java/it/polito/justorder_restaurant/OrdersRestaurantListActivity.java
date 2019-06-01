@@ -1,10 +1,14 @@
 package it.polito.justorder_restaurant;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,5 +78,32 @@ public class OrdersRestaurantListActivity extends OrdersListActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         this.initDataSource();
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_most_popolar_time_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.mostPopolarTime && this.maxHour != null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OrdersRestaurantListActivity.this);
+            AlertDialog dialog = builder
+                    .setTitle(getString(R.string.most_popolar_time))
+                    .setMessage(this.maxHour.toString())
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .create();
+            dialog.show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

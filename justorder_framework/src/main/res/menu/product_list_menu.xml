@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_menu" >
+    android:id="@+id/main_menu"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/review"
         android:enabled="true"
+        android:icon="@drawable/ic_star_border_black_24dp"
+        app:showAsAction="always"
         android:title="Rate the restaurant"
         android:visible="true" />
 
+    <item
+        android:id="@+id/sortByVote"
+        android:enabled="true"
+        android:icon="@drawable/ic_sort_black_24dp"
+        app:showAsAction="always"
+        android:title="@string/sort_by_vote"
+        android:visible="true" />
 </menu>

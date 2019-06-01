@@ -6,6 +6,7 @@ import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToo
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Deliverer;
 import it.polito.justorder_framework.model.Order;
+import it.polito.justorder_framework.model.OrderProduct;
 import it.polito.justorder_framework.model.Product;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
@@ -29,7 +30,7 @@ public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolba
     private User user;
     private TextView orderIdTextField, userTextField, addressTextField, priceTextField, timestampTextField, riderTextField, productsTextField;
     private String productString;
-    private Map<Product, Integer> products = new HashMap<>();
+    private Map<Product,Double> products = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +82,10 @@ public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolba
                 }));
             }
 
-            for(Map.Entry<String, Integer> entry : this.order.getProducts().entrySet()){
-                Database.INSTANCE.getProducts().get(entry.getKey(), (product -> {
-                    this.products.put(product, entry.getValue());
+            for(Map.Entry<String, OrderProduct> entry : this.order.getProducts().entrySet()){
+
+                Database.INSTANCE.getRestaurants().get(entry.getValue().getRestaurantKey(), (restaurant -> {
+                    this.products.put(restaurant.getProducts().get(entry.getValue().getProductKey()), entry.getValue().getQuantity());
                     this.reloadViews();
                     return Unit.INSTANCE;
                 }));
@@ -121,7 +123,7 @@ public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolba
     private String createProductString() {
 
         String productString = "";
-        for(Map.Entry<Product, Integer> entry : products.entrySet()){
+        for(Map.Entry<Product, Double> entry : products.entrySet()){
             productString += entry.getKey().getName() + ";\n";
         }
 

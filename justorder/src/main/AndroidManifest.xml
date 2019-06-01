@@ -20,12 +20,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProductsListActivity" />
+        <activity android:name=".CartProductsUserListActivity" />
         <activity android:name=".FavouriteProductsListActivity" />
         <activity android:name=".RestaurantsListActivity" />
         <activity android:name=".FavouriteRestaurantsListActivity" />
         <activity android:name=".ReviewActivity" />
         <activity android:name=".ProductClientActivity"></activity>
         <activity android:name=".OrderProductActivity"></activity>
+        <activity android:name=".CartProductActivity"></activity>
         <activity android:name=".OrderClientDetails"></activity>
         <activity android:name=".OrdersUserListActivity"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.OrderDetails"></activity>

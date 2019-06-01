@@ -122,7 +122,7 @@ public class FavouriteRestaurantsListActivity extends AbstractListViewWithSidena
             user = Database.INSTANCE.getCurrent_User();
             favourites = user.getFavouriteRestaurants();
             for (Restaurant rest : restaurants1) {
-                if (rest.getName().contains(filter) && favourites.keySet().contains(rest.getKeyId())) {
+                if (rest.getName().toLowerCase().contains(filter.toLowerCase()) && favourites.keySet().contains(rest.getKeyId())) {
                     restaurants.add(rest);
                 }
             }
