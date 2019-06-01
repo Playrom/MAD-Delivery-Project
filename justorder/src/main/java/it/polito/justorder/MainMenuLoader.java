@@ -61,7 +61,7 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
         view.setGravity(Gravity.CENTER_VERTICAL);
         view.setTypeface(null, Typeface.BOLD);
         view.setTextColor(navView.getResources().getColor(R.color.colorAccent));
-        view.setText("99+");
+        view.setText("0");
 
     }
 }
