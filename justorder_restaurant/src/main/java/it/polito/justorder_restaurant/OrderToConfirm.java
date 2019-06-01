@@ -24,6 +24,7 @@ import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImage
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Deliverer;
 import it.polito.justorder_framework.model.Order;
+import it.polito.justorder_framework.model.OrderProduct;
 import it.polito.justorder_framework.model.Product;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
@@ -77,9 +78,9 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
                 }));
             }
 
-            for(Map.Entry<String, Integer> entry : this.order.getProducts().entrySet()){
-                Database.INSTANCE.getProducts().get(entry.getKey(), (product -> {
-                    this.products.put(product, entry.getValue());
+            for(Map.Entry<String, OrderProduct> entry : this.order.getProducts().entrySet()){
+                Database.INSTANCE.getRestaurants().get(entry.getValue().getRestaurantKey(), (restaurant -> {
+                    this.products.put(restaurant.getProducts().get(entry.getValue().getProductKey()), entry.getValue().getQuantity());
                     this.reloadViews();
                     return Unit.INSTANCE;
                 }));

@@ -23,16 +23,6 @@ public class ProductClientActivity extends ProductActivity {
     @Override
     protected void setupActivity() {
         super.setupActivity();
-        orderButton.setVisibility(View.VISIBLE);
-        orderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(ProductClientActivity.this, OrderProductActivity.class);
-                myIntent.putExtra("restaurant", restaurant);
-                myIntent.putExtra("product", product);
-                ProductClientActivity.this.startActivity(myIntent);
-            }
-        });
         this.reloadData();
     }
 
@@ -44,7 +34,7 @@ public class ProductClientActivity extends ProductActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == it.polito.justorder_framework.R.id.add_to_favourite){
+        if(item.getItemId() == R.id.add_to_favourite){
             user = Database.INSTANCE.getCurrent_User();
             favouriteRestaurants = user.getFavouriteRestaurants();
             favouriteProducts = user.getFavouriteProducts();
@@ -57,11 +47,17 @@ public class ProductClientActivity extends ProductActivity {
             toast.show();
             return true;
         }
-        if(item.getItemId() == it.polito.justorder_framework.R.id.review){
+        if(item.getItemId() == R.id.review){
             Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
             i.putExtra("product", this.product);
             startActivity(i);
             return true;
+        }
+        if(item.getItemId() == R.id.add_to_cart){
+            Intent myIntent = new Intent(ProductClientActivity.this, OrderProductActivity.class);
+            myIntent.putExtra("restaurant", restaurant);
+            myIntent.putExtra("product", product);
+            startActivity(myIntent);
         }
         return super.onOptionsItemSelected(item);
     }

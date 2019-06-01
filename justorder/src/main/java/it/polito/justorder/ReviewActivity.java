@@ -94,56 +94,39 @@ public class ReviewActivity extends AbstractEditor {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.saveUserData) {
-            if (mFeedback.getText().toString().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Please fill in feedback text box", Toast.LENGTH_LONG).show();
-            } else {
-                if (restaurant != null) {
-                    review = new Review();
-                    review.setRestaurantKey(restaurant.getKeyId());
+            if (restaurant != null) {
+                review = new Review();
+                review.setRestaurantKey(restaurant.getKeyId());
+                review.setComment(mFeedback.getText().toString());
+                review.setStars(stars);
+                review.setReviewerKey(user.getKeyId());
+                Database.INSTANCE.getRestaurants().save(restaurant);
+                Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about our restaurant", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            if (product != null) {
+                review = new Review();
+                review.setProductKey(product.getKeyId());
+                review.setComment(mFeedback.getText().toString());
+                review.setStars(stars);
+                review.setReviewerKey(user.getKeyId());
+                Database.INSTANCE.getReviews().save(review);
+                Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about our product", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            if (user_deliverer != null) {
+                review = new Review();
+                Database.INSTANCE.getDeliverers().get(user_deliverer.getDelivererKey(), deliverer1 -> {
+                    deliverer = deliverer1;
+                    review.setDelivererKey(deliverer.getKeyId());
                     review.setComment(mFeedback.getText().toString());
                     review.setStars(stars);
                     review.setReviewerKey(user.getKeyId());
                     Database.INSTANCE.getReviews().save(review);
-                    Map<String, Boolean> m1 = restaurant.getReviews();
-                    m1.put(review.getKeyId(), true);
-                    restaurant.setReviews(m1);
-                    Database.INSTANCE.getRestaurants().save(restaurant);
-                    Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about our restaurant", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about our deliverer", Toast.LENGTH_SHORT).show();
                     finish();
-                }
-                if (product != null) {
-                    review = new Review();
-                    review.setProductKey(product.getKeyId());
-                    review.setComment(mFeedback.getText().toString());
-                    review.setStars(stars);
-                    review.setReviewerKey(user.getKeyId());
-                    Database.INSTANCE.getReviews().save(review);
-                    Map<String, Boolean> m1 = product.getReviews();
-                    m1.put(review.getKeyId(), true);
-                    product.setReviews(m1);
-                    Database.INSTANCE.getProducts().save(product);
-                    Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about our product", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-                if (user_deliverer != null) {
-                    review = new Review();
-                    Database.INSTANCE.getDeliverers().get(user_deliverer.getDelivererKey(), deliverer1 -> {
-                        deliverer = deliverer1;
-                        review.setProductKey(deliverer.getKeyId());
-                        review.setComment(mFeedback.getText().toString());
-                        review.setStars(stars);
-                        review.setReviewerKey(user.getKeyId());
-                        Database.INSTANCE.getReviews().save(review);
-                        Map<String, Boolean> m1 = deliverer.getReviews();
-                        m1.put(review.getKeyId(), true);
-                        deliverer.setReviews(m1);
-                        Database.INSTANCE.getDeliverers().save(deliverer);
-                        Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about our deliverer", Toast.LENGTH_SHORT).show();
-                        finish();
-                        return Unit.INSTANCE;
-                    });
-
-                }
+                    return Unit.INSTANCE;
+                });
 
             }
         }

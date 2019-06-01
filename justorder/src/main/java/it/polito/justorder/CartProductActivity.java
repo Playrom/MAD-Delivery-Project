@@ -74,13 +74,17 @@ public class CartProductActivity extends AbstractEditor {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == it.polito.justorder_framework.R.id.saveUserData) {
-
-            Integer qty = new Integer(quantityTextView.getText().toString());
-            Intent intent = new Intent();
-            intent.putExtra("qty", qty);
-            intent.putExtra("product", product);
-            setResult(RESULT_OK, intent);
-            finish();
+            try{
+                Integer qty = new Integer(quantityTextView.getText().toString());
+                Intent intent = new Intent();
+                intent.putExtra("qty", qty);
+                intent.putExtra("product", product);
+                setResult(RESULT_OK, intent);
+                finish();
+            }catch (NumberFormatException e){
+                Toast toast = Toast.makeText(getApplicationContext(), "Select a quantity", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
 
         return super.onOptionsItemSelected(item);

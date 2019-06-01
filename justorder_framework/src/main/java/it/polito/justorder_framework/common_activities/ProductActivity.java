@@ -29,7 +29,6 @@ public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToo
     protected Restaurant restaurant;
     protected EditText nameTextField, costTextField, notesTextField;
     protected TextView categoryTextView, ingredientsTextView;
-    protected Button orderButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +47,6 @@ public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToo
         ingredientsTextView = findViewById(R.id.ingredientsTextView);
         image = findViewById(R.id.imageView);
         categoryTextView = findViewById(R.id.categoryTextView);
-        orderButton = findViewById(R.id.order_button);
-        orderButton.setVisibility(View.GONE);
         this.reloadData();
     }
 

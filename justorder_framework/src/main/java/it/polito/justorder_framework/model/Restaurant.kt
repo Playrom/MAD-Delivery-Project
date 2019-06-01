@@ -16,9 +16,8 @@ class Restaurant : ModelWithVote(),Serializable {
     var openDays: Map<String, Boolean> = mutableMapOf()
     var type: String = ""
 
-    var products: Map<String, Product> = mutableMapOf()
+    var products: MutableMap<String, Product> = mutableMapOf()
     var orders: Map<String, Boolean> = mutableMapOf<String, Boolean>()
-    var reviews: Map<String, Boolean> = mutableMapOf<String, Boolean>()
 
     var owner: String = ""
 

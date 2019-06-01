@@ -17,7 +17,7 @@ class ModelWithVoteOperations<T: ModelWithVote>(tClass: Class<T>, path: String):
                 for (item in p0.children) {
                     items.add(Utils.convertObject(item, tClass))
                 }
-                cb(items)
+                cb(items.reversed())
             }
 
             override fun onCancelled(p0: DatabaseError) {

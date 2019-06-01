@@ -52,16 +52,6 @@ public class AbstractEditorWithImagePickerActivity extends AbstractEditor {
     protected void setupActivity(){
         super.setupActivity();
         image = findViewById(R.id.imageView);
-
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setDisplayShowHomeEnabled(true);
-
         butt = findViewById(R.id.button);
 
         butt.setOnClickListener(new View.OnClickListener() {

@@ -25,6 +25,7 @@ import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.abstract_activities.AbstractListViewWithSidenavSave;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Order;
+import it.polito.justorder_framework.model.OrderProduct;
 import it.polito.justorder_framework.model.Product;
 import it.polito.justorder_framework.model.Restaurant;
 import it.polito.justorder_framework.model.User;
@@ -172,7 +173,7 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
                 order.setRestaurantAddress(restaurant.getAddress());
                 order.setRestaurant(restaurant.getKeyId());
 
-                Map<String, Double> mm = order.getProducts();
+                Map<String, OrderProduct> mm = order.getProducts();
                 Double orderPrice = 0.0;
 
                 Iterator<Map.Entry<String, Integer>> iterator = user.getProducts().entrySet().iterator();
@@ -183,7 +184,11 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
                     Double price = entry.getValue() * product12.getCost();
                     orderPrice = orderPrice + price;
                     order.setPrice(orderPrice);
-                    mm.put(product12.getKeyId(), price);
+                    OrderProduct op = new OrderProduct();
+                    op.setProductKey(product12.getKeyId());
+                    op.setRestaurantKey(user.getCurrentRestaurant());
+                    op.setQuantity(entry.getValue());
+                    mm.put(product12.getKeyId(), op);
 
                 }
 
@@ -250,6 +255,9 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
                    user.getProducts().remove(prod.getKeyId());
                } else {
                    user.getProducts().put(prod.getKeyId(), qty);
+               }
+               if(user.getProducts().size()==0 ) {
+                   user.setCurrentRestaurant("");
                }
                 Database.INSTANCE.getUsers().save(user);
                 this.setupActivity();

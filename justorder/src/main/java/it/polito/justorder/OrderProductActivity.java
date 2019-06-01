@@ -73,39 +73,44 @@ public class OrderProductActivity extends AbstractEditor {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == it.polito.justorder_framework.R.id.saveUserData) {
+            try{
+                Integer qty = new Integer(quantityTextView.getText().toString());
 
-            Integer qty = new Integer(quantityTextView.getText().toString());
+                if(restaurant != null && product != null && user != null) {
 
-            if(restaurant != null && product != null && user != null) {
-
-                Toast toast;
-                Integer i= 0;
-                Map<String, Integer> m = user.getProducts();
-                if(user.getProducts() == null) m = new HashMap<String, Integer>();
+                    Toast toast;
+                    Integer i= 0;
+                    Map<String, Integer> m = user.getProducts();
+                    if(user.getProducts() == null) m = new HashMap<String, Integer>();
 
 
-                if(user.getCurrentRestaurant().equals(restaurant.getKeyId())){
-                    i = m.get(product.getKeyId());
-                    if(i == null) i = 0;
-                    qty = qty + i;
-                    m.put(product.getKeyId(), qty);
-                    user.setProducts(m);
-                    Database.INSTANCE.getUsers().save(user);
-                    toast = Toast.makeText(getApplicationContext(), "Product added to cart", Toast.LENGTH_SHORT);
-                } else {
-                    if(user.getCurrentRestaurant().equals("")) {
-                        user.setCurrentRestaurant(restaurant.getKeyId());
+                    if(user.getCurrentRestaurant().equals(restaurant.getKeyId())){
+                        i = m.get(product.getKeyId());
+                        if(i == null) i = 0;
+                        qty = qty + i;
                         m.put(product.getKeyId(), qty);
                         user.setProducts(m);
                         Database.INSTANCE.getUsers().save(user);
                         toast = Toast.makeText(getApplicationContext(), "Product added to cart", Toast.LENGTH_SHORT);
                     } else {
-                        toast = Toast.makeText(getApplicationContext(), "Please choose product of the same restaurant", Toast.LENGTH_SHORT);
+                        if(user.getCurrentRestaurant().equals("")) {
+                            user.setCurrentRestaurant(restaurant.getKeyId());
+                            m.put(product.getKeyId(), qty);
+                            user.setProducts(m);
+                            Database.INSTANCE.getUsers().save(user);
+                            toast = Toast.makeText(getApplicationContext(), "Product added to cart", Toast.LENGTH_SHORT);
+                        } else {
+                            toast = Toast.makeText(getApplicationContext(), "Please choose product of the same restaurant", Toast.LENGTH_SHORT);
+                        }
                     }
+                    toast.show();
+                    finish();
                 }
+            }catch (NumberFormatException e){
+                Toast toast = Toast.makeText(getApplicationContext(), "Select a quantity", Toast.LENGTH_SHORT);
                 toast.show();
-                finish();
             }
+
         }
 
         return super.onOptionsItemSelected(item);
