@@ -139,7 +139,11 @@ public class OrderToAccept extends ActivityAbstractWithToolbar {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.select_order_option, menu);
+        if(this.order.getState() == "accepted"){
+            getMenuInflater().inflate(R.menu.delivered_order_menu, menu);
+        }else{
+            getMenuInflater().inflate(R.menu.select_order_option, menu);
+        }
         return true;
     }
 
@@ -155,6 +159,18 @@ public class OrderToAccept extends ActivityAbstractWithToolbar {
         if(item.getItemId() == R.id.refuseOrder){
             order.setState("cancelled");
             order.setDeliverer(null);
+            Database.INSTANCE.getOrders().save(order);
+
+            Database.INSTANCE.getDeliverers().get(Database.INSTANCE.getCurrent_User().getDelivererKey(), deliverer1 ->{
+                deliverer1.setCurrentOrder(null);
+                Database.INSTANCE.getDeliverers().save(deliverer1);
+                return Unit.INSTANCE;
+            });
+            finish();
+        }
+
+        if(item.getItemId() == R.id.deliveredOrder){
+            order.setState("delivered");
             Database.INSTANCE.getOrders().save(order);
 
             Database.INSTANCE.getDeliverers().get(Database.INSTANCE.getCurrent_User().getDelivererKey(), deliverer1 ->{
