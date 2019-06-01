@@ -135,11 +135,6 @@
                         android:layout_height="match_parent"
                         android:text="Ingrediente"
                         style="@style/TextAppearance.AppCompat.Headline" />
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Order meal"
-                        android:id="@+id/order_button"/>
                 </LinearLayout>
 
 
