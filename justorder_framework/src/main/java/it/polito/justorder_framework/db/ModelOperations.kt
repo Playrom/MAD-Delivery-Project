@@ -96,6 +96,32 @@ open class ModelOperations<T: Model>(protected val tClass: Class<T>, val path: S
         }
     }
 
+    fun getWithIds(keys: List<String>, listen: Boolean, cb : (List<T>) -> Unit) {
+        var ref = Database.db.child(path)
+        var collection = mutableMapOf<String, T>()
+        if(listen){
+            for(key in keys){
+                ref.child(key).addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(p0: DataSnapshot) {
+                        if(p0.exists()) {
+                            val obj = Utils.convertObject(p0, tClass);
+                            collection.put(obj.keyId!!, obj)
+                        }
+                        if(collection.size.equals(keys.size)){
+                            cb(collection.values.toList())
+                        }
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+                })
+            }
+        }else{
+            getWithIds(keys, cb);
+        }
+    }
+
     fun getWithIds(keys: List<String>, cb : (List<T>) -> Unit) {
         var ref = Database.db.child(path)
         var collection = mutableListOf<T>()
@@ -116,23 +142,6 @@ open class ModelOperations<T: Model>(protected val tClass: Class<T>, val path: S
             })
         }
     }
-
-//    fun <K: Model> onChange(child: String, expectedClass: Class<K>, cb : (List<K>) -> Unit) {
-//        var ref = Database.db.child(path)
-//        ref.child(child).addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(p0: DataSnapshot) {
-//                var items: MutableList<K> = mutableListOf()
-//                for(item in p0.children){
-//                    items.add(Utils.convertObject(item, expectedClass))
-//                }
-//                cb(items)
-//            }
-//
-//            override fun onCancelled(p0: DatabaseError) {
-//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//            }
-//        })
-//    }
 
     fun query(key: String, value: String, cb : (List<T>) -> Unit){
         var ref = Database.db.child(path)

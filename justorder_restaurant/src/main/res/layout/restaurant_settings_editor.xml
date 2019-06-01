@@ -200,18 +200,6 @@
                         android:text="@string/saturday" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/set_position_as_current_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/layout_days"
-                    android:layout_alignStart="@id/common_editor_layout"
-                    android:layout_alignLeft="@id/common_editor_layout"
-                    android:layout_alignEnd="@id/common_editor_layout"
-                    android:layout_alignRight="@id/common_editor_layout"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/set_position_as_current"/>
-
 
             </RelativeLayout>
         </ScrollView>

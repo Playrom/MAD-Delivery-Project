@@ -1,20 +1,29 @@
 package it.polito.justorder_restaurant;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import android.text.Html;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashMap;
 
+import it.polito.justorder_framework.LogoutStatusEvent;
+import it.polito.justorder_framework.UserChangeStatusEvent;
 import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndSidenav;
+import it.polito.justorder_framework.common_activities.UserSettingsEditorActivity;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Restaurant;
 import it.polito.justorder_framework.model.User;
@@ -25,7 +34,7 @@ public class RestaurantSettingsViewerActivity extends AbstractViewerWithImagePic
     protected Restaurant restaurant;
     protected EditText nameTextField, emailTextField, phoneTextField, addressTextField, vatCodeTextField, taxCodeTextField, ibanTextField, foodTypeTextField;
     protected TextView openingHourTextView, closingHourTextView, openDaysTextView;
-    protected String openingHour, closingHour;
+    protected Button setPositionAsCurrentButton;
     protected Intent i;
     protected String restaurant_intent_key;
 
@@ -62,6 +71,35 @@ public class RestaurantSettingsViewerActivity extends AbstractViewerWithImagePic
         openingHourTextView = findViewById(R.id.openingHour);
         closingHourTextView = findViewById(R.id.closingHour);
         openDaysTextView = findViewById(R.id.openingDays);
+
+
+        setPositionAsCurrentButton = findViewById(R.id.set_position_as_current_button);
+        setPositionAsCurrentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Restaurant restaurant = RestaurantSettingsViewerActivity.this.restaurant;
+                if(restaurant != null){
+                    if(restaurant.getKeyId() == null){
+                        restaurant.setKeyId(Database.INSTANCE.getRestaurants().generateKeyForChild());
+                    }
+                    Database.INSTANCE.getGeodata().setClientPosition(restaurant.getKeyId(), RestaurantSettingsViewerActivity.this, () -> {
+                        EventBus.getDefault().post(new UserChangeStatusEvent());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantSettingsViewerActivity.this);
+                        AlertDialog dialog = builder
+                                .setTitle("Restaurant Location Setted")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .create();
+                        dialog.show();
+                        return Unit.INSTANCE;
+                    });
+                }
+            }
+        });
 
         reloadData();
     }

@@ -29,7 +29,6 @@ public class RestaurantSettingsEditorActivity extends AbstractEditorWithImagePic
     protected Restaurant restaurant;
     protected EditText nameTextField, emailTextField, phoneTextField, addressTextField, vatCodeTextField, taxCodeTextField, ibanTextField, foodTypeTextField;
     protected Spinner foodTypeSpinner;
-    protected Button setPositionAsCurrentButton;
     protected String openHour, openMinute, closeHour, closeMinute;
     protected TimePicker timePickerOpen, timePickerClose;
     protected CheckBox Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday;
@@ -82,8 +81,6 @@ public class RestaurantSettingsEditorActivity extends AbstractEditorWithImagePic
         Friday= findViewById(R.id.checkbox_friday);
         Saturday= findViewById(R.id.checkbox_saturday);
 
-        setPositionAsCurrentButton = findViewById(R.id.set_position_as_current_button);
-
         this.reloadData();
     }
 
@@ -101,21 +98,6 @@ public class RestaurantSettingsEditorActivity extends AbstractEditorWithImagePic
         }else{
             this.restaurant = new Restaurant();
         }
-
-        setPositionAsCurrentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Restaurant restaurant = RestaurantSettingsEditorActivity.this.restaurant;
-                if(restaurant != null){
-                    if(restaurant.getKeyId() == null){
-                        restaurant.setKeyId(Database.INSTANCE.getRestaurants().generateKeyForChild());
-                    }
-                    Database.INSTANCE.getGeodata().setClientPosition(restaurant.getKeyId(), RestaurantSettingsEditorActivity.this, () -> {
-                        return Unit.INSTANCE;
-                    });
-                }
-            }
-        });
 
         this.reloadViews();
     }

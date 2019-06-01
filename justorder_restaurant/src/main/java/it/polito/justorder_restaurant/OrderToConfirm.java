@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import java.util.Map;
 import java.util.Random;
 
 import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndToolbar;
+import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Deliverer;
 import it.polito.justorder_framework.model.Order;
@@ -30,7 +32,7 @@ import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
 
-public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndToolbar {
+public class OrderToConfirm extends ActivityAbstractWithToolbar {
 
     private Order order;
     private User deliverer;
@@ -123,7 +125,7 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_product_menu, menu);
+        getMenuInflater().inflate(R.menu.select_order_option, menu);
         return true;
     }
 
@@ -143,10 +145,20 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
         reloadViews();
     }
 
-    public void acceptOrder(View view){
-        Intent i = new Intent(this, RestaurantDelivererAssignActivity.class);
-        startActivityForResult(i, 0);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.acceptOrder){
+            Intent i = new Intent(this, RestaurantDelivererAssignActivity.class);
+            startActivityForResult(i, 0);
+        }
 
+        if(item.getItemId() == R.id.refuseOrder){
+            order.setState("cancelled");
+            order.setDeliverer(null);
+            Database.INSTANCE.getOrders().save(order);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -170,16 +182,6 @@ public class OrderToConfirm extends AbstractViewerWithImagePickerActivityAndTool
                 return Unit.INSTANCE;
             });
         }
-    }
-
-    public void deleteOrder(View view){
-        order.setState("cancelled");
-        order.setDeliverer(null);
-        Database.INSTANCE.getOrders().save(order);
-
-        //Intent returnIntent = new Intent();
-        //setResult(Activity.RESULT_OK, returnIntent);
-        finish();
     }
 
 }

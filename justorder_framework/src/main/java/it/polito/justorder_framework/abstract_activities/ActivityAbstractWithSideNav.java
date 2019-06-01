@@ -1,5 +1,6 @@
 package it.polito.justorder_framework.abstract_activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -20,6 +21,7 @@ import java.lang.reflect.Field;
 
 import it.polito.justorder_framework.AbstractRouteHandler;
 import it.polito.justorder_framework.FirebaseFunctions;
+import it.polito.justorder_framework.LogoutStatusEvent;
 import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.UserChangeStatusEvent;
 
@@ -62,6 +64,11 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
         this.reloadViews();
     }
 
+    @Subscribe
+    public void onMessageEvent(LogoutStatusEvent event) {
+        FirebaseFunctions.login(this);
+    }
+
     protected NavigationView.OnNavigationItemSelectedListener getNavigationListener() {
 
         return new NavigationView.OnNavigationItemSelectedListener() {
@@ -92,7 +99,7 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
         try {
             System.out.println(getApplicationContext().getPackageName() + ".MainMenuLoader");
             Class loader = Class.forName(getApplicationContext().getPackageName() + ".MainMenuLoader");
-            loader.getMethod("createMainMenu", NavigationView.class).invoke(null, navigationView);
+            loader.getMethod("createMainMenu", NavigationView.class, Context.class).invoke(null, navigationView, this);
         }catch (ClassNotFoundException e){
             System.out.println("Missing MainMenuLoader in package");
         }catch (NoSuchMethodException e){
@@ -125,7 +132,7 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
         if(requestCode == FirebaseFunctions.AUTH_ACTIVITY_RESULT){
             EventBus.getDefault().post(new UserChangeStatusEvent());
         }
-        this.reloadViews();
+        this.setupActivity();
     }
 
     @Override

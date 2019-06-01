@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/mostPopolarTime"
+        android:id="@+id/acceptOrder"
         android:enabled="true"
-        android:title="@string/sort_by_time_of_order"
+        android:title="@string/accept"
+        android:visible="true" />
+    <item
+        android:id="@+id/refuseOrder"
+        android:enabled="true"
+        android:title="@string/refuse"
         android:visible="true" />
 </menu>
