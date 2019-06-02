@@ -40,42 +40,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textStyle="italic"
-                    android:hint="@string/user" />
+                    android:hint="@string/user"
+                    />
 
                 <TextView
                     android:id="@+id/addressTextField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/userTextField"
-                    android:layout_marginTop="20dp"
-                    android:textSize="25sp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
                     android:textStyle="italic"
                     android:hint="@string/address" />
+
                 <TextView
-                    android:id="@+id/priceTextField"
+                    android:id="@+id/riderTextField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/addressTextField"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:textSize="20sp"
-                    android:hint="@string/price" />
-                <TextView
-                    android:id="@+id/timestampTextField"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/priceTextField"
-                    android:layout_marginTop="20dp"
-                    android:textSize="20sp"
-                    android:textStyle="italic"
-                    android:hint="@string/timestamp" />
+                    android:hint="@string/rider" />
 
                 <TextView
                     android:id="@+id/productsTitleTextField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/timestampTextField"
+                    android:layout_below="@id/riderTextField"
                     android:layout_marginTop="40dp"
                     android:text="Ordered Food"
                     android:textSize="30sp"
@@ -84,16 +77,34 @@
                     android:layout_centerVertical="true" />
 
 
-
                 <TextView
                     android:id="@+id/productsTextField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/productsTitleTextField"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:textSize="20sp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"/>
+
+
+                <TextView
+                    android:id="@+id/priceTextField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/productsTextField"
+                    android:layout_marginTop="15dp"
+                    android:textSize="20sp"
+                    android:hint="@string/price" />
+                <TextView
+                    android:id="@+id/timestampTextField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/priceTextField"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="italic"
+                    android:hint="@string/timestamp" />
 
 
 

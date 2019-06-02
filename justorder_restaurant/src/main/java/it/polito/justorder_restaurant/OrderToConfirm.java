@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +38,7 @@ public class OrderToConfirm extends ActivityAbstractWithToolbar {
     private Order order;
     private User deliverer;
     private User user;
-    private TextView orderIdTextField, userTextField, addressTextField, priceTextField, timestampTextField, productsTextField;
+    private TextView orderIdTextField, userTextField, riderTextField, addressTextField, priceTextField, timestampTextField, productsTextField;
     private String productString;
     private Map<Product, Double> products = new HashMap<>();
     private List<Deliverer> deliverers = new ArrayList<>();
@@ -59,6 +60,7 @@ public class OrderToConfirm extends ActivityAbstractWithToolbar {
         priceTextField = findViewById(R.id.priceTextField);
         timestampTextField = findViewById(R.id.timestampTextField);
         productsTextField = findViewById(R.id.productsTextField);
+        riderTextField = findViewById(R.id.riderTextField);
         this.reloadData();
     }
 
@@ -96,32 +98,38 @@ public class OrderToConfirm extends ActivityAbstractWithToolbar {
         super.reloadViews();
 
         if(this.user != null) {
-            userTextField.setText("User: " + this.user.getName());
+            userTextField.setText("User Name: " + this.user.getName());
         }
-        addressTextField.setText("Address: " + order.getUserAddress());
-        priceTextField.setText("Cost: " + new Double(order.getPrice()).toString());
+        addressTextField.setText("Delivery Address: " + order.getUserAddress());
+        priceTextField.setText("Order Cost: " + new Double(order.getPrice()).toString() + " €");
         String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
-        timestampTextField.setText(date);
+        timestampTextField.setText("Date and time: " + date);
+
+        if(this.deliverer != null) {
+            riderTextField.setText("Deliverer Name: "+ this.deliverer.getName());
+        } else {
+            riderTextField.setText("Deliverer not yet assigned");
+        }
 
         if(products.size() > 0){
             productString = createProductString();
-            productsTextField.setText(this.productString);
+            productsTextField.setText(Html.fromHtml(this.productString));
         }
 
-        if(this.order != null){
-            this.actionBar.setTitle(this.order.getKeyId());
-        }
+        this.actionBar.setTitle("Order Details");
     }
 
     private String createProductString() {
 
         String productString = "";
         for(Map.Entry<Product, Double> entry : products.entrySet()){
-            productString += entry.getKey().getName() + "\n";
+            // productString += entry.getValue().intValue() + " x " + entry.getKey().getName() + "\n";
+            productString += "&#8226; " +entry.getKey().getName() + " x " + entry.getValue().intValue() +"<br/>\n";
         }
 
         return productString;
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
