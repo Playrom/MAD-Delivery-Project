@@ -38,15 +38,56 @@ public class ProductClientActivity extends ProductActivity {
             user = Database.INSTANCE.getCurrent_User();
             favouriteRestaurants = user.getFavouriteRestaurants();
             favouriteProducts = user.getFavouriteProducts();
-            favouriteRestaurants.put(restaurant.getKeyId(), true);
-            favouriteProducts.put(product.getKeyId(), true);
-            user.setFavouriteRestaurants(favouriteRestaurants);
-            user.setFavouriteProducts(favouriteProducts);
-            Database.INSTANCE.getUsers().save(user);
-            Toast toast = Toast.makeText(getApplicationContext(), "Aggiunto ai preferiti", Toast.LENGTH_SHORT);
+            Toast toast;
+            if(favouriteProducts.get(product.getKeyId())==null){
+
+                favouriteRestaurants.put(restaurant.getKeyId(), true);
+                favouriteProducts.put(product.getKeyId(), true);
+                user.setFavouriteRestaurants(favouriteRestaurants);
+                user.setFavouriteProducts(favouriteProducts);
+                Database.INSTANCE.getUsers().save(user);
+                toast = Toast.makeText(getApplicationContext(), "Added to favourites", Toast.LENGTH_SHORT);
+
+            } else {
+                toast = Toast.makeText(getApplicationContext(), "Already added to favourites", Toast.LENGTH_SHORT);
+            }
+
             toast.show();
             return true;
         }
+
+        if(item.getItemId() == R.id.remove_from_favourite){
+            user = Database.INSTANCE.getCurrent_User();
+            favouriteRestaurants = user.getFavouriteRestaurants();
+            favouriteProducts = user.getFavouriteProducts();
+            Toast toast;
+            if(favouriteProducts.get(product.getKeyId())!=null){
+
+                favouriteProducts.remove(product.getKeyId());
+
+                Integer i=1;
+                for(String x : favouriteProducts.keySet()){
+                    if(restaurant.getProducts().get(x) != null){
+                        i=8;
+                    }
+                }
+                if(i==1){
+                    favouriteRestaurants.remove(restaurant.getKeyId());
+                }
+
+                user.setFavouriteRestaurants(favouriteRestaurants);
+                user.setFavouriteProducts(favouriteProducts);
+                Database.INSTANCE.getUsers().save(user);
+                toast = Toast.makeText(getApplicationContext(), "Removed from favourites", Toast.LENGTH_SHORT);
+
+            } else {
+                toast = Toast.makeText(getApplicationContext(), "Product was not a favourite one", Toast.LENGTH_SHORT);
+            }
+
+            toast.show();
+            return true;
+        }
+
         if(item.getItemId() == R.id.review){
             Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
             i.putExtra("product", this.product);

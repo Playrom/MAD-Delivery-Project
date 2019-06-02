@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import it.polito.justorder_framework.abstract_activities.AbstractEditorWithImagePickerActivity;
 import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
 import it.polito.justorder_framework.Utils;
+import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.db.Storage;
 import it.polito.justorder_framework.model.Product;
 import kotlin.Unit;
@@ -173,7 +174,13 @@ public class ProductEditActivity extends AbstractEditorWithImagePickerActivity {
             }
 
             spinner.setSelection(this.types.indexOf(product.getCategory()));
-            this.ingredientsChips.setText(this.ingredients);
+            String y ="";
+            for(String h : product.getIngredients()){
+                y += h + ", ";
+            }
+            y = y.replaceAll(", $", "");
+
+            this.ingredientsChips.setText(y);
         }
     }
 
@@ -181,7 +188,6 @@ public class ProductEditActivity extends AbstractEditorWithImagePickerActivity {
         this.product.setImageUri(uri.toString());
         return Unit.INSTANCE;
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -209,14 +215,20 @@ public class ProductEditActivity extends AbstractEditorWithImagePickerActivity {
                             }
                         })
                         .create();
+
                 dialog.show();
             } else {
 
                 Intent returnIntent = new Intent();
                 this.product.setName(this.nameTextField.getText().toString());
                 this.product.setCost(new Double(this.costTextField.getText().toString()));
+
+                String str = this.ingredientsChips.toString();
+                ArrayList aList= new ArrayList(Arrays.asList(str.split(",")));
+
+
                 this.product.setNotes(this.notesTextField.getText().toString());
-                this.product.setIngredients(this.ingredientsChips.getChipValues());
+                this.product.setIngredients(aList);
                 this.product.setCategory(this.types.get(spinner.getSelectedItemPosition()));
 
                 returnIntent.putExtra("product", product);

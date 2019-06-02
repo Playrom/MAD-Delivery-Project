@@ -164,6 +164,24 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
         this.reloadViews();
     }
 
+    protected void applyFilters2(){
+        this.visibleProducts.clear();
+        this.visibleProducts.addAll(this.products);
+        this.visibleProducts.sort(new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                if (p1.getAverageVote() > p2.getAverageVote()) {
+                    return -1;
+                }
+                if (p1.getAverageVote() < p2.getAverageVote()) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
+        this.reloadViews();
+    }
+
     @Override
     protected void reloadData() {
         super.reloadData();
@@ -195,8 +213,7 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
             if(this.isSorting) {
                 this.applyFilters();
             }else{
-                this.visibleProducts.clear();
-                this.visibleProducts.addAll(this.products);
+                this.applyFilters2();
                 this.reloadViews();
             }
         }else{

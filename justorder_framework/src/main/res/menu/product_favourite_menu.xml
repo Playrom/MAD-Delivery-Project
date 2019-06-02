@@ -15,6 +15,13 @@
         android:enabled="true"
         android:title="Add to favourites"
         android:visible="true" />
+
+    <item
+        android:id="@+id/remove_from_favourite"
+        android:enabled="true"
+        android:title="Remove from favourites"
+        android:visible="true" />
+
     <item
         android:id="@+id/review"
         android:enabled="true"

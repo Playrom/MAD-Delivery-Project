@@ -62,10 +62,10 @@ public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerAct
             FirebaseFunctions.login(this);
         }else{
             if(user != null){
-                nameTextField.setText(user.getName());
-                emailTextField.setText(user.getEmail());
-                phoneTextField.setText(user.getTelephone());
-                addressTextField.setText(user.getAddress());
+                nameTextField.setText("Name: " + user.getName());
+                emailTextField.setText("Email: " + user.getEmail());
+                phoneTextField.setText("Phone: " +user.getTelephone());
+                addressTextField.setText("Address: " + user.getAddress());
             }
         }
     }

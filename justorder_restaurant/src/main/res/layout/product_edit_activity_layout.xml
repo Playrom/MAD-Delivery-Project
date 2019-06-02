@@ -125,7 +125,7 @@
                     android:layout_alignEnd="@+id/nameTextField"
                     android:layout_alignRight="@+id/nameTextField"
                     android:layout_marginTop="20dp"
-                    android:hint="@string/ingredients"
+                    android:hint="@string/ingredients1"
                 />
 
                 <Spinner
