@@ -1,2 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="it.polito.justorder_framework" />
+    package="it.polito.justorder_framework" >
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+</manifest>
