@@ -29,7 +29,8 @@
         android:ems="10"
         android:hint="@string/name"
         android:inputType="textPersonName"
-        android:enabled="false" />
+        android:enabled="false"
+        android:textColor="#000000"/>
 
     <EditText
         android:id="@+id/emailTextField"
@@ -44,7 +45,8 @@
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:textColor="#000000"/>
 
     <EditText
         android:id="@+id/phoneTextField"
@@ -59,5 +61,6 @@
         android:ems="10"
         android:hint="@string/phone"
         android:inputType="phone"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:textColor="#000000"/>
 </LinearLayout>

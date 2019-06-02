@@ -48,6 +48,7 @@
     <string name="cost">Cost</string>
     <string name="note">Note</string>
     <string name="ingredients">Ingredients</string>
+    <string name="ingredients1">Ingredients (use , to separate them)</string>
     <string name="orderId">Order ID</string>
     <string name="user">Customer Username</string>
     <string name="price">Total Price</string>

@@ -75,7 +75,7 @@ public class ProductsListActivity extends AbstractListViewWithSidenav {
                     String x = String.format("%.02f", new Float(product.getCost()));
                     ((TextView)convertView.findViewById(R.id.content)).setText(product.getName());
                     ((TextView)convertView.findViewById(R.id.description)).setText("Cost: " + x + " €");
-                    ((TextView)convertView.findViewById(R.id.avgVote)).setText("Avg vote: " + String.valueOf(product.getAverageVote())+ " (" + product.getNumberOfVotes() + votes + ")");
+                    ((TextView)convertView.findViewById(R.id.avgVote)).setText("Average vote: " + String.valueOf(product.getAverageVote())+ " (" + product.getNumberOfVotes() + votes + ")");
                     Glide.with(ProductsListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
                 }
 
@@ -114,7 +114,7 @@ public class ProductsListActivity extends AbstractListViewWithSidenav {
 
         this.listView.setAdapter(this.adapter);
         this.actionBar.setTitle(R.string.product_list_title);
-
+        this.initDataSource();
         this.reloadData();
     }
 
