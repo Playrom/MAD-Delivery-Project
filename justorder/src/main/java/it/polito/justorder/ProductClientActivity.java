@@ -38,12 +38,20 @@ public class ProductClientActivity extends ProductActivity {
             user = Database.INSTANCE.getCurrent_User();
             favouriteRestaurants = user.getFavouriteRestaurants();
             favouriteProducts = user.getFavouriteProducts();
-            favouriteRestaurants.put(restaurant.getKeyId(), true);
-            favouriteProducts.put(product.getKeyId(), true);
-            user.setFavouriteRestaurants(favouriteRestaurants);
-            user.setFavouriteProducts(favouriteProducts);
-            Database.INSTANCE.getUsers().save(user);
-            Toast toast = Toast.makeText(getApplicationContext(), "Added to favourites", Toast.LENGTH_SHORT);
+            Toast toast;
+            if(favouriteProducts.get(product.getKeyId())==null){
+
+                favouriteRestaurants.put(restaurant.getKeyId(), true);
+                favouriteProducts.put(product.getKeyId(), true);
+                user.setFavouriteRestaurants(favouriteRestaurants);
+                user.setFavouriteProducts(favouriteProducts);
+                Database.INSTANCE.getUsers().save(user);
+                toast = Toast.makeText(getApplicationContext(), "Added to favourites", Toast.LENGTH_SHORT);
+
+            } else {
+                toast = Toast.makeText(getApplicationContext(), "Already added to favourites", Toast.LENGTH_SHORT);
+            }
+
             toast.show();
             return true;
         }
@@ -52,8 +60,9 @@ public class ProductClientActivity extends ProductActivity {
             user = Database.INSTANCE.getCurrent_User();
             favouriteRestaurants = user.getFavouriteRestaurants();
             favouriteProducts = user.getFavouriteProducts();
-
+            Toast toast;
             if(favouriteProducts.get(product.getKeyId())!=null){
+
                 favouriteProducts.remove(product.getKeyId());
 
                 Integer i=1;
@@ -69,12 +78,13 @@ public class ProductClientActivity extends ProductActivity {
                 user.setFavouriteRestaurants(favouriteRestaurants);
                 user.setFavouriteProducts(favouriteProducts);
                 Database.INSTANCE.getUsers().save(user);
-                Toast toast = Toast.makeText(getApplicationContext(), "Removed from favourites", Toast.LENGTH_SHORT);
-                toast.show();
+                toast = Toast.makeText(getApplicationContext(), "Removed from favourites", Toast.LENGTH_SHORT);
+
             } else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Product was not a favourite one", Toast.LENGTH_SHORT);
-                toast.show();
+                toast = Toast.makeText(getApplicationContext(), "Product was not a favourite one", Toast.LENGTH_SHORT);
             }
+
+            toast.show();
             return true;
         }
 
