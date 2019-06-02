@@ -31,7 +31,7 @@ public class OrdersDelivererListActivity extends OrdersListActivity {
                 Order entry = (Order) parent.getAdapter().getItem(position);
                 String state = entry.getState();
                 Intent intent;
-                if (state!=null && state.equals("deliver_pending")) {
+                if (state!=null && (state.equals("deliver_pending") || state.equals("accepted"))) {
                     intent = new Intent(OrdersDelivererListActivity.this, OrderToAccept.class);
                 }else {
                     intent = new Intent(OrdersDelivererListActivity.this, OrderDetails.class);

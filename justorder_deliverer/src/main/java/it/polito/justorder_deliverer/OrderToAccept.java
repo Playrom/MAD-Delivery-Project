@@ -139,7 +139,7 @@ public class OrderToAccept extends ActivityAbstractWithToolbar {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(this.order.getState() == "accepted"){
+        if(this.order.getState().equals("accepted")){
             getMenuInflater().inflate(R.menu.delivered_order_menu, menu);
         }else{
             getMenuInflater().inflate(R.menu.select_order_option, menu);

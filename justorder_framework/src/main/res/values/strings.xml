@@ -60,5 +60,8 @@
     <string name="most_popolar_time">Most Popolar Time</string>
     <string name="accept">Accept</string>
     <string name="refuse">Refuse</string>
+    <string name="delivered">Delivered</string>
+
+
 
 </resources>
