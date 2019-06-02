@@ -69,7 +69,10 @@
                     android:ems="10"
                     android:enabled="false"
                     android:inputType="text"
-                    android:hint="@string/name" />
+                    android:hint="@string/name"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="#000000"
+                    android:textSize="30dp"/>
 
                 <EditText
                     android:id="@+id/costTextField"
@@ -84,7 +87,9 @@
                     android:ems="10"
                     android:enabled="false"
                     android:inputType="numberSigned"
-                    android:hint="@string/cost" />
+                    android:hint="@string/cost"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="#000000"/>
 
                 <EditText
                     android:id="@+id/notesTextField"
@@ -99,7 +104,9 @@
                     android:ems="10"
                     android:enabled="false"
                     android:inputType="textMultiLine"
-                    android:hint="@string/note" />
+                    android:hint="@string/note"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="#000000"/>
 
                 <TextView
                     android:id="@+id/categoryTextView"
@@ -112,6 +119,8 @@
                     android:layout_alignRight="@id/common_viewer_layout"
                     android:layout_marginTop="20dp"
                     android:text="@string/category"
+                    android:textSize="15dp"
+                    android:textAlignment="center"
                     style="@style/TextAppearance.AppCompat.Title" />
 
                 <LinearLayout
@@ -128,12 +137,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/ingredients"
+                        android:textSize="15dp"
+                        android:textAlignment="center"
                         style="@style/TextAppearance.AppCompat.Title" />
                     <TextView
                         android:id="@+id/ingredientsTextView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textSize="15dp"
                         android:text="Ingrediente"
+                        android:textAlignment="center"
                         style="@style/TextAppearance.AppCompat.Headline" />
                 </LinearLayout>
 
