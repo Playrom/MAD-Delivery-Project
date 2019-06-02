@@ -26,10 +26,10 @@ import kotlin.Unit;
 
 public class MainMenuLoader extends AbstractMainMenuLoader {
     private static HashMap<String, Long> ordersCount = new HashMap<>();
+    private static boolean firstLoad = true;
 
     public static void createMainMenu(NavigationView navView, Context context){
         AbstractMainMenuLoader.createMainMenu(navView, context);
-
 
         MenuItem orders = navView.getMenu().findItem(R.id.ordersPage);
         TextView view = (TextView) orders.getActionView();
@@ -44,12 +44,13 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
 
                 view.setText(new Long(newOrdersCount.get("pending") + newOrdersCount.get("deliverer_pending") + newOrdersCount.get("accepted")).toString());
 
-                if(!newOrdersCount.get("pending").equals(ordersCount.get("pending")) ||
+                if((!newOrdersCount.get("pending").equals(ordersCount.get("pending")) ||
                     !newOrdersCount.get("deliverer_pending").equals(ordersCount.get("deliverer_pending")) ||
                         !newOrdersCount.get("accepted").equals(ordersCount.get("accepted")) ||
-                    !newOrdersCount.get("delivered").equals(ordersCount.get("delivered"))){
-                    Toast toast = Toast.makeText(context, "Updates on your orders, checkout in the orders section", Toast.LENGTH_LONG);
+                    !newOrdersCount.get("delivered").equals(ordersCount.get("delivered"))) && !firstLoad){
+                    Toast toast = Toast.makeText(context, "Updates on your orders, checkout in the orders section", Toast.LENGTH_SHORT);
                     toast.show();
+                    firstLoad = false;
                 }
                 ordersCount = newOrdersCount;
                 return Unit.INSTANCE;

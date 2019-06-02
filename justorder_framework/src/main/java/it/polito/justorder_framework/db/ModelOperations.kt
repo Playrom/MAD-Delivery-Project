@@ -143,6 +143,28 @@ open class ModelOperations<T: Model>(protected val tClass: Class<T>, val path: S
         }
     }
 
+    fun query(key: String, value: String, listen: Boolean, cb : (List<T>) -> Unit){
+        if(listen){
+            var ref = Database.db.child(path)
+            var query = ref.orderByChild(key).equalTo(value);
+            query.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    var items: MutableList<T> = mutableListOf()
+                    for (item in p0.children) {
+                        items.add(Utils.convertObject(item, tClass))
+                    }
+                    cb(items)
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+            })
+        }else{
+            query(key, value, cb)
+        }
+    }
+
     fun query(key: String, value: String, cb : (List<T>) -> Unit){
         var ref = Database.db.child(path)
         var query = ref.orderByChild(key).equalTo(value);
