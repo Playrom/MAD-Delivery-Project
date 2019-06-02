@@ -50,9 +50,6 @@ public class DelivererOrderListActivity extends AbstractListViewWithSidenav {
 
     @Override
     protected void setupActivity() {
-        super.setupActivity();
-        this.listView = findViewById(R.id.order_list);
-
         this.adapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -77,13 +74,17 @@ public class DelivererOrderListActivity extends AbstractListViewWithSidenav {
                 Order order = orders.get(position);
                 ((TextView)convertView.findViewById(R.id.order_id)).setText(order.getRestaurantName());
                 ((TextView)convertView.findViewById(R.id.amount)).setText("Restaurant Address: " + order.getRestaurantAddress());
-                 ((TextView)convertView.findViewById(R.id.address)).setText("User Address: " + order.getUserAddress());
+                ((TextView)convertView.findViewById(R.id.address)).setText("User Address: " + order.getUserAddress());
                 String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
                 ((TextView)convertView.findViewById(R.id.timestamp)).setText("Date and time: " + date);
                 ((TextView)convertView.findViewById(R.id.state)).setText(order.getState());
                 return convertView;
             }
         };
+        super.setupActivity();
+        this.listView = findViewById(R.id.order_list);
+
+
         this.listView.setAdapter(this.adapter);
         this.actionBar.setTitle(R.string.order_summary_title);
 
