@@ -10,5 +10,5 @@
     <string name="set_position_as_current">Set Current Position</string>
     <string name="list">List</string>
     <string name="map">Map</string>
-    <string name="select_deliverer">Seleziona Fattorino</string>
+    <string name="select_deliverer">Choose Deliverer</string>
 </resources>
