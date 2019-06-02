@@ -189,7 +189,6 @@ public class ProductEditActivity extends AbstractEditorWithImagePickerActivity {
         return Unit.INSTANCE;
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_product_edit_menu, menu);
