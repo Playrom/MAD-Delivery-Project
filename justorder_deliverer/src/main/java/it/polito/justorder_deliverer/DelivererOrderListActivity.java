@@ -73,7 +73,7 @@ public class DelivererOrderListActivity extends AbstractListViewWithSidenav {
                 }
                 Order order = orders.get(position);
                 ((TextView)convertView.findViewById(R.id.order_id)).setText(order.getRestaurantName());
-                ((TextView)convertView.findViewById(R.id.amount)).setText("Restaurant Address: " + order.getRestaurantAddress());
+                ((TextView)convertView.findViewById(R.id.amount)).setText("Restaurant Address: " + order.getRestaurantAddress() + " €");
                 ((TextView)convertView.findViewById(R.id.address)).setText("User Address: " + order.getUserAddress());
                 String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
                 ((TextView)convertView.findViewById(R.id.timestamp)).setText("Date and time: " + date);

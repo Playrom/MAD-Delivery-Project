@@ -99,10 +99,14 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
 
                 if(visibleProducts.get(position) != null){
                     Product product = visibleProducts.get(position);
+                    String votes="";
+                    if(product.getNumberOfVotes()==1){
+                        votes=" Vote";
+                    } else votes= " Votes";
                     String formattedString = String.format("%.02f", product.getAverageVote());
                     ((TextView)convertView.findViewById(R.id.content)).setText(product.getName());
                     ((TextView)convertView.findViewById(R.id.description)).setText("Cost: " + new Double(product.getCost()).toString());
-                    ((TextView)convertView.findViewById(R.id.avgVote)).setText("Average vote: " + formattedString + " (" + product.getNumberOfVotes() + " Votes)");
+                    ((TextView)convertView.findViewById(R.id.avgVote)).setText("Average vote: " + formattedString + " (" + product.getNumberOfVotes() + votes + ")");
                     Glide.with(ProductsListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
                 }
 
