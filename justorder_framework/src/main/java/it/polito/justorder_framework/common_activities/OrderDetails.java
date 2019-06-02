@@ -15,6 +15,7 @@ import kotlin.Unit;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
@@ -110,22 +111,24 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
         if(this.user != null) {
             userTextField.setText("User Name: " + this.user.getName());
         }
-        addressTextField.setText("Address: " + order.getUserAddress());
-        priceTextField.setText("Cost: " + new Double(order.getPrice()).toString());
+        addressTextField.setText("Delivery Address: " + order.getUserAddress());
+        priceTextField.setText("Order Cost: " + new Double(order.getPrice()).toString() + " €");
         String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
         timestampTextField.setText("Date and time: " + date);
 
         if(this.deliverer != null) {
             riderTextField.setText("Deliverer Name: "+ this.deliverer.getName());
+        } else {
+            riderTextField.setText("Deliverer not yet assigned");
         }
 
         if(products.size() > 0){
             productString = createProductString();
-            productsTextField.setText(this.productString);
+            productsTextField.setText(Html.fromHtml(this.productString));
         }
 
         if(this.order != null){
-            this.actionBar.setTitle(this.order.getKeyId());
+            this.actionBar.setTitle("Order Details");
         }
     }
 
@@ -133,7 +136,8 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
 
         String productString = "";
         for(Map.Entry<Product, Double> entry : products.entrySet()){
-            productString += entry.getValue().intValue() + " x " + entry.getKey().getName() + "\n";
+           // productString += entry.getValue().intValue() + " x " + entry.getKey().getName() + "\n";
+            productString += "&#8226; " +entry.getKey().getName() + " x " + entry.getValue().intValue() +"<br/>\n";
         }
 
         return productString;

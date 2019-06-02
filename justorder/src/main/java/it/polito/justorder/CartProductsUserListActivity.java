@@ -160,7 +160,7 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
                     total = total + qty * product.getCost();
                     i--;
                 }
-                this.actionBar.setTitle(this.user.getName() + "'s Cart, total: " + total.toString());
+                this.actionBar.setTitle("Cart total: " + total.toString());
                 findViewById(R.id.empty).setVisibility(View.GONE);
             }
         } else {
@@ -243,6 +243,9 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
 
                     Toast toast = Toast.makeText(getApplicationContext(), "Order successfully received by the restaurant, soon a deliveryman will deliver your order", Toast.LENGTH_SHORT);
                     toast.show();
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please select first some products to order", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         }
@@ -250,6 +253,8 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
 
             user.setCurrentRestaurant("");
             user.setProducts(null);
+            productList.clear();
+            productKeys.clear();
             Database.INSTANCE.getUsers().save(user);
 
             Toast toast = Toast.makeText(getApplicationContext(), "Cart cleared", Toast.LENGTH_SHORT);
