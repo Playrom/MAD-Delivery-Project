@@ -6,6 +6,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
@@ -103,21 +104,20 @@ public class OrderToAccept extends ActivityAbstractWithToolbar {
         super.reloadViews();
 
         if(this.user != null) {
-            userTextField.setText("User: " + this.user.getName());
+            userTextField.setText("User Name: " + this.user.getName());
         }
-        addressTextField.setText("Address: " + order.getUserAddress());
-        priceTextField.setText("Cost: " + new Double(order.getPrice()).toString());
+        addressTextField.setText("Delivery Address: " + order.getUserAddress());
+        String x = String.format("%.02f", new Float(order.getPrice()));
+        priceTextField.setText("Order Cost: " + x + " €");
         String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
-        timestampTextField.setText(date);
+        timestampTextField.setText("Date and time: " + date);
 
         if(products.size() > 0){
             productString = createProductString();
-            productsTextField.setText(this.productString);
+            productsTextField.setText(Html.fromHtml(this.productString));
         }
 
-        if(this.order != null){
-            this.actionBar.setTitle(this.order.getKeyId());
-        }
+        this.actionBar.setTitle("Order Details");
     }
 
     @Override

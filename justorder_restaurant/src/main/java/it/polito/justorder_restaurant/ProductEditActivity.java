@@ -164,7 +164,8 @@ public class ProductEditActivity extends AbstractEditorWithImagePickerActivity {
         super.reloadViews();
         if(product != null) {
             nameTextField.setText(product.getName());
-            costTextField.setText(new Double(product.getCost()).toString());
+            String x = String.format("%.02f", new Float(product.getCost()));
+            costTextField.setText(x);
             notesTextField.setText(product.getNotes());
 
             if(product.getName() != null){
