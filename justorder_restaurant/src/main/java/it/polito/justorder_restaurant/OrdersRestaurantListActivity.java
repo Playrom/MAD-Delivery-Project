@@ -66,15 +66,8 @@ public class OrdersRestaurantListActivity extends RestaurantOrderListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Order entry = (Order) parent.getAdapter().getItem(position);
-
                 Intent intent;
-                String state = entry.getState();
-                if (state!=null && state.equals("pending")) {
-                    intent = new Intent(OrdersRestaurantListActivity.this, OrderToConfirm.class);
-                }else {
-                    intent = new Intent(OrdersRestaurantListActivity.this, OrderDetails.class);
-                }
-
+                intent = new Intent(OrdersRestaurantListActivity.this, OrderDetails.class);
                 intent.putExtra("order", entry);
                 tapped = position;
                 startActivityForResult(intent, 1);
@@ -111,8 +104,6 @@ public class OrdersRestaurantListActivity extends RestaurantOrderListActivity {
         super.onActivityResult(requestCode, resultCode, data);
         this.initDataSource();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

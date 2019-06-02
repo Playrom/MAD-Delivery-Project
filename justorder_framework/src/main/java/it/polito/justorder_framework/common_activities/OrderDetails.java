@@ -127,9 +127,8 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
             productsTextField.setText(Html.fromHtml(this.productString));
         }
 
-        if(this.order != null){
-            this.actionBar.setTitle("Order Details");
-        }
+        this.actionBar.setTitle("Order Details");
+
     }
 
     private String createProductString() {

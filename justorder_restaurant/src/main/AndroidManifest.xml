@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderToConfirm"></activity>
         <activity android:name="it.polito.justorder_framework.common_activities.OrderDetails" />
         <activity android:name="it.polito.justorder_framework.common_activities.ProductActivity" />
         <activity android:name=".ProductActivityWithEditing" />
