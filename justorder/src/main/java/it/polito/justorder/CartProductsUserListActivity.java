@@ -92,9 +92,9 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
 
                     Product product = productList.get(position);
                     Integer qty = user.getProducts().get(product.getKeyId());
-
+                    String x = String.format("%.02f", new Float(product.getCost()));
                     ((TextView) convertView.findViewById(R.id.content)).setText(product.getName());
-                    ((TextView) convertView.findViewById(R.id.description)).setText("cost: " + new Double(product.getCost()).toString() + " ,qty: " + qty);
+                    ((TextView) convertView.findViewById(R.id.description)).setText("cost: " + x + " € ,quantity: " + qty);
                     Glide.with(CartProductsUserListActivity.this).load(product.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
 
                 }
@@ -160,7 +160,8 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
                     total = total + qty * product.getCost();
                     i--;
                 }
-                this.actionBar.setTitle("Cart total: " + total.toString());
+                String x = String.format("%.02f", new Float(total));
+                this.actionBar.setTitle("Cart total: " + x + " €");
                 findViewById(R.id.empty).setVisibility(View.GONE);
             }
         } else {

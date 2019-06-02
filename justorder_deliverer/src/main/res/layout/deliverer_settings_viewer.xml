@@ -39,7 +39,8 @@
                     android:ems="10"
                     android:hint="@string/tax_code"
                     android:inputType="text"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:textColor="#000000"/>
 
                 <EditText
                     android:id="@+id/ibanTextField"
@@ -54,7 +55,8 @@
                     android:ems="10"
                     android:hint="@string/iban"
                     android:inputType="text"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:textColor="#000000"/>
 
                 <TextView
                     android:id="@+id/KmTextField"
@@ -65,11 +67,11 @@
                     android:layout_alignLeft="@id/taxCodeTextField"
                     android:layout_alignEnd="@id/taxCodeTextField"
                     android:layout_alignRight="@id/taxCodeTextField"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginTop="50dp"
                     android:ems="10"
-                    android:text="Km done"
                     android:inputType="text"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:textColor="#000000"/>
 
                 <TextView
                     android:id="@+id/averageVote"
@@ -80,9 +82,11 @@
                     android:layout_alignLeft="@id/KmTextField"
                     android:layout_alignEnd="@id/KmTextField"
                     android:layout_alignRight="@id/KmTextField"
+                    android:layout_marginTop="10dp"
                     android:ems="10"
                     android:inputType="text"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:textColor="#000000"/>
 
             </RelativeLayout>
         </ScrollView>

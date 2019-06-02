@@ -79,8 +79,8 @@ public class DelivererSettingsViewerActivity extends AbstractViewerWithImagePick
     protected void reloadViews() {
         super.reloadViews();
         if(this.deliverer != null){
-            taxCodeTextField.setText(deliverer.getFiscalCode());
-            ibanTextField.setText(deliverer.getIban());
+            taxCodeTextField.setText("Fiscal code: " + deliverer.getFiscalCode());
+            ibanTextField.setText("IBAN: " + deliverer.getIban());
         }
     }
 
