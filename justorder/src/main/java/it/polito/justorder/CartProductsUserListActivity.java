@@ -274,6 +274,14 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
 
                if (qty == 0){
                    user.getProducts().remove(prod.getKeyId());
+                   Integer i = this.productList.size();
+                   while(i>0){
+                     Product p =  this.productList.get(i-1);
+                     if(p.getKeyId().compareTo(prod.getKeyId())==0){
+                         this.productList.remove(i-1);
+                     }
+                     i--;
+                   }
                } else {
                    user.getProducts().put(prod.getKeyId(), qty);
                }
