@@ -2,6 +2,7 @@ package it.polito.justorder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,12 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_list_activity);
         this.setupActivity();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_confirm_delete_menu, menu);
+        return true;
     }
 
     @Override
@@ -180,9 +187,9 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
             Order order = new Order();
             order.setState("pending");
 
-            if (user.getCurrentRestaurant() != null && products != null && user != null && user.getProducts()!= null) {
+            if (user.getCurrentRestaurant() != null && products != null && user != null && user.getProducts() != null) {
 
-                if(user.getProducts().size()!=0) {
+                if (user.getProducts().size() != 0) {
                     Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), true, (restaurant -> {
                         this.restaurant = restaurant;
                         this.reloadData();
@@ -239,6 +246,16 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
                 }
             }
         }
+        if (item.getItemId() == R.id.delete && user != null) {
+
+            user.setCurrentRestaurant("");
+            user.setProducts(null);
+            Database.INSTANCE.getUsers().save(user);
+
+            Toast toast = Toast.makeText(getApplicationContext(), "Cart cleared", Toast.LENGTH_SHORT);
+            toast.show();
+            this.reloadViews();
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -274,6 +291,14 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
 
                if (qty == 0){
                    user.getProducts().remove(prod.getKeyId());
+                   Integer i = this.productList.size();
+                   while(i>0){
+                     Product p =  this.productList.get(i-1);
+                     if(p.getKeyId().compareTo(prod.getKeyId())==0){
+                         this.productList.remove(i-1);
+                     }
+                     i--;
+                   }
                } else {
                    user.getProducts().put(prod.getKeyId(), qty);
                }
