@@ -188,7 +188,7 @@ public class OrderToAccept extends ActivityAbstractWithToolbar {
 
         String productString = "";
         for(Map.Entry<Product, Double> entry : products.entrySet()){
-            productString += entry.getKey().getName() + "\n";
+            productString += "&#8226; " +entry.getKey().getName() + " x " + entry.getValue().intValue() +"<br/>\n";
         }
 
         return productString;
