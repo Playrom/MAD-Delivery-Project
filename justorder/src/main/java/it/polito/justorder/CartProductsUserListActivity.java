@@ -54,7 +54,7 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_second_menu, menu);
+        getMenuInflater().inflate(R.menu.activity_confirm_delete_menu, menu);
         return true;
     }
 
@@ -254,6 +254,7 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
 
             Toast toast = Toast.makeText(getApplicationContext(), "Cart cleared", Toast.LENGTH_SHORT);
             toast.show();
+            this.reloadViews();
         }
 
         return super.onOptionsItemSelected(item);
