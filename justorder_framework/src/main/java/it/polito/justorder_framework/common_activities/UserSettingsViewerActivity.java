@@ -91,6 +91,7 @@ public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerAct
             if(resultCode== Activity.RESULT_OK){
                 user = (User) data.getSerializableExtra("user");
                 Database.INSTANCE.getUsers().save(user);
+                reloadData();
             }
         }
     }
@@ -105,6 +106,6 @@ public class UserSettingsViewerActivity extends AbstractViewerWithImagePickerAct
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         user = (User) savedInstanceState.getSerializable("user");
-        reloadViews();
+        reloadData();
     }
 }
