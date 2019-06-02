@@ -131,8 +131,8 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == FirebaseFunctions.AUTH_ACTIVITY_RESULT){
             EventBus.getDefault().post(new UserChangeStatusEvent());
+            this.setupActivity();
         }
-        this.setupActivity();
     }
 
     @Override
