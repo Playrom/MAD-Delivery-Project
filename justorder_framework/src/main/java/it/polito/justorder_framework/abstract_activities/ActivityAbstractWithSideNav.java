@@ -24,6 +24,7 @@ import it.polito.justorder_framework.FirebaseFunctions;
 import it.polito.justorder_framework.LogoutStatusEvent;
 import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.UserChangeStatusEvent;
+import kotlin.Unit;
 
 public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
     protected DrawerLayout drawerLayout;
@@ -66,7 +67,16 @@ public class ActivityAbstractWithSideNav extends ActivityAbstractWithToolbar {
 
     @Subscribe
     public void onMessageEvent(LogoutStatusEvent event) {
-        FirebaseFunctions.login(this);
+
+        try {
+            Class className = Class.forName(getApplicationContext().getPackageName() + ".AppLoaderActivity");
+            Intent i = new Intent(this, className);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            this.startActivity(i);
+            finish();
+        }catch (ClassNotFoundException e){
+            System.out.println("Missing AppLoaderActivity in package");
+        }
     }
 
     protected NavigationView.OnNavigationItemSelectedListener getNavigationListener() {

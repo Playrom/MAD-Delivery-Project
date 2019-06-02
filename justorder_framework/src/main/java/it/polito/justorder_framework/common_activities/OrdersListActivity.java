@@ -49,7 +49,6 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
 
     @Override
     protected void setupActivity() {
-        super.setupActivity();
         this.listView = findViewById(R.id.order_list);
 
         this.adapter = new BaseAdapter() {
@@ -83,6 +82,8 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
                 return convertView;
             }
         };
+        super.setupActivity();
+
         this.listView.setAdapter(this.adapter);
         this.actionBar.setTitle(R.string.order_summary_title);
 

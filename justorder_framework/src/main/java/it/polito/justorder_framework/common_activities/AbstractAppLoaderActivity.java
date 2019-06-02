@@ -24,7 +24,7 @@ import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithSid
 import it.polito.justorder_framework.db.Database;
 import kotlin.Unit;
 
-public class AppLoaderActivity extends ActivityAbstract {
+public class AbstractAppLoaderActivity extends ActivityAbstract {
 
     protected void loadData(){
 

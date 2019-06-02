@@ -32,7 +32,6 @@ public class OrdersRestaurantListActivity extends OrdersListActivity {
 
     @Override
     protected void setupActivity() {
-        super.setupActivity();
 
         this.adapter = new BaseAdapter() {
             @Override
@@ -65,7 +64,7 @@ public class OrdersRestaurantListActivity extends OrdersListActivity {
                 return convertView;
             }
         };
-
+        super.setupActivity();
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -25,12 +25,10 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
         MenuItem orders = navView.getMenu().findItem(R.id.ordersPage);
         TextView view = (TextView) orders.getActionView();
 
-        Database.INSTANCE.getOrders().query("deliverer", Database.INSTANCE.getCurrent_User().getDelivererKey(), true,orders1 -> {
+        Database.INSTANCE.getOrders().query("deliverer", Database.INSTANCE.getCurrent_User().getDelivererKey(), true, (orders1, hasUpdate) -> {
             long count = orders1.stream().filter(x -> ((Order) x).getState().equals("deliverer_pending")).count();
             view.setText(new Long(count).toString());
-            if(firstLoad){
-                firstLoad = false;
-            }else{
+            if(hasUpdate){
                 Toast toast = Toast.makeText(context, "Orders updates Pending", Toast.LENGTH_SHORT);
                 toast.show();
             }

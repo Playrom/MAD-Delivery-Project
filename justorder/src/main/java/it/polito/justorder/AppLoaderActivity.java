@@ -8,11 +8,11 @@ import org.greenrobot.eventbus.EventBus;
 
 import it.polito.justorder_framework.FirebaseFunctions;
 import it.polito.justorder_framework.UserChangeStatusEvent;
-import it.polito.justorder_framework.common_activities.AppLoaderActivity;
+import it.polito.justorder_framework.common_activities.AbstractAppLoaderActivity;
 import it.polito.justorder_framework.db.Database;
 import kotlin.Unit;
 
-public class ClientAppLoaderActivity extends AppLoaderActivity {
+public class AppLoaderActivity extends AbstractAppLoaderActivity {
 
     @Override
     protected void onStart() {

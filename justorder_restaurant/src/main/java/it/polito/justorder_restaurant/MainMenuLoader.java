@@ -22,7 +22,6 @@ import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
 public class MainMenuLoader extends AbstractMainMenuLoader {
-    private static boolean firstLoad = true;
 
     public static void createMainMenu(NavigationView navView, Context context){
         AbstractMainMenuLoader.createMainMenu(navView, context);
@@ -36,16 +35,15 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
             );
         }
 
+        boolean firstLoad = true;
         MenuItem orders = navView.getMenu().findItem(R.id.ordersPage);
         TextView view = (TextView) orders.getActionView();
 
-        Database.INSTANCE.getOrders().query("restaurant", Database.INSTANCE.getCurrent_User().getRestaurantKey(), true, orders1 -> {
+        Database.INSTANCE.getOrders().query("restaurant", Database.INSTANCE.getCurrent_User().getRestaurantKey(), true, (orders1, hasUpdate) -> {
             long count = orders1.stream().filter(x -> ((Order) x).getState().equals("pending")).count();
             view.setText(new Long(count).toString());
 
-            if(firstLoad){
-                firstLoad = false;
-            }else{
+            if(hasUpdate){
                 Toast toast = Toast.makeText(context, "Orders updates Pending", Toast.LENGTH_SHORT);
                 toast.show();
             }

@@ -143,25 +143,25 @@ open class ModelOperations<T: Model>(protected val tClass: Class<T>, val path: S
         }
     }
 
-    fun query(key: String, value: String, listen: Boolean, cb : (List<T>) -> Unit){
+    fun query(key: String, value: String, listen: Boolean, cb : (List<T>, Boolean) -> Unit){
         if(listen){
             var ref = Database.db.child(path)
             var query = ref.orderByChild(key).equalTo(value);
+            var hasUpdate = false
             query.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
                     var items: MutableList<T> = mutableListOf()
                     for (item in p0.children) {
                         items.add(Utils.convertObject(item, tClass))
                     }
-                    cb(items)
+                    cb(items, hasUpdate)
+                    hasUpdate = true
                 }
 
                 override fun onCancelled(p0: DatabaseError) {
                     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
             })
-        }else{
-            query(key, value, cb)
         }
     }
 

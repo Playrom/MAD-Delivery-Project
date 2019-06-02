@@ -21,7 +21,7 @@
         <activity android:name=".RestaurantDelivererAssignActivity" />
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsEditorActivity" />
         <activity android:name="it.polito.justorder_framework.common_activities.UserSettingsViewerActivity" />
-        <activity android:name=".ResturantAppLoaderActivity">
+        <activity android:name=".AppLoaderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
