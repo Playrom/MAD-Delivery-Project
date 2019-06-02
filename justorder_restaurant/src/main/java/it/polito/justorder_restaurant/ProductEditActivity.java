@@ -225,6 +225,7 @@ public class ProductEditActivity extends AbstractEditorWithImagePickerActivity {
                 String str = this.ingredientsChips.toString();
                 ArrayList aList= new ArrayList(Arrays.asList(str.split(",")));
 
+
                 this.product.setNotes(this.notesTextField.getText().toString());
                 this.product.setIngredients(aList);
                 this.product.setCategory(this.types.get(spinner.getSelectedItemPosition()));
