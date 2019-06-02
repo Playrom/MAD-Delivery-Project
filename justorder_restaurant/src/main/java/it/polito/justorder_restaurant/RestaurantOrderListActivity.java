@@ -96,7 +96,9 @@ public class RestaurantOrderListActivity extends AbstractListViewWithSidenav {
         for (Order o : orders) {
             hour = o.getTimestamp().getHours();
             if (m.get(hour) != null) {
-                m.put(hour, m.get(hour) + 1);
+                Integer r=m.get(hour);
+                r=r+1;
+                m.put(hour, r);
             }
             else {
                 m.put(hour, 1);
@@ -104,15 +106,17 @@ public class RestaurantOrderListActivity extends AbstractListViewWithSidenav {
         }
 
         Integer max = null;
+        Integer max2= 1;
         for (Map.Entry<Integer, Integer> entry : m.entrySet())
         {
             if (max == null || entry.getValue().compareTo(max) > 0)
             {
                 max = entry.getValue();
+                max2= entry.getKey();
             }
         }
 
-        return new Integer(max);
+        return new Integer(max2);
     }
 
     protected void initDataSource() {
