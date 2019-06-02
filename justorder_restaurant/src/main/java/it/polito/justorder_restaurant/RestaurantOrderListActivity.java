@@ -24,6 +24,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,8 +74,11 @@ public class RestaurantOrderListActivity extends AbstractListViewWithSidenav {
                     convertView = getLayoutInflater().inflate(R.layout.order_adapter, parent, false);
                 }
                 Order order = orders.get(position);
+
+                String x = String.format("%.02f", new Float(order.getPrice()));
+
                 ((TextView)convertView.findViewById(R.id.order_id)).setText(order.getUserName());
-                ((TextView)convertView.findViewById(R.id.amount)).setText("Cost: " + new Double(order.getPrice()).toString() + " €");
+                ((TextView)convertView.findViewById(R.id.amount)).setText("Cost: " + x + " €");
                 ((TextView)convertView.findViewById(R.id.address)).setText("User Address: " + order.getUserAddress());
                 String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
                 ((TextView)convertView.findViewById(R.id.timestamp)).setText("Date and time: " + date);

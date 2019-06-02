@@ -112,7 +112,8 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
             userTextField.setText("User Name: " + this.user.getName());
         }
         addressTextField.setText("Delivery Address: " + order.getUserAddress());
-        priceTextField.setText("Order Cost: " + new Double(order.getPrice()).toString() + " €");
+        String x = String.format("%.02f", new Float(order.getPrice()));
+        priceTextField.setText("Order Cost: " + x + " €");
         String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
         timestampTextField.setText("Date and time: " + date);
 
