@@ -113,7 +113,8 @@ public class OrdersRestaurantListActivity extends RestaurantOrderListActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.mostPopolarTime && this.maxHour != null) {
+        if(item.getItemId() == R.id.mostPopolarTime) {
+            this.maxHour = getMostPopularHour(this.orders);
             AlertDialog.Builder builder = new AlertDialog.Builder(OrdersRestaurantListActivity.this);
             AlertDialog dialog = builder
                     .setTitle(getString(R.string.most_popolar_time))
