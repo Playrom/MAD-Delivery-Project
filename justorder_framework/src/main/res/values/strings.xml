@@ -17,7 +17,7 @@
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
     <string name="category">Category</string>
-
+    <string name="empty">Cart is empty, please select some products to order</string>
 
     <string name="product_list_title">Our Meals</string>
     <string name="order_summary_title">Orders Summary</string>

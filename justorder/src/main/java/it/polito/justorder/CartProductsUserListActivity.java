@@ -96,7 +96,6 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
             }
         };
         this.listView.setAdapter(this.adapter);
-        this.actionBar.setTitle(R.string.product_list_title);
 
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -118,21 +117,20 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
 
         this.user = Database.INSTANCE.getCurrent_User();
         if (this.user != null && this.user.getProducts() != null) {
-            this.productKeys = new ArrayList<>(this.user.getProducts().keySet());
-            products.clear();
-            Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), (restaurant1 -> {
-                this.restaurant = restaurant1;
-                for (String prod : productKeys) {
-                    this.products.put(prod, this.restaurant.getProducts().get(prod));
-                }
-                this.productList = new ArrayList<>(products.values());
-                this.reloadData();
-                return Unit.INSTANCE;
-            }));
-
-
+            if(this.user.getProducts().size()!=0) {
+                this.productKeys = new ArrayList<>(this.user.getProducts().keySet());
+                products.clear();
+                Database.INSTANCE.getRestaurants().get(user.getCurrentRestaurant(), (restaurant1 -> {
+                    this.restaurant = restaurant1;
+                    for (String prod : productKeys) {
+                        this.products.put(prod, this.restaurant.getProducts().get(prod));
+                    }
+                    this.productList = new ArrayList<>(products.values());
+                    this.reloadData();
+                    return Unit.INSTANCE;
+                }));
+            }
         }
-
     }
 
     @Override
@@ -144,9 +142,32 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
     @Override
     protected void reloadViews() {
         super.reloadViews();
-        if (this.user != null) {
-            this.actionBar.setTitle(this.user.getName() + "'s Cart");
+
+        if(this.user != null && productList.size()!=0 && user.getProducts()!= null) {
+            if(user.getProducts().size()!=0){
+                Integer i = user.getProducts().size();
+                Double total = 0.0;
+                while(i>0){
+                    Product product = productList.get(i-1);
+                    Integer qty = user.getProducts().get(product.getKeyId());
+                    total = total + qty * product.getCost();
+                    i--;
+                }
+                this.actionBar.setTitle(this.user.getName() + "'s Cart, total: " + total.toString());
+                findViewById(R.id.empty).setVisibility(View.GONE);
+            }
+        } else {
+            if(this.user!=null){
+                this.actionBar.setTitle(this.user.getName() + "'s Cart");  findViewById(R.id.empty).setVisibility(View.VISIBLE);
+            } else {
+                this.actionBar.setTitle( "Cart");  findViewById(R.id.empty).setVisibility(View.VISIBLE);
+            }
         }
+
+
+
+
+
         this.adapter.notifyDataSetChanged();
     }
 
@@ -258,6 +279,9 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
                }
                if(user.getProducts().size()==0 ) {
                    user.setCurrentRestaurant("");
+                   user.setProducts(null);
+                   productList.clear();
+                   productKeys.clear();
                }
                 Database.INSTANCE.getUsers().save(user);
                 this.setupActivity();

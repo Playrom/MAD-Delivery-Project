@@ -8,6 +8,7 @@ import it.polito.justorder_framework.model.Deliverer;
 import it.polito.justorder_framework.model.Order;
 import it.polito.justorder_framework.model.OrderProduct;
 import it.polito.justorder_framework.model.Product;
+import it.polito.justorder_framework.model.Restaurant;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
@@ -16,8 +17,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +31,11 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
     private Order order;
     public User deliverer;
     private User user;
+    private Restaurant restaurant;
     private TextView orderIdTextField, userTextField, addressTextField, priceTextField, timestampTextField, riderTextField, productsTextField;
     private String productString;
     private Map<Product,Double> products = new HashMap<>();
-
+    private Integer x = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +70,7 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
             if(this.order.getUser() != null){
                 Database.INSTANCE.getUsers().get(this.order.getUser(), (user1 -> {
                     this.user = user1;
-                    //this.reloadViews();
+                    this.reloadViews();
                     return Unit.INSTANCE;
                 }));
             }
@@ -75,23 +79,36 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
                 Database.INSTANCE.getDeliverers().get(this.order.getDeliverer(), (deliverer1 -> {
                     Database.INSTANCE.getUsers().get(deliverer1.getUserKey(), user1 -> {
                         this.deliverer = user1;
-                        //this.reloadViews();
+                        this.reloadViews();
                         return Unit.INSTANCE;
                     });
                     return Unit.INSTANCE;
                 }));
             }
 
-            for(Map.Entry<String, OrderProduct> entry : this.order.getProducts().entrySet()){
+        /*    for(Map.Entry<String, OrderProduct> entry : this.order.getProducts().entrySet()){
 
                 Database.INSTANCE.getRestaurants().get(entry.getValue().getRestaurantKey(), (restaurant -> {
-                    this.products.put(restaurant.getProducts().get(entry.getValue().getProductKey()), entry.getValue().getQuantity());
+                    this.products.add(restaurant.getProducts().get(entry.getValue().getProductKey()));
                     this.reloadViews();
                     return Unit.INSTANCE;
                 }));
-            }
+            }*/
+            Database.INSTANCE.getRestaurants().get(this.order.getRestaurant(), (restaurant -> {
+                this.restaurant=restaurant;
+                if(x!=1) {
+                    for (Map.Entry<String, OrderProduct> entry : this.order.getProducts().entrySet()) {
+                        this.products.put(restaurant.getProducts().get(entry.getValue().getProductKey()), entry.getValue().getQuantity());
+                    }
+                    x=1;
+                }
+                this.reloadViews();
+                return Unit.INSTANCE;
+            }));
+
+
         }
-        //this.reloadViews();
+        this.reloadViews();
     }
 
     @Override
@@ -99,15 +116,15 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
         super.reloadViews();
 
         if(this.user != null) {
-            userTextField.setText("User: " + this.user.getName());
+            userTextField.setText("User Name: " + this.user.getName());
         }
         addressTextField.setText("Address: " + order.getUserAddress());
         priceTextField.setText("Cost: " + new Double(order.getPrice()).toString());
         String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
-        timestampTextField.setText(date);
+        timestampTextField.setText("Date and time: " + date);
 
         if(this.deliverer != null) {
-            riderTextField.setText(this.deliverer.getName());
+            riderTextField.setText("Deliverer Name: "+ this.deliverer.getName());
         }
 
         if(products.size() > 0){
@@ -124,7 +141,7 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
 
         String productString = "";
         for(Map.Entry<Product, Double> entry : products.entrySet()){
-            productString += entry.getKey().getName() + ";\n";
+            productString += entry.getValue().intValue() + " x " + entry.getKey().getName() + ";\n";
         }
 
         return productString;

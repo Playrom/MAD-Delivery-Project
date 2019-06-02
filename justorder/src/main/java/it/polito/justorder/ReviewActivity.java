@@ -101,17 +101,18 @@ public class ReviewActivity extends AbstractEditor {
                 review.setStars(stars);
                 review.setReviewerKey(user.getKeyId());
                 Database.INSTANCE.getRestaurants().save(restaurant);
-                Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about our restaurant", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about this restaurant", Toast.LENGTH_SHORT).show();
                 finish();
             }
-            if (product != null) {
+            if (product != null && restaurant!=null) {
                 review = new Review();
                 review.setProductKey(product.getKeyId());
+                review.setRestaurantKey(restaurant.getKeyId());
                 review.setComment(mFeedback.getText().toString());
                 review.setStars(stars);
                 review.setReviewerKey(user.getKeyId());
                 Database.INSTANCE.getReviews().save(review);
-                Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about our product", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about this product", Toast.LENGTH_SHORT).show();
                 finish();
             }
             if (user_deliverer != null) {
@@ -123,7 +124,7 @@ public class ReviewActivity extends AbstractEditor {
                     review.setStars(stars);
                     review.setReviewerKey(user.getKeyId());
                     Database.INSTANCE.getReviews().save(review);
-                    Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about our deliverer", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Thank you for sharing your feedback about this deliverer", Toast.LENGTH_SHORT).show();
                     finish();
                     return Unit.INSTANCE;
                 });

@@ -25,6 +25,17 @@
                 android:layout_height="wrap_content" >
             </ListView>
 
+            <TextView
+                android:id="@+id/empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty"
+                android:layout_marginTop="300dp"
+                android:layout_centerHorizontal="true"
+                android:enabled="false"
+                android:visibility="gone"
+                android:textColor="@color/preview_bottom_toolbar_bg"/>
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
