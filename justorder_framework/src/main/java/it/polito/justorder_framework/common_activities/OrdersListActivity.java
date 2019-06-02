@@ -74,7 +74,7 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
                     convertView = getLayoutInflater().inflate(R.layout.order_adapter, parent, false);
                 }
                 Order order = orders.get(position);
-                ((TextView)convertView.findViewById(R.id.order_id)).setText(order.getKeyId());
+                ((TextView)convertView.findViewById(R.id.order_id)).setText(order.getUserName());
                 ((TextView)convertView.findViewById(R.id.amount)).setText("Cost: " + new Double(order.getPrice()).toString());
                 ((TextView)convertView.findViewById(R.id.address)).setText("Address: " + order.getUserAddress());
                 String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
