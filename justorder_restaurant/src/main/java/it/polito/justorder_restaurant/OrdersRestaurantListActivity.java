@@ -2,10 +2,14 @@ package it.polito.justorder_restaurant;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -29,6 +33,38 @@ public class OrdersRestaurantListActivity extends OrdersListActivity {
     @Override
     protected void setupActivity() {
         super.setupActivity();
+
+        this.adapter = new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return orders.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return orders.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                if(convertView == null) {
+                    convertView = getLayoutInflater().inflate(R.layout.order_adapter, parent, false);
+                }
+                Order order = orders.get(position);
+                ((TextView)convertView.findViewById(R.id.order_id)).setText(order.getUserAddress());
+                ((TextView)convertView.findViewById(R.id.amount)).setText("Cost: " + new Double(order.getPrice()).toString());
+                ((TextView)convertView.findViewById(R.id.address)).setText("User: " + order.getUserName());
+                String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
+                ((TextView)convertView.findViewById(R.id.timestamp)).setText(date);
+                ((TextView)convertView.findViewById(R.id.state)).setText(order.getState());
+                return convertView;
+            }
+        };
 
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
