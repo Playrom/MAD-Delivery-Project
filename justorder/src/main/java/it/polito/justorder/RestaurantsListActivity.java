@@ -100,9 +100,10 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
 
                 if(visibleRestaurants.get(position) != null){
                     Restaurant restaurant = visibleRestaurants.get(position);
+                    String formattedString = String.format("%.02f", restaurant.getAverageVote());
                     ((TextView)convertView.findViewById(R.id.content)).setText(restaurant.getName());
-                    ((TextView)convertView.findViewById(R.id.description)).setText(restaurant.getAddress());
-                    ((TextView)convertView.findViewById(R.id.avgVote)).setText("Avg vote: " + String.valueOf(restaurant.getAverageVote()));
+                    ((TextView)convertView.findViewById(R.id.description)).setText("Address: "+restaurant.getAddress());
+                    ((TextView)convertView.findViewById(R.id.avgVote)).setText("Average vote: " + formattedString + " (" + restaurant.getNumberOfVotes() + " Votes)");
                     Glide.with(RestaurantsListActivity.this).load(restaurant.getImageUri()).into((ImageView) convertView.findViewById(R.id.image));
                 }
 

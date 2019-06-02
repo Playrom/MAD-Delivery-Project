@@ -86,14 +86,6 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
                 }));
             }
 
-        /*    for(Map.Entry<String, OrderProduct> entry : this.order.getProducts().entrySet()){
-
-                Database.INSTANCE.getRestaurants().get(entry.getValue().getRestaurantKey(), (restaurant -> {
-                    this.products.add(restaurant.getProducts().get(entry.getValue().getProductKey()));
-                    this.reloadViews();
-                    return Unit.INSTANCE;
-                }));
-            }*/
             Database.INSTANCE.getRestaurants().get(this.order.getRestaurant(), (restaurant -> {
                 this.restaurant=restaurant;
                 if(x!=1) {
@@ -141,7 +133,7 @@ public class OrderDetails extends ActivityAbstractWithToolbar {
 
         String productString = "";
         for(Map.Entry<Product, Double> entry : products.entrySet()){
-            productString += entry.getValue().intValue() + " x " + entry.getKey().getName() + ";\n";
+            productString += entry.getValue().intValue() + " x " + entry.getKey().getName() + "\n";
         }
 
         return productString;
