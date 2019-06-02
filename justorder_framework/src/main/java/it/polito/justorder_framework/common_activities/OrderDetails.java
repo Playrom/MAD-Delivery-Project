@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class OrderDetails extends AbstractViewerWithImagePickerActivityAndToolbar {
+public class OrderDetails extends ActivityAbstractWithToolbar {
 
     private Order order;
     public User deliverer;

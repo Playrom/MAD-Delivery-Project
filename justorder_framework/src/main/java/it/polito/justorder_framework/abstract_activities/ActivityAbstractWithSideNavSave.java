@@ -1,5 +1,6 @@
 package it.polito.justorder_framework.abstract_activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -89,7 +90,7 @@ public class ActivityAbstractWithSideNavSave extends ActivityAbstractWithToolbar
         try {
             System.out.println(getApplicationContext().getPackageName() + ".MainMenuLoader");
             Class loader = Class.forName(getApplicationContext().getPackageName() + ".MainMenuLoader");
-            loader.getMethod("createMainMenu", NavigationView.class).invoke(null, navigationView);
+            loader.getMethod("createMainMenu", NavigationView.class, Context.class).invoke(null, navigationView, this);
         }catch (ClassNotFoundException e){
             System.out.println("Missing MainMenuLoader in package");
         }catch (NoSuchMethodException e){

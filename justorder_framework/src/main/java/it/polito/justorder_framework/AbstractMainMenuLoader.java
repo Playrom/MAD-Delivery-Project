@@ -1,5 +1,6 @@
 package it.polito.justorder_framework;
 
+import android.content.Context;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
@@ -7,7 +8,8 @@ import com.google.android.material.navigation.NavigationView;
 import it.polito.justorder_framework.db.Database;
 
 public class AbstractMainMenuLoader {
-    public static void createMainMenu(NavigationView navView){
+    protected static boolean notifications = false;
+    public static void createMainMenu(NavigationView navView, Context context){
         Database.INSTANCE.getCurrent_User();
         MenuItem login = navView.getMenu().findItem(R.id.login);
         if(login != null){

@@ -6,9 +6,13 @@ import android.widget.AdapterView;
 
 import androidx.annotation.Nullable;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Map;
 
+import it.polito.justorder_framework.LogoutStatusEvent;
+import it.polito.justorder_framework.UserChangeStatusEvent;
 import it.polito.justorder_framework.common_activities.OrderDetails;
 import it.polito.justorder_framework.common_activities.OrdersListActivity;
 import it.polito.justorder_framework.db.Database;
@@ -42,9 +46,10 @@ public class OrdersUserListActivity extends OrdersListActivity {
         this.user = (User) i.getSerializableExtra("user");
         Map<String, Boolean> userOrders = this.user.getOrders();
 
-        Database.INSTANCE.getOrders().getWithIds(new ArrayList<>(userOrders.keySet()), orders1 -> {
+        Database.INSTANCE.getOrders().getWithIds(new ArrayList<>(userOrders.keySet()), true, orders1 -> {
             this.orders.clear();
             this.orders.addAll(orders1);
+            EventBus.getDefault().post(new UserChangeStatusEvent());
             this.reloadViews();
             return Unit.INSTANCE;
         });

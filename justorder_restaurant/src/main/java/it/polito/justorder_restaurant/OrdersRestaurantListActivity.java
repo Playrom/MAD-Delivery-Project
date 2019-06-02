@@ -64,7 +64,7 @@ public class OrdersRestaurantListActivity extends OrdersListActivity {
         });
 
         Database.INSTANCE.getRestaurants().get(this.restaurant.getKeyId(), true, (restaurant1 -> {
-            Database.INSTANCE.getOrders().getWithIds(new ArrayList<>(restaurant1.getOrders().keySet()), orders1 -> {
+            Database.INSTANCE.getOrders().getWithIds(new ArrayList<>(restaurant1.getOrders().keySet()), true, orders1 -> {
                 this.orders.clear();
                 this.orders.addAll(orders1);
                 this.reloadViews();

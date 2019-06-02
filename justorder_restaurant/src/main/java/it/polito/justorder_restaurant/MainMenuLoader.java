@@ -1,9 +1,11 @@
 package it.polito.justorder_restaurant;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.internal.NavigationMenu;
 import com.google.android.material.navigation.NavigationView;
@@ -20,8 +22,8 @@ import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
 public class MainMenuLoader extends AbstractMainMenuLoader {
-    public static void createMainMenu(NavigationView navView){
-        AbstractMainMenuLoader.createMainMenu(navView);
+    public static void createMainMenu(NavigationView navView, Context context){
+        AbstractMainMenuLoader.createMainMenu(navView, context);
 
         MenuItem restaurantSettings = navView.getMenu().findItem(R.id.restaurantSettings);
         if(restaurantSettings != null){
@@ -38,6 +40,9 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
         Database.INSTANCE.getOrders().query("restaurant", Database.INSTANCE.getCurrent_User().getRestaurantKey(), orders1 -> {
             long count = orders1.stream().filter(x -> ((Order) x).getState().equals("pending")).count();
             view.setText(new Long(count).toString());
+
+            Toast toast = Toast.makeText(context, "Orders updates Pending", Toast.LENGTH_LONG);
+            toast.show();
             return Unit.INSTANCE;
         });
 
@@ -45,6 +50,6 @@ public class MainMenuLoader extends AbstractMainMenuLoader {
         view.setGravity(Gravity.CENTER_VERTICAL);
         view.setTypeface(null, Typeface.BOLD);
         view.setTextColor(navView.getResources().getColor(R.color.colorAccent));
-        view.setText("99+");
+        view.setText("0");
     }
 }

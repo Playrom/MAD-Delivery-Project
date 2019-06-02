@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.polito.justorder_framework.abstract_activities.AbstractViewerWithImagePickerActivityAndToolbar;
+import it.polito.justorder_framework.abstract_activities.ActivityAbstractWithToolbar;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Order;
 import it.polito.justorder_framework.model.OrderProduct;
@@ -36,7 +39,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class OrderToAccept extends AbstractViewerWithImagePickerActivityAndToolbar {
+public class OrderToAccept extends ActivityAbstractWithToolbar {
 
     private TextView orderIdTextField, userTextField, addressTextField, priceTextField, timestampTextField, productsTextField;
     public Order order;
@@ -134,6 +137,53 @@ public class OrderToAccept extends AbstractViewerWithImagePickerActivityAndToolb
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(this.order.getState() == "accepted"){
+            getMenuInflater().inflate(R.menu.delivered_order_menu, menu);
+        }else{
+            getMenuInflater().inflate(R.menu.select_order_option, menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.acceptOrder){
+            order.setState("accepted");
+            Database.INSTANCE.getOrders().save(order);
+            Double prova = getDistanceInfo();
+            finish();
+        }
+
+        if(item.getItemId() == R.id.refuseOrder){
+            order.setState("cancelled");
+            order.setDeliverer(null);
+            Database.INSTANCE.getOrders().save(order);
+
+            Database.INSTANCE.getDeliverers().get(Database.INSTANCE.getCurrent_User().getDelivererKey(), deliverer1 ->{
+                deliverer1.setCurrentOrder(null);
+                Database.INSTANCE.getDeliverers().save(deliverer1);
+                return Unit.INSTANCE;
+            });
+            finish();
+        }
+
+        if(item.getItemId() == R.id.deliveredOrder){
+            order.setState("delivered");
+            Database.INSTANCE.getOrders().save(order);
+
+            Database.INSTANCE.getDeliverers().get(Database.INSTANCE.getCurrent_User().getDelivererKey(), deliverer1 ->{
+                deliverer1.setCurrentOrder(null);
+                Database.INSTANCE.getDeliverers().save(deliverer1);
+                return Unit.INSTANCE;
+            });
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
     private String createProductString() {
 
         String productString = "";
@@ -144,31 +194,6 @@ public class OrderToAccept extends AbstractViewerWithImagePickerActivityAndToolb
         return productString;
     }
 
-
-    public void deleteOrder(View view){
-        order.setState("cancelled");
-        order.setDeliverer(null);
-        Database.INSTANCE.getOrders().save(order);
-
-        Database.INSTANCE.getDeliverers().get(Database.INSTANCE.getCurrent_User().getDelivererKey(), deliverer1 ->{
-            deliverer1.setCurrentOrder(null);
-            Database.INSTANCE.getDeliverers().save(deliverer1);
-            return Unit.INSTANCE;
-        });
-
-
-        //Intent returnIntent = new Intent();
-        //setResult(Activity.RESULT_OK, returnIntent);
-        finish();
-    }
-
-    public void acceptOrder(View view) throws IOException {
-        order.setState("accepted");
-        Database.INSTANCE.getOrders().save(order);
-        Double prova = getDistanceInfo();
-        finish();
-    }
-
     private Double getDistanceInfo() {
         double dist=0;
         String restaurantCoordinates = getStringFromAddress(this, this.order.getRestaurantAddress());
@@ -176,27 +201,6 @@ public class OrderToAccept extends AbstractViewerWithImagePickerActivityAndToolb
 
 
         String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + restaurantCoordinates + "&destination=" + customerCoordinates + "&mode=driving&sensor=false&key=AIzaSyDWDWfu77UacZO2ZWBf8F8HsBer_uhvflY";
-
-        /*String url = "http://maps.googleapis.com/maps/api/directions/json?";
-
-        RequestBody formBody = new FormBody.Builder()
-                .add("origin", restaurantCoordinates)
-                .add("destination", customerCoordinates)
-                .add("mode", "driving")
-                .add("sensor", "false")
-                .add("key", "AIzaSyAdJTTUd5BzEbk7Jvmmp26l9TH6s-SRdus")
-                .build();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .post(formBody)
-                .build();
-        */
-
-        //String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + restaurantCoordinates + "&destination=" + customerCoordinates + "&mode=driving&sensor=false&key=AIzaSyAdJTTUd5BzEbk7Jvmmp26l9TH6s-SRdus";
-
-        //String response = post(url);
-
         new ApiDirectionsAsyncTask().execute(url);
 
 

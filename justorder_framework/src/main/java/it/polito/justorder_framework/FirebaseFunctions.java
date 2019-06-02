@@ -44,7 +44,7 @@ public class FirebaseFunctions {
 
     public static void logout() {
         FirebaseAuth.getInstance().signOut();
-        EventBus.getDefault().post(new UserChangeStatusEvent());
+        EventBus.getDefault().post(new LogoutStatusEvent());
         LOGGER.info("FIREBASE LOGOUT");
     }
 }

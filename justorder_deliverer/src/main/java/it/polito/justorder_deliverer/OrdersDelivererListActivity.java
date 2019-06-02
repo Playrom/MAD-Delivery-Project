@@ -57,7 +57,7 @@ public class OrdersDelivererListActivity extends OrdersListActivity {
         });
 
         Database.INSTANCE.getDeliverers().get(this.deliverer.getKeyId(), true, (deliverer1 -> {
-            Database.INSTANCE.getOrders().getWithIds(new ArrayList<>(deliverer1.getOrders().keySet()), orders1 -> {
+            Database.INSTANCE.getOrders().getWithIds(new ArrayList<>(deliverer1.getOrders().keySet()), true,  orders1 -> {
                 this.orders.clear();
                 this.orders.addAll(orders1);
                 this.reloadViews();
