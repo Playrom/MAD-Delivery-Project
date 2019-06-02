@@ -40,7 +40,6 @@ public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToo
     protected void setupActivity() {
         super.setupActivity();
         Intent i = getIntent();
-        this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
         nameTextField = findViewById(R.id.nameTextField);
         costTextField = findViewById(R.id.costTextField);
         notesTextField = findViewById(R.id.notesTextField);
@@ -54,6 +53,7 @@ public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToo
     protected void reloadData() {
         super.reloadData();
         Intent i = getIntent();
+        this.restaurant = (Restaurant) i.getSerializableExtra("restaurant");
         this.product = (Product) i.getSerializableExtra("product");
         if(this.product == null){
             this.product = new Product();

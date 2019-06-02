@@ -50,6 +50,7 @@ public class ProductClientActivity extends ProductActivity {
         if(item.getItemId() == R.id.review){
             Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
             i.putExtra("product", this.product);
+            i.putExtra("restaurant", this.restaurant);
             startActivity(i);
             return true;
         }

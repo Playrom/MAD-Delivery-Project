@@ -176,24 +176,9 @@ public class ProductsListActivity extends ActivityAbstractWithToolbar {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
-            if(resultCode== Activity.RESULT_OK){
-                Product product = (Product) data.getSerializableExtra("product");
-                visibleProducts.set(tapped, product);
-                this.restaurant.getProducts().put(product.getKeyId(), product);
-                Database.INSTANCE.getRestaurants().save(restaurant);
-                this.reloadData();
-            }
-        }else if(requestCode == 2){
-            if(resultCode== Activity.RESULT_OK){
-                Product product = (Product) data.getSerializableExtra("product");
-                visibleProducts.add(product);
-                String key = Database.INSTANCE.getRestaurants().generateKeyForChild(this.restaurant.getKeyId());
-                product.setKeyId(key);
-                this.restaurant.getProducts().put(key, product);
-                Database.INSTANCE.getRestaurants().save(restaurant);
-                this.reloadData();
-            }
+        Product product = (Product) data.getSerializableExtra("product");
+        if(product != null){
+            this.visibleProducts.get(tapped).setReviews(product.getReviews());
         }
     }
 
