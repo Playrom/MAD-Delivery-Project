@@ -69,8 +69,8 @@ public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToo
         List<String> types = Arrays.asList(getResources().getStringArray(R.array.foodTypes));
         if(product != null) {
             nameTextField.setText(product.getName());
-            costTextField.setText(new Double(product.getCost()).toString());
-            notesTextField.setText(product.getNotes());
+            costTextField.setText("Price: " + new Double(product.getCost()).toString() + "€");
+            notesTextField.setText("Notes: " + product.getNotes());
             String ingredients = "";
             for (String entry : product.getIngredients()) {
                 ingredients = ingredients + "&#8226; " + entry + "<br/>\n";
@@ -81,7 +81,7 @@ public class ProductActivity extends AbstractViewerWithImagePickerActivityAndToo
                 return x.equals(product.getCategory());
             }).findFirst().orElse(null);
             if (category != null) {
-                categoryTextView.setText(category);
+                categoryTextView.setText("Category: " + category);
             }
 
             if (product.getName() != null) {
