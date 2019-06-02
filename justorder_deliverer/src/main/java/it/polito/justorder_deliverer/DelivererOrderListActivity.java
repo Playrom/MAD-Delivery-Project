@@ -1,4 +1,5 @@
-package it.polito.justorder_framework.common_activities;
+package it.polito.justorder_deliverer;
+
 
 import it.polito.justorder_framework.R;
 import it.polito.justorder_framework.Utils;
@@ -30,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class OrdersListActivity extends AbstractListViewWithSidenav {
+public class DelivererOrderListActivity extends AbstractListViewWithSidenav {
 
     protected ListView listView;
     protected BaseAdapter adapter;
@@ -74,11 +75,11 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
                     convertView = getLayoutInflater().inflate(R.layout.order_adapter, parent, false);
                 }
                 Order order = orders.get(position);
-                ((TextView)convertView.findViewById(R.id.order_id)).setText(order.getUserName());
-                ((TextView)convertView.findViewById(R.id.amount)).setText("Cost: " + new Double(order.getPrice()).toString());
-                ((TextView)convertView.findViewById(R.id.address)).setText("Address: " + order.getUserAddress());
+                ((TextView)convertView.findViewById(R.id.order_id)).setText(order.getRestaurantName());
+                ((TextView)convertView.findViewById(R.id.amount)).setText("Restaurant Address: " + order.getRestaurantAddress());
+                 ((TextView)convertView.findViewById(R.id.address)).setText("User Address: " + order.getUserAddress());
                 String date = DateFormat.format("dd/MM/yyyy - hh:mm", order.getTimestamp()).toString();
-                ((TextView)convertView.findViewById(R.id.timestamp)).setText(date);
+                ((TextView)convertView.findViewById(R.id.timestamp)).setText("Date and time: " + date);
                 ((TextView)convertView.findViewById(R.id.state)).setText(order.getState());
                 return convertView;
             }
@@ -146,8 +147,5 @@ public class OrdersListActivity extends AbstractListViewWithSidenav {
     }
 
 }
-
-
-
 
 

@@ -234,7 +234,7 @@ public class CartProductsUserListActivity extends AbstractListViewWithSidenavSav
                     productKeys.clear();
                     Database.INSTANCE.getUsers().save(user);
 
-                    Toast toast = Toast.makeText(getApplicationContext(), "Order successfully inserted", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Order successfully received by the restaurant, soon a deliveryman will deliver your order", Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }

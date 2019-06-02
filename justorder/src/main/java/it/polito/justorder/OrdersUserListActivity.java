@@ -11,16 +11,13 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.Map;
 
-import it.polito.justorder_framework.LogoutStatusEvent;
 import it.polito.justorder_framework.UserChangeStatusEvent;
-import it.polito.justorder_framework.common_activities.OrderDetails;
-import it.polito.justorder_framework.common_activities.OrdersListActivity;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Order;
 import it.polito.justorder_framework.model.User;
 import kotlin.Unit;
 
-public class OrdersUserListActivity extends OrdersListActivity {
+public class OrdersUserListActivity extends UserOrderListActivity {
 
     protected User user;
 

@@ -7,17 +7,14 @@ import android.widget.AdapterView;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import it.polito.justorder_framework.common_activities.OrderDetails;
-import it.polito.justorder_framework.common_activities.OrdersListActivity;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Deliverer;
 import it.polito.justorder_framework.model.Order;
-import it.polito.justorder_framework.model.Restaurant;
 import kotlin.Unit;
 
-public class OrdersDelivererListActivity extends OrdersListActivity {
+public class OrdersDelivererListActivity extends DelivererOrderListActivity {
 
     protected Deliverer deliverer;
 

@@ -15,18 +15,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import it.polito.justorder_framework.common_activities.OrderDetails;
-import it.polito.justorder_framework.common_activities.OrdersListActivity;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Order;
 import it.polito.justorder_framework.model.Restaurant;
 import kotlin.Unit;
 
-public class OrdersRestaurantListActivity extends OrdersListActivity {
+public class OrdersRestaurantListActivity extends RestaurantOrderListActivity {
 
     protected Restaurant restaurant;
 
