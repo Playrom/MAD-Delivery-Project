@@ -18,6 +18,13 @@
         app:actionViewClass="android.widget.TextView" />
 
     <item
+        android:id="@+id/commentsPage"
+        android:enabled="true"
+        android:title="Comments"
+        android:visible="true"
+        app:actionViewClass="android.widget.TextView" />
+
+    <item
         android:id="@+id/login"
         android:enabled="true"
         android:title="Login/Sign up"

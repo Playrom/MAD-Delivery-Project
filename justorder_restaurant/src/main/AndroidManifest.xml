@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.polito.justorder_restaurant">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderToConfirm"></activity>
+        <activity android:name=".CommentsActivity"/>
+        <activity android:name=".OrderToConfirm" />
         <activity android:name="it.polito.justorder_framework.common_activities.OrderDetails" />
         <activity android:name="it.polito.justorder_framework.common_activities.ProductActivity" />
         <activity android:name=".ProductActivityWithEditing" />
@@ -44,13 +52,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDWDWfu77UacZO2ZWBf8F8HsBer_uhvflY"/>
+            android:value="AIzaSyDWDWfu77UacZO2ZWBf8F8HsBer_uhvflY" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-feature android:name="android.hardware.location.gps" />
-
 
 </manifest>

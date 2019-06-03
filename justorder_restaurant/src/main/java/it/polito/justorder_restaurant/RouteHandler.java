@@ -83,6 +83,20 @@ public class RouteHandler extends AbstractRouteHandler {
             return true;
         }
 
+        if(item.getItemId() == R.id.commentsPage) {
+            String restaurant_key = Database.INSTANCE.getCurrent_User().getRestaurantKey();
+
+            Database.INSTANCE.getRestaurants().get(restaurant_key, (restaurant -> {
+                Intent i = new Intent(context, CommentsActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                i.putExtra("restaurant", restaurant);
+                context.startActivity(i);
+                return Unit.INSTANCE;
+            }));
+
+            return true;
+        }
+
         return false;
     }
 
