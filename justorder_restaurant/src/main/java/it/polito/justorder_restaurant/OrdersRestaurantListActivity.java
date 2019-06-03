@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Map;
 
 import it.polito.justorder_framework.common_activities.OrderDetails;
@@ -91,6 +92,14 @@ public class OrdersRestaurantListActivity extends RestaurantOrderListActivity {
         Database.INSTANCE.getOrders().getWithIds(new ArrayList<>(restaurant.getOrders().keySet()), orders1 -> {
             this.orders.clear();
             this.orders.addAll(orders1);
+            orders.sort(new Comparator<Order>() {
+                        @Override
+                        public int compare(Order o1, Order o2) {
+                            return o1.getTimestamp().compareTo(o2.getTimestamp());
+
+                        }
+                    }.reversed()
+            );
             this.reloadViews();
             return Unit.INSTANCE;
         });
@@ -99,6 +108,14 @@ public class OrdersRestaurantListActivity extends RestaurantOrderListActivity {
             Database.INSTANCE.getOrders().getWithIds(new ArrayList<>(restaurant1.getOrders().keySet()), true, orders1 -> {
                 this.orders.clear();
                 this.orders.addAll(orders1);
+                orders.sort(new Comparator<Order>() {
+                            @Override
+                            public int compare(Order o1, Order o2) {
+                                return o1.getTimestamp().compareTo(o2.getTimestamp());
+
+                            }
+                        }.reversed()
+                );
                 this.reloadViews();
                 return Unit.INSTANCE;
             });

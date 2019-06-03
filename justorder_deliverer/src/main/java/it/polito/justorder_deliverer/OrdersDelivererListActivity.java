@@ -7,10 +7,12 @@ import android.widget.AdapterView;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import it.polito.justorder_framework.common_activities.OrderDetails;
 import it.polito.justorder_framework.db.Database;
 import it.polito.justorder_framework.model.Deliverer;
+import it.polito.justorder_framework.model.DelivererPosition;
 import it.polito.justorder_framework.model.Order;
 import kotlin.Unit;
 
@@ -49,6 +51,14 @@ public class OrdersDelivererListActivity extends DelivererOrderListActivity {
         Database.INSTANCE.getOrders().getWithIds(new ArrayList<>(deliverer.getOrders().keySet()), orders1 -> {
             this.orders.clear();
             this.orders.addAll(orders1);
+            orders.sort(new Comparator<Order>() {
+                        @Override
+                        public int compare(Order o1, Order o2) {
+                            return o1.getTimestamp().compareTo(o2.getTimestamp());
+
+                        }
+                    }.reversed()
+            );
             this.reloadViews();
             return Unit.INSTANCE;
         });
@@ -57,6 +67,16 @@ public class OrdersDelivererListActivity extends DelivererOrderListActivity {
             Database.INSTANCE.getOrders().getWithIds(new ArrayList<>(deliverer1.getOrders().keySet()), true,  orders1 -> {
                 this.orders.clear();
                 this.orders.addAll(orders1);
+                orders.sort(new Comparator<Order>() {
+                            @Override
+                            public int compare(Order o1, Order o2) {
+                                return o1.getTimestamp().compareTo(o2.getTimestamp());
+
+                            }
+                        }.reversed()
+                );
+
+
                 this.reloadViews();
                 return Unit.INSTANCE;
             });
