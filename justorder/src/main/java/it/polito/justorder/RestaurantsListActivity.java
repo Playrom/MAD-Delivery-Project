@@ -144,7 +144,7 @@ public class RestaurantsListActivity extends AbstractListViewWithSidenav {
     protected void applyFilters(){
         this.visibleRestaurants.clear();
         for (Restaurant rest : this.restaurants) {
-            if (rest.getName().toLowerCase().contains(filter.toLowerCase()) || filter.replaceAll(" ", "").equals("")) {
+            if (rest.getType().toLowerCase().contains(filter.toLowerCase()) || rest.getName().toLowerCase().contains(filter.toLowerCase()) || filter.replaceAll(" ", "").equals("")) {
                 visibleRestaurants.add(rest);
             }
         }
